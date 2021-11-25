@@ -12,7 +12,6 @@ const Connect: React.FC = () => {
 
   const activating = injected === activatingConnector;
   const connected = injected === connector;
-
   const disabled = !triedEager || !!activatingConnector || connected || !!error;
 
   const handleClick = useCallback(() => {

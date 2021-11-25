@@ -4,11 +4,8 @@ export default function Account() {
   const { account } = useWeb3React();
 
   return (
-    <div className="flex items-center space-x-2 px-4 py-2">
-      <span role="img" aria-label="robot">
-        🤖
-      </span>
-      <span>
+    <div className="flex items-center rounded-xl px-5 py-2 bg-primary text-white">
+      <span className="font-semibold text-sm">
         {account === null
           ? "-"
           : account
