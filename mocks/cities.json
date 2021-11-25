@@ -1,0 +1,26 @@
+{
+  "status": 200,
+  "data": [
+    {
+      "name": "TORONTO CITY",
+      "country": "American",
+      "startDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-25T08:20:18.757Z",
+      "slotLeft": 32
+    },
+    {
+      "name": "NEW YORK CITY",
+      "country": "American",
+      "startDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-25T08:20:18.757Z",
+      "slotLeft": 32
+    },
+    {
+      "name": "WASHINGTON CITY",
+      "country": "American",
+      "startDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-25T08:20:18.757Z",
+      "slotLeft": 32
+    }
+  ]
+}

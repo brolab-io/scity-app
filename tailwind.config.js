@@ -10,9 +10,17 @@ module.exports = {
     },
     backgroundColor: (theme) => ({
       ...theme("colors"),
-      primary: "#BF8124",
+      primary: "#5a55ee",
       secondary: "#ffed4a",
       danger: "#e3342f",
+    }),
+    textColor: (theme) => ({
+      ...theme("colors"),
+      primary: "#431216",
+    }),
+    borderColor: (theme) => ({
+      ...theme("colors"),
+      primary: "#5a55ee",
     }),
   },
   variants: {

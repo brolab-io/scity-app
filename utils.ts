@@ -27,3 +27,14 @@ export const getErrorMessage = (error: Error): string => {
     return "An unknown error occurred. Check the console for more details.";
   }
 };
+
+export const formatDate = (date: Date | string) => {
+  console.log(date);
+  if (typeof date === "string") {
+    date = new Date(date);
+  }
+  return date.toLocaleString("en-US", {
+    month: "numeric",
+    day: "numeric",
+  });
+};

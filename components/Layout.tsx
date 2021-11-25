@@ -9,10 +9,9 @@ const Layout: React.FC<any> = ({ children }) => {
         <Sidebar />
       </div>
       <div>
-        <div className="max-w-screen-xl mx-auto">
+        <div className="max-w-screen-xl mx-auto px-8">
           <Header />
-          <hr />
-          {children}
+          <div className="mt-8">{children}</div>
         </div>
       </div>
     </div>

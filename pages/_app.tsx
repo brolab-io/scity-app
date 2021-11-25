@@ -51,7 +51,7 @@ export default function App(props: AppProps) {
       <AppContextProvider>
         <SWRConfig value={swrOptions}>
           <MyApp {...props} />
-          <ToastContainer position="top-center" />
+          <ToastContainer pauseOnFocusLoss={false} position="top-center" />
         </SWRConfig>
       </AppContextProvider>
     </Web3ReactProvider>

@@ -31,7 +31,7 @@ export default function Balance() {
 
   return (
     <div className="flex items-center space-x-1 px-4 py-2">
-      <span className="font-semibold text-sm">
+      <span className="font-semibold text-sm text-primary">
         {/* {balance === null ? "Error" : balance ? `${formatEther(balance)}` : ""} */}
         My NFT: 0
       </span>
