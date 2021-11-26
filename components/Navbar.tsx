@@ -43,28 +43,30 @@ const Navbar: React.FC = () => {
     <nav className="fixed inset-x-0 top-0 h-20 z-30 bg-black">
       <div className="flex h-full px-4 w-full items-center justify-between">
         {/* LOGO  */}
-        <Link passHref href="/">
-          <a className="flex items-center space-x-1">
-            <Image
-              layout="fixed"
-              src="/logo.svg"
-              height={36}
-              width={36}
-              alt="logo"
-            />
-            <div className="mt-2">
-              <span className="text-3xl font-medium text-white select-none">
-                SCITY
-              </span>
-            </div>
-          </a>
-        </Link>
+        <div className="w-80">
+          <Link passHref href="/">
+            <a className="flex items-center space-x-1">
+              <Image
+                layout="fixed"
+                src="/logo.svg"
+                height={36}
+                width={36}
+                alt="logo"
+              />
+              <div className="mt-2">
+                <span className="text-3xl font-medium text-white select-none">
+                  SCITY
+                </span>
+              </div>
+            </a>
+          </Link>
+        </div>
 
         {/* NAVIGATION */}
         <NavigationMenus />
 
         {/* CONNECT */}
-        <div>
+        <div className="w-80 flex justify-end">
           {active ? (
             <div className="flex-none hidden px-2 mx-2 lg:flex">
               <Clickable className="flex items-stretch bg-white rounded-xl shadow-md transform ease-out duration-100 hover:shadow-lg hover:scale-105">

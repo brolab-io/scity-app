@@ -1,6 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { injected } from "../dapp/connectors";
 import abi from "../dapp/NFTLand.json";
@@ -16,8 +16,14 @@ const useBuyLand = (
   const [isBuying, setIsBuying] = useState(false);
   const { activate, library, active } = useWeb3React();
 
-  const buy = useCallback(async () => {
-    if (areaId && window && (window as any).ethereum) {
+  const buy = useCallback(
+    async (price: string) => {
+      if (!areaId) {
+        return;
+      }
+      if (typeof window === "undefined" || !window.ethereum) {
+        return;
+      }
       setIsBuying(true);
       if (!active) {
         await activate(injected);
@@ -44,7 +50,7 @@ const useBuyLand = (
       contract.once("BuyLand", onBuyLand);
       try {
         const tx = await contract.buyLand(areaId, {
-          value: ethers.utils.parseEther("0.01"),
+          value: ethers.utils.parseEther(price),
         });
         await tx.wait();
         console.log(tx);
@@ -54,12 +60,10 @@ const useBuyLand = (
         setIsBuying(false);
         toast.error(error.data?.message ?? error.message);
       }
-    }
-  }, [activate, active, areaId, library, onSuccess]);
+    },
+    [activate, active, areaId, library, onSuccess]
+  );
 
-  return {
-    isBuying,
-    buy,
-  };
+  return useMemo(() => ({ buy, isBuying }), [buy, isBuying]);
 };
 export default useBuyLand;

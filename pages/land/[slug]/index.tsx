@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo } from "react";
 import useSWR from "swr";
 import Container from "../../../components/Container";
 import Loading from "../../../components/Loading";
@@ -9,11 +9,6 @@ import Image from "next/image";
 import { ICityData } from "../../../lib/types";
 import Countdown from "../../../components/Countdown";
 import Button from "../../../components/Button";
-import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
-import abi from "../../../dapp/NFTLand.json";
-import { injected } from "../../../dapp/connectors";
-import { toast } from "react-toastify";
 import useInfoOpenArea from "../../../hooks/useInfoOpenArea";
 import useBuyLand from "../../../hooks/useBuyLand";
 
@@ -31,21 +26,18 @@ const CityPage: NextPage = () => {
 
   const city = data as ICityData | undefined;
 
-  const {
-    price,
-    limit,
-    startTime,
-    endTime,
-    isLoading,
-    currentQuantity,
-    reload,
-  } = useInfoOpenArea(city?.id);
+  const { price, limit, endTime, isLoading, currentQuantity, reload } =
+    useInfoOpenArea(city?.id);
 
-  const { buy: onClickBuyNow, isBuying } = useBuyLand(city?.id, {
+  const { buy, isBuying } = useBuyLand(city?.id, {
     onSuccess: reload,
   });
 
   const isFetching = !data && !error;
+
+  const onClickBuyNow = useCallback(() => {
+    buy(price);
+  }, [buy, price]);
 
   const bg1Style = useMemo(
     () => ({
@@ -60,6 +52,12 @@ const CityPage: NextPage = () => {
 
   const isOutOfTime = new Date().getTime() > new Date(endTime * 1000).getTime();
   const isOutOfStock = currentQuantity >= limit;
+  const shouldEnableBuy = !(
+    isLoading ||
+    isBuying ||
+    isOutOfTime ||
+    isOutOfStock
+  );
 
   return (
     <>
@@ -129,7 +127,7 @@ const CityPage: NextPage = () => {
                   </div>
                 </div>
                 <Button
-                  disabled={isBuying || isOutOfStock || isOutOfTime}
+                  disabled={!shouldEnableBuy}
                   isLoading={isBuying}
                   onClick={onClickBuyNow}
                 >
