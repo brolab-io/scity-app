@@ -19,8 +19,6 @@ const Connect: React.FC<Props> = ({ outline }) => {
   const connected = injected === connector;
   const disabled = !triedEager || !!activatingConnector || connected || !!error;
 
-  console.log("Connect.jsx: activatingConnector", activatingConnector);
-
   const handleClick = useCallback(() => {
     setActivatingConnector(injected);
     activate(injected);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { formatCountDown } from "../utils";
 
 type Props = {
-  endDate: string;
+  endDate: string | Date;
   className?: string;
 };
 

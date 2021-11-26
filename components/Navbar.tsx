@@ -12,6 +12,10 @@ const navigationMenus = [
     href: "/",
   },
   {
+    title: "Buy Land",
+    href: "/land",
+  },
+  {
     title: "Explore",
     href: "/explore",
   },
@@ -49,7 +53,9 @@ const Navbar: React.FC = () => {
               alt="logo"
             />
             <div className="mt-2">
-              <span className="text-3xl text-white select-none">SCITY</span>
+              <span className="text-3xl font-medium text-white select-none">
+                SCITY
+              </span>
             </div>
           </a>
         </Link>
@@ -79,11 +85,15 @@ const NavigationMenus = () => {
   return (
     <ul className="flex space-x-8 items-center">
       {navigationMenus.map((menu) => (
-        <ul key={menu.href}>
+        <li key={menu.href}>
           <Link passHref href={menu.href}>
-            <a className="text-white text-lg font-medium">{menu.title}</a>
+            <a className="transform duration-200 hover:scale-105">
+              <span className="text-white hover:text-primary font-semibold">
+                {menu.title}
+              </span>
+            </a>
           </Link>
-        </ul>
+        </li>
       ))}
     </ul>
   );

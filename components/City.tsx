@@ -20,21 +20,21 @@ const City: React.FC<Props> = ({ city }) => {
     <div className="flex justify-between items-end p-6 border-2 border-gray-300">
       <div className="space-y-4">
         <div>
-          <span>
+          <span className="text-white">
             {formatDate(city.startDate)} - {formatDate(city.endDate)}
           </span>
         </div>
-        <h3>{city.name}</h3>
+        <h3 className="text-white">{city.name}</h3>
         <div>
-          <span>{city.country}</span>
+          <span className="text-white">{city.country}</span>
         </div>
       </div>
       <div className="flex flex-col items-end">
-        <Button onClick={onClickJoin} outline>
+        <Button onClick={onClickJoin} outline className="text-white">
           Join
         </Button>
         <div className="mt-2">
-          <span>{city.slotLeft} slots left</span>
+          <span className="text-white">{city.slotLeft} slots left</span>
         </div>
       </div>
     </div>

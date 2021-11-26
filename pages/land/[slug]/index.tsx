@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useSWR from "swr";
 import Container from "../../../components/Container";
 import Loading from "../../../components/Loading";
@@ -9,6 +9,13 @@ import Image from "next/image";
 import { ICityData } from "../../../lib/types";
 import Countdown from "../../../components/Countdown";
 import Button from "../../../components/Button";
+import { useWeb3React } from "@web3-react/core";
+import { ethers } from "ethers";
+import abi from "../../../dapp/NFTLand.json";
+import { injected } from "../../../dapp/connectors";
+import { toast } from "react-toastify";
+import useInfoOpenArea from "../../../hooks/useInfoOpenArea";
+import useBuyLand from "../../../hooks/useBuyLand";
 
 const CityPage: NextPage = () => {
   const router = useRouter();
@@ -21,6 +28,22 @@ const CityPage: NextPage = () => {
     slug ? `/api/cities/${slug}` : null,
     slug ? fetcher : null
   );
+
+  const city = data as ICityData | undefined;
+
+  const {
+    price,
+    limit,
+    startTime,
+    endTime,
+    isLoading,
+    currentQuantity,
+    reload,
+  } = useInfoOpenArea(city?.id);
+
+  const { buy: onClickBuyNow, isBuying } = useBuyLand(city?.id, {
+    onSuccess: reload,
+  });
 
   const isFetching = !data && !error;
 
@@ -35,7 +58,8 @@ const CityPage: NextPage = () => {
     return <Loading />;
   }
 
-  const city = data as ICityData;
+  const isOutOfTime = new Date().getTime() > new Date(endTime * 1000).getTime();
+  const isOutOfStock = currentQuantity >= limit;
 
   return (
     <>
@@ -56,8 +80,8 @@ const CityPage: NextPage = () => {
               </div>
               <div className="flex flex-col justify-center px-10 space-y-4">
                 <div className="flex">
-                  <h1 className="text-3xl text-white">{city.name}</h1>
-                  <div className="flex items-center justify-center ml-2 rounded-xl bg-gradient bg-gradient-to-bl p-2 -mt-2 h-7 w-12">
+                  <h1 className="text-3xl text-white">{city?.name}</h1>
+                  <div className="flex items-center justify-center ml-2 rounded-xl bg-gradient bg-gradient-to-b p-2 -mt-2 h-7 w-12">
                     <span className="font-semibold text-white text-sm">
                       HOT
                     </span>
@@ -67,9 +91,9 @@ const CityPage: NextPage = () => {
                   <span className="text-gray">
                     Remaining Amount:{" "}
                     <span className="text-gradient bg-gradient-to-bl">
-                      {city.slotLeft}
+                      {currentQuantity ?? 0}
                     </span>
-                    /<span className="text-white">200</span>
+                    /<span className="text-white">{limit ?? 0}</span>
                   </span>
                 </div>
                 <div className="flex items-center space-x-4">
@@ -83,7 +107,7 @@ const CityPage: NextPage = () => {
                     />
                     <Countdown
                       className="text-white text-sm font-medium"
-                      endDate={city.endDate}
+                      endDate={new Date(endTime * 1000)}
                     />
                   </div>
                 </div>
@@ -97,14 +121,24 @@ const CityPage: NextPage = () => {
                       alt="fire"
                     />
                     <span className="text-2xl font-medium text-white">
-                      0.42
+                      {price}
                     </span>
                     <span className="text-gradient bg-gradient-to-bl">
-                      ~ $266
+                      ~ $6.6
                     </span>
                   </div>
                 </div>
-                <Button>Buy Now</Button>
+                <Button
+                  disabled={isBuying || isOutOfStock || isOutOfTime}
+                  isLoading={isBuying}
+                  onClick={onClickBuyNow}
+                >
+                  {isOutOfStock
+                    ? "Out of stock"
+                    : isOutOfTime
+                    ? "Out of time"
+                    : "Buy now"}
+                </Button>
                 <div className="bg-gray p-4 rounded-xl space-y-2">
                   <span className="text-white">Shop Rule:</span>
                   <div className="space-y-1">

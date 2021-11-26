@@ -1,4 +1,5 @@
 export interface ICityData {
+  id: number;
   name: string;
   slug: string;
   country: string;
@@ -11,4 +12,12 @@ export interface MenuItem {
   title: string;
   href: string;
   icon: string;
+}
+
+export interface IAreaInfo {
+  price: string;
+  limit: number;
+  startTime: number;
+  endTime: number;
+  currentQuantity: number;
 }
