@@ -29,7 +29,7 @@ const useBuyLand = (
         await activate(injected);
       }
       const provider =
-        library ?? new ethers.providers.Web3Provider((window as any).ethereum);
+        library ?? new ethers.providers.Web3Provider(window.ethereum);
 
       const contract = new ethers.Contract(
         process.env["NEXT_PUBLIC_CONTRACT_LAND"] ?? "",
@@ -46,19 +46,21 @@ const useBuyLand = (
         // TODO: Show card
         toast.success(`Bought land successfully!`);
       };
-
       contract.once("BuyLand", onBuyLand);
+
       try {
         const tx = await contract.buyLand(areaId, {
           value: ethers.utils.parseEther(price),
         });
         await tx.wait();
-        console.log(tx);
-        setIsBuying(false);
         onSuccess && onSuccess();
       } catch (error: any) {
-        setIsBuying(false);
+        if (error.code === "UNSUPPORTED_OPERATION") {
+          return;
+        }
         toast.error(error.data?.message ?? error.message);
+      } finally {
+        setIsBuying(false);
       }
     },
     [activate, active, areaId, library, onSuccess]

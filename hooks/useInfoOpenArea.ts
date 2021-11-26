@@ -42,7 +42,7 @@ const useInfoOpenArea = (areaId: number | undefined) => {
     } finally {
       setIsLoading(false);
     }
-  }, [active, areaId, library]);
+  }, [areaId, library]);
 
   useEffect(() => {
     getCityInfo();
