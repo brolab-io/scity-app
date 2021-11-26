@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     if (error) {
+      console.error(error);
       toast.error(getErrorMessage(error));
       deactivate();
     }
