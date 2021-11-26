@@ -1,0 +1,15 @@
+{
+  "titleTemplate": "City Land | %s",
+  "defaultTitle": "City Land",
+  "openGraph": {
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://www.url.ie/",
+    "site_name": "City Land"
+  },
+  "twitter": {
+    "handle": "@handle",
+    "site": "@site",
+    "cardType": "summary_large_image"
+  }
+}

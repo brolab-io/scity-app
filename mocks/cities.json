@@ -3,23 +3,26 @@
   "data": [
     {
       "name": "TORONTO CITY",
+      "slug": "toronto",
       "country": "American",
       "startDate": "2021-11-25T08:20:18.757Z",
-      "endDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-28T08:20:18.757Z",
       "slotLeft": 32
     },
     {
       "name": "NEW YORK CITY",
       "country": "American",
+      "slug": "newyork",
       "startDate": "2021-11-25T08:20:18.757Z",
-      "endDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-29T08:20:18.757Z",
       "slotLeft": 32
     },
     {
       "name": "WASHINGTON CITY",
+      "slug": "washington",
       "country": "American",
       "startDate": "2021-11-25T08:20:18.757Z",
-      "endDate": "2021-11-25T08:20:18.757Z",
+      "endDate": "2021-11-30T08:20:18.757Z",
       "slotLeft": 32
     }
   ]

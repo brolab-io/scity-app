@@ -8,12 +8,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/providers": "^5.5.0",
     "@web3-react/core": "^6.1.9",
     "@web3-react/injected-connector": "^6.0.7",
     "@web3-react/walletconnect-connector": "^6.2.8",
     "axios": "^0.24.0",
     "loglevel": "^1.8.0",
     "next": "12.0.4",
+    "next-seo": "^4.28.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-fast-compare": "^3.2.0",

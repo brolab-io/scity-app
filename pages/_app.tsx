@@ -13,6 +13,8 @@ import { getErrorMessage } from "../utils";
 import type { Web3Provider } from "@ethersproject/providers";
 import type { SWRConfiguration } from "swr";
 import Layout from "../components/Layout";
+import SEO from "../next-seo.config.json";
+import { DefaultSeo } from "next-seo";
 
 const swrOptions: SWRConfiguration = {
   fetcher,
@@ -40,6 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <Layout>
+      <DefaultSeo {...SEO} />
       <Component {...pageProps} />
     </Layout>
   );

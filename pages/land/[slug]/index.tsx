@@ -1,0 +1,134 @@
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useMemo } from "react";
+import useSWR from "swr";
+import Container from "../../../components/Container";
+import Loading from "../../../components/Loading";
+import fetcher from "../../../lib/fetcher";
+import Image from "next/image";
+import { ICityData } from "../../../lib/types";
+import Countdown from "../../../components/Countdown";
+import Button from "../../../components/Button";
+
+const CityPage: NextPage = () => {
+  const router = useRouter();
+
+  const slug = Array.isArray(router.query.slug)
+    ? router.query.slug[0]
+    : router.query.slug;
+
+  const { data, error } = useSWR(
+    slug ? `/api/cities/${slug}` : null,
+    slug ? fetcher : null
+  );
+
+  const isFetching = !data && !error;
+
+  const bg1Style = useMemo(
+    () => ({
+      backgroundImage: `url(/images/backgrounds/bg-1.svg)`,
+    }),
+    []
+  );
+
+  if (isFetching) {
+    return <Loading />;
+  }
+
+  const city = data as ICityData;
+
+  return (
+    <>
+      <div style={bg1Style} className="p-10 pt-20">
+        <Container>
+          <div className="rounded-xl bg-dark-gray bg-opacity-80 p-10">
+            <div className="grid lg:grid-cols-2">
+              <div className="grid grid-cols-2 gap-4">
+                {[0, 1, 2, 3].map((i) => (
+                  <Image
+                    key={i}
+                    src="/images/mock.png"
+                    height={600}
+                    width={600}
+                    alt="mock"
+                  />
+                ))}
+              </div>
+              <div className="flex flex-col justify-center px-10 space-y-4">
+                <div className="flex">
+                  <h1 className="text-3xl text-white">{city.name}</h1>
+                  <div className="flex items-center justify-center ml-2 rounded-xl bg-gradient bg-gradient-to-bl p-2 -mt-2 h-7 w-12">
+                    <span className="font-semibold text-white text-sm">
+                      HOT
+                    </span>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-gray">
+                    Remaining Amount:{" "}
+                    <span className="text-gradient bg-gradient-to-bl">
+                      {city.slotLeft}
+                    </span>
+                    /<span className="text-white">200</span>
+                  </span>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <span className="text-gray">Ended:</span>
+                  <div className="flex items-center bg-gray rounded-xl px-3 py-1 space-x-2">
+                    <Image
+                      src="/images/icons/fire.svg"
+                      width={16}
+                      height={16}
+                      alt="fire"
+                    />
+                    <Countdown
+                      className="text-white text-sm font-medium"
+                      endDate={city.endDate}
+                    />
+                  </div>
+                </div>
+                <div className="bg-gray p-4 rounded-xl">
+                  <span className="text-gray">Price</span>
+                  <div className="flex items-center space-x-2">
+                    <Image
+                      src="/images/icons/bnb.svg"
+                      width={26}
+                      height={26}
+                      alt="fire"
+                    />
+                    <span className="text-2xl font-medium text-white">
+                      0.42
+                    </span>
+                    <span className="text-gradient bg-gradient-to-bl">
+                      ~ $266
+                    </span>
+                  </div>
+                </div>
+                <Button>Buy Now</Button>
+                <div className="bg-gray p-4 rounded-xl space-y-2">
+                  <span className="text-white">Shop Rule:</span>
+                  <div className="space-y-1">
+                    <p className="text-gray text-sm">
+                      1. You can buy BOX with SCC, and get a CITY CARD randomly
+                      after purchase;
+                    </p>
+                    <p className="text-gray text-sm">
+                      2. The higher rarity box, the higher CITY CARD rare. There
+                      are four level of rarity: B - A - R - SR.
+                    </p>
+                    <p className="text-gray text-sm">
+                      3. The higher CITY CARD rare, the higher Hashrate, meaning
+                      the higher income you’ll receive when stake these card
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </div>
+    </>
+  );
+};
+
+export default CityPage;

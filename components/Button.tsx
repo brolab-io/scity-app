@@ -3,6 +3,7 @@ type Props = {
   disabled?: boolean;
   isLoading?: boolean;
   outline?: boolean;
+  className?: string;
 };
 
 const Button: React.FC<Props> = ({
@@ -11,6 +12,7 @@ const Button: React.FC<Props> = ({
   isLoading,
   outline,
   onClick,
+  className,
 }) => {
   return (
     <button
@@ -23,7 +25,8 @@ const Button: React.FC<Props> = ({
           ? "border-2 border-primary hover:bg-primary hover:text-white"
           : "bg-primary hover:opacity-90 text-white") +
         " " +
-        "flex items-center justify-center font-medium py-2 px-4 rounded transform duration-200"
+        "flex items-center justify-center font-medium py-2 px-4 rounded transform duration-200" +
+        (className ? " " + className : "")
       }
     >
       {isLoading ? (

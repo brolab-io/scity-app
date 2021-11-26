@@ -11,6 +11,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
+  console.log(req.query);
   const data = await readFile(path.resolve("mocks/cities.json"), "utf8");
   return res.json(JSON.parse(data));
 }

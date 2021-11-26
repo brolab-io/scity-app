@@ -13,14 +13,24 @@ module.exports = {
       primary: "#5a55ee",
       secondary: "#ffed4a",
       danger: "#e3342f",
+      pink: "#4B50E6",
+      purple: "#E250E5",
+      "dark-gray": "#1A202C",
+      gray: "#2D3748",
     }),
     textColor: (theme) => ({
       ...theme("colors"),
       primary: "#431216",
+      gray: "#718096",
     }),
     borderColor: (theme) => ({
       ...theme("colors"),
       primary: "#5a55ee",
+    }),
+    gradientColorStops: (theme) => ({
+      ...theme("colors"),
+      purple: "#E250E5",
+      pink: "#4B50E6",
     }),
   },
   variants: {

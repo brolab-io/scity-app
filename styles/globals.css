@@ -14,8 +14,14 @@
   h3 {
     @apply text-lg font-medium;
   }
+  .bg-gradient {
+    @apply from-pink to-purple;
+  }
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient;
+  }
 }
 
 html {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", "Poppins", sans-serif;
 }

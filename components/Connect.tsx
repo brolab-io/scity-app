@@ -4,8 +4,13 @@ import { useCallback } from "react";
 import { injected } from "../dapp/connectors";
 import { useAppContext } from "./AppContext";
 import Button from "./Button";
+import Image from "next/image";
 
-const Connect: React.FC = () => {
+type Props = {
+  outline?: boolean;
+};
+
+const Connect: React.FC<Props> = ({ outline }) => {
   const { activatingConnector, setActivatingConnector, triedEager } =
     useAppContext();
   const { activate, connector, error } = useWeb3React<Web3Provider>();
@@ -20,8 +25,20 @@ const Connect: React.FC = () => {
   }, [activate, setActivatingConnector]);
 
   return (
-    <Button isLoading={activating} disabled={disabled} onClick={handleClick}>
-      Connect Wallet
+    <Button
+      outline={outline}
+      isLoading={activating}
+      disabled={disabled}
+      onClick={handleClick}
+      className="text-white rounded-2xl text-sm space-x-2"
+    >
+      <Image
+        src="/images/icons/wallet.svg"
+        width={16}
+        height={16}
+        alt="wallet"
+      />
+      <span>Connect Wallet</span>
     </Button>
   );
 };
