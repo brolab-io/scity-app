@@ -119,9 +119,9 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
   return (
     <ul
       className={
-        "transform duration-500 top-20 lg:top-0 absolute bg-black h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 items-center" +
+        "transform duration-500 top-20 lg:top-0 absolute bg-black h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
         " " +
-        (isVisible ? "left-0" : "-left-80")
+        (isVisible ? "left-0" : "-left-80 md:left-0")
       }
     >
       {navigationMenus.map((menu) => {
