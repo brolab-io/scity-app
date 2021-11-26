@@ -13,6 +13,7 @@ const Countdown: React.FC<Props> = ({ className, endDate }) => {
     const updateCountdown = () => {
       setValue(formatCountDown(endDate));
     };
+    updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
     return () => {
       clearInterval(interval);
