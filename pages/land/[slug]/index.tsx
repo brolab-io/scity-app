@@ -61,10 +61,10 @@ const CityPage: NextPage = () => {
 
   return (
     <>
-      <div style={bg1Style} className="p-10 pt-20">
+      <div style={bg1Style} className="p-4 lg:p-10 pt-6 lg:pt-20">
         <Container>
-          <div className="rounded-xl bg-dark-gray bg-opacity-80 p-10">
-            <div className="grid lg:grid-cols-2">
+          <div className="rounded-xl bg-dark-gray bg-opacity-80 p-6 lg:p-10">
+            <div className="grid gap-4 lg:grid-cols-2">
               <div className="grid grid-cols-2 gap-4">
                 {[0, 1, 2, 3].map((i) => (
                   <Image
@@ -76,7 +76,7 @@ const CityPage: NextPage = () => {
                   />
                 ))}
               </div>
-              <div className="flex flex-col justify-center px-10 space-y-4">
+              <div className="flex flex-col justify-center px-0 lg:px-6 space-y-4">
                 <div className="flex">
                   <h1 className="text-3xl text-white">{city?.name}</h1>
                   <div className="flex items-center justify-center ml-2 rounded-xl bg-gradient bg-gradient-to-b p-2 -mt-2 h-7 w-12">

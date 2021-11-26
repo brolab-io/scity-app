@@ -17,7 +17,7 @@ export default function LandPage() {
   );
 
   return (
-    <div style={bg1Style} className="p-10 pt-20">
+    <div style={bg1Style} className="p-4 lg:p-10 pt-6 lg:pt-20">
       <Container>
         <div className="rounded-xl bg-dark-gray bg-opacity-80 p-10 space-y-4">
           {cities.map((city) => (
