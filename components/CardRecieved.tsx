@@ -1,10 +1,10 @@
 import Image from "next/image";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import Clickable from "./Clickable";
+import { ICardData } from "../lib/types";
 import Loading from "./Loading";
 
 type Props = {
-  cardData;
+  cardData?: ICardData;
   isLoading?: boolean;
 };
 

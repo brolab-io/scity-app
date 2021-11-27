@@ -44,15 +44,11 @@ const useBuyLand = (
         });
         const result = await tx.wait();
         const buyLandEvent = result.events.find(
-          (event) => event.event === "BuyLand"
+          (event: ethers.Event) => event.event === "BuyLand"
         );
-        // console.log(buyLandEvent.args);
-        // console.log(buyLandEvent.args[0]);
         const [, tokenId] = buyLandEvent.args;
-        console.log(tokenId);
         const _cardURI = await contract.tokenURI(tokenId);
         setCardURI(_cardURI);
-
         onSuccess && onSuccess();
       } catch (error: any) {
         if (error.code === "UNSUPPORTED_OPERATION") {

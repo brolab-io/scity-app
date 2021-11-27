@@ -8,6 +8,19 @@ export interface ICityData {
   slotLeft: number;
 }
 
+export interface ICardData {
+  name: string;
+  hash: string;
+  description: string | null;
+  image: string;
+  ownerAddress: string | null;
+  attributes: {
+    display_type?: string;
+    trait_type: string;
+    value: string | number;
+  }[];
+}
+
 export interface MenuItem {
   title: string;
   href: string;
