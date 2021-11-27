@@ -15,13 +15,13 @@ module.exports = {
       danger: "#e3342f",
       pink: "#4B50E6",
       purple: "#E250E5",
-      "dark-gray": "#1A202C",
-      gray: "#2D3748",
+      dark: "#1A202C",
+      "dark-gray": "#2D3748",
     }),
     textColor: (theme) => ({
       ...theme("colors"),
       primary: "#431216",
-      gray: "#718096",
+      "light-gray": "#718096",
     }),
     borderColor: (theme) => ({
       ...theme("colors"),

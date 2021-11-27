@@ -11,6 +11,7 @@ import Countdown from "../../../components/Countdown";
 import Button from "../../../components/Button";
 import useInfoOpenArea from "../../../hooks/useInfoOpenArea";
 import useBuyLand from "../../../hooks/useBuyLand";
+import Cards from "../../../components/Cards";
 
 const CityPage: NextPage = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const CityPage: NextPage = () => {
 
   const bg1Style = useMemo(
     () => ({
-      backgroundImage: `url(/images/backgrounds/bg-1.svg)`,
+      backgroundImage: `url(/images/backgrounds/bg-2.svg)`,
     }),
     []
   );
@@ -60,11 +61,14 @@ const CityPage: NextPage = () => {
   );
 
   return (
-    <>
-      <div style={bg1Style} className="p-4 lg:p-10 pt-6 lg:pt-20">
+    <div className="bg-black">
+      <div
+        style={bg1Style}
+        className="md:p-4 lg:p-10 md:pt-6 lg:pt-20 space-y-8"
+      >
         <Container>
-          <div className="rounded-xl bg-dark-gray bg-opacity-80 p-6 lg:p-10">
-            <div className="grid gap-4 lg:grid-cols-2">
+          <div className="md:rounded-md lg:rounded-lg xl:rounded-xl bg-dark-gray bg-opacity-80 p-6 lg:p-10">
+            <div className="grid gap-x-4 gap-y-8 lg:grid-cols-2">
               <div className="grid grid-cols-2 gap-4">
                 {[0, 1, 2, 3].map((i) => (
                   <Image
@@ -86,17 +90,17 @@ const CityPage: NextPage = () => {
                   </div>
                 </div>
                 <div>
-                  <span className="text-gray">
+                  <span className="text-light-gray">
                     Remaining Amount:{" "}
                     <span className="text-gradient bg-gradient-to-bl">
-                      {currentQuantity ?? 0}
+                      {(limit ?? 0) - (currentQuantity ?? 0)}
                     </span>
                     /<span className="text-white">{limit ?? 0}</span>
                   </span>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <span className="text-gray">Ended:</span>
-                  <div className="flex items-center bg-gray rounded-xl px-3 py-1 space-x-2">
+                  <span className="text-light-gray">Ended:</span>
+                  <div className="flex items-center bg-dark-gray rounded-xl px-3 py-1 space-x-2">
                     <Image
                       src="/images/icons/fire.svg"
                       width={16}
@@ -109,8 +113,8 @@ const CityPage: NextPage = () => {
                     />
                   </div>
                 </div>
-                <div className="bg-gray p-4 rounded-xl">
-                  <span className="text-gray">Price</span>
+                <div className="bg-dark-gray p-4 rounded-xl">
+                  <span className="text-light-gray">Price</span>
                   <div className="flex items-center space-x-2">
                     <Image
                       src="/images/icons/bnb.svg"
@@ -137,18 +141,18 @@ const CityPage: NextPage = () => {
                     ? "Out of time"
                     : "Buy now"}
                 </Button>
-                <div className="bg-gray p-4 rounded-xl space-y-2">
+                <div className="bg-dark-gray p-4 rounded-xl space-y-2">
                   <span className="text-white">Shop Rule:</span>
                   <div className="space-y-1">
-                    <p className="text-gray text-sm">
+                    <p className="text-light-gray text-sm">
                       1. You can buy BOX with SCC, and get a CITY CARD randomly
                       after purchase;
                     </p>
-                    <p className="text-gray text-sm">
+                    <p className="text-light-gray text-sm">
                       2. The higher rarity box, the higher CITY CARD rare. There
                       are four level of rarity: B - A - R - SR.
                     </p>
-                    <p className="text-gray text-sm">
+                    <p className="text-light-gray text-sm">
                       3. The higher CITY CARD rare, the higher Hashrate, meaning
                       the higher income you’ll receive when stake these card
                     </p>
@@ -159,7 +163,12 @@ const CityPage: NextPage = () => {
           </div>
         </Container>
       </div>
-    </>
+      <Container>
+        <div className="pb-10 pt-20">
+          <Cards />
+        </div>
+      </Container>
+    </div>
   );
 };
 
