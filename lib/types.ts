@@ -1,5 +1,5 @@
 export interface ICityData {
-  id: number;
+  id: string;
   name: string;
   slug: string;
   country: string;

@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import useSWR from "swr";
 import Container from "../../../components/Container";
 import Loading from "../../../components/Loading";
@@ -12,6 +12,9 @@ import Button from "../../../components/Button";
 import useInfoOpenArea from "../../../hooks/useInfoOpenArea";
 import useBuyLand from "../../../hooks/useBuyLand";
 import Cards from "../../../components/Cards";
+import { useQuery } from "react-query";
+import { getNFTLandMetaData } from "../../../lib/api";
+import CardReceived from "../../../components/CardRecieved";
 
 const CityPage: NextPage = () => {
   const router = useRouter();
@@ -30,9 +33,18 @@ const CityPage: NextPage = () => {
   const { price, limit, endTime, isLoading, currentQuantity, reload } =
     useInfoOpenArea(city?.id);
 
-  const { buy, isBuying } = useBuyLand(city?.id, {
+  const { buy, cardURI, isBuying } = useBuyLand(city?.id, {
     onSuccess: reload,
   });
+
+  const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
+    ["nft-lands", cardURI ?? ""],
+    getNFTLandMetaData,
+    {
+      enabled: !!cardURI,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const isFetching = !data && !error;
 
@@ -46,6 +58,12 @@ const CityPage: NextPage = () => {
     }),
     []
   );
+
+  useEffect(() => {
+    if (cardMetaData) {
+      console.log(cardMetaData);
+    }
+  }, [cardMetaData]);
 
   if (isFetching) {
     return <Loading />;
@@ -168,6 +186,10 @@ const CityPage: NextPage = () => {
           <Cards />
         </div>
       </Container>
+      <CardReceived
+        isLoading={isBuying || isFetchingMetaData}
+        cardData={cardMetaData}
+      />
     </div>
   );
 };

@@ -10,10 +10,11 @@ type BuyOptions = {
 };
 
 const useBuyLand = (
-  areaId: number | undefined,
+  areaId: string | undefined,
   { onSuccess }: BuyOptions = {}
 ) => {
   const [isBuying, setIsBuying] = useState(false);
+  const [cardURI, setCardURI] = useState<string | undefined>(undefined);
   const { activate, library, active } = useWeb3React();
 
   const buy = useCallback(
@@ -37,22 +38,21 @@ const useBuyLand = (
         provider.getSigner()
       );
 
-      const onBuyLand = (
-        address: ethers.BigNumber,
-        tokenId: ethers.BigNumber,
-        price: ethers.BigNumber
-      ) => {
-        const cardId = tokenId.toNumber();
-        // TODO: Show card
-        toast.success(`Bought land successfully!`);
-      };
-      contract.once("BuyLand", onBuyLand);
-
       try {
         const tx = await contract.buyLand(areaId, {
           value: ethers.utils.parseEther(price),
         });
-        await tx.wait();
+        const result = await tx.wait();
+        const buyLandEvent = result.events.find(
+          (event) => event.event === "BuyLand"
+        );
+        // console.log(buyLandEvent.args);
+        // console.log(buyLandEvent.args[0]);
+        const [, tokenId] = buyLandEvent.args;
+        console.log(tokenId);
+        const _cardURI = await contract.tokenURI(tokenId);
+        setCardURI(_cardURI);
+
         onSuccess && onSuccess();
       } catch (error: any) {
         if (error.code === "UNSUPPORTED_OPERATION") {
@@ -66,6 +66,6 @@ const useBuyLand = (
     [activate, active, areaId, library, onSuccess]
   );
 
-  return useMemo(() => ({ buy, isBuying }), [buy, isBuying]);
+  return useMemo(() => ({ buy, isBuying, cardURI }), [buy, isBuying, cardURI]);
 };
 export default useBuyLand;

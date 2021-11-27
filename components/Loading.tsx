@@ -1,6 +1,6 @@
 const Loading: React.FC = () => {
   return (
-    <div className="flex w-full h-full items-center justify-center duration-300 transition-opacity p-10">
+    <div className="fixed inset-0 z-40 bg-gray-800 bg-opacity-70 flex items-center justify-center transform duration-500">
       <div className="flex-col">
         <div className="w-24 h-24">
           <svg viewBox="0 0 860.1 876.5">

@@ -2,18 +2,18 @@
   "status": 200,
   "data": [
     {
-      "id": 1,
-      "name": "TORONTO CITY",
-      "slug": "toronto",
+      "id": "tokyo",
+      "name": "TOKYO CITY",
+      "slug": "tokyo",
       "country": "American",
       "startDate": "2021-11-25T08:20:18.757Z",
       "endDate": "2021-11-28T08:20:18.757Z",
       "slotLeft": 32
     },
     {
-      "id": 2,
-      "name": "NEW YORK CITY",
-      "country": "American",
+      "id": "hongkong",
+      "name": "HONGKONG CITY",
+      "country": "Hong Kong",
       "slug": "newyork",
       "startDate": "2021-11-25T08:20:18.757Z",
       "endDate": "2021-11-29T08:20:18.757Z",

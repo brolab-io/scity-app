@@ -14,7 +14,7 @@ const Clickable: React.FC<Props> = ({ children, onClick, href, className }) => {
     <div
       role="presentation"
       onClick={onClick}
-      className={((className && className + " ") || "") + "cursor-pointer"}
+      className={"cursor-pointer" + ((className && " " + className) || "")}
     >
       {children}
     </div>

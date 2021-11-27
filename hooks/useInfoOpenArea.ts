@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import abi from "../dapp/NFTLand.json";
 import { IAreaInfo } from "../lib/types";
 
-const useInfoOpenArea = (areaId: number | undefined) => {
+const useInfoOpenArea = (areaId: string | undefined) => {
   const { library, active } = useWeb3React();
   const [isLoading, setIsLoading] = useState(false);
   const [info, setInfo] = useState<IAreaInfo>({} as IAreaInfo);
