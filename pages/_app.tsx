@@ -16,6 +16,11 @@ import Layout from "../components/Layout";
 import SEO from "../next-seo.config.json";
 import { DefaultSeo } from "next-seo";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
+const queryClient = new QueryClient();
+
 const swrOptions: SWRConfiguration = {
   fetcher,
 };
@@ -53,10 +58,13 @@ export default function App(props: AppProps) {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <AppContextProvider>
-        <SWRConfig value={swrOptions}>
-          <MyApp {...props} />
-          <ToastContainer pauseOnFocusLoss={false} position="top-center" />
-        </SWRConfig>
+        <QueryClientProvider client={queryClient}>
+          <SWRConfig value={swrOptions}>
+            <MyApp {...props} />
+            <ToastContainer pauseOnFocusLoss={false} position="top-center" />
+          </SWRConfig>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </AppContextProvider>
     </Web3ReactProvider>
   );
