@@ -22,8 +22,8 @@ const Feature = () => {
           </h3>
           <p className="my-2 text-black-500">
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown
+            industry. Lorem Ipsum has been the industry&apos;s standard dummy
+            text ever since the 1500s, when an unknown
           </p>
         </div>
       </div>

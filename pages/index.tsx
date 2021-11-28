@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   return (
     <>
       {/* <Sample /> */}
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* <BuyNFTLandSlider /> */}
       <Testimoni />
       <Feature />
