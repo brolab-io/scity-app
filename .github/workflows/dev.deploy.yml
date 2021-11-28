@@ -43,5 +43,5 @@ jobs:
             cd ${{ secrets.APP_DIR }}/${{ github.event.repository.name }}
             yarn install
             pm2 delete -s ${{ github.event.repository.name }} || :
-            pm2 start dist/main.js --name ${{ github.event.repository.name }}
+            pm2 start
             pm2 save
