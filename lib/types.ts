@@ -2,10 +2,11 @@ export interface ICityData {
   id: string;
   name: string;
   slug: string;
+  image: string;
   country: string;
-  startDate: string;
-  endDate: string;
-  slotLeft: number;
+  openTime: string;
+  closeTime: string;
+  numberOfSlots: number;
 }
 
 export interface ICardData {

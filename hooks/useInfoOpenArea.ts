@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 
-import abi from "../dapp/NFTLand.json";
+import abi from "../dapp/contract-abi.json";
 import { IAreaInfo } from "../lib/types";
 
 const useInfoOpenArea = (areaId: string | undefined) => {

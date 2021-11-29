@@ -13,3 +13,9 @@ export const getNFTLandMetaData = (
     .get(queryContext.queryKey[1])
     .then((response) => response.data);
 };
+
+export const getOpenedCities = () => {
+  return request
+    .get("/nft-cities/openedCities")
+    .then((response) => response.data);
+};

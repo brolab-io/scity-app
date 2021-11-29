@@ -1,17 +1,17 @@
 import "../styles/globals.css";
-import fetcher from "../lib/fetcher";
+import "react-toastify/dist/ReactToastify.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import type { AppProps } from "next/app";
-import { SWRConfig } from "swr";
 import { useWeb3React, Web3ReactProvider } from "@web3-react/core";
 import { getLibrary } from "../lib/getLibrary";
 import useInactiveListener from "../hooks/useInactiveListener";
 import { useAppContext, AppContextProvider } from "../components/AppContext";
 import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { getErrorMessage } from "../utils";
 import type { Web3Provider } from "@ethersproject/providers";
-import type { SWRConfiguration } from "swr";
 import Layout from "../components/Layout";
 import SEO from "../next-seo.config.json";
 import { DefaultSeo } from "next-seo";
@@ -19,14 +19,7 @@ import { DefaultSeo } from "next-seo";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
 const queryClient = new QueryClient();
-
-const swrOptions: SWRConfiguration = {
-  fetcher,
-};
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { activatingConnector, setActivatingConnector, triedEager } =
@@ -62,10 +55,8 @@ export default function App(props: AppProps) {
     <Web3ReactProvider getLibrary={getLibrary}>
       <AppContextProvider>
         <QueryClientProvider client={queryClient}>
-          <SWRConfig value={swrOptions}>
-            <MyApp {...props} />
-            <ToastContainer pauseOnFocusLoss={false} position="top-center" />
-          </SWRConfig>
+          <MyApp {...props} />
+          <ToastContainer pauseOnFocusLoss={false} position="top-center" />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </AppContextProvider>

@@ -21,7 +21,7 @@ const City: React.FC<Props> = ({ city }) => {
       <div className="space-y-4">
         <div>
           <span className="text-white">
-            {formatDate(city.startDate)} - {formatDate(city.endDate)}
+            {formatDate(city.openTime)} - {formatDate(city.closeTime)}
           </span>
         </div>
         <h3 className="text-white">{city.name}</h3>
@@ -34,7 +34,7 @@ const City: React.FC<Props> = ({ city }) => {
           Join
         </Button>
         <div className="mt-2">
-          <span className="text-white">{city.slotLeft} slots left</span>
+          <span className="text-white">{city.numberOfSlots} slots left</span>
         </div>
       </div>
     </div>

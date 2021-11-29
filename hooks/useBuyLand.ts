@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { injected } from "../dapp/connectors";
-import abi from "../dapp/NFTLand.json";
+import abi from "../dapp/contract-abi.json";
 
 type BuyOptions = {
   onSuccess?: () => void;
@@ -14,20 +14,26 @@ const useBuyLand = (
   { onSuccess }: BuyOptions = {}
 ) => {
   const [isBuying, setIsBuying] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [cardURI, setCardURI] = useState<string | undefined>(undefined);
   const { activate, library, active } = useWeb3React();
 
   const buy = useCallback(
     async (price: string) => {
+      setIsProcessing(true);
       if (!areaId) {
         return;
       }
       if (typeof window === "undefined" || !window.ethereum) {
         return;
       }
-      setIsBuying(true);
       if (!active) {
-        await activate(injected);
+        try {
+          await activate(injected);
+        } catch (error) {
+          setIsProcessing(false);
+          return;
+        }
       }
       const provider =
         library ?? new ethers.providers.Web3Provider(window.ethereum);
@@ -42,6 +48,7 @@ const useBuyLand = (
         const tx = await contract.buyLand(areaId, {
           value: ethers.utils.parseEther(price),
         });
+        setIsBuying(true);
         const result = await tx.wait();
         const buyLandEvent = result.events.find(
           (event: ethers.Event) => event.event === "BuyLand"
@@ -57,11 +64,15 @@ const useBuyLand = (
         toast.error(error.data?.message ?? error.message);
       } finally {
         setIsBuying(false);
+        setIsProcessing(false);
       }
     },
     [activate, active, areaId, library, onSuccess]
   );
 
-  return useMemo(() => ({ buy, isBuying, cardURI }), [buy, isBuying, cardURI]);
+  return useMemo(
+    () => ({ buy, isBuying, cardURI, isProcessing }),
+    [buy, isBuying, cardURI, isProcessing]
+  );
 };
 export default useBuyLand;

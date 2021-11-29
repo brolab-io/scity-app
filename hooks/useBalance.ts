@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import abi from "../dapp/NFTLand.json";
+import abi from "../dapp/contract-abi.json";
 
 const useBalance = () => {
   const { library, account, active } = useWeb3React();

@@ -18,47 +18,6 @@ const CardReceived: React.FC<Props> = ({ cardData, isLoading }) => {
     setCardMetaData(cardData);
   }, [cardData]);
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      setCardMetaData({
-        attributes: [
-          {
-            trait_type: "name",
-            value: "Tokyo #1",
-          },
-          {
-            trait_type: "city",
-            value: "Tokyo",
-          },
-          {
-            trait_type: "location",
-            value: "0,0",
-          },
-          {
-            trait_type: "rare",
-            value: "R",
-          },
-          {
-            trait_type: "miningPower",
-            value: 56,
-          },
-          {
-            trait_type: "miningEfficiency",
-            value: 110,
-          },
-        ],
-
-        hash: "15732f1db39d49ead31930a200ace1dc84cb36478bd515684c44e70894a14499",
-        name: "Tokyo #1",
-        description: null,
-        image:
-          "https://res.cloudinary.com/dcrbaasbt/image/upload/v1637838193/Group_332_nroa32.png",
-        ownerAddress: null,
-      });
-    }, 5000);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
   const onClickClose = useCallback(() => {
     setCardMetaData(undefined);
   }, []);
