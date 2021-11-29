@@ -1,9 +1,10 @@
-import Container from "./Container";
-import Logo from "./Logo";
+import Container from "../UI/Container";
+import Logo from "../UI/Logo";
 import Link from "next/link";
 import Image from "next/image";
-import Button from "./Button";
+import Button from "../UI/Button";
 import { useMemo } from "react";
+import clsx from "clsx";
 
 const socialLinks = [
   {
@@ -100,19 +101,19 @@ const Footer: React.FC = () => {
   );
 
   return (
-    <div className="bg-black py-20 space-y-10">
-      <div style={clipPathStyle} className="text-center pt-24 pb-20 space-y-5">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl text-white">
+    <div className="py-20 space-y-10 bg-black">
+      <div style={clipPathStyle} className="pt-24 pb-20 space-y-5 text-center">
+        <h2 className="text-2xl text-white md:text-3xl lg:text-4xl">
           SCITY - METAVERSE
         </h2>
-        <p className="text-lg md:text-xl lg:text-2xl text-white font-semibold">
+        <p className="text-lg font-semibold text-white md:text-xl lg:text-2xl">
           BUY LAND - OPEN BUSINESS - EARN PROFIT
         </p>
       </div>
       <Container>
-        <div className="grid gap-y-10 gap-x-2 md:gap-x-4 grid-cols-2 lg:grid-cols-4 xl:grid-cols-12 px-8 lg:px-4">
+        <div className="grid grid-cols-2 px-8 gap-y-10 gap-x-2 md:gap-x-4 lg:grid-cols-4 xl:grid-cols-12 lg:px-4">
           {/* COL 1 */}
-          <div className="space-y-4 col-span-2 lg:col-span-4 xl:col-span-3 px-2 lg:px-4">
+          <div className="col-span-2 px-2 space-y-4 lg:col-span-4 xl:col-span-3 lg:px-4">
             <Logo />
             <p className="text-sm text-gray-300">
               Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non,
@@ -123,7 +124,7 @@ const Footer: React.FC = () => {
                 <Link key={link.href} passHref href={link.href}>
                   <a
                     target="_blank"
-                    className="flex items-center justify-center h-9 w-9 rounded-lg bg-dark-gray"
+                    className="flex items-center justify-center rounded-lg h-9 w-9 bg-dark-gray"
                   >
                     <Image
                       src={link.icon}
@@ -140,15 +141,20 @@ const Footer: React.FC = () => {
 
           {/* COL 2 - 3 -4 */}
           {useFullLinks.map((section, index) => (
-            <div key={index.toString()} className="xl:col-span-2 px-2 lg:px-4">
+            <div key={index.toString()} className="px-2 xl:col-span-2 lg:px-4">
               <ul className="space-y-1">
-                <span className="flex text-lg font-semibold text-white mb-3">
+                <span className="flex mb-3 text-lg font-semibold text-white">
                   {section.title}
                 </span>
                 {section.children.map((link, idx) => (
                   <li className="flex justify-start" key={`${index}-${idx}`}>
                     <Link passHref href={link.href}>
-                      <a className="flex py-1.5 text-sm text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap from-white to-gray-300 hover:from-pink hover:to-purple">
+                      <a
+                        className={clsx(
+                          "flex py-1.5 text-sm text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap",
+                          "from-white to-gray-300 hover:from-pink hover:to-purple"
+                        )}
+                      >
                         {link.title}
                       </a>
                     </Link>
@@ -159,12 +165,12 @@ const Footer: React.FC = () => {
           ))}
 
           {/* COL 5 */}
-          <div className="xl:col-span-3 px-2 lg:px-4 space-y-3">
-            <span className="flex text-lg font-semibold text-white mb-3">
+          <div className="px-2 space-y-3 xl:col-span-3 lg:px-4">
+            <span className="flex mb-3 text-lg font-semibold text-white">
               Subscribe Us
             </span>
             <input
-              className="w-full bg-transparent border border-gray-700 px-4 py-3 rounded-lg text-white"
+              className="w-full px-4 py-3 text-white bg-transparent border border-gray-700 rounded-lg"
               placeholder="yourmail@example.com"
             />
             <Button>

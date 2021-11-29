@@ -1,20 +1,30 @@
 import { ethers } from "ethers";
 import { NextPage } from "next";
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import isEqual from "react-fast-compare";
+import BoxReceived from "../../components/BuyBox/BoxReceived";
 import BuyBoxBuySection from "../../components/BuyBox/BuySection";
 import BuyBoxSeo from "../../components/BuyBox/SEO";
 import useBuyBox from "../../hooks/useBuyBox";
 import useTotalSupply from "../../hooks/useTotalSupply";
 
 const BuyBoxPage: NextPage = () => {
-  const { totalSupply, reload } = useTotalSupply();
+  const { totalSupply } = useTotalSupply();
+  const [isBoxReceived, setIsBoxReceived] = useState(false);
+
+  const onBoxReceived = useCallback(() => {
+    setIsBoxReceived(true);
+  }, []);
+
+  const hideModal = useCallback(() => {
+    setIsBoxReceived(false);
+  }, []);
 
   const {
     buy: onClickBuyNow,
     price,
     isProcessing,
-  } = useBuyBox({ onSuccess: reload });
+  } = useBuyBox({ onSuccess: onBoxReceived });
 
   return (
     <>
@@ -29,6 +39,7 @@ const BuyBoxPage: NextPage = () => {
           isProcessing={isProcessing}
         />
       </div>
+      <BoxReceived isVisible={isBoxReceived} close={hideModal} />
     </>
   );
 };

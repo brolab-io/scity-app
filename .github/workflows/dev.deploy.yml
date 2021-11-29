@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "package.json,public,mocks,yarn.lock,.next,ecosystem.config.js"
+          source: "package.json,public,mocks,yarn.lock,.next,ecosystem.config.js,next.config.js"
           target: ${{ secrets.APP_DIR }}/${{ github.event.repository.name }}
           debug: true
 

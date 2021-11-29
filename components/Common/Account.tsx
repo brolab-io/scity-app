@@ -4,8 +4,8 @@ export default function Account() {
   const { account } = useWeb3React();
 
   return (
-    <div className="flex items-center rounded-xl px-5 py-2 bg-primary">
-      <span className="font-semibold text-sm text-white">
+    <div className="flex items-center px-5 py-2 rounded-xl bg-primary">
+      <span className="text-sm font-semibold text-white">
         {account === null
           ? "-"
           : account

@@ -1,12 +1,14 @@
-import Connect from "../Common/Connect";
+import Connect from "./Connect";
 import Link from "next/link";
-import Clickable from "./Clickable";
-import Balance from "../Common/Balance";
-import Account from "../Common/Account";
+import Clickable from "../UI/Clickable";
+import Balance from "./Balance";
+import Account from "./Account";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-import Logo from "./Logo";
+import Logo from "../UI/Logo";
+import NavbarAccountPopover from "./NavbarAccountPopover";
+import clsx from "clsx";
 
 const navigationMenus = [
   {
@@ -83,11 +85,27 @@ const Navbar: React.FC = () => {
         {/* CONNECT */}
         <div className="hidden lg:flex w-80 lg:justify-end">
           {active ? (
-            <div className="flex-none hidden px-2 mx-2 lg:flex">
-              <Clickable className="flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg hover:scale-105">
+            <div className="relative flex-none hidden px-2 mx-2 group lg:flex">
+              <Clickable
+                className={clsx(
+                  "flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg z-20"
+                )}
+              >
                 <Balance />
                 <Account />
               </Clickable>
+              <div
+                className={clsx(
+                  "absolute top-9 skew-x-0 right-2 z-10 transform duration-200 w-80",
+                  "opacity-0 invisible",
+                  "group-hover:opacity-100 group-hover:visible"
+                )}
+              >
+                <div className="bg-opacity-0 h-7"></div>
+                <div className="border rounded-lg bg-dark border-primary">
+                  <NavbarAccountPopover />
+                </div>
+              </div>
             </div>
           ) : (
             <Connect outline />

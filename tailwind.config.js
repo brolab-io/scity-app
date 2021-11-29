@@ -7,6 +7,16 @@ module.exports = {
         primary: "1fr",
         "primary-lg": "288px 1fr",
       },
+
+      keyframes: {
+        wiggle: {
+          "0%": { transform: "translate(0px,-20px)" },
+          "100%": { transform: "translate(0px,10px)" },
+        },
+      },
+      animation: {
+        wiggle: "wiggle 1s ease-in-out",
+      },
     },
     backgroundColor: (theme) => ({
       ...theme("colors"),
@@ -17,6 +27,7 @@ module.exports = {
       purple: "#E250E5",
       dark: "#1A202C",
       "dark-gray": "#2D3748",
+      "light-gray": "#718096",
     }),
     textColor: (theme) => ({
       ...theme("colors"),
@@ -44,6 +55,9 @@ module.exports = {
       textColor: ["disabled"],
       backgroundColor: ["disabled"],
       opacity: ["disabled"],
+      display: ["group-hover"],
+      skew: ["group-hover"],
+      visibility: ["group-hover"],
     },
   },
   plugins: [],

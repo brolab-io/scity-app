@@ -1,7 +1,7 @@
 import { memo } from "react";
 import isEqual from "react-fast-compare";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "../Common/Footer";
+import Navbar from "../Common/Navbar";
 
 const Layout: React.FC<any> = ({ children }) => {
   return (

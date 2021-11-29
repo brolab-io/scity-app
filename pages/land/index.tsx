@@ -7,7 +7,7 @@ import useBuyLand from "../../hooks/useBuyLand";
 import Cards from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
-import CardReceived from "../../components/Common/CardRecieved";
+import CardReceived from "../../components/BuyLand/CardRecieved";
 import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
