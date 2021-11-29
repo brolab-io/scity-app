@@ -149,13 +149,15 @@ const Footer: React.FC = () => {
                 {section.children.map((link, idx) => (
                   <li className="flex justify-start" key={`${index}-${idx}`}>
                     <Link passHref href={link.href}>
-                      <a
-                        className={clsx(
-                          "flex py-1.5 text-sm text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap",
-                          "from-white to-gray-300 hover:from-pink hover:to-purple"
-                        )}
-                      >
-                        {link.title}
+                      <a>
+                        <span
+                          className={clsx(
+                            "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap py-1.5 text-sm",
+                            "from-white to-gray-300 hover:from-pink hover:to-purple"
+                          )}
+                        >
+                          {link.title}
+                        </span>
                       </a>
                     </Link>
                   </li>
@@ -170,7 +172,7 @@ const Footer: React.FC = () => {
               Subscribe Us
             </span>
             <input
-              className="w-full px-4 py-3 text-white bg-transparent border border-gray-700 rounded-lg"
+              className="w-full px-4 py-2.5 text-white bg-transparent border border-gray-700 rounded-xl"
               placeholder="yourmail@example.com"
             />
             <Button>
@@ -183,7 +185,7 @@ const Footer: React.FC = () => {
                   alt="send"
                 />
               </span>
-              <span>Subscribe now</span>
+              <span>Subscribe</span>
             </Button>
           </div>
         </div>
