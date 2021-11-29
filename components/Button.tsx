@@ -20,7 +20,7 @@ const Button: React.FC<Props> = ({
       disabled={disabled}
       className={
         (disabled
-          ? "cursor-not-allowed bg-gray text-gray"
+          ? "cursor-not-allowed bg-dark-gray text-gray"
           : outline
           ? "border-2 border-primary hover:bg-primary hover:text-white"
           : "bg-primary hover:opacity-90 text-white") +
