@@ -2,8 +2,7 @@ import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
-import abi from "../dapp/contract-abi.json";
+import abi from "../dapp/abi/land-abi.json";
 
 const useBalance = () => {
   const { library, account, active } = useWeb3React();

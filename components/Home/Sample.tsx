@@ -1,5 +1,5 @@
 import styles from "./Sample.module.css";
-import Container from "../../components/Container";
+import Container from "../UI/Container";
 
 export default function Sample() {
   return (

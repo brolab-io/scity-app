@@ -31,10 +31,20 @@ module.exports = {
       ...theme("colors"),
       purple: "#E250E5",
       pink: "#4B50E6",
+      "purple-500": "#833ef1",
+      "purple-700": "#491cb5",
+      "light-gray": "#718096",
+      "dark-gray": "#2D3748",
     }),
   },
   variants: {
-    extend: {},
+    extend: {
+      gradientColorStops: ["disabled"],
+      cursor: ["disabled"],
+      textColor: ["disabled"],
+      backgroundColor: ["disabled"],
+      opacity: ["disabled"],
+    },
   },
   plugins: [],
 };

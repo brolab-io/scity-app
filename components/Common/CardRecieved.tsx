@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ICardData } from "../lib/types";
+import { ICardData } from "../../lib/types";
 import Image from "next/image";
 import ReactCardFlip from "react-card-flip";
-import LoadingIcon from "./LoadingIcon";
+import LoadingIcon from "../UI/LoadingIcon";
 
 type Props = {
   cardData?: ICardData;

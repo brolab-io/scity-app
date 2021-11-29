@@ -12,7 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { getErrorMessage } from "../utils";
 import type { Web3Provider } from "@ethersproject/providers";
-import Layout from "../components/Layout";
+import Layout from "../components/UI/Layout";
 import SEO from "../next-seo.config.json";
 import { DefaultSeo } from "next-seo";
 

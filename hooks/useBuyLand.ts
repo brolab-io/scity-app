@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { injected } from "../dapp/connectors";
-import abi from "../dapp/contract-abi.json";
+import abi from "../dapp/abi/land-abi.json";
 
 type BuyOptions = {
   onSuccess?: () => void;

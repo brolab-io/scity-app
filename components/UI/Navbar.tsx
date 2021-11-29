@@ -1,10 +1,9 @@
-import Connect from "./Connect";
+import Connect from "../Common/Connect";
 import Link from "next/link";
 import Clickable from "./Clickable";
-import Balance from "./Balance";
-import Account from "./Account";
+import Balance from "../Common/Balance";
+import Account from "../Common/Account";
 import { useWeb3React } from "@web3-react/core";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import Logo from "./Logo";
@@ -19,12 +18,12 @@ const navigationMenus = [
     href: "/land",
   },
   {
-    title: "Explore",
-    href: "/explore",
+    title: "Buy Box",
+    href: "/box",
   },
   {
-    title: "Activity",
-    href: "/activity",
+    title: "Explore",
+    href: "/explore",
   },
   {
     title: "Comunity",
@@ -58,13 +57,13 @@ const Navbar: React.FC = () => {
   }, [events]);
 
   return (
-    <nav className="fixed inset-x-0 top-0 p-4 lg:p-0 h-20 z-30 bg-black border-b border-gray-600">
-      <div className="lg:flex h-full px-4 w-full items-center justify-between">
+    <nav className="fixed inset-x-0 top-0 z-30 h-20 p-4 bg-black border-b border-gray-600 lg:p-0">
+      <div className="items-center justify-between w-full h-full px-4 lg:flex">
         {/* LOGO  */}
-        <div className="flex justify-between items-center w-full lg:w-80 lg:justify-start">
+        <div className="flex items-center justify-between w-full lg:w-80 lg:justify-start">
           <Clickable onClick={toggle}>
             <svg
-              className="h-10 w-10 fill-current text-white lg:hidden -mb-2"
+              className="w-10 h-10 -mb-2 text-white fill-current lg:hidden"
               height="32px"
               viewBox="0 0 32 32"
               xmlSpace="preserve"
@@ -85,7 +84,7 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex w-80 lg:justify-end">
           {active ? (
             <div className="flex-none hidden px-2 mx-2 lg:flex">
-              <Clickable className="flex items-stretch bg-white rounded-xl shadow-md transform ease-out duration-100 hover:shadow-lg hover:scale-105">
+              <Clickable className="flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg hover:scale-105">
                 <Balance />
                 <Account />
               </Clickable>
@@ -118,10 +117,10 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
         return (
           <li
             key={menu.href}
-            className="border-b lg:border-b-0 border-gray-800"
+            className="border-b border-gray-800 lg:border-b-0"
           >
             <Link passHref href={menu.href}>
-              <a className="block transform duration-200 px-8 lg:px-0 w-full py-4">
+              <a className="block w-full px-8 py-4 duration-200 transform lg:px-0">
                 <span
                   className={
                     "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-xl lg:text-base" +

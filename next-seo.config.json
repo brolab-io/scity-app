@@ -1,10 +1,10 @@
 {
-  "titleTemplate": "City Land | %s",
+  "titleTemplate": "%s - City Land",
   "defaultTitle": "City Land",
   "openGraph": {
     "type": "website",
-    "locale": "en_IE",
-    "url": "https://www.url.ie/",
+    "locale": "vn_VI",
+    "url": "https://landing.dev-nft.xyz/",
     "site_name": "City Land"
   },
   "twitter": {
