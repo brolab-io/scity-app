@@ -2,14 +2,14 @@ import Image from "next/image";
 
 type Props = {};
 
-const CardItem: React.FC<Props> = () => {
+const CompanyItem: React.FC<Props> = () => {
   return (
     <div className="p-6 bg-dark rounded-xl space-y">
       <Image
-        width={247 * 2}
-        height={311 * 2}
+        width={272 * 2}
+        height={387 * 2}
         alt="card"
-        src="/images/card.png"
+        src="/images/company.png"
       />
       <div className="py-1 mt-4 md:mt-2 lg:mt-1">
         <span className="font-semibold text-white lg:text-lg">
@@ -32,4 +32,4 @@ const CardItem: React.FC<Props> = () => {
   );
 };
 
-export default CardItem;
+export default CompanyItem;

@@ -58,6 +58,7 @@ module.exports = {
       display: ["group-hover"],
       skew: ["group-hover"],
       visibility: ["group-hover"],
+      borderRadius: ["group-hover"],
     },
   },
   plugins: [],

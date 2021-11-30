@@ -83,7 +83,11 @@ const BuyLandBuySection: React.FC<Props> = ({
       slotsRemaining={
         limit - (currentQuantity ?? selectedCity?.numberOfSlots ?? 0)
       }
-      endTime={endTime}
+      endTime={
+        endTime
+          ? new Date(endTime * 1000)
+          : new Date(selectedCity?.closeTime || "")
+      }
       numberOfSlots={selectedCity?.numberOfSlots}
       buttonTitle={buttonTitle}
       buyEnabled={shouldEnableBuy}

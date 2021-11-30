@@ -5,9 +5,10 @@ import Clickable from "../UI/Clickable";
 import SvgIconLogout from "../Icons/SvgIconLogout";
 import SvgIconExternalLink from "../Icons/SvgIconExternalLink";
 import { useCallback } from "react";
+import { Web3Provider } from "@ethersproject/providers";
 
 const AccountModal: React.FC = () => {
-  const { account, deactivate } = useWeb3React();
+  const { account, deactivate } = useWeb3React<Web3Provider>();
 
   const onClickLogout = useCallback(() => {
     deactivate();

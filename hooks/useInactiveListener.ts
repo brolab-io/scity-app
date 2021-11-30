@@ -1,3 +1,4 @@
+import { Web3Provider } from "@ethersproject/providers";
 import logger from "../lib/logger";
 
 import { injected } from "./../dapp/connectors";
@@ -5,10 +6,31 @@ import { useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 
 export default function useInactiveListener(suppress: boolean = false) {
-  const { active, error, activate } = useWeb3React();
+  const { active, error, activate, library } = useWeb3React<Web3Provider>();
+
+  useEffect(() => {}, []);
+
+  // useEffect(() => {
+  //   const onWeb3ReactUpdate = ({ chainId, account }: any) => {
+  //     if (
+  //       chainId &&
+  //       (injected.supportedChainIds || []).includes(Number(chainId))
+  //     ) {
+  //       return library?.jsonRpcFetchFunc("wallet_switchEthereumChain", [
+  //         { chainId: injected.supportedChainIds?.[0] ?? "56" },
+  //       ]);
+  //     }
+  //   };
+
+  //   injected.on("Web3ReactUpdate", onWeb3ReactUpdate);
+  //   return () => {
+  //     injected.removeListener("Web3ReactUpdate", onWeb3ReactUpdate);
+  //   };
+  //   // injected.on("networkChanged", (networkId: number) => {})
+  // }, [activate, library]);
 
   useEffect(() => {
-    const { ethereum } = window as any;
+    const ethereum = { window } as any;
     if (ethereum && ethereum.on && !active && !error && !suppress) {
       const handleConnect = () => {
         logger.info("Handling 'connect' event");
@@ -19,9 +41,17 @@ export default function useInactiveListener(suppress: boolean = false) {
         activate(injected);
       };
       const handleAccountsChanged = (accounts: string[]) => {
-        logger.info("Handling 'accountsChanged' event with payload", accounts);
+        logger.info(
+          "Handling 'accountsChanged' event with payload ```````````",
+          accounts
+        );
         if (accounts.length > 0) {
           activate(injected);
+          // return ethereum.request({
+          //   method: "wallet_switchEthereumChain",
+          //   params: [{ chainId: "0x38" }],
+          //   // params: [{ chainId: '0x61' }],
+          // });
         }
       };
       const handleNetworkChanged = (networkId: string | number) => {
@@ -43,5 +73,5 @@ export default function useInactiveListener(suppress: boolean = false) {
         }
       };
     }
-  }, [active, error, suppress, activate]);
+  }, [active, error, suppress, activate, library]);
 }

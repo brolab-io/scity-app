@@ -4,7 +4,7 @@ import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
 import useInfoOpenArea from "../../hooks/useInfoOpenArea";
 import useBuyLand from "../../hooks/useBuyLand";
-import Cards from "../../components/BuyLand/CardList";
+import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
 import CardReceived from "../../components/BuyLand/CardRecieved";
@@ -73,7 +73,7 @@ const CityPage: NextPage<Props> = ({ cities }) => {
 
         {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
         <Container className="pt-20 pb-10">
-          <Cards />
+          <CardList cards={new Array(Number(20)).fill(0)} />
         </Container>
 
         {/*  MODAL SHOW ON CARD RECEIVED!  */}

@@ -1,14 +1,17 @@
-import Card from "./CardItem";
+import CardItem from "./CardItem";
 
-const Cards: React.FC<{}> = () => {
-  const cards = new Array(20).fill(0);
+type Props = {
+  cards: unknown[];
+};
+
+const CardList: React.FC<Props> = ({ cards }) => {
   return (
-    <div className="grid grid-cols-2 gap-4 p-4 lg:p-6 lg:gap-6 xl:p-8 xl:gap-10 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 px-4 lg:px-6 lg:gap-6 xl:px-8 xl:gap-10 md:grid-cols-3 xl:grid-cols-4">
       {cards.map((_, index) => (
-        <Card key={index} />
+        <CardItem key={index} />
       ))}
     </div>
   );
 };
 
-export default Cards;
+export default CardList;

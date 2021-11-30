@@ -8,7 +8,11 @@ type Props = {
 
 const Clickable: React.FC<Props> = ({ children, onClick, href, className }) => {
   if (href) {
-    return <Link href={href}>{children}</Link>;
+    return (
+      <Link passHref href={href}>
+        {children}
+      </Link>
+    );
   }
   return (
     <div

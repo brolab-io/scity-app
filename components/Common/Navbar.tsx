@@ -86,13 +86,15 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex w-80 lg:justify-end">
           {active ? (
             <div className="relative flex-none hidden px-2 mx-2 group lg:flex">
-              <Clickable
-                className={clsx(
-                  "flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg z-20"
-                )}
-              >
-                <Balance />
-                <Account />
+              <Clickable href="/inventory">
+                <a
+                  className={clsx(
+                    "flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg z-20"
+                  )}
+                >
+                  <Balance />
+                  <Account />
+                </a>
               </Clickable>
               <div
                 className={clsx(

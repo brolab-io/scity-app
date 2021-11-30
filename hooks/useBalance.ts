@@ -2,19 +2,18 @@ import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAppContext } from "../components/AppContext";
 import abi from "../dapp/abi/land-abi.json";
 
 const useBalance = () => {
-  const { library, account, active } = useWeb3React();
+  const { library, account } = useWeb3React();
   const [isLoading, setIsLoading] = useState(false);
   const [balance, setBalance] = useState("0");
+  const { landContract } = useAppContext();
 
   const getBalance = useCallback(async () => {
-    if (typeof window === "undefined" || !window.ethereum) {
-      return;
-    }
-
-    if (!active || !account) {
+    if (!landContract || !account) {
+      setBalance("0");
       return;
     }
 
@@ -35,7 +34,7 @@ const useBalance = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [account, active, library]);
+  }, [account, landContract, library]);
 
   useEffect(() => {
     getBalance();

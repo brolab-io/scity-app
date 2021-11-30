@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { injected } from "../dapp/connectors";
-import abi from "../dapp/abi/box-abi.json";
+import { useAppContext } from "../components/AppContext";
 
 type BuyOptions = {
   onSuccess?: () => void;
@@ -13,24 +13,17 @@ const useBuyBox = ({ onSuccess }: BuyOptions = {}) => {
   const [isBuying, setIsBuying] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [price, setPrice] = useState(0);
+  const { boxContract } = useAppContext();
 
-  const { activate, library, active, account } = useWeb3React();
+  const { activate, active, account } = useWeb3React();
 
   const getPrice = useCallback(async () => {
-    if (typeof window === "undefined" || !window.ethereum) {
+    if (!boxContract) {
       return;
     }
-    const provider =
-      library ?? new ethers.providers.Web3Provider(window.ethereum);
-
-    const contract = new ethers.Contract(
-      process.env["NEXT_PUBLIC_CONTRACT_BOX"] ?? "",
-      abi,
-      provider
-    );
-    const _price = await contract.price();
+    const _price = await boxContract.price();
     setPrice(_price);
-  }, [library]);
+  }, [boxContract]);
 
   useEffect(() => {
     getPrice();
@@ -39,7 +32,7 @@ const useBuyBox = ({ onSuccess }: BuyOptions = {}) => {
   const buy = useCallback(async () => {
     setIsProcessing(true);
 
-    if (typeof window === "undefined" || !window.ethereum) {
+    if (!boxContract) {
       return;
     }
     if (!active) {
@@ -50,17 +43,9 @@ const useBuyBox = ({ onSuccess }: BuyOptions = {}) => {
         return;
       }
     }
-    const provider =
-      library ?? new ethers.providers.Web3Provider(window.ethereum);
-
-    const contract = new ethers.Contract(
-      process.env["NEXT_PUBLIC_CONTRACT_BOX"] ?? "",
-      abi,
-      provider.getSigner()
-    );
 
     try {
-      const tx = await contract.buyBox({
+      const tx = await boxContract.buyBox({
         value: price,
       });
       setIsBuying(true);
@@ -84,7 +69,7 @@ const useBuyBox = ({ onSuccess }: BuyOptions = {}) => {
       setIsBuying(false);
       setIsProcessing(false);
     }
-  }, [account, activate, active, library, onSuccess, price]);
+  }, [account, activate, active, boxContract, onSuccess, price]);
 
   return useMemo(
     () => ({ buy, isBuying, isProcessing, price }),

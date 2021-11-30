@@ -1,9 +1,9 @@
+import { useAppContext } from "./../components/AppContext";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import { injected } from "../dapp/connectors";
-import abi from "../dapp/abi/land-abi.json";
 
 type BuyOptions = {
   onSuccess?: () => void;
@@ -17,14 +17,12 @@ const useBuyLand = (
   const [isProcessing, setIsProcessing] = useState(false);
   const [cardURI, setCardURI] = useState<string | undefined>(undefined);
   const { activate, library, active } = useWeb3React();
+  const { landContract } = useAppContext();
 
   const buy = useCallback(
     async (price: string) => {
       setIsProcessing(true);
-      if (!areaId) {
-        return;
-      }
-      if (typeof window === "undefined" || !window.ethereum) {
+      if (!areaId || !landContract) {
         return;
       }
       if (!active) {
@@ -35,17 +33,9 @@ const useBuyLand = (
           return;
         }
       }
-      const provider =
-        library ?? new ethers.providers.Web3Provider(window.ethereum);
-
-      const contract = new ethers.Contract(
-        process.env["NEXT_PUBLIC_CONTRACT_LAND"] ?? "",
-        abi,
-        provider.getSigner()
-      );
 
       try {
-        const tx = await contract.buyLand(areaId, {
+        const tx = await landContract.buyLand(areaId, {
           value: ethers.utils.parseEther(price),
         });
         setIsBuying(true);
@@ -54,7 +44,7 @@ const useBuyLand = (
           (event: ethers.Event) => event.event === "BuyLand"
         );
         const [, tokenId] = buyLandEvent.args;
-        const _cardURI = await contract.tokenURI(tokenId);
+        const _cardURI = await landContract.tokenURI(tokenId);
         setCardURI(_cardURI);
         onSuccess && onSuccess();
       } catch (error: any) {
@@ -67,7 +57,7 @@ const useBuyLand = (
         setIsProcessing(false);
       }
     },
-    [activate, active, areaId, library, onSuccess]
+    [activate, active, areaId, landContract, onSuccess]
   );
 
   return useMemo(

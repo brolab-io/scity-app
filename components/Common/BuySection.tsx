@@ -8,7 +8,7 @@ type Props = {
   priceInBSC: string;
   priceInUSD: string;
   shopRules: string;
-  endTime?: number;
+  endTime: Date;
   slotsRemaining?: number;
   numberOfSlots?: number;
   name: string;
@@ -81,7 +81,7 @@ const BuySection: React.FC<Props> = ({
                     />
                     <Countdown
                       className="text-sm font-medium text-white"
-                      endDate={endTime ? new Date(endTime * 1000) : new Date()}
+                      endDate={endTime}
                     />
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import isEqual from "react-fast-compare";
 import Image from "next/image";
 import Button from "../UI/Button";
@@ -6,10 +6,29 @@ import Button from "../UI/Button";
 type Props = {
   isVisible: boolean;
   close: () => void;
+  approve: () => void;
+  isApproved: boolean;
+  isLoading: boolean;
 };
 
-const BoxReceived: React.FC<Props> = ({ isVisible, close }) => {
-  if (!isVisible) return null;
+const BoxReceived: React.FC<Props> = ({
+  isVisible,
+  close,
+  isApproved,
+  approve,
+  isLoading,
+}) => {
+  const onClick = useCallback(() => {
+    if (isApproved) {
+      // Buy
+      approve();
+    } else {
+      approve();
+    }
+  }, [approve, isApproved]);
+  if (!isVisible) {
+    return null;
+  }
   return (
     <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-70">
       <div className="p-12 space-y-4 bg-white rounded-xl">
@@ -25,15 +44,15 @@ const BoxReceived: React.FC<Props> = ({ isVisible, close }) => {
             className="animate-wiggle"
           />
         </div>
-        <div className="flex items-center space-x-4">
-          <Button className="flex flex-1">
-            <span>Open</span>
-          </Button>
+        <div className="grid items-center w-full grid-cols-3 space-x-4">
           <Button
-            onClick={close}
-            outline
-            className="flex flex-1 hover:text-white"
+            isLoading={isLoading}
+            onClick={onClick}
+            className="col-span-2"
           >
+            <span>{isApproved ? "Open" : "Approve Box"}</span>
+          </Button>
+          <Button onClick={close} outline className="col-span-1">
             <span className="text-purple-600 ">Close</span>
           </Button>
         </div>

@@ -6,11 +6,13 @@ import BoxReceived from "../../components/BuyBox/BoxReceived";
 import BuyBoxBuySection from "../../components/BuyBox/BuySection";
 import BuyBoxSeo from "../../components/BuyBox/SEO";
 import useBuyBox from "../../hooks/useBuyBox";
+import useApproveBox from "../../hooks/useApproveBox";
 import useTotalSupply from "../../hooks/useTotalSupply";
 
 const BuyBoxPage: NextPage = () => {
   const { totalSupply } = useTotalSupply();
   const [isBoxReceived, setIsBoxReceived] = useState(false);
+  const { approve, isApproved, isLoading } = useApproveBox();
 
   const onBoxReceived = useCallback(() => {
     setIsBoxReceived(true);
@@ -39,7 +41,13 @@ const BuyBoxPage: NextPage = () => {
           isProcessing={isProcessing}
         />
       </div>
-      <BoxReceived isVisible={isBoxReceived} close={hideModal} />
+      <BoxReceived
+        isLoading={isLoading}
+        approve={approve}
+        isApproved={isApproved}
+        isVisible={isBoxReceived}
+        close={hideModal}
+      />
     </>
   );
 };
