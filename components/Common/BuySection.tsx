@@ -8,7 +8,7 @@ type Props = {
   priceInBSC: string;
   priceInUSD: string;
   shopRules: string;
-  endTime: Date;
+  endTime?: Date;
   slotsRemaining?: number;
   numberOfSlots?: number;
   name: string;

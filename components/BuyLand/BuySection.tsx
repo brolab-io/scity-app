@@ -8,7 +8,7 @@ import BuySection from "../Common/BuySection";
 type Props = {
   selectedCity?: ICityData;
   currentQuantity?: number;
-  endTime?: number;
+  endTime?: Date;
   cities: ICityData[];
   setSelectedCity: React.Dispatch<React.SetStateAction<ICityData | undefined>>;
   price?: string;
@@ -22,13 +22,13 @@ const BuyLandBuySection: React.FC<Props> = ({
   setSelectedCity,
   isProcessing,
   currentQuantity = 0,
-  endTime = 0,
+  endTime,
   cities,
   price = "0",
   limit = 0,
   onClickBuyNow,
 }) => {
-  const isOutOfTime = new Date().getTime() > new Date(endTime * 1000).getTime();
+  const isOutOfTime = new Date().getTime() > (endTime || new Date()).getTime();
   const isOutOfStock = currentQuantity >= limit;
   const shouldEnableBuy = !(isProcessing || isOutOfTime || isOutOfStock);
 
@@ -83,11 +83,7 @@ const BuyLandBuySection: React.FC<Props> = ({
       slotsRemaining={
         limit - (currentQuantity ?? selectedCity?.numberOfSlots ?? 0)
       }
-      endTime={
-        endTime
-          ? new Date(endTime * 1000)
-          : new Date(selectedCity?.closeTime || "")
-      }
+      endTime={endTime}
       numberOfSlots={selectedCity?.numberOfSlots}
       buttonTitle={buttonTitle}
       buyEnabled={shouldEnableBuy}

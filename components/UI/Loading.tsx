@@ -1,6 +1,17 @@
+import { useEffect } from "react";
+
 const Loading: React.FC = () => {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.body.classList.add("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, []);
+
   return (
-    <div className="fixed inset-0 z-40 bg-gray-800 bg-opacity-70 flex items-center justify-center transform duration-500">
+    <div className="fixed inset-0 z-40 flex items-center justify-center duration-500 transform bg-gray-800 bg-opacity-70 disable-scroll">
       <div className="flex-col">
         <div className="w-24 h-24">
           <svg viewBox="0 0 860.1 876.5">
@@ -41,7 +52,7 @@ const Loading: React.FC = () => {
             />
           </svg>
         </div>
-        <div className="mt-3 text-gray-200 font-mono text-sm sm:text-xs">
+        <div className="mt-3 font-mono text-sm text-gray-200 sm:text-xs">
           Loading...
         </div>
       </div>

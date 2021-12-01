@@ -6,6 +6,8 @@ import CompanyList from "../../components/Common/CompanyList";
 import InventoryPageBanner from "../../components/Inventory/Banner";
 import InventoryFilter from "../../components/Inventory/Filter";
 import Container from "../../components/UI/Container";
+import Loading from "../../components/UI/Loading";
+import useApproveBox from "../../hooks/useApproveBox";
 import useBalance from "../../hooks/useBalance";
 import useCompanies from "../../hooks/useCompanies";
 import useOpenBox from "../../hooks/useOpenBox";
@@ -23,7 +25,11 @@ const sortBys = {
 };
 
 const InventoryPage: NextPage = () => {
-  const { openBox, cardURI, isLoading, totalBoxes } = useOpenBox();
+  const { companies, reload } = useCompanies();
+  const { openBox, cardURI, isLoading, totalBoxes } = useOpenBox({
+    onSuccess: reload,
+  });
+  const { isApproved, approve, isLoading: isApproving } = useApproveBox();
   const { balance } = useBalance();
 
   const [filter, setFilter] = useState<keyof typeof filters>(
@@ -32,8 +38,6 @@ const InventoryPage: NextPage = () => {
   const [sortBy, setSortBy] = useState<keyof typeof sortBys>(
     (Object.keys(filters) as Array<keyof typeof sortBys>)[0]
   );
-
-  const { companies } = useCompanies();
 
   useEffect(() => {
     // openBox();
@@ -56,7 +60,9 @@ const InventoryPage: NextPage = () => {
         <Container className="space-y-4 lg:space-y-6 xl:space-y-8">
           {filter === "box" && (
             <BoxList
+              isApproved={isApproved}
               openBox={openBox}
+              approve={approve}
               boxes={new Array(Number(totalBoxes)).fill(0)}
             />
           )}
@@ -66,6 +72,7 @@ const InventoryPage: NextPage = () => {
           {filter === "company" && <CompanyList companies={companies} />}
         </Container>
       </div>
+      {(isLoading || isApproving) && <Loading />}
     </div>
   );
 };

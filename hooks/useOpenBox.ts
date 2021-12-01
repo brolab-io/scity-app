@@ -3,8 +3,13 @@ import { ethers } from "ethers";
 import { useState, useCallback, useEffect } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+import { toast } from "react-toastify";
 
-const useOpenBox = () => {
+type Options = {
+  onSuccess?: () => void;
+};
+
+const useOpenBox = ({ onSuccess }: Options) => {
   const [isLoading, setIsLoading] = useState(false);
   const { companyContract, boxContract } = useAppContext();
   const [cardURI, setCardURI] = useState("");
@@ -34,8 +39,13 @@ const useOpenBox = () => {
       const [, tokenId] = buyLandEvent.args;
       const _companyURI = await companyContract.tokenURI(tokenId);
       setCardURI(_companyURI);
+      onSuccess && onSuccess();
       return getTotalBoxes();
     } catch (error: any) {
+      if (error.code === "UNSUPPORTED_OPERATION") {
+        return;
+      }
+      toast.error(error.data?.message ?? error.message);
     } finally {
       setIsLoading(false);
     }

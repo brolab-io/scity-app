@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useEffect, useState } from "react";
 import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
 import useInfoOpenArea from "../../hooks/useInfoOpenArea";
@@ -11,6 +11,7 @@ import CardReceived from "../../components/BuyLand/CardRecieved";
 import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
+import Loading from "../../components/UI/Loading";
 
 export const getServerSideProps = async () => {
   try {
@@ -28,19 +29,19 @@ type Props = {
 };
 
 const CityPage: NextPage<Props> = ({ cities }) => {
-  const [selectedCity, setSelectedCity] = useState<ICityData | undefined>(
-    cities[0]
+  const [selectedCity, setSelectedCity] = useState<ICityData | undefined>(cities[0]);
+
+  const { price, limit, endTime, isLoading, currentQuantity, reload } = useInfoOpenArea(
+    selectedCity?.slug
   );
 
-  const { price, limit, endTime, isLoading, currentQuantity, reload } =
-    useInfoOpenArea(selectedCity?.slug);
+  useEffect(() => {
+    console.log(selectedCity?.slug, price, limit, endTime, isLoading, currentQuantity);
+  }, [currentQuantity, endTime, isLoading, limit, price, selectedCity?.slug]);
 
-  const { buy, cardURI, isBuying, isProcessing } = useBuyLand(
-    selectedCity?.slug,
-    {
-      onSuccess: reload,
-    }
-  );
+  const { buy, cardURI, isBuying, isProcessing } = useBuyLand(selectedCity?.slug, {
+    onSuccess: reload,
+  });
 
   const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
     ["nft-lands", cardURI ?? ""],
@@ -67,9 +68,12 @@ const CityPage: NextPage<Props> = ({ cities }) => {
           setSelectedCity={setSelectedCity}
           onClickBuyNow={onClickBuyNow}
           currentQuantity={currentQuantity}
-          endTime={endTime}
+          endTime={
+            new Date(endTime * 1000) ||
+            (selectedCity?.closeTime && new Date(selectedCity?.closeTime))
+          }
           isProcessing={isProcessing}
-          limit={limit}
+          limit={limit || selectedCity?.numberOfSlots}
         />
 
         {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
@@ -77,11 +81,10 @@ const CityPage: NextPage<Props> = ({ cities }) => {
           <CardList cards={new Array(Number(20)).fill(0)} />
         </Container>
 
+        {isLoading || isProcessing ? <Loading /> : null}
+
         {/*  MODAL SHOW ON CARD RECEIVED!  */}
-        <CardReceived
-          isLoading={isBuying || isFetchingMetaData}
-          cardData={cardMetaData}
-        />
+        <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />
       </div>
     </>
   );

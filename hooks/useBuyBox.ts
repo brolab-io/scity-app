@@ -50,10 +50,11 @@ const useBuyBox = ({ onSuccess }: BuyOptions = {}) => {
       });
       setIsBuying(true);
       const result = await tx.wait();
-      const buyLandEvent = result.events.find(
+      console.log(result.events);
+      const boxSoldEvent = result.events.find(
         (event: ethers.Event) => event.event === "BoxSold"
       );
-      const [buyer] = buyLandEvent.args;
+      const [buyer] = boxSoldEvent.args;
       if (buyer === account) {
         toast.success("You successfully bought this box!");
         if (onSuccess) {
