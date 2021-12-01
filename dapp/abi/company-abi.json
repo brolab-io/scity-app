@@ -76,7 +76,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_newPrice",
+        "name": "newPrice",
         "type": "uint256"
       }
     ],
@@ -89,13 +89,19 @@
       {
         "indexed": false,
         "internalType": "address",
-        "name": "_owner",
+        "name": "owner",
         "type": "address"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_tokenId",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
         "type": "uint256"
       }
     ],

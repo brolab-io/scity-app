@@ -48,6 +48,7 @@ const CityPage: NextPage<Props> = ({ cities }) => {
     {
       enabled: !!cardURI,
       refetchOnWindowFocus: false,
+      retryDelay: 2000,
     }
   );
 
