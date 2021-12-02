@@ -1,5 +1,5 @@
 import Container from "../UI/Container";
-import Logo from "../UI/Logo";
+import Logo from "./Logo";
 import Link from "next/link";
 import Image from "next/image";
 import Button from "../UI/Button";
@@ -103,9 +103,7 @@ const Footer: React.FC = () => {
   return (
     <div className="py-20 space-y-10 bg-black">
       <div style={clipPathStyle} className="pt-24 pb-20 space-y-5 text-center">
-        <h2 className="text-2xl text-white md:text-3xl lg:text-4xl">
-          SCITY - METAVERSE
-        </h2>
+        <h2 className="text-2xl text-white md:text-3xl lg:text-4xl">SCITY - METAVERSE</h2>
         <p className="text-lg font-semibold text-white md:text-xl lg:text-2xl">
           BUY LAND - OPEN BUSINESS - EARN PROFIT
         </p>
@@ -116,8 +114,8 @@ const Footer: React.FC = () => {
           <div className="col-span-2 px-2 space-y-4 lg:col-span-4 xl:col-span-3 lg:px-4">
             <Logo />
             <p className="text-sm text-gray-300">
-              Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non,
-              fugit totam vel laboriosam vitae.
+              Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non, fugit totam vel
+              laboriosam vitae.
             </p>
             <div className="flex space-x-2">
               {socialLinks.map((link) => (
@@ -126,13 +124,7 @@ const Footer: React.FC = () => {
                     target="_blank"
                     className="flex items-center justify-center rounded-lg h-9 w-9 bg-dark-gray"
                   >
-                    <Image
-                      src={link.icon}
-                      height={20}
-                      width={20}
-                      quality={100}
-                      alt="facebook"
-                    />
+                    <Image src={link.icon} height={20} width={20} quality={100} alt="facebook" />
                   </a>
                 </Link>
               ))}
@@ -143,9 +135,7 @@ const Footer: React.FC = () => {
           {useFullLinks.map((section, index) => (
             <div key={index.toString()} className="px-2 xl:col-span-2 lg:px-4">
               <ul className="space-y-1">
-                <span className="flex mb-3 text-lg font-semibold text-white">
-                  {section.title}
-                </span>
+                <span className="flex mb-3 text-lg font-semibold text-white">{section.title}</span>
                 {section.children.map((link, idx) => (
                   <li className="flex justify-start" key={`${index}-${idx}`}>
                     <Link passHref href={link.href}>
@@ -168,9 +158,7 @@ const Footer: React.FC = () => {
 
           {/* COL 5 */}
           <div className="px-2 space-y-3 xl:col-span-3 lg:px-4">
-            <span className="flex mb-3 text-lg font-semibold text-white">
-              Subscribe Us
-            </span>
+            <span className="flex mb-3 text-lg font-semibold text-white">Subscribe Us</span>
             <input
               className="w-full px-4 py-2.5 text-white bg-transparent border border-gray-700 rounded-xl"
               placeholder="yourmail@example.com"

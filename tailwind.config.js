@@ -20,6 +20,9 @@ module.exports = {
       fontFamily: {
         poppins: ["Poppins", "Roboto", "sans-serif"],
       },
+      fontSize: {
+        "10xl": ["10rem", "10rem"],
+      },
     },
     backgroundColor: (theme) => ({
       ...theme("colors"),

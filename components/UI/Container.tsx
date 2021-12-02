@@ -5,9 +5,7 @@ type Props = {
 };
 
 const Container: React.FC<Props> = ({ children, className }) => {
-  return (
-    <div className={clsx("max-w-screen-xl mx-auto", className)}>{children}</div>
-  );
+  return <div className={clsx("max-w-screen-xl mx-auto", className)}>{children}</div>;
 };
 
 export default Container;

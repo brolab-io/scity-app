@@ -6,7 +6,7 @@ import Account from "./Account";
 import { useWeb3React } from "@web3-react/core";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
-import Logo from "../UI/Logo";
+import Logo from "./Logo";
 import NavbarAccountPopover from "./NavbarAccountPopover";
 import clsx from "clsx";
 
@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
     <nav className="fixed inset-x-0 top-0 z-30 h-20 p-4 bg-black border-b border-gray-600 lg:p-0">
       <div className="items-center justify-between w-full h-full px-4 lg:flex">
         {/* LOGO  */}
-        <div className="flex items-center justify-between w-full lg:w-80 lg:justify-start">
+        <div className="flex items-center justify-between w-full lg:w-72 lg:justify-start">
           <Clickable onClick={toggle}>
             <svg
               className="w-10 h-10 -mb-2 text-white fill-current lg:hidden"
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
         <NavigationMenus isVisible={isVisible} pathname={pathname} />
 
         {/* CONNECT */}
-        <div className="hidden lg:flex w-80 lg:justify-end">
+        <div className="hidden lg:flex lg:w-72 lg:justify-end">
           {active ? (
             <div className="relative flex-none hidden px-2 mx-2 group lg:flex">
               <Clickable href="/inventory">
@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
               </Clickable>
               <div
                 className={clsx(
-                  "absolute top-9 skew-x-0 right-2 z-10 transform duration-200 w-80",
+                  "absolute top-9 skew-x-0 right-2 z-10 transform duration-200 w-76",
                   "opacity-0 invisible",
                   "group-hover:opacity-100 group-hover:visible"
                 )}
@@ -132,13 +132,9 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
       }
     >
       {navigationMenus.map((menu) => {
-        const isActive =
-          pathname === menu.href || pathname.startsWith(menu.href + "/");
+        const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
-          <li
-            key={menu.href}
-            className="border-b border-gray-800 lg:border-b-0"
-          >
+          <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
             <Link passHref href={menu.href}>
               <a className="block w-full px-8 py-4 duration-200 transform lg:px-0">
                 <span

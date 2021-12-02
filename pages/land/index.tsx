@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { memo, useCallback, useEffect, useState } from "react";
 import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
@@ -13,11 +13,17 @@ import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
 
-export const getServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const slug =
+    (Array.isArray(context.params?.slug) && context.params?.slug[0]) || context.params?.slug || "";
   try {
-    const cities = await getOpenedCities();
+    const cities: ICityData[] = await getOpenedCities();
     return {
-      props: { cities },
+      props: {
+        cities,
+        slug,
+        city: (cities.find((city) => city.slug === slug) || cities[0]) ?? null,
+      },
     };
   } catch (error) {
     return { props: { error, cities: [] } };
@@ -26,10 +32,11 @@ export const getServerSideProps = async () => {
 
 type Props = {
   cities: ICityData[];
+  city: ICityData | null;
 };
 
-const CityPage: NextPage<Props> = ({ cities }) => {
-  const [selectedCity, setSelectedCity] = useState<ICityData | undefined>(cities[0]);
+const CityPage: NextPage<Props> = ({ cities, city }) => {
+  const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
 
   const { price, limit, endTime, isLoading, currentQuantity, reload } = useInfoOpenArea(
     selectedCity?.slug

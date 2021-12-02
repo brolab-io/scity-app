@@ -4,13 +4,14 @@ import Clickable from "../UI/Clickable";
 import Image from "next/image";
 import isEqual from "react-fast-compare";
 import BuySection from "../Common/BuySection";
+import { useRouter } from "next/router";
 
 type Props = {
-  selectedCity?: ICityData;
+  selectedCity?: ICityData | null;
   currentQuantity?: number;
   endTime?: Date;
   cities: ICityData[];
-  setSelectedCity: React.Dispatch<React.SetStateAction<ICityData | undefined>>;
+  setSelectedCity: React.Dispatch<React.SetStateAction<ICityData | undefined | null>>;
   price?: string;
   limit?: number;
   isProcessing?: boolean;
@@ -32,16 +33,24 @@ const BuyLandBuySection: React.FC<Props> = ({
   const isOutOfStock = currentQuantity >= limit;
   const shouldEnableBuy = !(isProcessing || isOutOfTime || isOutOfStock);
 
+  const router = useRouter();
+
+  const onClickSelectCity = useCallback(
+    (city) => {
+      setSelectedCity(city);
+      router.push(`/land/${city.slug}`, undefined, { shallow: true });
+    },
+    [router, setSelectedCity]
+  );
+
   const ImageSection = useCallback(
     () => (
       <div className="grid grid-cols-2 gap-4 md:gap-6">
         {cities.map((city) => (
           <Clickable
-            onClick={() => setSelectedCity(city)}
+            onClick={() => onClickSelectCity(city)}
             className={`bg-radial-gradient-purple p-3 md:p-4 lg:p-5 xl:p-6 rounded-xl ${
-              selectedCity?.id === city.id
-                ? "bg-opacity-100 ring"
-                : "bg-opacity-50"
+              selectedCity?.id === city.id ? "bg-opacity-100 ring" : "bg-opacity-50"
             }`}
             key={city.id}
           >
@@ -68,21 +77,15 @@ const BuyLandBuySection: React.FC<Props> = ({
         ))}
       </div>
     ),
-    [cities, selectedCity?.id, setSelectedCity]
+    [cities, onClickSelectCity, selectedCity?.id]
   );
 
-  const buttonTitle = isOutOfStock
-    ? "Out of stock"
-    : isOutOfTime
-    ? "Out of time"
-    : "Buy now";
+  const buttonTitle = isOutOfStock ? "Out of stock" : isOutOfTime ? "Out of time" : "Buy now";
 
   return (
     <BuySection
       ImageSection={ImageSection}
-      slotsRemaining={
-        limit - (currentQuantity ?? selectedCity?.numberOfSlots ?? 0)
-      }
+      slotsRemaining={limit - (currentQuantity ?? selectedCity?.numberOfSlots ?? 0)}
       endTime={endTime}
       numberOfSlots={selectedCity?.numberOfSlots}
       buttonTitle={buttonTitle}

@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import Button from "../UI/Button";
 
 const BackgroundImage: React.FC<{}> = () => {
   const bgStyle = useMemo(
@@ -9,19 +10,19 @@ const BackgroundImage: React.FC<{}> = () => {
   );
 
   return (
-    <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
+    <div className="flex items-center content-center justify-center">
       <div
-        className="absolute top-0 w-full h-60 bg-center bg-cover"
+        className="w-full py-32 bg-center bg-cover sm:py-44 md:py-56 lg:py-68 xl:py-80"
         style={bgStyle}
-      ></div>
-      <div className="container relative mx-auto">
-        <div className="items-center flex flex-wrap">
-          <div className="w-full ml-auto mr-auto text-center">
-            <div className="">
-              <h3 className="text-white font-semibold text-5xl">
-                Became one of the first resident of Scity
-              </h3>
-            </div>
+      >
+        <div className="container relative mx-auto">
+          <div className="flex flex-col items-center space-y-10">
+            <h3 className="text-5xl font-semibold text-white">
+              Became one of the first resident of Scity
+            </h3>
+            <Button className="px-6 py-3 rounded-3xl">
+              <span className="text-xl">Enter Marketplace</span>
+            </Button>
           </div>
         </div>
       </div>
