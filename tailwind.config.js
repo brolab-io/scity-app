@@ -17,6 +17,9 @@ module.exports = {
       animation: {
         wiggle: "wiggle 1s ease-in-out",
       },
+      fontFamily: {
+        poppins: ["Poppins", "Roboto", "sans-serif"],
+      },
     },
     backgroundColor: (theme) => ({
       ...theme("colors"),

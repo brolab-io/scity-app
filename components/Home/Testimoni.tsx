@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
 // import react slick
-import Slider from "react-slick";
+import Slider, { Settings } from "react-slick";
 import Image from "next/image";
-// import Stars from "../../public/assets/Icon/stars.svg";
-// import ArrowBack from "../public/assets/Icon/eva_arrow-back-fill.svg";
-// import ArrowNext from "../public/assets/Icon/eva_arrow-next-fill.svg";
+import Container from "../UI/Container";
+import useWindowSize from "../../hooks/useWindowSize";
+import clsx from "clsx";
+import Button from "../UI/Button";
+import SvgArrowBack from "../Icons/SvgArrowBack";
+import SvgArrowNext from "../Icons/SvgArrowNext";
+import SliderArrow from "./SliderArrow";
 
 const Testimoni = ({
   listTestimoni = [
@@ -47,114 +51,134 @@ const Testimoni = ({
     },
   ],
 }) => {
-  const settings = {
-    dots: true,
-    // customPaging: function (i) {
-    //   return (
-    //     <a className="">
-    //       <span className="mx-2 rounded-l-full rounded-r-full h-4 w-4 block cursor-pointer transition-all "></span>
-    //     </a>
-    //   );
-    // },
-    dotsClass: "slick-dots w-max absolute mt-20  ",
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
+  const [height, width] = useWindowSize();
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const settings: Settings = {
+    className: "center w-full",
     centerMode: true,
-    responsive: [
-      {
-        breakpoint: 770,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    infinite: true,
+    slidesToShow: width > 432 ? 3 : 1,
+    centerPadding: "0px",
+    beforeChange: (current, next) => {
+      console.log(current);
+      setImageIndex(next);
+    },
+    focusOnSelect: true,
+    nextArrow: (
+      <SliderArrow>
+        <SvgArrowNext />
+      </SliderArrow>
+    ),
+    prevArrow: (
+      <SliderArrow>
+        <SvgArrowBack />
+      </SliderArrow>
+    ),
+    arrows: true,
   };
+
   const [sliderRef, setSliderRef] = useState(null);
 
+  // if (!width) return null;
   return (
-    <div className="bg-black w-full flex flex-col py-12">
-      <section className="pt-20 pb-48">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center text-center mb-24">
-            <div className="w-full lg:w-6/12 px-4">
-              <h2 className="text-4xl font-semibold">
-                Buy NFT Land in your favorite city
-              </h2>
-            </div>
-          </div>
+    <Container>
+      <div>
+        <div className="text-center">
+          <h2 className="text-4xl font-semibold text-white">Buy NFT Land in your favorite city</h2>
         </div>
-        <Slider
-          {...settings}
-          // arrows={false}
-          // ref={setSliderRef}
-          className="flex items-stretch justify-items-stretch"
-        >
-          {listTestimoni.map((listTestimonis, index) => (
-            <div className="px-3 flex items-stretch" key={index}>
-              <div className="border-2 border-gray-500 hover:border-orange-500 transition-all rounded-lg p-8 flex flex-col">
-                <div className="flex flex-col xl:flex-row w-full items-stretch xl:items-center">
-                  <div className="flex order-2 xl:order-1">
-                    <Image
-                      src={listTestimonis.image}
-                      height={50}
-                      width={50}
-                      alt="Icon People"
-                    />
-                    <div className="flex flex-col ml-5 text-left">
-                      <p className="text-lg text-white capitalize">
-                        {listTestimonis.name}
-                      </p>
-                      <p className="text-sm text-white capitalize">
-                        {listTestimonis.city},{listTestimonis.country}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex flex-none items-center ml-auto order-1 xl:order-2">
-                    <p className="text-sm text-white">
-                      {listTestimonis.rating}
-                    </p>
-                    <span className="flex ml-4">
-                      {/* <Stars className="h-4 w-4" /> */}
-                    </span>
-                  </div>
-                </div>
-                <p className="mt-5 text-white text-left">
-                  “{listTestimonis.testimoni}”.
-                </p>
+        <div className="py-20">
+          <Slider
+            {...settings}
+            // arrows={false}
+            // ref={setSliderRef}
+            className="flex items-stretch justify-items-stretch"
+          >
+            {listTestimoni.map((testimoni, index) => (
+              <div key={index}>
+                <Image
+                  src="/images/slider-item.png"
+                  className={clsx(
+                    "transform duration-300",
+                    index === imageIndex ? "scale-100 opacity-100" : "scale-75 opacity-50"
+                  )}
+                  width={400}
+                  height={400}
+                  alt="item"
+                />
               </div>
-            </div>
-          ))}
-        </Slider>
-        <div className="flex w-full items-center justify-end">
-          <div className="flex flex-none justify-between w-auto mt-14">
-            <div
-              className="mx-4 flex items-center justify-center h-14 w-14 rounded-full bg-white border-orange-500 border hover:bg-orange-500 hover:text-white-500 transition-all text-orange-500 cursor-pointer"
-              // onClick={sliderRef?.slickPrev}
-            >
-              {/* <ArrowBack className="h-6 w-6 " /> */}
-            </div>
-            <div
-              className="flex items-center justify-center h-14 w-14 rounded-full bg-white border-orange-500 border hover:bg-orange-500 hover:text-white-500 transition-all text-orange-500 cursor-pointer"
-              // onClick={sliderRef?.slickNext}
-            >
-              {/* <ArrowNext className="h-6 w-6" /> */}
-            </div>
-          </div>
+            ))}
+          </Slider>
         </div>
-      </section>
-    </div>
+        <div className="flex justify-center">
+          <Button className="px-12 rounded-3xl">
+            <span className="text-white">Explore Marketplace</span>
+          </Button>
+        </div>
+      </div>
+    </Container>
   );
+
+  // return (
+  //   <div className="flex flex-col w-full bg-black">
+  //     <section className="">
+  //       <div className="container px-4 mx-auto">
+  //         <div className="flex flex-wrap justify-center mb-24 text-center">
+  //           <div className="w-full px-4 lg:w-6/12">
+  //             <h2 className="text-4xl font-semibold text-white">
+  //               Buy NFT Land in your favorite city
+  //             </h2>
+  //           </div>
+  //         </div>
+  //       </div>
+  //       <Slider
+  //         {...settings}
+  //         // arrows={false}
+  //         // ref={setSliderRef}
+  //         className="flex items-stretch justify-items-stretch"
+  //       >
+  //         {listTestimoni.map((listTestimonis, index) => (
+  //           <div className="flex items-stretch px-3" key={index}>
+  //             <div className="flex flex-col p-8 transition-all border-2 border-gray-500 rounded-lg hover:border-orange-500">
+  //               <div className="flex flex-col items-stretch w-full xl:flex-row xl:items-center">
+  //                 <div className="flex order-2 xl:order-1">
+  //                   <Image src={listTestimonis.image} height={50} width={50} alt="Icon People" />
+  //                   <div className="flex flex-col ml-5 text-left">
+  //                     <p className="text-lg text-white capitalize">{listTestimonis.name}</p>
+  //                     <p className="text-sm text-white capitalize">
+  //                       {listTestimonis.city},{listTestimonis.country}
+  //                     </p>
+  //                   </div>
+  //                 </div>
+  //                 <div className="flex items-center flex-none order-1 ml-auto xl:order-2">
+  //                   <p className="text-sm text-white">{listTestimonis.rating}</p>
+  //                   <span className="flex ml-4">{/* <Stars className="w-4 h-4" /> */}</span>
+  //                 </div>
+  //               </div>
+  //               <p className="mt-5 text-left text-white">“{listTestimonis.testimoni}”.</p>
+  //             </div>
+  //           </div>
+  //         ))}
+  //       </Slider>
+  //       <div className="flex items-center justify-end w-full">
+  //         <div className="flex justify-between flex-none w-auto mt-14">
+  //           <div
+  //             className="flex items-center justify-center mx-4 text-orange-500 transition-all bg-white border border-orange-500 rounded-full cursor-pointer h-14 w-14 hover:bg-orange-500 hover:text-white-500"
+  //             // onClick={sliderRef?.slickPrev}
+  //           >
+  //             {/* <ArrowBack className="w-6 h-6 " /> */}
+  //           </div>
+  //           <div
+  //             className="flex items-center justify-center text-orange-500 transition-all bg-white border border-orange-500 rounded-full cursor-pointer h-14 w-14 hover:bg-orange-500 hover:text-white-500"
+  //             // onClick={sliderRef?.slickNext}
+  //           >
+  //             {/* <ArrowNext className="w-6 h-6" /> */}
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </section>
+  //   </div>
+  // );
 };
 
 export default Testimoni;

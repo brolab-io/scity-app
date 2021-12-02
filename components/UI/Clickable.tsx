@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 type Props = {
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<any>;
   href?: string;
   className?: string;
 };

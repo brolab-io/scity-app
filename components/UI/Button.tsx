@@ -22,13 +22,12 @@ const Button: React.FC<Props> = ({
       onClick={onClick}
       disabled={disabled || isLoading}
       className={clsx(
-        "flex items-center justify-center py-2 px-4 rounded transform duration-500", // Button
+        "flex items-center justify-center py-2 px-4 rounded transform duration-200", // Button
         {
           "border-2 border-primary hover:bg-primary hover:text-white": outline, // Outline
         },
         {
-          "bg-gradient from-purple-500 to-purple-700 bg-gradient-to-b":
-            !outline, // Default
+          "bg-gradient from-purple-500 to-purple-700 bg-gradient-to-b": !outline, // Default
         },
         "disabled:cursor-not-allowed disabled:from-dark-gray disabled:to-dark-gray", // Disabled
         "text-white disabled:text-gray-600", // Text

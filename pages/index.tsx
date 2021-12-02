@@ -9,7 +9,7 @@ import BackgroundImage from "../components/Home/BackgroundImage";
 
 const Home: NextPage = () => {
   return (
-    <>
+    <div className="pt-20 bg-black">
       {/* <Sample /> */}
       <HeroSection />
       {/* <BuyNFTLandSlider /> */}
@@ -17,7 +17,7 @@ const Home: NextPage = () => {
       <Feature />
       <OurGameplayFeatures />
       <BackgroundImage />
-    </>
+    </div>
   );
 };
 
