@@ -1,0 +1,9 @@
+.total-supply-container {
+  height: 0;
+  padding: 0;
+  padding-bottom: 100%;
+  background-image: url(/images/total-supply.png);
+  background-position: center center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}

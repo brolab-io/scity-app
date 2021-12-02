@@ -1,8 +1,27 @@
 import Image from "next/image";
+import Link from "next/link";
 import Button from "../UI/Button";
 import Container from "../UI/Container";
 
 const Feature = () => {
+  const socialLinks = [
+    {
+      icon: "/images/icons/facebook.svg",
+      href: "https://www.facebook.com/scity.io",
+    },
+    {
+      icon: "/images/icons/twitter.svg",
+      href: "https://www.twitter.com/scity.io",
+    },
+    {
+      icon: "/images/icons/google.svg",
+      href: "https://www.google.com/scity.io",
+    },
+    {
+      icon: "/images/icons/twitch.svg",
+      href: "https://www.twitch.com/scity.io",
+    },
+  ];
   return (
     <div className="py-12 text-white bg-black md:py-20 lg:py-28 xl:py-40 " id="feature">
       <div className="grid grid-flow-row grid-cols-1 gap-8 sm:grid-flow-col sm:grid-cols-2">
@@ -27,9 +46,22 @@ const Feature = () => {
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
             has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown
           </p>
-          <Button className="px-10 rounded-3xl">
-            <span>Join Telegram</span>
-          </Button>
+
+          <div className="flex items-center space-x-2">
+            <Button className="px-10 rounded-3xl">
+              <span>Join Telegram</span>
+            </Button>
+            {socialLinks.map((link) => (
+              <Link key={link.href} passHref href={link.href}>
+                <a
+                  target="_blank"
+                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-dark-gray"
+                >
+                  <Image src={link.icon} height={20} width={20} quality={100} alt="social icon" />
+                </a>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </div>

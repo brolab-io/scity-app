@@ -1,11 +1,11 @@
 {
-  "titleTemplate": "%s - City Land",
-  "defaultTitle": "City Land",
+  "titleTemplate": "%s - SCity",
+  "defaultTitle": "SCity - Metaverst | Buy Land - Open Bussiness - Earn Profit",
   "openGraph": {
     "type": "website",
     "locale": "vn_VI",
     "url": "https://landing.dev-nft.xyz/",
-    "site_name": "City Land"
+    "site_name": "SCity - Metaverst"
   },
   "twitter": {
     "handle": "@handle",

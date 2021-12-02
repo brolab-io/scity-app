@@ -124,7 +124,7 @@ const Footer: React.FC = () => {
                     target="_blank"
                     className="flex items-center justify-center rounded-lg h-9 w-9 bg-dark-gray"
                   >
-                    <Image src={link.icon} height={20} width={20} quality={100} alt="facebook" />
+                    <Image src={link.icon} height={20} width={20} quality={100} alt="social icon" />
                   </a>
                 </Link>
               ))}
