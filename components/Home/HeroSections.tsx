@@ -33,7 +33,7 @@ const HeroSection: React.FC = () => {
                     className={clsx(
                       "font-bold leading-relaxed text-white",
                       "text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl",
-                      "-mt-4 sm:-mt-6 md:-mt-8 lg:-mt-10 xl:-mt-12 2xl:-mt-14"
+                      "-mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8 xl:-mt-10 2xl:-mt-12"
                     )}
                   >
                     The new world is coming

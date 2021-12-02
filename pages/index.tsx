@@ -10,6 +10,7 @@ import { getOpenedCities } from "../lib/api";
 import { ICityData } from "../lib/types";
 import SCCTokenomics from "../components/Home/SCCTokenomics";
 import TokenomicsStatistics from "../components/Home/TokenomicsStatistics";
+import RoadMap from "../components/Home/RoadMap";
 
 export const getServerSideProps = async () => {
   try {
@@ -38,6 +39,7 @@ const Home: NextPage<Props> = ({ cities }) => {
       <BackgroundImage />
       <SCCTokenomics />
       <TokenomicsStatistics />
+      <RoadMap />
     </div>
   );
 };
