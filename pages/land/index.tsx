@@ -1,9 +1,8 @@
 import { GetServerSideProps, NextPage } from "next";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
 import useInfoOpenArea from "../../hooks/useInfoOpenArea";
-import useBuyLand from "../../hooks/useBuyLand";
 import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
@@ -12,6 +11,8 @@ import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
+import useEtherMutation from "../../hooks/useEtherMutation";
+import { ContractTypes } from "../../components/EtherContext";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -38,31 +39,35 @@ type Props = {
 const CityPage: NextPage<Props> = ({ cities, city }) => {
   const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
 
-  const { price, limit, endTime, isLoading, currentQuantity, reload } = useInfoOpenArea(
-    selectedCity?.slug
-  );
+  const { price, limit, endTime, isLoading, currentQuantity } = useInfoOpenArea(selectedCity?.slug);
 
-  useEffect(() => {
-    console.log(selectedCity?.slug, price, limit, endTime, isLoading, currentQuantity);
-  }, [currentQuantity, endTime, isLoading, limit, price, selectedCity?.slug]);
-
-  const { buy, cardURI, isBuying, isProcessing } = useBuyLand(selectedCity?.slug, {
-    onSuccess: reload,
+  const { mutate, isMutating, tokenURI } = useEtherMutation([ContractTypes.LAND, "buyLand"], true, {
+    tokenURIEventName: "BuyLand",
   });
 
+  // Fetch metaData once the land is bought
   const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
-    ["nft-lands", cardURI ?? ""],
+    ["nft-lands", tokenURI ?? ""],
     getNFTLandMetaData,
     {
-      enabled: !!cardURI,
+      enabled: !!tokenURI,
       refetchOnWindowFocus: false,
       retryDelay: 2000,
     }
   );
 
+  useEffect(() => {
+    console.log("Data onchain", price, limit, endTime, currentQuantity);
+  }, [price, limit, endTime, currentQuantity]);
+
+  useEffect(() => {
+    console.log("Data offchain", selectedCity);
+  }, [selectedCity]);
+
+  // Button buy selected Land
   const onClickBuyNow = useCallback(() => {
-    buy(price);
-  }, [buy, price]);
+    mutate(selectedCity?.slug, { price });
+  }, [mutate, price, selectedCity?.slug]);
 
   return (
     <>
@@ -79,7 +84,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
             new Date(endTime * 1000) ||
             (selectedCity?.closeTime && new Date(selectedCity?.closeTime))
           }
-          isProcessing={isProcessing}
+          isProcessing={isMutating}
           limit={limit || selectedCity?.numberOfSlots}
         />
 
@@ -88,7 +93,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
           <CardList cards={new Array(Number(20)).fill(0)} />
         </Container>
 
-        {isLoading || isProcessing ? <Loading /> : null}
+        {isLoading || isMutating ? <Loading /> : null}
 
         {/*  MODAL SHOW ON CARD RECEIVED!  */}
         <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />

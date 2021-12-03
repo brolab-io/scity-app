@@ -1,9 +1,11 @@
 import { useAppContext } from "./../components/AppContext";
-import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import { injected } from "../dapp/connectors";
+import useConnectWallet from "./useConnectWallet";
+import useEtherMutation from "./useEtherMutation";
+import { ContractTypes } from "../components/EtherContext";
+import useTokenURI from "./useTokenURI";
 
 type BuyOptions = {
   onSuccess?: () => void;
@@ -15,39 +17,33 @@ const useBuyLand = (
 ) => {
   const [isBuying, setIsBuying] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [cardURI, setCardURI] = useState<string | undefined>(undefined);
-  const { activate, library, active } = useWeb3React();
-  const { landContract } = useAppContext();
+  const [tokenId, setTokenID] = useState<ethers.BigNumber | undefined>(
+    undefined
+  );
+
+  const { mutate, isMutating } = useEtherMutation(
+    [ContractTypes.LAND, "buyLand"],
+    true
+  );
+  const { tokenURI: cardURI } = useTokenURI([ContractTypes.LAND, tokenId]);
 
   const buy = useCallback(
     async (price: string) => {
       setIsProcessing(true);
-      if (!areaId || !landContract) {
-        return;
-      }
-      if (!active) {
-        try {
-          await activate(injected);
-        } catch (error) {
-          setIsProcessing(false);
-          return;
-        }
-      }
 
       try {
-        const tx = await landContract.buyLand(areaId, {
+        const contractReceipt = await mutate(areaId, {
           value: ethers.utils.parseEther(price),
         });
-        setIsBuying(true);
-        const result = await tx.wait();
-        const buyLandEvent = result.events.find(
+
+        const buyLandEvent = contractReceipt?.events?.find(
           (event: ethers.Event) => event.event === "BuyLand"
         );
-        const [, tokenId] = buyLandEvent.args;
-        const _cardURI = await landContract.tokenURI(tokenId);
-        setCardURI(_cardURI);
+        const [, tokenId] = buyLandEvent?.args || [];
+        setTokenID(tokenId);
         onSuccess && onSuccess();
       } catch (error: any) {
+        console.log(`Error buying land: ${error}`);
         if (error.code === "UNSUPPORTED_OPERATION") {
           return;
         }
@@ -57,7 +53,7 @@ const useBuyLand = (
         setIsProcessing(false);
       }
     },
-    [activate, active, areaId, landContract, onSuccess]
+    [areaId, mutate, onSuccess]
   );
 
   return useMemo(
