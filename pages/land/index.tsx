@@ -1,8 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
-import useInfoOpenArea from "../../hooks/useInfoOpenArea";
 import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
@@ -11,8 +10,7 @@ import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
-import useEtherMutation from "../../hooks/useEtherMutation";
-import { ContractTypes } from "../../components/EtherContext";
+import useLandContract from "../../hooks/useLandContract";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -39,35 +37,29 @@ type Props = {
 const CityPage: NextPage<Props> = ({ cities, city }) => {
   const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
 
-  const { price, limit, endTime, isLoading, currentQuantity } = useInfoOpenArea(selectedCity?.slug);
-
-  const { mutate, isMutating, tokenURI } = useEtherMutation([ContractTypes.LAND, "buyLand"], true, {
-    tokenURIEventName: "BuyLand",
-  });
+  const { info, isFetchingInfo, buyLand, boughtTokenURI, isBuying } = useLandContract(
+    selectedCity?.slug
+  );
 
   // Fetch metaData once the land is bought
   const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
-    ["nft-lands", tokenURI ?? ""],
+    ["nft-lands", boughtTokenURI ?? ""],
     getNFTLandMetaData,
     {
-      enabled: !!tokenURI,
+      enabled: !!boughtTokenURI,
       refetchOnWindowFocus: false,
       retryDelay: 2000,
     }
   );
 
-  useEffect(() => {
-    console.log("Data onchain", price, limit, endTime, currentQuantity);
-  }, [price, limit, endTime, currentQuantity]);
+  const price = info.price ?? selectedCity?.price?.toString() ?? "0";
+  const currentQuantity = info.currentQuantity ?? 0;
+  const endTime =
+    (info.endTime && new Date(info.endTime * 1000)) ||
+    (selectedCity && new Date(selectedCity.closeTime)) ||
+    new Date();
 
-  useEffect(() => {
-    console.log("Data offchain", selectedCity);
-  }, [selectedCity]);
-
-  // Button buy selected Land
-  const onClickBuyNow = useCallback(() => {
-    mutate(selectedCity?.slug, { price });
-  }, [mutate, price, selectedCity?.slug]);
+  const limit = info.limit ?? selectedCity?.numberOfSlots ?? 0;
 
   return (
     <>
@@ -78,14 +70,11 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
           price={price}
           selectedCity={selectedCity}
           setSelectedCity={setSelectedCity}
-          onClickBuyNow={onClickBuyNow}
+          onClickBuyNow={buyLand}
           currentQuantity={currentQuantity}
-          endTime={
-            new Date(endTime * 1000) ||
-            (selectedCity?.closeTime && new Date(selectedCity?.closeTime))
-          }
-          isProcessing={isMutating}
-          limit={limit || selectedCity?.numberOfSlots}
+          endTime={endTime}
+          isProcessing={isBuying}
+          limit={limit}
         />
 
         {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
@@ -93,7 +82,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
           <CardList cards={new Array(Number(20)).fill(0)} />
         </Container>
 
-        {isLoading || isMutating ? <Loading /> : null}
+        {isFetchingInfo || isBuying ? <Loading /> : null}
 
         {/*  MODAL SHOW ON CARD RECEIVED!  */}
         <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />

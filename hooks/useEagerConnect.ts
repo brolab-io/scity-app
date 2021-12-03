@@ -8,7 +8,6 @@ export default function useEagerConnect() {
   const [tried, setTried] = useState(false);
 
   useEffect(() => {
-    console.log(injected);
     injected.isAuthorized().then((isAuthorized: boolean) => {
       if (isAuthorized) {
         activate(injected, undefined, true).catch((err) => {

@@ -29,17 +29,15 @@ const contractsAbi = {
 };
 
 type EtherContextType = {
-  getContract: (contractType: ContractTypes, getSigner?: boolean) => ethers.Contract | undefined;
+  getContract: (contractType: ContractTypes, getSigner?: boolean) => ethers.Contract;
 };
 
-const EtherContext = createContext<EtherContextType>({
-  getContract: () => undefined,
-});
+const EtherContext = createContext<EtherContextType>({} as EtherContextType);
 
 export const useEtherContext = () => useContext(EtherContext);
 
 const EtherContextProvider: React.FC = ({ children }) => {
-  const { library, account } = useWeb3React<Web3Provider>();
+  const { library } = useWeb3React<Web3Provider>();
 
   const getContract = useCallback(
     (contractType: ContractTypes, getSigner?: boolean) => {
@@ -51,10 +49,6 @@ const EtherContextProvider: React.FC = ({ children }) => {
       }
       const provider = library ?? new ethers.providers.Web3Provider(window.ethereum);
 
-      if (getSigner && !account) {
-        throw new Error(`No account found to sign transaction`);
-      }
-
       const contract = new ethers.Contract(
         contractsAbi[contractType].contractAddress,
         contractsAbi[contractType].abi,
@@ -63,7 +57,7 @@ const EtherContextProvider: React.FC = ({ children }) => {
 
       return contract;
     },
-    [account, library]
+    [library]
   );
 
   const contextValue = useMemo(
