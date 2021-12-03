@@ -1,6 +1,7 @@
-import type { ethers } from "ethers";
+import type { MetaMaskInpageProvider } from "@metamask/providers";
+
 declare global {
   interface Window {
-    ethereum: ethers.providers.ExternalProvider;
+    ethereum?: MetaMaskInpageProvider;
   }
 }

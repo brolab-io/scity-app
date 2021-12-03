@@ -3,6 +3,7 @@ export interface ICityData {
   name: string;
   slug: string;
   image: string;
+  price: number;
   country: string;
   openTime: string;
   closeTime: string;

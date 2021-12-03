@@ -1,9 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
-import { memo, useCallback, useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import Container from "../../components/UI/Container";
 import { ICityData } from "../../lib/types";
-import useInfoOpenArea from "../../hooks/useInfoOpenArea";
-import useBuyLand from "../../hooks/useBuyLand";
 import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
@@ -12,6 +10,7 @@ import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
+import useLandContract from "../../hooks/useLandContract";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -38,31 +37,29 @@ type Props = {
 const CityPage: NextPage<Props> = ({ cities, city }) => {
   const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
 
-  const { price, limit, endTime, isLoading, currentQuantity, reload } = useInfoOpenArea(
+  const { info, isFetchingInfo, buyLand, boughtTokenURI, isBuying } = useLandContract(
     selectedCity?.slug
   );
 
-  useEffect(() => {
-    console.log(selectedCity?.slug, price, limit, endTime, isLoading, currentQuantity);
-  }, [currentQuantity, endTime, isLoading, limit, price, selectedCity?.slug]);
-
-  const { buy, cardURI, isBuying, isProcessing } = useBuyLand(selectedCity?.slug, {
-    onSuccess: reload,
-  });
-
+  // Fetch metaData once the land is bought
   const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
-    ["nft-lands", cardURI ?? ""],
+    ["nft-lands", boughtTokenURI ?? ""],
     getNFTLandMetaData,
     {
-      enabled: !!cardURI,
+      enabled: !!boughtTokenURI,
       refetchOnWindowFocus: false,
       retryDelay: 2000,
     }
   );
 
-  const onClickBuyNow = useCallback(() => {
-    buy(price);
-  }, [buy, price]);
+  const price = info.price ?? selectedCity?.price?.toString() ?? "0";
+  const currentQuantity = info.currentQuantity ?? 0;
+  const endTime =
+    (info.endTime && new Date(info.endTime * 1000)) ||
+    (selectedCity && new Date(selectedCity.closeTime)) ||
+    new Date();
+
+  const limit = info.limit ?? selectedCity?.numberOfSlots ?? 0;
 
   return (
     <>
@@ -73,14 +70,11 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
           price={price}
           selectedCity={selectedCity}
           setSelectedCity={setSelectedCity}
-          onClickBuyNow={onClickBuyNow}
+          onClickBuyNow={buyLand}
           currentQuantity={currentQuantity}
-          endTime={
-            new Date(endTime * 1000) ||
-            (selectedCity?.closeTime && new Date(selectedCity?.closeTime))
-          }
-          isProcessing={isProcessing}
-          limit={limit || selectedCity?.numberOfSlots}
+          endTime={endTime}
+          isProcessing={isBuying}
+          limit={limit}
         />
 
         {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
@@ -88,7 +82,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
           <CardList cards={new Array(Number(20)).fill(0)} />
         </Container>
 
-        {isLoading || isProcessing ? <Loading /> : null}
+        {isFetchingInfo || isBuying ? <Loading /> : null}
 
         {/*  MODAL SHOW ON CARD RECEIVED!  */}
         <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />

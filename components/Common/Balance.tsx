@@ -1,7 +1,8 @@
-import useBalance from "../../hooks/useBalance";
+import useBalanceOf from "../../hooks/useBalanceOf";
+import { ContractTypes } from "../EtherContext";
 
 export default function Balance() {
-  const { balance } = useBalance();
+  const { balance } = useBalanceOf(ContractTypes.LAND);
 
   return (
     <div className="flex items-center px-4 py-2 space-x-1">

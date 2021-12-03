@@ -19,6 +19,7 @@ import Head from "next/head";
 
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import EtherContextProvider from "../components/EtherContext";
 
 const queryClient = new QueryClient();
 
@@ -79,13 +80,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default function App(props: AppProps) {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <AppContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <MyApp {...props} />
-          <ToastContainer pauseOnFocusLoss={false} position="top-center" />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </AppContextProvider>
+      <EtherContextProvider>
+        <AppContextProvider>
+          <QueryClientProvider client={queryClient}>
+            <MyApp {...props} />
+            <ToastContainer pauseOnFocusLoss={false} position="top-center" />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </QueryClientProvider>
+        </AppContextProvider>
+      </EtherContextProvider>
     </Web3ReactProvider>
   );
 }

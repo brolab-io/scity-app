@@ -1,32 +1,29 @@
-import { ethers } from "ethers";
 import { NextPage } from "next";
-import { memo, useCallback, useState } from "react";
+import { memo } from "react";
 import isEqual from "react-fast-compare";
+
+// Components
 import BoxReceived from "../../components/BuyBox/BoxReceived";
 import BuyBoxBuySection from "../../components/BuyBox/BuySection";
 import BuyBoxSeo from "../../components/BuyBox/SEO";
-import useBuyBox from "../../hooks/useBuyBox";
-import useApproveBox from "../../hooks/useApproveBox";
-import useTotalSupply from "../../hooks/useTotalSupply";
+
+import { ethers } from "ethers";
+import useBoxContract from "../../hooks/useBoxContract";
+import useCompanyContract from "../../hooks/useCompanyContract";
 
 const BuyBoxPage: NextPage = () => {
-  const { totalSupply } = useTotalSupply();
-  const [isBoxReceived, setIsBoxReceived] = useState(false);
-  const { approve, isApproved, isLoading } = useApproveBox();
-
-  const onBoxReceived = useCallback(() => {
-    setIsBoxReceived(true);
-  }, []);
-
-  const hideModal = useCallback(() => {
-    setIsBoxReceived(false);
-  }, []);
-
   const {
-    buy: onClickBuyNow,
     price,
-    isProcessing,
-  } = useBuyBox({ onSuccess: onBoxReceived });
+    totalSupply,
+    isBuying,
+    buyBox,
+    isBoughtBox,
+    isApproved,
+    approveBoxes,
+    isApprovingBoxes,
+  } = useBoxContract();
+
+  const { openBox } = useCompanyContract(false);
 
   return (
     <>
@@ -34,19 +31,18 @@ const BuyBoxPage: NextPage = () => {
       <div className="pt-20 bg-black">
         <BuyBoxBuySection
           currentQuantity={Number(totalSupply.toString())}
-          endTime={1638181910}
           priceInBSC={ethers.utils.formatEther(price)}
           priceInUSD={"6.6"}
-          onClickBuyNow={onClickBuyNow}
-          isProcessing={isProcessing}
+          onClickBuyNow={buyBox}
+          isProcessing={isBuying}
         />
       </div>
       <BoxReceived
-        isLoading={isLoading}
-        approve={approve}
+        isLoading={isApprovingBoxes}
+        approve={approveBoxes}
         isApproved={isApproved}
-        isVisible={isBoxReceived}
-        close={hideModal}
+        isBoughtBox={isBoughtBox}
+        openBox={openBox}
       />
     </>
   );

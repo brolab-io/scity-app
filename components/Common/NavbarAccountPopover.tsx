@@ -10,7 +10,7 @@ import { Web3Provider } from "@ethersproject/providers";
 const AccountModal: React.FC = () => {
   const { account, deactivate } = useWeb3React<Web3Provider>();
 
-  const onClickLogout = useCallback(() => {
+  const onClickLogout = useCallback(async () => {
     deactivate();
   }, [deactivate]);
 
@@ -22,21 +22,13 @@ const AccountModal: React.FC = () => {
       <div className="p-5 space-y-1.5">
         <div className="flex justify-between px-4 py-2 text-sm truncate rounded-lg bg-light-gray">
           <span className="font-medium">
-            {`${account.substring(0, 13)}...${account.substring(
-              account.length - 13
-            )}`}
+            {`${account.substring(0, 13)}...${account.substring(account.length - 13)}`}
           </span>
           <SvgIconCopy className="w-4 h-4 cursor-pointer fill-current hover:text-blue-700" />
         </div>
         <div className="flex justify-center">
-          <Link
-            passHref
-            href={`https://testnet.bscscan.com/address/${account}`}
-          >
-            <a
-              target="_blank"
-              className="flex items-center text-sm text-blue-600"
-            >
+          <Link passHref href={`https://testnet.bscscan.com/address/${account}`}>
+            <a target="_blank" className="flex items-center text-sm text-blue-600">
               <span>View on BSCScan</span>
               <SvgIconExternalLink className="w-4 h-4 ml-1 -mt-1 fill-current" />
             </a>

@@ -8,7 +8,14 @@ const HeroSection: React.FC = () => {
   return (
     <>
       <section className="relative pt-20 bg-black md:pt-28 lg:pt-32 xl:pt-40">
-        <div className="bg-black">
+        <div>
+          {/* <Image
+            width="1263"
+            height="1404"
+            src="/images/backgrounds/bg-earth.svg"
+            layout="responsive"
+            alt="bg"
+          /> */}
           <Container className={clsx(styles.hero, "relative")}>
             <div
               className={clsx(
@@ -38,7 +45,7 @@ const HeroSection: React.FC = () => {
                   >
                     The new world is coming
                   </p>
-                  <div className="flex space-x-4">
+                  <div className="flex mt-6 space-x-4 lg:mt-8">
                     <Button outline className="px-6 lg:px-8 xl:px-10 rounded-3xl">
                       Explore
                     </Button>

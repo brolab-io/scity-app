@@ -56,3 +56,9 @@ export const formatCountDown = (date: Date | string) => {
     seconds > 0 ? `${seconds.toString().padStart(2, "0")}` : "00";
   return `${daysString}:${hoursString}:${minutesString}:${secondsString}`;
 };
+
+export const waitPromise = (ms: number) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
