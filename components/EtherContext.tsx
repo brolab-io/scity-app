@@ -47,7 +47,7 @@ const EtherContextProvider: React.FC = ({ children }) => {
       if (!contractsAbi[contractType].contractAddress || !contractsAbi[contractType].abi) {
         throw new Error(`No contract address or abi found for ${contractType}`);
       }
-      const provider = library ?? new ethers.providers.Web3Provider(window.ethereum);
+      const provider = library ?? new ethers.providers.Web3Provider(window.ethereum as any);
 
       const contract = new ethers.Contract(
         contractsAbi[contractType].contractAddress,
