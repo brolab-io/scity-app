@@ -193,23 +193,27 @@ const usePrivateBoxContract = () => {
   );
 
   useEffect(() => {
-    const contract = getContract(ContractTypes.PRIVATE_BOX);
-    const onBuyPrivateSale: ethers.providers.Listener = (
-      buyer,
-      email,
-      telegram,
-      ref,
-      buyTime
-    ) => {
-      setData((prevData) => ({
-        ...prevData,
-        histories: [{ buyer, buyTime }, ...prevData.histories],
-      }));
-    };
-    contract.on("BuyPrivateSale", onBuyPrivateSale);
-    return () => {
-      contract.off("BuyPrivateSale", onBuyPrivateSale);
-    };
+    try {
+      const contract = getContract(ContractTypes.PRIVATE_BOX);
+      const onBuyPrivateSale: ethers.providers.Listener = (
+        buyer,
+        email,
+        telegram,
+        ref,
+        buyTime
+      ) => {
+        setData((prevData) => ({
+          ...prevData,
+          histories: [{ buyer, buyTime }, ...prevData.histories],
+        }));
+      };
+      contract.on("BuyPrivateSale", onBuyPrivateSale);
+      return () => {
+        contract.off("BuyPrivateSale", onBuyPrivateSale);
+      };
+    } catch (error) {
+      console.log("Please connect to BNC network");
+    }
   }, [getContract]);
 
   useEffect(() => {
