@@ -19,6 +19,8 @@ type UsePrivateBoxData = {
   isApprovingBUSD: boolean;
   isApprovedBUSD: boolean;
   isCheckingApproval: boolean;
+  isFetchingHistories: boolean;
+  histories: string[];
 };
 
 const usePrivateBoxContract = () => {
@@ -40,6 +42,8 @@ const usePrivateBoxContract = () => {
     isApprovingBUSD: false,
     isApprovedBUSD: false,
     isCheckingApproval: false,
+    histories: [],
+    isFetchingHistories: false,
   });
 
   const fetchInfo = useCallback(async () => {
@@ -64,6 +68,29 @@ const usePrivateBoxContract = () => {
     } catch (error) {
       setData((prevData) => ({ ...prevData, isFetchingInfo: false }));
       console.log("Fetch Private Box Failed", error);
+    }
+  }, [getContract]);
+
+  const fetchHistories = useCallback(async () => {
+    setData((prevData) => ({
+      ...prevData,
+      isFetchingHistories: true,
+    }));
+    try {
+      const contract = getContract(ContractTypes.PRIVATE_BOX);
+      const contractReceipt: string[] = await contract.getBuyer();
+
+      setData((prevData) => ({
+        ...prevData,
+        isFetchingHistories: false,
+        histories: contractReceipt,
+      }));
+    } catch (error) {
+      setData((prevData) => ({
+        ...prevData,
+        isFetchingHistories: false,
+      }));
+      console.log("Fetch Private Box History Failed", error);
     }
   }, [getContract]);
 
@@ -158,12 +185,32 @@ const usePrivateBoxContract = () => {
   );
 
   useEffect(() => {
+    const contract = getContract(ContractTypes.PRIVATE_BOX);
+    const onBuyPrivateSale: ethers.providers.Listener = (args) => {
+      const [buyer] = args;
+      console.log(buyer);
+      setData((prevData) => ({
+        ...prevData,
+        histories: [...prevData.histories, buyer],
+      }));
+    };
+    contract.on("BuyPrivateSale", onBuyPrivateSale);
+    return () => {
+      contract.off("BuyPrivateSale", onBuyPrivateSale);
+    };
+  }, [getContract]);
+
+  useEffect(() => {
     fetchInfo();
   }, [fetchInfo]);
 
   useEffect(() => {
     checkIsApproved();
   }, [checkIsApproved]);
+
+  useEffect(() => {
+    fetchHistories();
+  }, [fetchHistories]);
 
   return useMemo(
     () => ({ ...data, fetchInfo, buyPrivateBox, approveBUSD }),

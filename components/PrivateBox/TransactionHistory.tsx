@@ -18,10 +18,10 @@ const formatDate = (date: Date, nomal?: boolean) => {
 };
 
 type Props = {
-  histories: [];
+  histories: string[];
 };
 
-const PrivateBoxTransactionHistory = ({}) => {
+const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
   const onScroll: DOMAttributes<HTMLDivElement>["onScroll"] = (event) => {
     console.log(Object.keys(event.target));
   };
@@ -30,10 +30,12 @@ const PrivateBoxTransactionHistory = ({}) => {
       <div className="text-center text-white">
         <h2 className="text-2xl font-medium text-gray-300 lg:text-3xl">HISTORY</h2>
       </div>
-      <div className="mt-4 space-y-1.5 h-72 overflow-y-scroll pr-4" onScroll={onScroll}>
-        {new Array(10).fill(0).map((_, index) => (
+      <div className="mt-4 space-y-1.5 max-h-72 overflow-y-scroll pr-4" onScroll={onScroll}>
+        {histories.map((address, index) => (
           <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
-            <span>0x1234...6789</span>
+            <span>
+              {address.substr(0, 6)}...{address.substr(address.length - 4)}
+            </span>
             <span className="md:hidden">{formatDate(new Date(), true)}</span>
             <span className="hidden md:block">{formatDate(new Date())}</span>
           </div>

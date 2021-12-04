@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import usePrivateBoxContract from "../../hooks/usePrivateBoxContract";
 import { ethers } from "ethers";
 import Loading from "../../components/UI/Loading";
+import AlertModal from "../../components/UI/AlertModal";
 
 const PrivateBoxPage: NextPage = () => {
   const router = useRouter();
@@ -39,8 +40,9 @@ const PrivateBoxPage: NextPage = () => {
     }),
     []
   );
-  const { info, isBuying, buyPrivateBox, isApprovingBUSD } = usePrivateBoxContract();
-  const { price, limit, endTime, totalSupply } = info;
+  const { info, isBuying, buyPrivateBox, isApprovingBUSD, histories } = usePrivateBoxContract();
+  const { price, limit, endTime } = info;
+  const totalSupply = histories.length;
 
   const { active } = useWeb3React<Web3Provider>();
   const { connectWallet } = useConnectWallet();
@@ -167,10 +169,15 @@ const PrivateBoxPage: NextPage = () => {
               </div>
             </div>
           </div>
-          <PrivateBoxTransactionHistory />
+          <PrivateBoxTransactionHistory histories={histories} />
         </div>
       </div>
       {isApprovingBUSD || isBuying || isBuying ? <Loading /> : null}
+      <AlertModal
+        type="success"
+        title="Success"
+        message="You have successfully purchased the private box."
+      />
     </>
   );
 };
