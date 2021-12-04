@@ -1,4 +1,5 @@
-import { DOMAttributes, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
+import LoadingIcon from "../UI/LoadingIcon";
 
 const formatDate = (date: Date, nomal?: boolean) => {
   const day = date.getDate().toString().padStart(2, "0");
@@ -19,10 +20,11 @@ const formatDate = (date: Date, nomal?: boolean) => {
 
 type Props = {
   histories: { buyer: string; buyTime: number }[];
+  isFetchingHistories: boolean;
 };
 
-const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
-  const [renderRows, setRenderRows] = useState(4);
+const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories, isFetchingHistories }) => {
+  const [renderRows, setRenderRows] = useState(10);
 
   const historiesToReder = histories.slice(0, renderRows);
 
@@ -33,7 +35,7 @@ const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
 
       if (bottom) {
         if (histories.length > renderRows) {
-          setRenderRows(renderRows + 1);
+          setRenderRows(renderRows + 10);
         }
       }
     },
@@ -44,7 +46,12 @@ const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
       <div className="text-center text-white">
         <h2 className="text-2xl font-medium text-gray-300 lg:text-3xl">HISTORY</h2>
       </div>
-      <div className="mt-4 space-y-1.5 max-h-72 overflow-y-scroll pr-4" onScroll={onScroll}>
+      <div className="mt-4 space-y-1.5 max-h-68 overflow-y-scroll pr-4" onScroll={onScroll}>
+        {isFetchingHistories ? (
+          <div className="flex justify-center p-20 text-white fill-current">
+            <LoadingIcon className="w-10 h-10" />
+          </div>
+        ) : null}
         {historiesToReder.map(({ buyer, buyTime }, index) => (
           <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
             <span>

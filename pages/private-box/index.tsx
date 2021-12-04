@@ -49,6 +49,7 @@ const PrivateBoxPage: NextPage = () => {
     histories,
     boughtError,
     buyedTransactionHash,
+    isFetchingHistories,
   } = usePrivateBoxContract();
   const { price, limit, endTime } = info;
   const totalSupply = histories.length;
@@ -189,7 +190,10 @@ const PrivateBoxPage: NextPage = () => {
               </div>
             </div>
           </div>
-          <PrivateBoxTransactionHistory histories={histories} />
+          <PrivateBoxTransactionHistory
+            isFetchingHistories={isFetchingHistories}
+            histories={histories}
+          />
         </div>
       </div>
       {isApprovingBUSD || isBuying || isBuying ? <Loading /> : null}

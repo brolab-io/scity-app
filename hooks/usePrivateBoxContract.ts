@@ -44,7 +44,7 @@ const usePrivateBoxContract = () => {
     isApprovedBUSD: false,
     isCheckingApproval: false,
     histories: [],
-    isFetchingHistories: false,
+    isFetchingHistories: true,
     buyedTransactionHash: "",
   });
 
