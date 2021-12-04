@@ -18,7 +18,7 @@ const formatDate = (date: Date, nomal?: boolean) => {
 };
 
 type Props = {
-  histories: string[];
+  histories: { buyer: string; buyTime: number }[];
 };
 
 const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
@@ -31,13 +31,13 @@ const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
         <h2 className="text-2xl font-medium text-gray-300 lg:text-3xl">HISTORY</h2>
       </div>
       <div className="mt-4 space-y-1.5 max-h-72 overflow-y-scroll pr-4" onScroll={onScroll}>
-        {histories.map((address, index) => (
+        {histories.map(({ buyer, buyTime }, index) => (
           <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
             <span>
-              {address.substr(0, 6)}...{address.substr(address.length - 4)}
+              {buyer.substr(0, 6)}...{buyer.substr(buyer.length - 4)}
             </span>
-            <span className="md:hidden">{formatDate(new Date(), true)}</span>
-            <span className="hidden md:block">{formatDate(new Date())}</span>
+            <span className="md:hidden">{formatDate(new Date(buyTime * 1000), true)}</span>
+            <span className="hidden md:block">{formatDate(new Date(buyTime * 1000))}</span>
           </div>
         ))}
       </div>

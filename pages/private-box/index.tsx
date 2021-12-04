@@ -16,7 +16,8 @@ import { useRouter } from "next/router";
 import usePrivateBoxContract from "../../hooks/usePrivateBoxContract";
 import { ethers } from "ethers";
 import Loading from "../../components/UI/Loading";
-import AlertModal from "../../components/UI/AlertModal";
+import AlertModal from "../../components/PrivateBox/AlertModal";
+import PrivateBoxSEO from "../../components/PrivateBox/SEO";
 
 const PrivateBoxPage: NextPage = () => {
   const router = useRouter();
@@ -40,7 +41,15 @@ const PrivateBoxPage: NextPage = () => {
     }),
     []
   );
-  const { info, isBuying, buyPrivateBox, isApprovingBUSD, histories } = usePrivateBoxContract();
+  const {
+    info,
+    isBuying,
+    buyPrivateBox,
+    isApprovingBUSD,
+    histories,
+    boughtError,
+    buyedTransactionHash,
+  } = usePrivateBoxContract();
   const { price, limit, endTime } = info;
   const totalSupply = histories.length;
 
@@ -70,6 +79,7 @@ const PrivateBoxPage: NextPage = () => {
 
   return (
     <>
+      <PrivateBoxSEO />
       <div
         style={bg1Style}
         className="relative flex flex-col w-screen h-screen py-6 space-y-8 overflow-y-scroll bg-black md:p-4 lg:p-10 lg:py-10"
@@ -123,7 +133,7 @@ const PrivateBoxPage: NextPage = () => {
                     <label className="text-white" htmlFor="email">
                       Email
                     </label>
-                    {!isValidEmail ? (
+                    {formData.email.length && !isValidEmail ? (
                       <span className="text-sm text-red-500">Email is not vaild</span>
                     ) : null}
                   </div>
@@ -143,7 +153,7 @@ const PrivateBoxPage: NextPage = () => {
                     <label className="text-white" htmlFor="telegram">
                       Telegram ID
                     </label>
-                    {!isVaildTelegramID ? (
+                    {formData.telegram.length && !isVaildTelegramID ? (
                       <span className="text-sm text-red-500">Telegram ID is not valid</span>
                     ) : null}
                   </div>
@@ -173,11 +183,7 @@ const PrivateBoxPage: NextPage = () => {
         </div>
       </div>
       {isApprovingBUSD || isBuying || isBuying ? <Loading /> : null}
-      <AlertModal
-        type="success"
-        title="Success"
-        message="You have successfully purchased the private box."
-      />
+      <AlertModal buyedTransactionHash={buyedTransactionHash} error={boughtError} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ContractTypes, useEtherContext } from "../components/EtherContext";
@@ -15,12 +15,13 @@ type UsePrivateBoxData = {
   isBuying: boolean;
   isBoughtSuccess: boolean;
   isBoughtFailed: boolean;
-  boughtError: unknown | null;
+  boughtError: any | null;
   isApprovingBUSD: boolean;
   isApprovedBUSD: boolean;
   isCheckingApproval: boolean;
   isFetchingHistories: boolean;
-  histories: string[];
+  histories: { buyer: string; buyTime: number }[];
+  buyedTransactionHash: string;
 };
 
 const usePrivateBoxContract = () => {
@@ -44,6 +45,7 @@ const usePrivateBoxContract = () => {
     isCheckingApproval: false,
     histories: [],
     isFetchingHistories: false,
+    buyedTransactionHash: "",
   });
 
   const fetchInfo = useCallback(async () => {
@@ -83,7 +85,12 @@ const usePrivateBoxContract = () => {
       setData((prevData) => ({
         ...prevData,
         isFetchingHistories: false,
-        histories: contractReceipt,
+        histories: [
+          ...contractReceipt.map((buyer) => ({
+            buyer,
+            buyTime: Date.now() / 1000,
+          })),
+        ].reverse(),
       }));
     } catch (error) {
       setData((prevData) => ({
@@ -163,12 +170,13 @@ const usePrivateBoxContract = () => {
           await contract.buyPrivate(email, telegramID, ref);
 
         const contractReceipt: ethers.ContractReceipt = await contractTx.wait();
-        toast.success("Buy Private Box Success");
 
         setData((prevData) => ({
           ...prevData,
           isBuying: false,
           isBoughtSuccess: true,
+          isApprovedBUSD: false,
+          buyedTransactionHash: contractReceipt.transactionHash,
         }));
       } catch (error: any) {
         setData((prevData) => ({
@@ -178,7 +186,7 @@ const usePrivateBoxContract = () => {
           isBoughtFailed: true,
         }));
         console.log("Buy Private Box Failed", error);
-        toast.error(error.data?.message ?? error.message);
+        // toast.error(error.data?.message ?? error.message);
       }
     },
     [approveBUSD, data.isApprovedBUSD, getContract]
@@ -186,12 +194,16 @@ const usePrivateBoxContract = () => {
 
   useEffect(() => {
     const contract = getContract(ContractTypes.PRIVATE_BOX);
-    const onBuyPrivateSale: ethers.providers.Listener = (args) => {
-      const [buyer] = args;
-      console.log(buyer);
+    const onBuyPrivateSale: ethers.providers.Listener = (
+      buyer,
+      email,
+      telegram,
+      ref,
+      buyTime
+    ) => {
       setData((prevData) => ({
         ...prevData,
-        histories: [...prevData.histories, buyer],
+        histories: [{ buyer, buyTime }, ...prevData.histories],
       }));
     };
     contract.on("BuyPrivateSale", onBuyPrivateSale);
