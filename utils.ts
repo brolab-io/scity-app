@@ -62,3 +62,7 @@ export const waitPromise = (ms: number) => {
     setTimeout(resolve, ms);
   });
 };
+
+export const isEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};

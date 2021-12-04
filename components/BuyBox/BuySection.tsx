@@ -19,7 +19,6 @@ const BuyBoxBuySection: React.FC<Props> = ({
   endTime = 0,
   priceInBSC = "0",
   priceInUSD = "0",
-  numberOfSlots = 0,
   onClickBuyNow,
 }) => {
   const ImageSection = useCallback(

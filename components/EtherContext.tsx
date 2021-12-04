@@ -4,6 +4,9 @@ import { createContext, useCallback, useContext, useMemo } from "react";
 import landAbi from "../dapp/abi/land-abi.json";
 import boxAbi from "../dapp/abi/box-abi.json";
 import companyAbi from "../dapp/abi/company-abi.json";
+import privateBox from "../dapp/abi/private-box-abi.json";
+import busdAbi from "../dapp/abi/busd-abi.json";
+
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
@@ -11,6 +14,8 @@ export enum ContractTypes {
   LAND = "LAND",
   BOX = "BOX",
   COMPANY = "COMPANY",
+  PRIVATE_BOX = "PRIVATE_BOX",
+  BUSD = "BUSD",
 }
 
 const contractsAbi = {
@@ -25,6 +30,14 @@ const contractsAbi = {
   [ContractTypes.COMPANY]: {
     contractAddress: process.env["NEXT_PUBLIC_CONTRACT_COMPANY"] ?? "",
     abi: companyAbi,
+  },
+  [ContractTypes.PRIVATE_BOX]: {
+    contractAddress: process.env["NEXT_PUBLIC_CONTRACT_PRIVATE_BOX"] ?? "",
+    abi: privateBox,
+  },
+  [ContractTypes.BUSD]: {
+    contractAddress: process.env["NEXT_PUBLIC_CONTRACT_BUSD"] ?? "",
+    abi: busdAbi,
   },
 };
 
