@@ -62,7 +62,15 @@ const PrivateBoxPage: NextPage = () => {
     buyPrivateBox(formData.email, formData.telegram, ref);
   }, [buyPrivateBox, formData.email, formData.telegram, ref]);
 
-  const buttonTitle = active ? "Buy Now" : "Connect Wallet";
+  const isOutOfStock = limit - totalSupply <= 0;
+  const isOutOfTime = Date.now() / 1000 > endTime;
+  const buttonTitle = isOutOfStock
+    ? "Sold out"
+    : isOutOfTime
+    ? "Out of time"
+    : active
+    ? "Buy Now"
+    : "Connect Wallet";
 
   const ImageSection = useCallback(
     () => (
@@ -75,7 +83,9 @@ const PrivateBoxPage: NextPage = () => {
 
   const isValidEmail = isEmail(formData.email);
   const isVaildTelegramID = formData.telegram.length > 5;
-  const shouldDisableButton = active && (!(isValidEmail && isVaildTelegramID) || isBuying || !ref);
+  const shouldDisableButton =
+    active &&
+    (!(isValidEmail && isVaildTelegramID) || isBuying || !ref || isOutOfStock || isOutOfTime);
 
   return (
     <>
