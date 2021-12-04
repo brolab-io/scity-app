@@ -1,4 +1,4 @@
-import { DOMAttributes } from "react";
+import { DOMAttributes, useCallback, useState } from "react";
 
 const formatDate = (date: Date, nomal?: boolean) => {
   const day = date.getDate().toString().padStart(2, "0");
@@ -22,16 +22,30 @@ type Props = {
 };
 
 const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories }) => {
-  const onScroll: DOMAttributes<HTMLDivElement>["onScroll"] = (event) => {
-    console.log(Object.keys(event.target));
-  };
+  const [renderRows, setRenderRows] = useState(4);
+
+  const historiesToReder = histories.slice(0, renderRows);
+
+  const onScroll = useCallback(
+    (event: any) => {
+      const bottom =
+        event.target.scrollHeight - event.target.scrollTop - event.target.clientHeight < 20;
+
+      if (bottom) {
+        if (histories.length > renderRows) {
+          setRenderRows(renderRows + 1);
+        }
+      }
+    },
+    [histories, renderRows]
+  );
   return (
     <div className="w-full p-6 mt-2 rounded-lg xl:rounded-xl bg-dark-gray bg-opacity-80 lg:p-8 md:mt-4 lg:mt-10">
       <div className="text-center text-white">
         <h2 className="text-2xl font-medium text-gray-300 lg:text-3xl">HISTORY</h2>
       </div>
       <div className="mt-4 space-y-1.5 max-h-72 overflow-y-scroll pr-4" onScroll={onScroll}>
-        {histories.map(({ buyer, buyTime }, index) => (
+        {historiesToReder.map(({ buyer, buyTime }, index) => (
           <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
             <span>
               {buyer.substr(0, 6)}...{buyer.substr(buyer.length - 4)}
