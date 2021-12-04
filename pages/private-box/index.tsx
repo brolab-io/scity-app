@@ -65,13 +65,13 @@ const PrivateBoxPage: NextPage = () => {
 
   const isOutOfStock = limit - totalSupply <= 0;
   const isOutOfTime = Date.now() / 1000 > endTime;
-  const buttonTitle = isOutOfStock
+  const buttonTitle = !active
+    ? "Connect Wallet"
+    : isOutOfStock
     ? "Sold out"
     : isOutOfTime
     ? "Out of time"
-    : active
-    ? "Buy Now"
-    : "Connect Wallet";
+    : "Buy Now";
 
   const ImageSection = useCallback(
     () => (
