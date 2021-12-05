@@ -23,9 +23,14 @@ const HeroSection: React.FC = () => {
                 "absolute inset-0 bg-no-repeat bg-center w-full"
               )}
             >
-              <div className="relative">
-                <div className="absolute -bottom-14 -left-40 md:-left:32 lg:-lef:24 xl:-left-14">
-                  <Image src="/images/icons/coin1.png" alt="coin" height={230} width={230} />
+              <div className="relative pl-24">
+                <div className="absolute -bottom-14 -left-16 sm:-left-1 md:-left-1 lg:-left-1 xl:left-28">
+                  <Image
+                    src="/images/icons/coin1.png"
+                    alt="coin"
+                    height={230}
+                    width={230}
+                  />
                 </div>
                 <div className="pl-12 md:pl-24 lg:pl-32 xl:pl-56">
                   <h1
@@ -46,7 +51,10 @@ const HeroSection: React.FC = () => {
                     The new world is coming
                   </p>
                   <div className="flex mt-6 space-x-4 lg:mt-8">
-                    <Button outline className="px-6 lg:px-8 xl:px-10 rounded-3xl">
+                    <Button
+                      outline
+                      className="px-6 lg:px-8 xl:px-10 rounded-3xl"
+                    >
                       Explore
                     </Button>
                     <Button className="px-6 lg:px-8 xl:px-10 rounded-3xl ">
