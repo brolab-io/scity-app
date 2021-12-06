@@ -7,9 +7,14 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
+        "internalType": "address",
+        "name": "_devAdrress",
+        "type": "address"
+      },
+      {
+        "internalType": "uint32",
         "name": "_saleLimit",
-        "type": "uint256"
+        "type": "uint32"
       },
       {
         "internalType": "uint256",
@@ -24,6 +29,25 @@
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "AddRef",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -48,18 +72,75 @@
       },
       {
         "indexed": false,
-        "internalType": "address",
+        "internalType": "bytes32",
         "name": "ref",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "buyTime",
+        "type": "uint32"
+      }
+    ],
+    "name": "BuyPrivateSale",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "devAddress",
         "type": "address"
       },
       {
         "indexed": false,
-        "internalType": "uint256",
-        "name": "buyTime",
-        "type": "uint256"
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
       }
     ],
-    "name": "BuyPrivateSale",
+    "name": "DevAddressChange",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "endTime",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "EndTimeChange",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isOneTimeBuy",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "OneTimeBuyChange",
     "type": "event"
   },
   {
@@ -82,6 +163,101 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "paymentToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "PaymentTokenChange",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "PriceChange",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "index",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RefChange",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint32",
+        "name": "saleLimit",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "time",
+        "type": "bytes32"
+      }
+    ],
+    "name": "SaleLimitChange",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      }
+    ],
+    "name": "addRef",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "string",
@@ -94,14 +270,27 @@
         "type": "string"
       },
       {
-        "internalType": "address",
-        "name": "ref",
-        "type": "address"
+        "internalType": "string",
+        "name": "refString",
+        "type": "string"
       }
     ],
     "name": "buyPrivate",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "devAdrress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -119,19 +308,6 @@
   },
   {
     "inputs": [],
-    "name": "getBalance",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "getBuyer",
     "outputs": [
       {
@@ -142,14 +318,14 @@
             "type": "address"
           },
           {
-            "internalType": "uint256",
+            "internalType": "uint32",
             "name": "buyTime",
-            "type": "uint256"
+            "type": "uint32"
           },
           {
-            "internalType": "address",
+            "internalType": "bytes32",
             "name": "ref",
-            "type": "address"
+            "type": "bytes32"
           }
         ],
         "internalType": "struct PrivateSale.PrivateSaleHistory[]",
@@ -163,9 +339,28 @@
   {
     "inputs": [
       {
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      }
+    ],
+    "name": "getCountOfRef",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
       }
     ],
     "name": "getRefCountOf",
@@ -182,6 +377,25 @@
   {
     "inputs": [],
     "name": "isOneTimeBuy",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      }
+    ],
+    "name": "isRefExists",
     "outputs": [
       {
         "internalType": "bool",
@@ -232,25 +446,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "buyer",
-        "type": "address"
-      }
-    ],
-    "name": "refOf",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -262,12 +457,25 @@
     "name": "saleLimit",
     "outputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint32",
         "name": "",
-        "type": "uint256"
+        "type": "uint32"
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_devAdress",
+        "type": "address"
+      }
+    ],
+    "name": "setDevAdress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -299,6 +507,19 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_paymentToken",
+        "type": "address"
+      }
+    ],
+    "name": "setPaymentToken",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_price",
         "type": "uint256"
@@ -312,9 +533,27 @@
   {
     "inputs": [
       {
-        "internalType": "uint256",
+        "internalType": "uint16",
+        "name": "index",
+        "type": "uint16"
+      },
+      {
+        "internalType": "string",
+        "name": "ref",
+        "type": "string"
+      }
+    ],
+    "name": "setRef",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
         "name": "_saleLimit",
-        "type": "uint256"
+        "type": "uint32"
       }
     ],
     "name": "setSaleLimit",
@@ -331,24 +570,6 @@
       }
     ],
     "name": "transferOwnership",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "to",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "withdraw",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
