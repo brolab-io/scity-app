@@ -3,7 +3,7 @@ import { QueryFunctionContext } from "react-query";
 import { ICardData } from "./types";
 
 const request = axios.create({
-  baseURL: "https://api.dev-nft.xyz",
+  baseURL: "https://api.scity.games",
 });
 
 export const getNFTLandMetaData = (
