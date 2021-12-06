@@ -13,11 +13,11 @@ const navigationMenus = [
   },
   {
     title: "Buy Land",
-    href: "/land",
+    href: "/buy-land",
   },
   {
     title: "Buy Box",
-    href: "/box",
+    href: "/buy-box",
   },
   {
     title: "Explore",
@@ -105,9 +105,13 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
       }
     >
       {navigationMenus.map((menu) => {
-        const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
+        const isActive =
+          pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
-          <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
+          <li
+            key={menu.href}
+            className="border-b border-gray-800 lg:border-b-0"
+          >
             <Link passHref href={menu.href}>
               <a
                 target={menu.target}
