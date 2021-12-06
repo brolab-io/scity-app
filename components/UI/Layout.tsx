@@ -6,7 +6,7 @@ import Navbar from "../Common/Navbar";
 
 const Layout: React.FC<any> = ({ children }) => {
   const router = useRouter();
-  const isPrivateBox = router.pathname.includes("/private-box");
+  const isPrivateBox = router.pathname.startsWith("/private");
   if (isPrivateBox) {
     return <>{children}</>;
   }

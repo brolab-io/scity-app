@@ -30,7 +30,6 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
       slidesToShow: width > 562 ? 3 : 1,
       centerPadding: "0px",
       beforeChange: (current, next) => {
-        console.log(next);
         setImageIndex(next);
       },
       focusOnSelect: true,
@@ -38,8 +37,6 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
     }),
     [width]
   );
-
-  console.log(imageIndex);
 
   const onPressBack = useCallback(() => {
     sliderRef.current?.slickPrev();

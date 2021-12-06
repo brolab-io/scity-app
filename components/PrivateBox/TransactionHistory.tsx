@@ -44,23 +44,30 @@ const PrivateBoxTransactionHistory: React.FC<Props> = ({ histories, isFetchingHi
   return (
     <div className="w-full p-6 mt-2 rounded-lg xl:rounded-xl bg-dark-gray bg-opacity-80 lg:p-8 md:mt-4 lg:mt-10">
       <div className="text-center text-white">
-        <h2 className="text-2xl font-medium text-gray-300 lg:text-3xl">HISTORY</h2>
+        <h2 className="text-xl font-medium text-gray-300 lg:text-2xl">HISTORY</h2>
       </div>
-      <div className="mt-4 space-y-1.5 max-h-68 overflow-y-scroll pr-4" onScroll={onScroll}>
+      <div className="mt-4">
         {isFetchingHistories ? (
-          <div className="flex justify-center p-20 text-white fill-current">
+          <div className="flex justify-center h-20 p-20 text-gray-400 fill-current">
             <LoadingIcon className="w-10 h-10" />
           </div>
         ) : null}
-        {historiesToReder.map(({ buyer, buyTime }, index) => (
-          <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
-            <span>
-              {buyer.substr(0, 6)}...{buyer.substr(buyer.length - 4)}
-            </span>
-            <span className="md:hidden">{formatDate(new Date(buyTime * 1000), true)}</span>
-            <span className="hidden md:block">{formatDate(new Date(buyTime * 1000))}</span>
+        {!historiesToReder.length ? (
+          <div className="flex justify-center h-20 p-20 text-gray-400 fill-current">
+            <span>No record</span>
           </div>
-        ))}
+        ) : null}
+        <div className="space-y-1.5 max-h-68 overflow-y-auto pr-4" onScroll={onScroll}>
+          {historiesToReder.map(({ buyer, buyTime }, index) => (
+            <div key={index} className="flex justify-between text-sm text-gray-300 lg:text-base">
+              <span>
+                {buyer.substr(0, 6)}...{buyer.substr(buyer.length - 4)}
+              </span>
+              <span className="md:hidden">{formatDate(new Date(buyTime * 1000), true)}</span>
+              <span className="hidden md:block">{formatDate(new Date(buyTime * 1000))}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

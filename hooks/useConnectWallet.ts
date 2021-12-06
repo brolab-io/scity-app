@@ -1,9 +1,40 @@
+import getConfig from "next/config";
 import { waitPromise } from "./../utils";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { useAppContext } from "./../components/AppContext";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { injected, supportedChainIds } from "../dapp/connectors";
+import { injected } from "../dapp/connectors";
+
+const { publicRuntimeConfig } = getConfig();
+
+const isMetaMask = (window: Window & typeof globalThis) => {
+  return window.ethereum?.isMetaMask;
+};
+
+const switchWallet = async (window: Window & typeof globalThis) => {
+  if (isMetaMask(window) && !!window.ethereum?.chainId) {
+    const chainId = publicRuntimeConfig.supportedMetaMaskNetworks[0].chainId;
+    if (chainId && window.ethereum.chainId !== chainId) {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: chainId }],
+      });
+      return waitPromise(700);
+    }
+  }
+};
+
+const addBSCChain = async (window: Window & typeof globalThis) => {
+  const chainId = publicRuntimeConfig.supportedMetaMaskNetworks[0].chainId;
+  if (!!window.ethereum?.chainId && window.ethereum.chainId !== chainId) {
+    await window.ethereum.request({
+      method: "wallet_addEthereumChain",
+      params: publicRuntimeConfig.supportedMetaMaskNetworks,
+    });
+    return waitPromise(700);
+  }
+};
 
 const useConnectWallet = () => {
   const { activate, active } = useWeb3React<Web3Provider>();
@@ -11,24 +42,10 @@ const useConnectWallet = () => {
 
   const connectWallet = useCallback(async () => {
     if (active) {
-      console.log("Already connected");
       return;
     }
-    console.log("Connected to wallet");
-    if (window.ethereum?.isMetaMask && window.ethereum.chainId!!) {
-      if (
-        supportedChainIds[0] &&
-        Number(window.ethereum.chainId) !== supportedChainIds[0]
-      ) {
-        console.log(`Switching to chainId: ${supportedChainIds[0]}`);
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x" + supportedChainIds[0].toString(16) }],
-        });
-
-        await waitPromise(700);
-      }
-    }
+    await addBSCChain(window);
+    await switchWallet(window);
     setActivatingConnector(injected);
     await activate(injected);
   }, [activate, active, setActivatingConnector]);

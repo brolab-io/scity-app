@@ -1,17 +1,16 @@
 import clsx from "clsx";
-import Account from "../Common/Account";
-import Balance from "../Common/Balance";
 import Connect from "../Common/Connect";
-import Clickable from "../UI/Clickable";
 import NavbarAccountPopover from "../Common/NavbarAccountPopover";
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+import Logo from "../Common/Logo";
 
-const PrivateBoxConnectWallet = ({}) => {
+const PrivateBoxNavbar = ({}) => {
   const { active, account } = useWeb3React<Web3Provider>();
   return (
-    <div className="relative top-0 left-0 right-0 z-30 flex items-center justify-center lg:fixed lg:left-auto">
-      <div className="px-10 py-3">
+    <div className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between h-16 px-4 bg-black border-b border-gray-700 shadow-sm">
+      <Logo />
+      <div>
         {active ? (
           <div className="relative flex-none group">
             <div
@@ -53,4 +52,4 @@ const PrivateBoxConnectWallet = ({}) => {
   );
 };
 
-export default PrivateBoxConnectWallet;
+export default PrivateBoxNavbar;

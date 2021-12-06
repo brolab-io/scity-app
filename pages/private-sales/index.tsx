@@ -10,7 +10,7 @@ import useConnectWallet from "../../hooks/useConnectWallet";
 import Countdown from "../../components/UI/Countdown";
 import Button from "../../components/UI/Button";
 import PrivateBoxTransactionHistory from "../../components/PrivateBox/TransactionHistory";
-import PrivateBoxConnectWallet from "../../components/PrivateBox/ConnectWallet";
+import PrivateBoxNavbar from "../../components/PrivateBox/ConnectWallet";
 import { isEmail } from "../../utils";
 import { useRouter } from "next/router";
 import usePrivateBoxContract from "../../hooks/usePrivateBoxContract";
@@ -18,6 +18,7 @@ import { ethers } from "ethers";
 import Loading from "../../components/UI/Loading";
 import AlertModal from "../../components/PrivateBox/AlertModal";
 import PrivateBoxSEO from "../../components/PrivateBox/SEO";
+import SvgBUSDLogo from "../../components/Icons/SvgBUSDLogo";
 
 const PrivateBoxPage: NextPage = () => {
   const router = useRouter();
@@ -93,9 +94,9 @@ const PrivateBoxPage: NextPage = () => {
       <PrivateBoxSEO />
       <div
         style={bg1Style}
-        className="relative flex flex-col w-screen h-screen py-6 space-y-8 overflow-y-scroll bg-black md:p-4 lg:p-10 lg:py-10"
+        className="relative flex flex-col w-screen h-screen px-4 py-16 space-y-8 overflow-y-scroll bg-black lg:px-10"
       >
-        <PrivateBoxConnectWallet />
+        <PrivateBoxNavbar />
         <div className="max-w-screen-lg mx-auto">
           <div className="p-6 rounded-lg xl:rounded-xl bg-dark-gray bg-opacity-80 lg:p-8">
             <div className="grid gap-x-4 gap-y-8 lg:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:gap-x-10">
@@ -127,15 +128,12 @@ const PrivateBoxPage: NextPage = () => {
                     />
                   </div>
                 </div>
-                <div className="p-4 bg-dark-gray rounded-xl">
+                <div className="p-4 space-y-1 bg-dark-gray rounded-xl">
                   <span className="text-light-gray">Price</span>
                   <div className="flex items-center space-x-2">
-                    <Image src="/images/icons/bnb.svg" width={26} height={26} alt="fire" />
+                    <SvgBUSDLogo className="w-6 h-6" />
                     <span className="text-2xl font-medium text-white">
-                      {ethers.utils.formatEther(price)} BUSD
-                    </span>
-                    <span className="text-gradient bg-gradient-to-bl">
-                      ~ ${ethers.utils.formatEther(price)}
+                      {ethers.utils.formatEther(price).replace(".0", "")} BUSD
                     </span>
                   </div>
                 </div>

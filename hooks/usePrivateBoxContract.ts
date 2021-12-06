@@ -80,15 +80,16 @@ const usePrivateBoxContract = () => {
     }));
     try {
       const contract = getContract(ContractTypes.PRIVATE_BOX);
-      const contractReceipt: string[] = await contract.getBuyer();
+      const contractReceipt: [string, ethers.BigNumber, string][] =
+        await contract.getBuyer();
 
       setData((prevData) => ({
         ...prevData,
         isFetchingHistories: false,
         histories: [
-          ...contractReceipt.map((buyer) => ({
-            buyer,
-            buyTime: Date.now() / 1000,
+          ...contractReceipt.map((history: any) => ({
+            buyer: history[0],
+            buyTime: history[1].toNumber(),
           })),
         ].reverse(),
       }));
