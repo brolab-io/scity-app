@@ -89,7 +89,7 @@ const usePrivateBoxContract = () => {
         histories: [
           ...contractReceipt.map((history: any) => ({
             buyer: history[0],
-            buyTime: history[1].toNumber(),
+            buyTime: history[1],
           })),
         ].reverse(),
       }));
