@@ -112,11 +112,8 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-2 px-8 gap-y-10 gap-x-2 md:gap-x-4 lg:grid-cols-4 xl:grid-cols-12 lg:px-4">
           {/* COL 1 */}
           <div className="col-span-2 px-2 space-y-4 lg:col-span-4 xl:col-span-3 lg:px-4">
-            <Logo />
-            <p className="text-sm text-gray-300">
-              Lorem ipsum dolor sit amet,consectetur adipisicing elit. Quis non, fugit totam vel
-              laboriosam vitae.
-            </p>
+            <Logo width={100} height={100} />
+            {/* <p className="text-sm text-gray-300">The next generation of metaverse world</p> */}
             <div className="flex space-x-2">
               {socialLinks.map((link) => (
                 <Link key={link.href} passHref href={link.href}>
