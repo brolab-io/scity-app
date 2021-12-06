@@ -3,6 +3,8 @@ import Button from "../UI/Button";
 import Container from "../UI/Container";
 import styles from "./HeroSections.module.css";
 import Image from "next/image";
+import SvgIconRocket from "../Icons/SvgIconRocket";
+import SvgIconPaper from "../Icons/SvgIconPaper";
 
 const HeroSection: React.FC = () => {
   return (
@@ -24,13 +26,8 @@ const HeroSection: React.FC = () => {
               )}
             >
               <div className="relative pl-24">
-                <div className="absolute -bottom-14 -left-16 sm:-left-1 md:-left-1 lg:-left-1 xl:left-28">
-                  <Image
-                    src="/images/icons/coin1.png"
-                    alt="coin"
-                    height={230}
-                    width={230}
-                  />
+                <div className="absolute -bottom-14 -left-16 sm:-left-12 md:-left-1 lg:-left-1 xl:left-28">
+                  <Image src="/images/icons/coin1.png" alt="coin" height={230} width={230} />
                 </div>
                 <div className="pl-12 md:pl-24 lg:pl-32 xl:pl-56">
                   <h1
@@ -50,15 +47,14 @@ const HeroSection: React.FC = () => {
                   >
                     The new world is coming
                   </p>
-                  <div className="flex mt-6 space-x-4 lg:mt-8">
-                    <Button
-                      outline
-                      className="px-6 lg:px-8 xl:px-10 rounded-3xl"
-                    >
-                      Explore
+                  <div className="flex flex-wrap items-center mt-6 sm:flex-nowrap lg:mt-8">
+                    <Button outline className="px-6 mr-4 lg:px-8 xl:px-10 rounded-3xl">
+                      <SvgIconRocket className="w-6 h-6" />
+                      <span>Explore</span>
                     </Button>
-                    <Button className="px-6 lg:px-8 xl:px-10 rounded-3xl ">
-                      <span>Buy SCC</span>
+                    <Button className="px-6 mt-4 lg:px-8 xl:px-10 rounded-3xl md:mt-0 md:ml-4">
+                      <SvgIconPaper className="w-6 h-6" />
+                      <span className="ml-2">Buy SCC</span>
                     </Button>
                   </div>
                 </div>

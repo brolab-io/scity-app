@@ -93,7 +93,7 @@ const BuySection: React.FC<Props> = ({
               </div>
               <Button
                 className="py-2.5 rounded-lg"
-                disabled={!buyEnabled && !active}
+                disabled={!buyEnabled || (buyEnabled && !active)}
                 isLoading={isBuying}
                 onClick={active ? onClickBuy : connectWallet}
               >

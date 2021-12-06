@@ -34,13 +34,20 @@ const RoadMap = () => {
           <div className="flex flex-wrap justify-around w-full py-12 lg:py-16 xl:py-24">
             {phases.map((phase, index) => (
               <div className="mt-16" key={index}>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center flex-1 space-x-4">
                   <SvgCircleWithRing className="w-16 h-16" />
                   <div className="flex items-center">
                     <span className="text-xl font-bold text-pink lg:text-2xl xl:text-3xl">
                       {phase.title}
                     </span>
-                    {index !== phases.length - 1 ? <SvgTripleCircle className="h-6 ml-4" /> : null}
+                    {index !== phases.length - 1 ? (
+                      <SvgTripleCircle className="h-6 ml-4" />
+                    ) : (
+                      <>
+                        <div className="w-20 ml-4 lg:hidden" />
+                        <div className="lg:hidden ml-0.5" />
+                      </>
+                    )}
                   </div>
                 </div>
                 <ul className="pl-20 mt-4 list-disc list-outside md:mt-5 lg:mt-6">

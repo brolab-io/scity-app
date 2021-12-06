@@ -29,7 +29,7 @@ const OurGameplayFeatures: React.FC = () => {
     },
   ];
   return (
-    <section className="py-20 text-white bg-black">
+    <section className="px-4 py-20 text-white bg-black">
       <Container>
         <div className="flex flex-wrap justify-center mb-24 text-center">
           <div className="w-full px-4 lg:w-6/12">
@@ -39,7 +39,7 @@ const OurGameplayFeatures: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-8 font-light md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 font-light sm:grid-cols-2 lg:grid-cols-4">
           {lists.map((item, index) => (
             <div key={index} className="w-full p-8 bg-dark-gray rounded-3xl">
               <div className="text-center">

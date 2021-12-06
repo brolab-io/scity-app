@@ -4,6 +4,13 @@ module.exports = {
   images: {
     domains: ["res.cloudinary.com"],
   },
+  serverRuntimeConfig: {
+    redisOptions: {
+      url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`,
+      password: process.env.REDIS_PASSWORD,
+      legacyMode: true,
+    },
+  },
   publicRuntimeConfig: {
     supportedMetaMaskNetworks: [
       {

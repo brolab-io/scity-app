@@ -75,7 +75,7 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
                   />
                   <div
                     className={clsx(
-                      "absolute inset-0 z-50 flex flex-col items-center justify-center space-y-10 transform duration-300",
+                      "absolute inset-0 z-30 flex flex-col items-center justify-center space-y-10 transform duration-300",
                       index === imageIndex ? "scale-100 opacity-100" : "scale-75 opacity-50"
                     )}
                   >

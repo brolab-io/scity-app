@@ -14,7 +14,8 @@ import useLandContract from "../../hooks/useLandContract";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
-    (Array.isArray(context.params?.slug) && context.params?.slug[0]) || context.params?.slug || "";
+    (Array.isArray(context.query?.slug) && context.query?.slug[0]) || context.query?.slug || "";
+
   try {
     const cities: ICityData[] = await getOpenedCities();
     return {

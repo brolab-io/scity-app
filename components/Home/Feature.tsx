@@ -39,7 +39,7 @@ const Feature = () => {
           </div>
         </div>
         <div className="flex flex-col items-start justify-center w-full max-w-screen-sm p-8 space-y-8 md:p-12 lg:p-16 xl:p-20">
-          <h3 className="text-4xl font-extrabold leading-relaxed lg:text-5xl text-black-600">
+          <h3 className="text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600">
             Travel With Us To <br /> A Land of Future
           </h3>
           <p className="my-2 text-gray-300">
@@ -47,20 +47,22 @@ const Feature = () => {
             has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown
           </p>
 
-          <div className="flex items-center space-x-2">
-            <Button className="px-10 rounded-3xl">
+          <div className="flex flex-wrap items-center space-y-2 lg:flex-nowrap lg:space-y-0">
+            <Button className="px-10 mr-2 rounded-3xl">
               <span>Join Telegram</span>
             </Button>
-            {socialLinks.map((link) => (
-              <Link key={link.href} passHref href={link.href}>
-                <a
-                  target="_blank"
-                  className="flex items-center justify-center w-10 h-10 rounded-lg bg-dark-gray"
-                >
-                  <Image src={link.icon} height={20} width={20} quality={100} alt="social icon" />
-                </a>
-              </Link>
-            ))}
+            <div className="flex space-x-2">
+              {socialLinks.map((link) => (
+                <Link key={link.href} passHref href={link.href}>
+                  <a
+                    target="_blank"
+                    className="flex items-center justify-center w-10 h-10 rounded-lg bg-dark-gray"
+                  >
+                    <Image src={link.icon} height={20} width={20} quality={100} alt="social icon" />
+                  </a>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>

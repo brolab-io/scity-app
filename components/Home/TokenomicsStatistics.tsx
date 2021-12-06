@@ -46,7 +46,7 @@ const TokenomicsStatistics = () => {
                   <span className="text-white truncate">{stat.percent}%</span>
                 </div>
               </div>
-              <div className="px-12 md:px-0">
+              <div className="px-12 md:px-0 md:pr-12">
                 <ProgressBar percentage={stat.percent} className="h-5" color={stat.color} />
               </div>
             </div>

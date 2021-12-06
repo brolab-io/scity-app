@@ -31,7 +31,7 @@ const BuyLandBuySection: React.FC<Props> = ({
 }) => {
   const isOutOfTime = new Date().getTime() > (endTime || new Date()).getTime();
   const isOutOfStock = currentQuantity >= limit;
-  const shouldEnableBuy = !(isProcessing || isOutOfTime || isOutOfStock);
+  const shouldDisableBuy = isProcessing || isOutOfTime || isOutOfStock;
 
   const router = useRouter();
 
@@ -89,7 +89,7 @@ const BuyLandBuySection: React.FC<Props> = ({
       endTime={endTime}
       numberOfSlots={selectedCity?.numberOfSlots}
       buttonTitle={buttonTitle}
-      buyEnabled={shouldEnableBuy}
+      buyEnabled={!shouldDisableBuy}
       isBuying={isProcessing}
       name={selectedCity?.name || ""}
       onClickBuy={onClickBuyNow}
