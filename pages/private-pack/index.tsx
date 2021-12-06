@@ -103,7 +103,7 @@ const PrivateBoxPage: NextPage = () => {
               {/* 2ND COL */}
               <div className="flex flex-col justify-center px-0 space-y-4">
                 <div className="flex">
-                  <h1 className="text-2xl text-white uppercase lg:text-3xl">PRIVATE BOX</h1>
+                  <h1 className="text-2xl text-white uppercase lg:text-3xl">PRIVATE PACK</h1>
                   <div className="flex items-center justify-center w-16 h-6 p-2 ml-2 -mt-2 lg:w-20 rounded-xl bg-gradient bg-gradient-to-b lg:h-7">
                     <span className="text-xs font-semibold text-white lg:text-sm">LIMITED</span>
                   </div>

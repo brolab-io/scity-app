@@ -5,7 +5,7 @@ import isEqual from "react-fast-compare";
 type Props = {};
 
 const PrivateBoxSEO: React.FC<Props> = () => {
-  return <NextSeo title="Buy Private Box - Private Sale" />;
+  return <NextSeo title="Buy Private Pack - Private Sale" />;
 };
 
 export default memo(PrivateBoxSEO, isEqual);
