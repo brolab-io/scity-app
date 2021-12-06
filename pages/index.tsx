@@ -11,6 +11,7 @@ import { ICityData } from "../lib/types";
 import SCCTokenomics from "../components/Home/SCCTokenomics";
 import TokenomicsStatistics from "../components/Home/TokenomicsStatistics";
 import RoadMap from "../components/Home/RoadMap";
+import HomeAbout from "../components/Home/About";
 
 export const getServerSideProps = async () => {
   try {
@@ -33,7 +34,9 @@ const Home: NextPage<Props> = ({ cities }) => {
       {/* <Sample /> */}
       <HeroSection />
       {/* <BuyNFTLandSlider /> */}
+      <HomeAbout />
       <Testimoni cities={cities} />
+
       <Feature />
       <OurGameplayFeatures />
       <BackgroundImage />

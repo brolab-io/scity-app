@@ -32,8 +32,9 @@ const navigationMenus = [
     href: "/pages",
   },
   {
-    title: "Contact",
-    href: "/contact",
+    title: "Whitepaper",
+    href: "https://whitepaper.scity.games",
+    target: "_blank",
   },
 ];
 
@@ -108,7 +109,10 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
         return (
           <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
             <Link passHref href={menu.href}>
-              <a className="block w-full px-8 py-4 duration-200 transform lg:px-0">
+              <a
+                target={menu.target}
+                className="block w-full px-8 py-4 duration-200 transform lg:px-0"
+              >
                 <span
                   className={
                     "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-xl lg:text-base" +

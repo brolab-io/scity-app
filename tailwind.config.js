@@ -23,6 +23,12 @@ module.exports = {
       fontSize: {
         "10xl": ["10rem", "10rem"],
       },
+      height: {
+        112: "28rem",
+        120: "30rem",
+        140: "40rem",
+        148: "44rem",
+      },
     },
     backgroundColor: (theme) => ({
       ...theme("colors"),

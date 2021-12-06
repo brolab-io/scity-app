@@ -47,7 +47,7 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
   }, [sliderRef]);
 
   return (
-    <Container className="px-4 lg:px-6 xl:px-8">
+    <Container className="px-4 mt-20 lg:px-6 xl:px-8">
       <div>
         <div className="text-center">
           <h2 className="text-xl font-semibold text-white md:text-2xl lg:text-3xl xl:text-4xl">

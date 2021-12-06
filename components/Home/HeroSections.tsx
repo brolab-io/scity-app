@@ -41,11 +41,11 @@ const HeroSection: React.FC = () => {
                   <p
                     className={clsx(
                       "font-bold leading-relaxed text-white",
-                      "text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl",
-                      "-mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8 xl:-mt-10 2xl:-mt-12"
+                      "text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl",
+                      "-mt-2 sm:-mt-4 md:-mt-6 lg:-mt-8 xl:-mt-10"
                     )}
                   >
-                    The new world is coming
+                    The next generation of metaverse world
                   </p>
                   <div className="flex flex-wrap items-center mt-6 sm:flex-nowrap lg:mt-8">
                     <Button outline className="px-6 mr-4 lg:px-8 xl:px-10 rounded-3xl">

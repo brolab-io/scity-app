@@ -16,8 +16,8 @@ const SCCTokenomics = () => {
       </div>
       <div className={clsx(styles["total-supply-container"], "relative")}>
         <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4">
-          <span className="block text-2xl font-bold text-white md:text-3xl lg:text-4xl">
-            100M <span className="text-purple-700">SCC</span>
+          <span className="block text-lg font-bold text-white md:text-xl lg:text-2xl xl:text-4xl">
+            1.000.000.000 <span className="text-purple-700">SCC</span>
           </span>
           <span className="block text-lg font-bold text-gray-300 md:text-xl lg:text-2xl">
             Total supply
