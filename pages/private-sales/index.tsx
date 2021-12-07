@@ -1,11 +1,17 @@
 import { NextPage } from "next";
-import React, { ChangeEventHandler, memo, useCallback, useMemo, useState } from "react";
+import React, {
+  ChangeEventHandler,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import isEqual from "react-fast-compare";
 
 // Components
 import Image from "next/image";
-import { useWeb3React } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
 import useConnectWallet from "../../hooks/useConnectWallet";
 import Countdown from "../../components/UI/Countdown";
 import Button from "../../components/UI/Button";
@@ -19,8 +25,12 @@ import Loading from "../../components/UI/Loading";
 import AlertModal from "../../components/PrivateBox/AlertModal";
 import PrivateBoxSEO from "../../components/PrivateBox/SEO";
 import SvgBUSDLogo from "../../components/Icons/SvgBUSDLogo";
+import { useWeb3React } from "@web3-react/core";
 
 const PrivateBoxPage: NextPage = () => {
+  const { active } = useWeb3React();
+  const { connectWallet } = useConnectWallet();
+  const isRequestedConnectWallet = useRef(false);
   const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
@@ -55,8 +65,6 @@ const PrivateBoxPage: NextPage = () => {
   const { price, limit, endTime } = info;
   const totalSupply = histories.length;
 
-  const { active } = useWeb3React<Web3Provider>();
-  const { connectWallet } = useConnectWallet();
   const onClickBuy = useCallback(() => {
     if (!ref) {
       return;
@@ -88,6 +96,15 @@ const PrivateBoxPage: NextPage = () => {
   const shouldDisableButton =
     active &&
     (!(isValidEmail && isVaildTelegramID) || isBuying || !ref || isOutOfStock || isOutOfTime);
+
+  useEffect(() => {
+    if (window?.ethereum && !active && !isRequestedConnectWallet.current) {
+      isRequestedConnectWallet.current = true;
+      connectWallet().then(() => {
+        connectWallet(); // this is magic
+      });
+    }
+  }, [active, connectWallet]);
 
   return (
     <>
