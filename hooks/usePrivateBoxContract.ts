@@ -117,7 +117,7 @@ const usePrivateBoxContract = () => {
       );
       setData((prevData) => ({
         ...prevData,
-        isApproved: data.info.price.gt(0) && approved.gte(data.info.price),
+        isApprovedBUSD: approved.gte(data.info.price),
         isCheckingApproval: false,
       }));
     } catch (error: any) {
