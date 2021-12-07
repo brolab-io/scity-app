@@ -1,18 +1,18 @@
 {
   "titleTemplate": "%s - SCity",
-  "defaultTitle": "SCity - Metaverst | Buy Land - Open Bussiness - Earn Profit",
+  "defaultTitle": "SCity - Metaverse | Buy Land - Open Bussiness - Earn Profit",
   "description": "SCITY - THE SOCIALVERSE CITY. The next generation of metaverse world. You can buy lands - open bussiness - earn profit.",
   "openGraph": {
     "type": "website",
     "locale": "vn_VI",
     "url": "https://scity.games",
-    "site_name": "SCity - Metaverst",
+    "site_name": "SCity - Metaverse",
     "images": [
       {
         "url": "https://scity.games/images/sharing.png",
         "width": 1130,
         "height": 250,
-        "alt": "SCity - Metaverst"
+        "alt": "SCity - Metaverse"
       }
     ]
   },
