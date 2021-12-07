@@ -344,25 +344,6 @@
         "type": "string"
       }
     ],
-    "name": "getCountOfRef",
-    "outputs": [
-      {
-        "internalType": "uint16",
-        "name": "",
-        "type": "uint16"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "ref",
-        "type": "string"
-      }
-    ],
     "name": "getRefCountOf",
     "outputs": [
       {
