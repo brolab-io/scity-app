@@ -75,11 +75,15 @@ const TokenomicsStatistics = () => {
         <div className="mt-12 space-y-7">
           {statics.map((stat, index) => (
             <div className="grid md:grid-cols-2 gap-y-4" key={index}>
-              <div className="flex flex-wrap items-center justify-between px-12 md:flex-row">
-                <span className="truncate w-52 text-light-gray">{stat.title}</span>
-                <span className="text-white truncate">{stat.value}</span>
-                <div className="flex flex-wrap">
-                  <span className="text-white truncate">{stat.percent}%</span>
+              <div className="grid px-12 md:grid-cols-2">
+                <span className="w-full truncate text-light-gray">{stat.title}</span>
+                <div className="flex">
+                  <div className="flex flex-1 md:justify-end">
+                    <span className="text-white truncate">{stat.value}</span>
+                  </div>
+                  <div className="flex justify-end flex-1">
+                    <span className="text-white truncate">{stat.percent}%</span>
+                  </div>
                 </div>
               </div>
               <div className="px-12 md:px-0 md:pr-12">

@@ -7,7 +7,6 @@ module.exports = {
         primary: "1fr",
         "primary-lg": "288px 1fr",
       },
-
       keyframes: {
         wiggle: {
           "0%": { transform: "translate(0px,-20px)" },
@@ -28,6 +27,11 @@ module.exports = {
         120: "30rem",
         140: "40rem",
         148: "44rem",
+      },
+      backgroundSize: {
+        150: "150%",
+        125: "125%",
+        100: "100%",
       },
     },
     backgroundColor: (theme) => ({

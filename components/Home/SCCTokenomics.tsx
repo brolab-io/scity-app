@@ -14,9 +14,11 @@ const SCCTokenomics = () => {
           We believe artists need to be compensated for every sale,not just the first one!
         </p>
       </div>
-      <div className={clsx(styles["total-supply-container"], "relative")}>
+      <div
+        className={clsx(styles["total-supply-container"], "relative bg-150 sm:bg-125 lg:bg-100")}
+      >
         <div className="absolute inset-0 flex flex-col items-center justify-center space-y-4">
-          <span className="block text-lg font-bold text-white md:text-xl lg:text-2xl xl:text-4xl">
+          <span className="block text-sm font-bold text-white sm:text-lg md:text-xl lg:text-2xl xl:text-4xl">
             1.000.000.000 <span className="text-purple-700">SCC</span>
           </span>
           <span className="block text-lg font-bold text-gray-300 md:text-xl lg:text-2xl">

@@ -186,6 +186,7 @@ const usePrivateBoxContract = () => {
           boughtError: error,
           isBoughtFailed: true,
         }));
+        getErrorMessage(error);
         console.log("Buy Private Box Failed", error);
         // toast.error(error.data?.message ?? error.message);
       }
@@ -233,6 +234,14 @@ const usePrivateBoxContract = () => {
     () => ({ ...data, fetchInfo, buyPrivateBox, approveBUSD }),
     [data, fetchInfo, buyPrivateBox, approveBUSD]
   );
+};
+
+const getErrorMessage = (error: any) => {
+  console.log(error.contructor?.name);
+  console.log(error.message);
+  if (error instanceof Error) {
+    return error.message;
+  }
 };
 
 export default usePrivateBoxContract;
