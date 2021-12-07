@@ -18,12 +18,13 @@ const useBalanceOf = (type: ContractTypes) => {
       return;
     }
     setIsLoading(true);
-    const contract = getContract(type, true);
+
     try {
+      const contract = getContract(type, true);
       const balance = await contract.balanceOf(account);
       setBalance(balance.toNumber());
     } catch (error: any) {
-      toast.error(error.data?.message ?? error.message);
+      // toast.error(error.data?.message ?? error.message);
     } finally {
       setIsLoading(false);
     }
