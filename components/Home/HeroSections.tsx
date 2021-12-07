@@ -26,8 +26,8 @@ const HeroSection: React.FC = () => {
               )}
             >
               <div className="relative pl-24">
-                <div className="absolute -bottom-14 -left-16 sm:-left-12 md:-left-1 lg:-left-1 xl:left-28">
-                  <Image src="/images/icons/coin1.png" alt="coin" height={230} width={230} />
+                <div className="absolute -bottom-14 -left-16 sm:-left-12 md:-left-1 lg:-left-1 xl:left-28 top:0 md:top-8 lg:top-16">
+                  <Image src="/images/icons/coin-3d.png" alt="coin" height={180} width={180} />
                 </div>
                 <div className="pl-12 md:pl-24 lg:pl-32 xl:pl-56">
                   <h1
