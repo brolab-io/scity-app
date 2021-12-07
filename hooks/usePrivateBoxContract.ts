@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ContractTypes, useEtherContext } from "../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
+import { TxError } from "../lib/error";
 
 type UsePrivateBoxData = {
   info: {
@@ -116,7 +117,7 @@ const usePrivateBoxContract = () => {
       );
       setData((prevData) => ({
         ...prevData,
-        isApproved: approved.gt(0),
+        isApproved: data.info.price.gt(0) && approved.gte(data.info.price),
         isCheckingApproval: false,
       }));
     } catch (error: any) {
@@ -145,12 +146,13 @@ const usePrivateBoxContract = () => {
         isApprovingBUSD: false,
         isApprovedBUSD: true,
       }));
-    } catch (error) {
+    } catch (error: any) {
       console.log("Approve BUSD Failed", error);
       setData((prevData) => ({
         ...prevData,
         isApprovingBUSD: false,
       }));
+      throw new TxError({ code: error.code, message: error.message });
     }
   }, [data.info.price, getContract]);
 
@@ -183,12 +185,9 @@ const usePrivateBoxContract = () => {
         setData((prevData) => ({
           ...prevData,
           isBuying: false,
-          boughtError: error,
+          boughtError: new TxError(error),
           isBoughtFailed: true,
         }));
-        getErrorMessage(error);
-        console.log("Buy Private Box Failed", error);
-        // toast.error(error.data?.message ?? error.message);
       }
     },
     [approveBUSD, data.isApprovedBUSD, getContract]
@@ -234,14 +233,6 @@ const usePrivateBoxContract = () => {
     () => ({ ...data, fetchInfo, buyPrivateBox, approveBUSD }),
     [data, fetchInfo, buyPrivateBox, approveBUSD]
   );
-};
-
-const getErrorMessage = (error: any) => {
-  console.log(error.contructor?.name);
-  console.log(error.message);
-  if (error instanceof Error) {
-    return error.message;
-  }
 };
 
 export default usePrivateBoxContract;

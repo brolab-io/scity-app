@@ -27,7 +27,7 @@ const AlertModal: React.FC<Props> = ({ error, buyedTransactionHash }) => {
     if (error) {
       setType("error");
       setTitle("Failure");
-      setMessage("Something went wrong, please try again later.");
+      setMessage(error.message);
       setIsVisible(true);
     }
   }, [error]);
