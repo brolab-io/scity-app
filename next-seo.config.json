@@ -5,8 +5,16 @@
   "openGraph": {
     "type": "website",
     "locale": "vn_VI",
-    "url": "https://landing.dev-nft.xyz/",
-    "site_name": "SCity - Metaverst"
+    "url": "https://scity.games",
+    "site_name": "SCity - Metaverst",
+    "images": [
+      {
+        "url": "https://scity.games/images/sharing.png",
+        "width": 1130,
+        "height": 250,
+        "alt": "SCity - Metaverst"
+      }
+    ]
   },
   "twitter": {
     "handle": "@handle",
