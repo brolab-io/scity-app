@@ -104,7 +104,7 @@ const usePrivateBoxContract = () => {
   }, [getContract]);
 
   const checkIsApproved = useCallback(async () => {
-    if (!account || data.info.price.gt(0)) {
+    if (!account || data.info.price.eq(0)) {
       return;
     }
     setData((prevData) => ({ ...prevData, isCheckingApproval: true }));

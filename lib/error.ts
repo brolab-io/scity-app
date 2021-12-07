@@ -24,7 +24,7 @@ export class TxError extends Error {
     }
     if (this.data?.message.startsWith("execution reverted")) {
       return (
-        "An error occurred:" +
+        "An error occurred" +
         this.data.message.replace("execution reverted", "")
       );
     }
