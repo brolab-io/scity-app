@@ -17,6 +17,10 @@ const AccountModal: React.FC = () => {
     deactivate();
   }, [deactivate]);
 
+  const onClickCopy = useCallback(() => {
+    return navigator.clipboard.writeText(account!);
+  }, [account]);
+
   if (!account) {
     return null;
   }
@@ -27,7 +31,9 @@ const AccountModal: React.FC = () => {
           <span className="font-medium">
             {`${account.substring(0, 13)}...${account.substring(account.length - 13)}`}
           </span>
-          <SvgIconCopy className="w-4 h-4 cursor-pointer fill-current hover:text-blue-700" />
+          <Clickable onClick={onClickCopy}>
+            <SvgIconCopy className="w-4 h-4 cursor-pointer fill-current hover:text-blue-700" />
+          </Clickable>
         </div>
         <div className="flex justify-center">
           <Link

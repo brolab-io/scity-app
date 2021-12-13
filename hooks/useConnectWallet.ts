@@ -38,17 +38,17 @@ const addBSCChain = async (window: Window & typeof globalThis) => {
 
 const useConnectWallet = () => {
   const { activate, active } = useWeb3React<Web3Provider>();
-  const { setActivatingConnector } = useAppContext();
+  const { setActivatingConnector, triedEager } = useAppContext();
 
   const connectWallet = useCallback(async () => {
-    if (active) {
+    if (active || !triedEager) {
       return;
     }
     await addBSCChain(window);
     await switchWallet(window);
     setActivatingConnector(injected);
     await activate(injected);
-  }, [activate, active, setActivatingConnector]);
+  }, [activate, active, setActivatingConnector, triedEager]);
 
   return useMemo(() => ({ connectWallet }), [connectWallet]);
 };

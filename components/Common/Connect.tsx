@@ -3,9 +3,11 @@ import { useWeb3React } from "@web3-react/core";
 import { useCallback } from "react";
 import { injected } from "../../dapp/connectors";
 import { useAppContext } from "../AppContext";
-import Button from "../UI/Button";
 import Image from "next/image";
 import useConnectWallet from "../../hooks/useConnectWallet";
+import styles from "./Connect.module.css";
+import clsx from "clsx";
+import LoadingIcon from "../UI/LoadingIcon";
 
 type Props = {
   outline?: boolean;
@@ -25,16 +27,24 @@ const Connect: React.FC<Props> = ({ outline }) => {
   }, [connectWallet]);
 
   return (
-    <Button
-      outline={outline}
-      isLoading={activating}
-      disabled={disabled}
+    <button
+      // isLoading={activating}
+      disabled={disabled || activating}
       onClick={handleClick}
-      className="space-x-2 text-sm text-white rounded-2xl"
+      className={clsx(
+        styles.connect,
+        "text-sm text-white px-5 py-2.5 rounded-full flex items-center space-x-3",
+        "hover:opacity-80 duration-200",
+        "disabled:opacity-60 duration-200"
+      )}
     >
-      <Image src="/images/icons/wallet.svg" width={16} height={16} alt="wallet" />
+      {activating ? (
+        <LoadingIcon className="w-4 h-4" />
+      ) : (
+        <Image src="/images/icons/wallet.svg" width={16} height={16} alt="wallet" />
+      )}
       <span>Connect Wallet</span>
-    </Button>
+    </button>
   );
 };
 

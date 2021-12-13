@@ -16,7 +16,7 @@ import useConnectWallet from "../../hooks/useConnectWallet";
 import Countdown from "../../components/UI/Countdown";
 import Button from "../../components/UI/Button";
 import PrivateBoxTransactionHistory from "../../components/PrivateBox/TransactionHistory";
-import PrivateBoxNavbar from "../../components/PrivateBox/ConnectWallet";
+import PrivateBoxNavbar from "../../components/PrivateBox/Narbar";
 import { isEmail } from "../../utils";
 import { useRouter } from "next/router";
 import usePrivateBoxContract from "../../hooks/usePrivateBoxContract";
@@ -85,7 +85,7 @@ const PrivateBoxPage: NextPage = () => {
   const ImageSection = useCallback(
     () => (
       <div className="p-10 md:p-16 lg:p-20 xl:p-24 rounded-xl bg-radial-gradient-purple">
-        <Image src="/images/icons/box.png" height={456} width={426} alt="Box" />
+        <Image src="/images/private-pack.png" height={587} quality={100} width={640} alt="Box" />
       </div>
     ),
     []
@@ -101,7 +101,7 @@ const PrivateBoxPage: NextPage = () => {
     if (window?.ethereum && !active && !isRequestedConnectWallet.current) {
       isRequestedConnectWallet.current = true;
       connectWallet().then(() => {
-        connectWallet(); // this is magic
+        // connectWallet(); // this is magic
       });
     }
   }, [active, connectWallet]);
