@@ -11,7 +11,7 @@ const ProgressBar: React.FC<Props> = ({ percentage, color, className }) => {
   const style = useMemo(
     () => ({
       background: color,
-      width: `${percentage}%`,
+      width: `${percentage + 1}%`,
     }),
     [percentage, color]
   );
