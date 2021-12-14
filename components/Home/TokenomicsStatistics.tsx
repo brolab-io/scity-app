@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import SvgInfo from "../Icons/SvgInfo";
 import ProgressBar from "../UI/ProgressBar";
 import styles from "./TokenomicsStatistics.module.css";
 
@@ -71,10 +72,10 @@ const TokenomicsStatistics = () => {
         <div className="text-center">
           <h3 className="font-bold text-white text-[24px] lg:text-[28px]">Tokenomics Statistics</h3>
         </div>
-        <div className="mt-8 space-y-7">
+        <div className="mt-8 space-y-6">
           {statics.map((stat, index) => (
-            <div className="grid md:grid-cols-2 gap-y-4" key={index}>
-              <div className="grid px-12 md:grid-cols-2">
+            <div className="grid md:grid-cols-11 gap-y-4 md:gap-x-8" key={index}>
+              <div className="grid md:col-span-6 px-12 md:grid-cols-2">
                 <span className="w-full truncate text-[18px] text-[#A0AEC0] mt-1.5">
                   {stat.title}
                 </span>
@@ -87,8 +88,9 @@ const TokenomicsStatistics = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-12 md:px-0 md:pr-12 mt-2.5">
+              <div className="md:col-span-5 px-12 md:px-0 md:pr-12 flex items-center space-x-4 -mt-2 md:-mt-0">
                 <ProgressBar percentage={stat.percent} className="h-[16px]" color={stat.color} />
+                <SvgInfo />
               </div>
             </div>
           ))}
