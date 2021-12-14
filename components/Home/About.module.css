@@ -1,0 +1,14 @@
+.background {
+  background-image: url("/assets/images/landing/bg-about-section.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -300px 0;
+}
+
+.video {
+  background-image: url("/assets/images/landing/video-frame.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+}

@@ -12,6 +12,7 @@ import SCCTokenomics from "../components/Home/SCCTokenomics";
 import TokenomicsStatistics from "../components/Home/TokenomicsStatistics";
 import RoadMap from "../components/Home/RoadMap";
 import HomeAbout from "../components/Home/About";
+import InfinityTown from "../components/Home/InfinityTown";
 
 export const getServerSideProps = async () => {
   try {
@@ -30,9 +31,10 @@ type Props = {
 
 const Home: NextPage<Props> = ({ cities }) => {
   return (
-    <div className="py-20 bg-black">
+    <div className="bg-black">
       {/* <Sample /> */}
-      <HeroSection />
+      {/* <HeroSection /> */}
+      <InfinityTown />
       {/* <BuyNFTLandSlider /> */}
       <HomeAbout />
       <Testimoni cities={cities} />
