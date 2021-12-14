@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import Logo from "./Logo";
 import ConnectWalletBlock from "./ConnectWalletBlock";
 import ConnectWalletBlockMobile from "./ConnectWalletBlockMobile";
+import clsx from "clsx";
 
 const navigationMenus = [
   {
@@ -105,26 +106,21 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
       }
     >
       {navigationMenus.map((menu) => {
-        const isActive =
-          pathname === menu.href || pathname.startsWith(menu.href + "/");
+        const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
-          <li
-            key={menu.href}
-            className="border-b border-gray-800 lg:border-b-0"
-          >
+          <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
             <Link passHref href={menu.href}>
               <a
                 target={menu.target}
                 className="block w-full px-8 py-4 duration-200 transform lg:px-0"
               >
                 <span
-                  className={
-                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-xl lg:text-base" +
-                    " " +
-                    (isActive
+                  className={clsx(
+                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-xl lg:text-base",
+                    isActive
                       ? "from-pink to-purple"
-                      : "from-white to-gray-300 hover:from-pink hover:to-purple")
-                  }
+                      : "from-white to-gray-300 hover:from-pink hover:to-purple"
+                  )}
                 >
                   {menu.title}
                 </span>

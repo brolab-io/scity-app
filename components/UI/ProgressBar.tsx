@@ -10,10 +10,10 @@ type Props = {
 const ProgressBar: React.FC<Props> = ({ percentage, color, className }) => {
   const style = useMemo(
     () => ({
-      background: "linear-gradient(216.56deg, #E250E5 5.32%, #4B50E6 94.32%)",
+      background: color,
       width: `${percentage}%`,
     }),
-    [percentage]
+    [percentage, color]
   );
   return (
     <div className="relative w-full h-3 bg-opacity-50 rounded-full bg-light-gray">

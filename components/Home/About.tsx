@@ -20,14 +20,12 @@ const HomeAbout: React.FC<Props> = () => {
           </div>
           <div className="py-6 lg:py-8 xl:py-10 2xl:py-12">
             <div
-              className={clsx(
-                styles.video,
-                "flex items-center justify-center w-full h-80 md:h-96 lg:h-148"
-              )}
+              className={clsx(styles.video, "flex items-center justify-center w-full aspect-video")}
             >
               <iframe
                 width="100%"
                 height="100%"
+                className="rounded-lg lg:rounded-xl"
                 src="https://www.youtube.com/embed/3hbcCHgxn6E?showinfo=0&controls=0&rel=0&autoplay=0&mute=0"
                 title="YouTube video player"
                 frameBorder="0"

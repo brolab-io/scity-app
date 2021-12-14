@@ -24,7 +24,7 @@
 
 html,
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   overflow-x: hidden;
 }
 
@@ -34,6 +34,10 @@ body {
   background: -webkit-radial-gradient(50% 50% at 50% 50%, #833ef1 0%, #491cb5 100%);
   background: -moz-radial-gradient(50% 50% at 50% 50%, #833ef1 0%, #491cb5 100%);
   background: -ms-radial-gradient(50% 50% at 50% 50%, #833ef1 0%, #491cb5 100%);
+}
+
+.bg-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
 
 /* width */

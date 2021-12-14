@@ -13,6 +13,7 @@ import TokenomicsStatistics from "../components/Home/TokenomicsStatistics";
 import RoadMap from "../components/Home/RoadMap";
 import HomeAbout from "../components/Home/About";
 import InfinityTown from "../components/Home/InfinityTown";
+import styles from "../styles/Home.module.css";
 
 export const getServerSideProps = async () => {
   try {
@@ -31,7 +32,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ cities }) => {
   return (
-    <div className="bg-black">
+    <div className={styles.background}>
       {/* <Sample /> */}
       {/* <HeroSection /> */}
       <InfinityTown />
