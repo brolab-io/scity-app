@@ -1,5 +1,6 @@
+import clsx from "clsx";
 import { useMemo } from "react";
-import Button from "../UI/Button";
+import styles from "./BackgroundImage.module.css";
 
 const BackgroundImage: React.FC<{}> = () => {
   const bgStyle = useMemo(
@@ -17,12 +18,17 @@ const BackgroundImage: React.FC<{}> = () => {
       >
         <div className="container relative mx-auto">
           <div className="flex flex-col items-center space-y-10">
-            <h3 className="text-5xl font-semibold text-center text-white">
-              Became one of the first resident of Scity
+            <h3 className="text-5xl font-bold text-center text-white uppercase text-[40px]">
+              Become one of the first resident of Scity
             </h3>
-            <Button className="px-6 py-3 rounded-3xl">
-              <span className="text-xl">Enter Marketplace</span>
-            </Button>
+            <button
+              className={clsx(
+                "px-12 py-3 rounded-3xl hover:brightness-75 transition duration-200",
+                styles.button
+              )}
+            >
+              <span className="text-xl font-medium text-white font-[16px]">Enter Marketplace</span>
+            </button>
           </div>
         </div>
       </div>
