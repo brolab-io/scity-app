@@ -2,4 +2,9 @@
   background-image: url("/assets/images/landing/home-banner-preload.png");
   background-repeat: no-repeat;
   background-size: cover;
+  height: calc(100vh - 4rem) !important;
+}
+
+.canvas {
+  height: calc(100vh - 4rem) !important;
 }

@@ -73,11 +73,11 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={clsx(
-        "fixed inset-x-0 top-0 z-30 h-16 bg-opacity-70 bg-[#1F0537] lg:px-4 transform transition-all duration-200",
-        isTop ? "bg-opacity-70" : "bg-opacity-100"
+        "fixed inset-x-0 top-0 z-30 h-16 bg-[#1F0537] lg:px-4 transform transition-all duration-200"
+        // isTop ? "bg-opacity-70" : "bg-opacity-100"
       )}
     >
-      <div className="items-center justify-between w-full h-full px-4 lg:flex max-w-screen-xl mx-auto">
+      <div className="items-center justify-between w-full h-full max-w-screen-xl px-4 mx-auto lg:flex">
         {/* LOGO  */}
         <div className="flex items-center justify-between lg:justify-center w-full lg:w-72">
           <div className="flex items-center">
