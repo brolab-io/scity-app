@@ -49,24 +49,21 @@ body {
 }
 
 /* width */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 4px;
+} */
+
+/* ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.5);
 }
 
-/* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
+  background: rgba(0, 0, 0, 0.7);
+} */
 
 /*  INFINITY TOWN  */
 * {

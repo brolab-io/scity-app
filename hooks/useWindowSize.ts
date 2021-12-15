@@ -6,7 +6,7 @@ export default function useWindowSize() {
     if (typeof window !== "undefined") {
       setSize([window.innerWidth, window.innerHeight]);
       const handleResize = () =>
-        setSize([window.innerHeight, window.innerWidth]);
+        setSize([window.innerWidth, window.innerHeight]);
       window.addEventListener("resize", handleResize);
       return () => {
         window.removeEventListener("resize", handleResize);

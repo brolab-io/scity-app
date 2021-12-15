@@ -10,7 +10,7 @@ type Props = {};
 
 const HomeAbout: React.FC<Props> = () => {
   return (
-    <div className={clsx(styles.background, "pt-24")}>
+    <div className={clsx(styles.background, "pt-32")}>
       <Container className="px-4 lg:px-6 xl:px-8">
         <div>
           <div className="text-center">

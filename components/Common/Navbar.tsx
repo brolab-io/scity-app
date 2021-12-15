@@ -42,6 +42,7 @@ const navigationMenus = [
 const Navbar: React.FC = () => {
   const { pathname, events } = useRouter();
   const [isVisible, setVisible] = useState(false);
+  const [isTop, setIsTop] = useState(true);
 
   const toggle = useCallback(() => {
     setVisible((prevState) => !prevState);
@@ -55,9 +56,27 @@ const Navbar: React.FC = () => {
     };
   }, [events]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const onScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        setIsTop(scrollTop < window.innerHeight - 64);
+      };
+      window.addEventListener("scroll", onScroll);
+      return () => {
+        window.removeEventListener("scroll", onScroll);
+      };
+    }
+  }, []);
+
   return (
-    <nav className="fixed inset-x-0 top-0 z-30 h-16 bg-black border-b border-gray-800 lg:px-4">
-      <div className="items-center justify-between w-full h-full px-4 lg:flex">
+    <nav
+      className={clsx(
+        "fixed inset-x-0 top-0 z-30 h-16 bg-opacity-70 bg-[#1F0537] lg:px-4 transform transition-all duration-200",
+        isTop ? "bg-opacity-70" : "bg-opacity-100"
+      )}
+    >
+      <div className="items-center justify-between w-full h-full px-4 lg:flex max-w-screen-xl mx-auto">
         {/* LOGO  */}
         <div className="flex items-center justify-between w-full lg:w-72">
           <div className="flex items-center">
@@ -73,7 +92,12 @@ const Navbar: React.FC = () => {
                 <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
               </svg>
             </Clickable>
-            <Logo />
+            <div className="mt-0 lg:hidden">
+              <Logo />
+            </div>
+            <div className="hidden lg:block xl:mt-10">
+              <Logo height={133} width={133} />
+            </div>
           </div>
           <div className="lg:hidden">
             <ConnectWalletBlockMobile />
@@ -100,7 +124,7 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
   return (
     <ul
       className={
-        "z-30 transform duration-500 top-20 lg:top-0 absolute bg-black h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
+        "z-30 transform duration-500 top-20 lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
         " " +
         (isVisible ? "left-0" : "-left-80 lg:left-0")
       }
@@ -116,10 +140,10 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
               >
                 <span
                   className={clsx(
-                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-xl lg:text-base",
+                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px]",
                     isActive
                       ? "from-pink to-purple"
-                      : "from-white to-gray-300 hover:from-pink hover:to-purple"
+                      : "from-white to-white hover:from-pink hover:to-purple"
                   )}
                 >
                   {menu.title}

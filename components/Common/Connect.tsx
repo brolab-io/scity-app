@@ -33,7 +33,7 @@ const Connect: React.FC<Props> = ({ outline }) => {
       onClick={handleClick}
       className={clsx(
         styles.connect,
-        "text-sm text-white px-5 py-2.5 rounded-full flex items-center space-x-3",
+        "text-sm text-white px-6 py-2.5 rounded-full flex items-center space-x-3",
         "hover:opacity-80 duration-200",
         "disabled:opacity-60 duration-200"
       )}

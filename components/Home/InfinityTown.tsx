@@ -1,7 +1,26 @@
-import { memo } from "react";
+import clsx from "clsx";
+import { url } from "inspector";
+import { memo, useMemo } from "react";
 import isEqual from "react-fast-compare";
 import useScript from "../../hooks/useScript";
-import LoadingAutoResize from "../Common/LoadingAutoResize";
+import useWindowSize from "../../hooks/useWindowSize";
+import styles from "./InfinityTown.module.css";
+
+const PreloadAutoResize: React.FC = ({ children }) => {
+  const [, height] = useWindowSize();
+
+  const style = useMemo(
+    () => ({
+      height: `${height}px`,
+    }),
+    [height]
+  );
+  return (
+    <div style={style} className={clsx("w-screen bg-center", styles.bg)}>
+      {children}
+    </div>
+  );
+};
 
 const InfinityTown = () => {
   const jqueryStatus = useScript(
@@ -14,9 +33,9 @@ const InfinityTown = () => {
   console.log(jqueryStatus, threeJsStatus, mainStatus);
 
   return (
-    <div className="relative">
-      <canvas onLoad={console.log}></canvas>
-    </div>
+    <PreloadAutoResize>
+      <canvas className="" onLoad={console.log}></canvas>
+    </PreloadAutoResize>
   );
 };
 

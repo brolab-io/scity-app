@@ -1,0 +1,5 @@
+.bg {
+  background-image: url("/assets/images/landing/home-banner-preload.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
