@@ -41,9 +41,14 @@ const Connect: React.FC<Props> = ({ outline }) => {
       {activating ? (
         <LoadingIcon className="w-4 h-4" />
       ) : (
-        <Image src="/images/icons/wallet.svg" width={16} height={16} alt="wallet" />
+        <Image
+          src="/images/icons/wallet.svg"
+          width={16}
+          height={16}
+          alt="wallet"
+        />
       )}
-      <span>Connect Wallet</span>
+      <span>Wallet Connect </span>
     </button>
   );
 };

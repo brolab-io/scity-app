@@ -59,7 +59,8 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const onScroll = () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
         setIsTop(scrollTop < window.innerHeight - 64);
       };
       window.addEventListener("scroll", onScroll);
@@ -78,7 +79,7 @@ const Navbar: React.FC = () => {
     >
       <div className="items-center justify-between w-full h-full px-4 lg:flex max-w-screen-xl mx-auto">
         {/* LOGO  */}
-        <div className="flex items-center justify-between w-full lg:w-72">
+        <div className="flex items-center justify-between lg:justify-center w-full lg:w-72">
           <div className="flex items-center">
             <Clickable className="mr-2 lg:hidden" onClick={toggle}>
               <svg
@@ -93,7 +94,7 @@ const Navbar: React.FC = () => {
               </svg>
             </Clickable>
             <div className="mt-0 lg:hidden">
-              <Logo />
+              <Logo width={64} height={64} />
             </div>
             <div className="hidden lg:block xl:mt-10">
               <Logo height={133} width={133} />
@@ -124,15 +125,19 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
   return (
     <ul
       className={
-        "z-30 transform duration-500 top-20 lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
+        "z-30 transform duration-500 top-15 lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
         " " +
         (isVisible ? "left-0" : "-left-80 lg:left-0")
       }
     >
       {navigationMenus.map((menu) => {
-        const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
+        const isActive =
+          pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
-          <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
+          <li
+            key={menu.href}
+            className="border-b border-gray-800 lg:border-b-0"
+          >
             <Link passHref href={menu.href}>
               <a
                 target={menu.target}

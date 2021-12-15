@@ -10,7 +10,7 @@ type Props = {};
 
 const HomeAbout: React.FC<Props> = () => {
   return (
-    <div className={clsx(styles.background, "pt-32")}>
+    <div className={clsx(styles.background, "pt-32")} id="section-about">
       <Container className="px-4 lg:px-6 xl:px-8">
         <div>
           <div className="text-center">
@@ -20,7 +20,10 @@ const HomeAbout: React.FC<Props> = () => {
           </div>
           <div className="py-6 lg:py-8 xl:py-10 2xl:py-12">
             <div
-              className={clsx(styles.video, "flex items-center justify-center w-full aspect-video")}
+              className={clsx(
+                styles.video,
+                "flex items-center justify-center w-full aspect-video"
+              )}
             >
               <iframe
                 width="100%"
