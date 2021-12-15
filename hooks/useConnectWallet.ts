@@ -1,5 +1,5 @@
 import getConfig from "next/config";
-import { waitPromise } from "./../utils";
+import { waitPromise } from "../utils";
 import { useCallback, useMemo } from "react";
 import { useAppContext } from "./../components/AppContext";
 import { Web3Provider } from "@ethersproject/providers";

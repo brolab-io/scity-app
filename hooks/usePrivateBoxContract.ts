@@ -1,7 +1,11 @@
 // import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ContractTypes, useEtherContext } from "../components/EtherContext";
+import {
+  callPublicRpc,
+  ContractTypes,
+  useEtherContext,
+} from "../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { TxError } from "../lib/error";
 
@@ -52,11 +56,10 @@ const usePrivateBoxContract = () => {
   const fetchInfo = useCallback(async () => {
     setData((prevData) => ({ ...prevData, isFetchingInfo: true }));
     try {
-      const contract = getContract(ContractTypes.PRIVATE_BOX);
       const [price, saleLimit, endTime] = await Promise.all([
-        contract.price(),
-        contract.saleLimit(),
-        contract.endTime(),
+        callPublicRpc(ContractTypes.PRIVATE_BOX, "price"),
+        callPublicRpc(ContractTypes.PRIVATE_BOX, "saleLimit"),
+        callPublicRpc(ContractTypes.PRIVATE_BOX, "endTime"),
       ]);
       setData((prevData) => ({
         ...prevData,
@@ -72,7 +75,7 @@ const usePrivateBoxContract = () => {
       setData((prevData) => ({ ...prevData, isFetchingInfo: false }));
       console.log("Fetch Private Box Failed", error);
     }
-  }, [getContract]);
+  }, []);
 
   const fetchHistories = useCallback(async () => {
     setData((prevData) => ({
@@ -80,9 +83,8 @@ const usePrivateBoxContract = () => {
       isFetchingHistories: true,
     }));
     try {
-      const contract = getContract(ContractTypes.PRIVATE_BOX);
       const contractReceipt: [string, ethers.BigNumber, string][] =
-        await contract.getBuyer();
+        await callPublicRpc(ContractTypes.PRIVATE_BOX, "getBuyer");
 
       setData((prevData) => ({
         ...prevData,
@@ -101,7 +103,7 @@ const usePrivateBoxContract = () => {
       }));
       console.log("Fetch Private Box History Failed", error);
     }
-  }, [getContract]);
+  }, []);
 
   const checkIsApproved = useCallback(async () => {
     if (!account || data.info.price.eq(0)) {

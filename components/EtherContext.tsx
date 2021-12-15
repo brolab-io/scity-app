@@ -1,6 +1,6 @@
 import { ethers } from "ethers";
 import { createContext, useCallback, useContext, useMemo } from "react";
-
+import getConfig from "next/config";
 import landAbi from "../dapp/abi/land-abi.json";
 import boxAbi from "../dapp/abi/box-abi.json";
 import companyAbi from "../dapp/abi/company-abi.json";
@@ -9,6 +9,7 @@ import busdAbi from "../dapp/abi/busd-abi.json";
 
 import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+import logger from "../lib/logger";
 
 export enum ContractTypes {
   LAND = "LAND",
@@ -17,6 +18,8 @@ export enum ContractTypes {
   PRIVATE_BOX = "PRIVATE_BOX",
   BUSD = "BUSD",
 }
+
+const { publicRuntimeConfig } = getConfig();
 
 const contractsAbi = {
   [ContractTypes.LAND]: {
@@ -39,6 +42,24 @@ const contractsAbi = {
     contractAddress: process.env["NEXT_PUBLIC_CONTRACT_BUSD"] ?? "",
     abi: busdAbi,
   },
+};
+
+export const callPublicRpc = (contractType: ContractTypes, method: string, ...args: any) => {
+  if (!contractsAbi[contractType].contractAddress || !contractsAbi[contractType].abi) {
+    throw new Error(`No contract address or abi found for ${contractType}`);
+  }
+  const rpcURL = publicRuntimeConfig.supportedMetaMaskNetworks[0].rpcUrls[0];
+  logger.debug("callPublicRpc", contractType, method, rpcURL, args);
+  const provider = new ethers.providers.JsonRpcProvider(rpcURL);
+  const contract = new ethers.Contract(
+    contractsAbi[contractType].contractAddress,
+    contractsAbi[contractType].abi,
+    provider
+  );
+  if (!contract[method]) {
+    throw new Error(`Method ${method} not found on contract ${contractType}`);
+  }
+  return contract[method](...args);
 };
 
 type EtherContextType = {
