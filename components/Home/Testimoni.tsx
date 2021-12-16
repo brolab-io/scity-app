@@ -12,6 +12,7 @@ import SvgArrowNext from "../Icons/SvgArrowNext";
 import SliderArrow from "./SliderArrow";
 import { ICityData } from "../../lib/types";
 import Clickable from "../UI/Clickable";
+import styles from "./Testimoni.module.css";
 
 type Props = {
   cities: ICityData[];
@@ -48,67 +49,52 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
 
   return (
     <Container className="px-4 mt-20 lg:px-6 xl:px-8">
-      <div>
-        <div className="text-center">
-          <h2 className="text-xl font-semibold text-white md:text-2xl lg:text-3xl xl:text-4xl">
+      <div className="flex flex-col">
+        <div className={clsx("flex flex-col justify-center items-center")}>
+          <h2
+            className={clsx(styles.title, "text-white uppercase text-center")}
+          >
             Buy NFT Land in your favorite city
           </h2>
+          <h6
+            className={clsx(
+              styles.subtitle,
+              "text-center text-sm text-gray-600  md:w-1/2"
+            )}
+          >
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown
+          </h6>
         </div>
-        <div className="py-8 lg:py-10 xl:py-16 2xl:py-20">
-          <div className="relative">
-            <Slider
-              ref={sliderRef}
-              {...settings}
-              className="flex items-stretch justify-items-stretch"
-            >
-              {cities.map((city, index) => (
-                <Clickable className="relative select-none" key={index}>
+        <div className="relative flex py-8 lg:py-10 xl:py-16 2xl:py-20">
+          <div className="relative w-full flex whitespace-nowrap lg:justify-center lg:items-center gap-6 overflow-x-auto overflow-y-hidden pb-4 lg:pb-14  snap-mandatory snap-x">
+            {cities.map((city, index) => (
+              <Clickable
+                className={clsx(
+                  styles["city-card"],
+                  "relative select-none shrink-0 shadow-xl snap-center"
+                )}
+                key={index}
+              >
+                <div className="shrink-0">
                   <Image
-                    src="/images/diamon.png"
-                    className={clsx(
-                      "transform duration-300",
-                      index === imageIndex ? "scale-100 opacity-100" : "scale-75 opacity-50"
-                    )}
-                    width={400}
-                    height={400}
-                    alt="item"
+                    src={city.image}
+                    width={177}
+                    height={242}
+                    alt="City card"
                   />
-                  <div
-                    className={clsx(
-                      "absolute inset-0 z-30 flex flex-col items-center justify-center space-y-10 transform duration-300",
-                      index === imageIndex ? "scale-100 opacity-100" : "scale-75 opacity-50"
-                    )}
-                  >
-                    <div className="text-center text-white">
-                      <h3 className="text-xl font-bold uppercase lg:text-2xl xl:text-3xl">
-                        {city.name}
-                      </h3>
-                      <span>{city.numberOfSlots} Slots Available</span>
-                    </div>
-                    <div className="text-center text-white">
-                      <span className="font-bold">500SCC</span> <span>$3000</span>
-                    </div>
+                  <div className="bg-black/30 text-white text-center shadow-lg rounded-md py-1 mx-3">
+                    {city.name}
                   </div>
-                </Clickable>
-              ))}
-            </Slider>
-            <SliderArrow
-              onClick={onPressBack}
-              className="left-0 select-none xl:-left-8 2xl:-left-10"
-            >
-              <SvgArrowBack />
-            </SliderArrow>
-            <SliderArrow
-              onClick={onPressNext}
-              className="right-0 select-none xl:-right-8 2xl:-right-10"
-            >
-              <SvgArrowNext />
-            </SliderArrow>
+                </div>
+              </Clickable>
+            ))}
           </div>
         </div>
-        <div className="flex justify-center">
-          <Button className="px-12 rounded-3xl">
-            <span className="text-white">Explore Marketplace</span>
+        <div className="flex justify-center my-5">
+          <Button className={clsx(styles.button, "px-12 rounded-3xl relative")}>
+            <span className="text-white z-10">Explore Marketplace</span>
           </Button>
         </div>
       </div>
