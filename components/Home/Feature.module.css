@@ -1,0 +1,61 @@
+.button {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.button::before {
+  content: "";
+  background: radial-gradient(
+    169.03% 670.04% at 125.55% 172.92%,
+    #e250e5 24.48%,
+    #4b50e6 100%
+  );
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+}
+.button::after {
+  content: "";
+  background: linear-gradient(182.93deg, #e250e5 -7.45%, #4b50e6 99.06%);
+  filter: blur(20px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+}
+
+.travel-left {
+  background-image: url("/assets/images/landing/bg-travel-left.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 1020px;
+  background-position: left center;
+}
+
+@media only screen and (max-width: 1025px) {
+  .travel-left {
+    height: 620px;
+    /* background-position: left center; */
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .travel-left {
+    height: 100%;
+    /* min-height: vh; */
+    background-position: left center;
+  }
+}
+
+@media only screen and (max-width: 540px) {
+  .travel-left {
+    height: 620px;
+    background-position: 10% center;
+  }
+}

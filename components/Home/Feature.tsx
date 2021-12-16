@@ -1,64 +1,76 @@
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../UI/Button";
 import Container from "../UI/Container";
+import styles from "./Feature.module.css";
 
 const Feature = () => {
   const socialLinks = [
     {
-      icon: "/images/icons/facebook.svg",
+      icon: "/assets/images/landing/instagram.svg",
+      href: "https://www.instagram.com/scity.io",
+    },
+    {
+      icon: "/assets/images/landing/facebook.svg",
       href: "https://www.facebook.com/scity.io",
     },
-    {
-      icon: "/images/icons/twitter.svg",
-      href: "https://www.twitter.com/scity.io",
-    },
-    {
-      icon: "/images/icons/google.svg",
-      href: "https://www.google.com/scity.io",
-    },
-    {
-      icon: "/images/icons/twitch.svg",
-      href: "https://www.twitch.com/scity.io",
-    },
+    // {
+    //   icon: "/images/icons/twitter.svg",
+    //   href: "https://www.twitter.com/scity.io",
+    // },
+    // {
+    //   icon: "/images/icons/google.svg",
+    //   href: "https://www.google.com/scity.io",
+    // },
+    // {
+    //   icon: "/images/icons/twitch.svg",
+    //   href: "https://www.twitch.com/scity.io",
+    // },
   ];
   return (
-    <div className="py-12 text-white bg-black md:py-20 lg:py-28 xl:py-40 " id="feature">
-      <div className="grid grid-flow-row grid-cols-1 gap-8 sm:grid-flow-col sm:grid-cols-2">
+    <div className="text-white" id="feature">
+      <div className="grid grid-flow-row grid-cols-1 gap-8 md:grid-flow-col md:grid-cols-2">
         <div className="flex justify-end w-full">
-          <div className="w-full h-full ">
-            <Image
-              src="/assets/Mask-Group.png"
+          <div className={clsx(styles["travel-left"], "w-full")}>
+            {/* <Image
+              src="/assets/images/landing/bg-travel-left.svg"
               alt="Mask Group"
               layout="responsive"
               quality={100}
-              className="h-96"
               height={835 / 2}
               width={672 / 2}
-            />
+            /> */}
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center w-full max-w-screen-sm p-8 space-y-8 md:p-12 lg:p-16 xl:p-20">
-          <h3 className="text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600">
+        <div className="flex flex-col items-start justify-center w-full max-w-screen-sm p-6 space-y-8 lg:p-16 xl:p-20  text-center md:text-justify">
+          <h3 className="text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600 w-full uppercase">
             Travel With Us To <br /> A Land of Future
           </h3>
-          <p className="my-2 text-gray-300">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-            has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown
+          <p className="my-1 text-gray-600  select-none">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry&apos;s standard dummy
+            text ever since the 1500s, when an unknown
           </p>
 
-          <div className="flex flex-wrap items-center space-y-2 lg:flex-nowrap lg:space-y-0">
-            <Button className="px-10 mr-2 rounded-3xl">
-              <span>Join Telegram</span>
+          <div className="flex flex-wrap items-center md:space-y-2 lg:flex-nowrap lg:space-y-0">
+            <Button className={clsx(styles.button, "px-10 mr-2 rounded-3xl")}>
+              <span className="text-white z-10 select-none">Join Telegram</span>
             </Button>
-            <div className="flex space-x-2">
+            <div className="flex items-center space-x-1">
               {socialLinks.map((link) => (
                 <Link key={link.href} passHref href={link.href}>
                   <a
                     target="_blank"
-                    className="flex items-center justify-center w-10 h-10 rounded-lg bg-dark-gray"
+                    className="flex items-center justify-center rounded-lg"
                   >
-                    <Image src={link.icon} height={20} width={20} quality={100} alt="social icon" />
+                    <Image
+                      src={link.icon}
+                      height={40}
+                      width={40}
+                      quality={100}
+                      alt="social icon"
+                    />
                   </a>
                 </Link>
               ))}
