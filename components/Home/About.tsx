@@ -10,8 +10,11 @@ type Props = {};
 
 const HomeAbout: React.FC<Props> = () => {
   return (
-    <div className={clsx(styles.background, "pt-32")} id="section-about">
-      <Container className="px-4 lg:px-6 xl:px-8">
+    <div
+      className={clsx(styles.background, "pt-32 relative")}
+      id="section-about"
+    >
+      <Container className="px-4 lg:px-6 xl:px-8 ">
         <div>
           <div className="text-center">
             <h2 className="text-xl font-semibold text-white md:text-2xl lg:text-3xl">

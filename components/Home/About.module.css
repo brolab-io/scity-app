@@ -1,8 +1,36 @@
-.background {
-  background-image: url("/assets/images/landing/bg-about-section.png");
+.background::before {
+  content: "";
+  background-image: url("/assets/images/landing/bg-intro-left.svg");
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position: -300px 0;
+  background-size: 100% 100%;
+  background-position: -100px 0;
+  height: 100%;
+  width: 599px;
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 0;
+}
+
+.background::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -20%;
+  right: -145px;
+  background-image: url("/assets/images/landing/bg-intro-right.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: -100px 0;
+  width: 674px;
+  height: 100%;
+}
+
+@media only screen and (max-width: 1900px) {
+  .background::before,
+  .background::after {
+    display: none;
+  }
 }
 
 .video {
