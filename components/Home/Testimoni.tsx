@@ -63,8 +63,8 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
             )}
           >
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown
+            industry. Lorem Ipsum has been the industry standard dummy text ever
+            since the 1500s, when an unknown
           </h6>
         </div>
         <div className="relative flex py-8 lg:py-10 xl:py-16 2xl:py-20">
