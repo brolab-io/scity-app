@@ -30,7 +30,12 @@ const Feature = () => {
   ];
   return (
     <div className="text-white" id="feature">
-      <div className="grid grid-flow-row grid-cols-1 gap-8 md:grid-flow-col md:grid-cols-2">
+      <div
+        className={clsx(
+          styles["travel-right"],
+          "grid grid-flow-row grid-cols-1 gap-8 md:grid-flow-col md:grid-cols-2 relative"
+        )}
+      >
         <div className="flex justify-end w-full">
           <div className={clsx(styles["travel-left"], "w-full")}>
             {/* <Image
@@ -43,7 +48,11 @@ const Feature = () => {
             /> */}
           </div>
         </div>
-        <div className="flex flex-col items-start justify-center w-full max-w-screen-sm p-6 space-y-8 lg:p-16 xl:p-20  text-center md:text-justify">
+        <div
+          className={clsx(
+            "flex flex-col items-start justify-center w-full max-w-screen-sm p-6 space-y-8 lg:p-16 xl:p-20  text-center md:text-justify"
+          )}
+        >
           <h3 className="text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600 w-full uppercase">
             Travel With Us To <br /> A Land of Future
           </h3>
