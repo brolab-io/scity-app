@@ -1,3 +1,31 @@
 .phase-container {
   background: linear-gradient(142.54deg, #af4ffa 1.07%, #3b1cb5 87.45%);
 }
+
+.background::before {
+  content: "";
+  background-image: url("/assets/images/landing/bg-roadmap-left.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: -500px 0;
+  height: 100%;
+  width: 1000px;
+  display: block;
+  position: absolute;
+  top: -15%;
+  left: 0;
+}
+
+.background::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 10%;
+  right: 0;
+  background-image: url("/assets/images/landing/bg-roadmap-right.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: 600px 0;
+  width: 900px;
+  height: 100%;
+}
