@@ -1,59 +1,74 @@
-import SvgCircleWithRing from "../Icons/SvgCircleWithRing";
-import SvgTripleCircle from "../Icons/SvgTripleCircle";
+import clsx from "clsx";
+import SvgCheck from "../Icons/SvgCheck";
 import Container from "../UI/Container";
+import styles from "./RoadMap.module.css";
+import Image from "next/image";
 
 const RoadMap = () => {
   const phases = [
     {
       title: "Phase 1",
       goals: ["Seed Round", "Private Sale", "Landing"],
+      className: "left-0 top-[-180px]",
     },
     {
       title: "Phase 2",
       goals: ["Close Beta Launch", "Market Place v1", "Pool"],
+      className: "top-[0px] right-[-140px]",
     },
     {
       title: "Phase 3",
       goals: ["Open Beta", "Guild"],
+      className: "left-[240px] top-[270px]",
     },
     {
       title: "Phase 4",
       goals: ["Side-chain", "New Feature", "Game"],
+      className: "bottom-[0px] right-[-140px]",
     },
   ];
   return (
-    <div className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10">
+    <div className="hidden px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10 lg:block">
       <Container>
         <div className="flex flex-col items-center">
-          <div className="space-y-6 text-center text-white">
-            <h3 className="text-xl font-extrabold lg:text-2xl xl:text-3xl 2xl:text-4xl">Roadmap</h3>
-            <p className="mx-auto w-80">
+          <div className="space-y-8 text-center text-white">
+            <h3 className="font-bold uppercase text-[40px]">Roadmap</h3>
+            <p className="mx-auto">
               We believe artists need to be compensated for every sale,not just the first one!
             </p>
           </div>
-          <div className="flex flex-wrap justify-around w-full py-12 lg:py-16 xl:py-24">
+
+          {/* DESKTOP */}
+          <div className="relative flex mt-44">
+            <Image
+              src="/assets/images/landing/bg-roadmap.png"
+              height={839 * 1.2}
+              width={797 * 1.2}
+              alt="bg-lines"
+            />
             {phases.map((phase, index) => (
-              <div className="mt-16" key={index}>
+              <div
+                className={clsx(
+                  styles["phase-container"],
+                  "absolute mt-16 py-12 px-8 rounded-xl w-[270px] h-[270px]",
+                  phase.className
+                )}
+                key={index}
+              >
                 <div className="flex items-center flex-1 space-x-4">
-                  <SvgCircleWithRing className="w-16 h-16" />
                   <div className="flex items-center">
-                    <span className="text-xl font-bold text-pink lg:text-2xl xl:text-3xl">
+                    <span className="text-xl font-bold text-white lg:text-2xl xl:text-3xl text-[28px]">
                       {phase.title}
                     </span>
-                    {index !== phases.length - 1 ? (
-                      <SvgTripleCircle className="h-6 ml-4" />
-                    ) : (
-                      <>
-                        <div className="w-20 ml-4 lg:hidden" />
-                        <div className="lg:hidden ml-0.5" />
-                      </>
-                    )}
+                    <div className="w-20 ml-4 lg:hidden" />
+                    <div className="lg:hidden ml-0.5" />
                   </div>
                 </div>
-                <ul className="pl-20 mt-4 list-disc list-outside md:mt-5 lg:mt-6">
+                <ul className="mt-4 space-y-2 md:mt-5 lg:mt-6">
                   {phase.goals.map((goal, i) => (
-                    <li className="font-semibold text-white" key={i}>
-                      {goal}
+                    <li className="text-white text-[18px] flex items-center space-x-3" key={i}>
+                      <SvgCheck className="w-[18px] h-[18px]" />
+                      <span>{goal}</span>
                     </li>
                   ))}
                 </ul>

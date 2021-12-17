@@ -1,0 +1,58 @@
+.bg {
+  position: relative;
+  background: radial-gradient(
+    90.16% 143.01% at 15.32% 21.04%,
+    rgba(165, 239, 255, 0.2) 0%,
+    rgba(110, 191, 244, 0.0447917) 77.08%,
+    rgba(70, 144, 213, 0) 100%
+  );
+  border-radius: 16px;
+
+  background-blend-mode: overlay, normal;
+  filter: drop-shadow(2px 16px 19px rgba(0, 0, 0, 0.09));
+  backdrop-filter: blur(80px);
+}
+
+.bg::before {
+  background: radial-gradient(
+    80.38% 222.5% at -13.75% -12.36%,
+    #98f9ff 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  /* background: linear-gradient(45deg, red, blue); */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.bg::after {
+  background: radial-gradient(
+    80.69% 208.78% at 108.28% 112.58%,
+    #eabfff 0%,
+    rgba(136, 40, 184, 0.0125001) 99.99%,
+    rgba(135, 38, 183, 0) 100%
+  );
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+}
+
+.send {
+  background: radial-gradient(169.03% 670.04% at 125.55% 172.92%, #e250e5 24.48%, #4b50e6 100%);
+}

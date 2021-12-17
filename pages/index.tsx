@@ -12,6 +12,7 @@ import HomeAbout from "../components/Home/About";
 import InfinityTown from "../components/Home/InfinityTown";
 import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
+import StayUpToDate from "../components/Home/StayUpToDate";
 
 export const getServerSideProps = async () => {
   try {
@@ -29,15 +30,6 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ cities }) => {
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      document.body.classList.add("overflow-hidden");
-      return () => {
-        document.body.classList.remove("overflow-hidden");
-      };
-    }
-  }, []);
-
   return (
     <div className={styles.background}>
       {/* <Sample /> */}
@@ -53,6 +45,7 @@ const Home: NextPage<Props> = ({ cities }) => {
       <SCCTokenomics />
       <TokenomicsStatistics />
       <RoadMap />
+      <StayUpToDate />
     </div>
   );
 };
