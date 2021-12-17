@@ -11,14 +11,13 @@ const SCCTokenomics = () => {
           <span className="text-white">Tokenomics</span>
         </h3>
         <p className="mx-auto text-white/80 text-[16px] ">
-          We believe artists need to be compensated for every sale,not just the
-          first one!
+          We believe artists need to be compensated for every sale,not just the first one!
         </p>
       </div>
       <div
         className={clsx(
           styles["total-supply-container"],
-          "relative bg-150 sm:bg-125 lg:bg-100 -mt-24 -mb-40"
+          "relative bg-150 sm:bg-125 lg:bg-100 -mb-12 md:-mb:20 lg:-mt-24 lg:-mb-40"
         )}
       ></div>
     </Container>
