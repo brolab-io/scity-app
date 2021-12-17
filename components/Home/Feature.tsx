@@ -53,10 +53,20 @@ const Feature = () => {
             "flex flex-col items-start justify-center w-full max-w-screen-sm p-6 space-y-8 lg:p-16 xl:p-20  text-center md:text-justify"
           )}
         >
-          <h3 className="text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600 w-full uppercase">
+          <h3
+            className={clsx(
+              styles.title,
+              "text-3xl font-extrabold leading-relaxed lg:text-4xl text-black-600 w-full uppercase"
+            )}
+          >
             Travel With Us To <br /> A Land of Future
           </h3>
-          <p className="my-1 text-gray-600  select-none">
+          <p
+            className={clsx(
+              styles.subtitle,
+              "my-1 text-gray-600  select-none "
+            )}
+          >
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry&apos;s standard dummy
             text ever since the 1500s, when an unknown
