@@ -33,7 +33,7 @@ const OurGameplayFeatures: React.FC = () => {
     },
   ];
   return (
-    <section className="px-6 py-10 text-white ">
+    <section className="px-6 py-10 md:py-32 text-white relative">
       <Container>
         <div className="flex flex-wrap justify-center mb-20 text-center">
           <div className="w-full lg:w-6/12">
@@ -53,7 +53,12 @@ const OurGameplayFeatures: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-x-12 lg:gap-x-24 gap-y-4 font-light md:grid-cols-2">
+        <div
+          className={clsx(
+            styles.feature,
+            "grid grid-cols-1 gap-x-12 lg:gap-x-24 gap-y-4 font-light md:grid-cols-2"
+          )}
+        >
           <div className="flex flex-col space-y-8 justify-center order-2 md:order-1">
             <h2
               className={clsx(
@@ -93,6 +98,13 @@ const OurGameplayFeatures: React.FC = () => {
               alt="Buy Land"
             />
           </div>
+        </div>
+        <div
+          className={clsx(
+            styles["feature-middle-right"],
+            "grid grid-cols-1 gap-x-12 lg:gap-x-24 gap-y-4 font-light md:grid-cols-2 relative"
+          )}
+        >
           <div className="order-3">
             <Image
               layout="responsive"
@@ -130,6 +142,13 @@ const OurGameplayFeatures: React.FC = () => {
               </Button>
             </div>
           </div>
+        </div>
+        <div
+          className={clsx(
+            styles["feature-bottom-left"],
+            "grid grid-cols-1 gap-x-12 lg:gap-x-24 gap-y-4 font-light md:grid-cols-2 relative"
+          )}
+        >
           <div className="flex flex-col space-y-8 justify-center order-6 md:order-5">
             <h2
               className={clsx(
@@ -167,6 +186,13 @@ const OurGameplayFeatures: React.FC = () => {
               alt="Buy Land"
             />
           </div>
+        </div>
+        <div
+          className={clsx(
+            styles["feature-bottom-right"],
+            "grid grid-cols-1 gap-x-12 lg:gap-x-24 gap-y-4 font-light md:grid-cols-2 relative"
+          )}
+        >
           <div className="order-7">
             <Image
               layout="responsive"
