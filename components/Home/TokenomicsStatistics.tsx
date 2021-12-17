@@ -67,15 +67,15 @@ const TokenomicsStatistics = () => {
     },
   ];
   return (
-    <div className={clsx("max-w-screen-xl mx-auto relative", styles.bg)}>
-      <div className="py-10">
+    <div className={clsx("max-w-screen-xl mx-auto relative")}>
+      <div className={clsx("py-10", styles.bg)}>
         <div className="text-center">
           <h3 className="font-bold text-white text-[24px] lg:text-[28px]">Tokenomics Statistics</h3>
         </div>
         <div className="mt-8 space-y-6">
           {statics.map((stat, index) => (
             <div className="grid md:grid-cols-11 gap-y-4 md:gap-x-8" key={index}>
-              <div className="grid md:col-span-6 px-12 md:grid-cols-2">
+              <div className="grid px-12 md:col-span-6 md:grid-cols-2">
                 <span className="w-full truncate text-[18px] text-[#A0AEC0] mt-1.5">
                   {stat.title}
                 </span>
@@ -88,7 +88,7 @@ const TokenomicsStatistics = () => {
                   </div>
                 </div>
               </div>
-              <div className="md:col-span-5 px-12 md:px-0 md:pr-12 flex items-center space-x-4 -mt-2 md:-mt-0">
+              <div className="flex items-center px-12 -mt-2 space-x-4 md:col-span-5 md:px-0 md:pr-12 md:-mt-0">
                 <ProgressBar percentage={stat.percent} className="h-[16px]" color={stat.color} />
                 <SvgInfo />
               </div>

@@ -1,35 +1,35 @@
 import clsx from "clsx";
 import SvgCheck from "../Icons/SvgCheck";
-import Container from "../UI/Container";
 import styles from "./RoadMap.module.css";
 import Image from "next/image";
+import Container from "../UI/Container";
 
 const RoadMap = () => {
   const phases = [
     {
       title: "Phase 1",
       goals: ["Seed Round", "Private Sale", "Landing"],
-      className: "left-0 top-[-180px]",
+      className: "left-0 top-[-18%]",
     },
     {
       title: "Phase 2",
       goals: ["Close Beta Launch", "Market Place v1", "Pool"],
-      className: "top-[-10px] right-[-140px]",
+      className: "top-[2%] right-0",
     },
     {
       title: "Phase 3",
       goals: ["Open Beta", "Guild"],
-      className: "left-[220px] top-[220px]",
+      className: "left-[24%] top-[26%]",
     },
     {
       title: "Phase 4",
       goals: ["Side-chain", "New Feature", "Game"],
-      className: "bottom-[0px] right-[-140px]",
+      className: "bottom-0 right-0",
     },
   ];
   return (
-    <div className={clsx(styles.background, "pt-32 relative")} id="section-roadmap">
-      <div className="hidden px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10 lg:block">
+    <div className={clsx(styles.background, "relative")} id="section-roadmap">
+      <div className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10">
         <Container>
           <div className="flex flex-col items-center">
             <div className="space-y-8 text-center text-white">
@@ -40,19 +40,23 @@ const RoadMap = () => {
             </div>
 
             {/* DESKTOP */}
-            <div className="relative flex mt-44">
-              <Image
-                src="/assets/images/landing/bg-roadmap.png"
-                height={839 * 1.1}
-                width={797 * 1.1}
-                alt="bg-lines"
-              />
+            <div className={clsx("relative flex w-full lg:w-auto flex-col mt-44")}>
+              <div className="hidden pr-28 lg:block">
+                <Image
+                  src="/assets/images/landing/bg-roadmap.png"
+                  height={975 * 1.1}
+                  width={876 * 1.1}
+                  alt="bg-lines"
+                  className="lg:block"
+                />
+              </div>
               {phases.map((phase, index) => (
                 <div
                   className={clsx(
                     styles["phase-container"],
-                    "absolute mt-16 py-12 px-8 rounded-xl w-[270px] h-[270px]",
-                    phase.className
+                    "flex flex-col lg:absolute mt-16 py-12 px-8 rounded-xl w-[270px] h-[270px]",
+                    phase.className,
+                    index % 2 === 1 && "self-end"
                   )}
                   key={index}
                 >

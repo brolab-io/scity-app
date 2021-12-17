@@ -2,6 +2,9 @@
   background: linear-gradient(142.54deg, #af4ffa 1.07%, #3b1cb5 87.45%);
 }
 
+.roadmap-background {
+}
+
 .background::before {
   content: "";
   background-image: url("/assets/images/landing/bg-roadmap-left.svg");
@@ -14,6 +17,7 @@
   position: absolute;
   top: -15%;
   left: 0;
+  user-select: none;
 }
 
 .background::after {
@@ -28,4 +32,5 @@
   background-position: 600px 0;
   width: 900px;
   height: 100%;
+  user-select: none;
 }
