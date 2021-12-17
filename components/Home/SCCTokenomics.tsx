@@ -7,11 +7,12 @@ const SCCTokenomics = () => {
     <Container className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10">
       <div className="space-y-8 text-center">
         <h3 className="space-x-4 text-xl font-bold text-[40px] uppercase">
-          <span className="text-purple-600">SCC</span>
+          <span className="text-[#BF03DE]">SCC</span>
           <span className="text-white">Tokenomics</span>
         </h3>
-        <p className="mx-auto text-white text-[16px]">
-          We believe artists need to be compensated for every sale,not just the first one!
+        <p className="mx-auto text-white/80 text-[16px] ">
+          We believe artists need to be compensated for every sale,not just the
+          first one!
         </p>
       </div>
       <div
