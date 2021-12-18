@@ -4,7 +4,7 @@ import styles from "./StayUpToDate.module.css";
 
 const StayUpToDate = () => {
   return (
-    <Container className="px-8 py-20">
+    <Container className="hidden px-8 py-20 lg:block">
       <div className={styles.bg}>
         <div className="flex flex-wrap items-center justify-between px-20 py-12 gap-y-8">
           <div className="space-y-4">

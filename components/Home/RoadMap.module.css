@@ -2,7 +2,14 @@
   background: linear-gradient(142.54deg, #af4ffa 1.07%, #3b1cb5 87.45%);
 }
 
-.roadmap-background {
+.circle {
+  background: linear-gradient(
+    175.17deg,
+    rgba(61, 6, 95, 0.5) 3.24%,
+    rgba(196, 159, 204, 0.5) 96.11%
+  );
+  backdrop-filter: blur(8px);
+  border-radius: 50%;
 }
 
 .background::before {

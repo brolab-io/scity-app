@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ cities }) => {
       <SCCTokenomics />
       <TokenomicsStatistics />
       <RoadMap />
-      {/* <StayUpToDate /> */}
+      <StayUpToDate />
     </div>
   );
 };

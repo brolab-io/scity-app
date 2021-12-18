@@ -67,7 +67,7 @@ const TokenomicsStatistics = () => {
     },
   ];
   return (
-    <div className={clsx("max-w-screen-xl px-6 md:px-4 lg:px-0 mx-auto relative")}>
+    <div className={clsx("max-w-screen-xl px-4 sm:px-6 mx-auto relative")}>
       <div className={clsx("py-10", styles.bg)}>
         <div className="text-center">
           <h3 className="font-bold text-white text-[24px] lg:text-[28px]">Tokenomics Statistics</h3>
@@ -75,11 +75,17 @@ const TokenomicsStatistics = () => {
         <div className="mt-8 space-y-6">
           {statics.map((stat, index) => (
             <div className="flex px-4 md:px-6 lg:px-8 xl:px-10" key={index}>
-              <div className="flex w-1/2 space-x-4 md:space-x-8 lg:space-x-12">
-                <span className="truncate text-[12px] md:text-[15px] lg:text-[18px] text-[#A0AEC0] mt-1.5 w-7/12 lg:w-2/6">
+              <div className="flex w-1/2 space-x-4 md:space-x-8 lg:space-x-12 items-center">
+                <span className="truncate text-[12px] md:text-[15px] lg:text-[18px] text-[#A0AEC0] w-7/12 lg:w-2/6">
                   {stat.title}
                 </span>
-                <span className="text-white text-[14px] md:text-[19px] truncate lg:text-[24px] w-5/12 lg:w-2/6 text-right">
+                <span
+                  className={clsx(
+                    "text-white text-[14px] w-5/12 text-right min-w-[76px]",
+                    "md:text-[19px]",
+                    "lg:text-[24px] lg:w-2/6"
+                  )}
+                >
                   {stat.value}
                 </span>
                 <span className="hidden lg:block text-white truncate text-[24px]">

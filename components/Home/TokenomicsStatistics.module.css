@@ -7,7 +7,6 @@
     rgba(70, 144, 213, 0) 100%
   );
   border-radius: 16px;
-
   background-blend-mode: overlay, normal;
   filter: drop-shadow(2px 16px 19px rgba(0, 0, 0, 0.09));
   backdrop-filter: blur(80px);
@@ -31,6 +30,7 @@
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
+  user-select: none;
 }
 
 .bg::after {
@@ -51,4 +51,5 @@
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: destination-out;
   mask-composite: exclude;
+  user-select: none;
 }

@@ -2,7 +2,7 @@ type Props = {
   className?: string;
 };
 
-const SvgCheck: React.FC<Props> = ({ className }) => {
+const SvgCheckDone: React.FC<Props> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -12,10 +12,10 @@ const SvgCheck: React.FC<Props> = ({ className }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g filter="url(#filter0_d_231_75)">
+      <g filter="url(#filter0_d_231_34)">
         <path
           d="M42.1039 7.05176L19.2468 29.9089L8.85718 19.5193"
-          stroke="#A0AEC0"
+          stroke="#FFAD02"
           strokeWidth="6"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -24,7 +24,7 @@ const SvgCheck: React.FC<Props> = ({ className }) => {
       </g>
       <defs>
         <filter
-          id="filter0_d_231_75"
+          id="filter0_d_231_34"
           x="-0.142822"
           y="0.0517578"
           width="55.2468"
@@ -43,11 +43,11 @@ const SvgCheck: React.FC<Props> = ({ className }) => {
           <feGaussianBlur stdDeviation="4" />
           <feComposite in2="hardAlpha" operator="out" />
           <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_231_75" />
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_231_34" />
           <feBlend
             mode="normal"
             in="SourceGraphic"
-            in2="effect1_dropShadow_231_75"
+            in2="effect1_dropShadow_231_34"
             result="shape"
           />
         </filter>
@@ -56,4 +56,4 @@ const SvgCheck: React.FC<Props> = ({ className }) => {
   );
 };
 
-export default SvgCheck;
+export default SvgCheckDone;
