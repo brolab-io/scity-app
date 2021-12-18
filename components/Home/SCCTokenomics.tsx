@@ -6,7 +6,7 @@ const SCCTokenomics = () => {
   return (
     <Container className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10">
       <div className="space-y-8 text-center">
-        <h3 className="space-x-4 text-xl font-bold text-[40px] uppercase">
+        <h3 className="space-x-4 text-xl font-bold text-[32px] lg:text-[40px] uppercase">
           <span className="text-[#BF03DE]">SCC</span>
           <span className="text-white">Tokenomics</span>
         </h3>

@@ -67,30 +67,35 @@ const TokenomicsStatistics = () => {
     },
   ];
   return (
-    <div className={clsx("max-w-screen-xl mx-auto relative")}>
+    <div className={clsx("max-w-screen-xl px-6 md:px-4 lg:px-0 mx-auto relative")}>
       <div className={clsx("py-10", styles.bg)}>
         <div className="text-center">
           <h3 className="font-bold text-white text-[24px] lg:text-[28px]">Tokenomics Statistics</h3>
         </div>
         <div className="mt-8 space-y-6">
           {statics.map((stat, index) => (
-            <div className="grid md:grid-cols-11 gap-y-4 md:gap-x-8" key={index}>
-              <div className="grid px-12 md:col-span-6 md:grid-cols-2">
-                <span className="w-full truncate text-[18px] text-[#A0AEC0] mt-1.5">
+            <div className="flex px-4 md:px-6 lg:px-8 xl:px-10" key={index}>
+              <div className="flex w-1/2 space-x-4 md:space-x-8 lg:space-x-12">
+                <span className="truncate text-[12px] md:text-[15px] lg:text-[18px] text-[#A0AEC0] mt-1.5 w-7/12 lg:w-2/6">
                   {stat.title}
                 </span>
-                <div className="flex">
-                  <div className="flex flex-1 md:justify-end">
-                    <span className="text-white truncate text-[24px]">{stat.value}</span>
-                  </div>
-                  <div className="flex justify-end flex-1">
-                    <span className="text-white truncate text-[24px]">{stat.percent}%</span>
-                  </div>
-                </div>
+                <span className="text-white text-[14px] md:text-[19px] truncate lg:text-[24px] w-5/12 lg:w-2/6 text-right">
+                  {stat.value}
+                </span>
+                <span className="hidden lg:block text-white truncate text-[24px]">
+                  {stat.percent}%
+                </span>
               </div>
-              <div className="flex items-center px-12 -mt-2 space-x-4 md:col-span-5 md:px-0 md:pr-12 md:-mt-0">
-                <ProgressBar percentage={stat.percent} className="h-[16px]" color={stat.color} />
-                <SvgInfo />
+              <div className="flex items-center w-1/2 pl-4 space-x-4">
+                <ProgressBar
+                  percentage={stat.percent}
+                  className="h-[8px] md:h-[12px] lg:h-[16px]"
+                  color={stat.color}
+                />
+                <SvgInfo className="hidden lg:block" />
+                <span className="lg:hidden text-white truncate text-[14px] w-12 text-right">
+                  {stat.percent}%
+                </span>
               </div>
             </div>
           ))}
