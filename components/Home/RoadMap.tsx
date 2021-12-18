@@ -94,9 +94,9 @@ const RoadMap = () => {
                       )}
                     >
                       {phase.done ? (
-                        <SvgCheckDone className="h-[49px] w-[49px] lg:h-[39px] lg:w-[39px]" />
+                        <SvgCheckDone className="h-[39px] w-[39px] lg:h-[49px] lg:w-[49px]" />
                       ) : (
-                        <SvgCheck className="h-[49px] w-[49px] lg:h-[39px] lg:w-[39px]" />
+                        <SvgCheck className="h-[39px] w-[39px] lg:h-[49px] lg:w-[49px]" />
                       )}
                     </div>
                     <div className="flex items-center space-x-4">
