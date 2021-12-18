@@ -122,39 +122,21 @@ const Footer: React.FC = () => {
   );
 
   return (
-    <div
-      className={clsx(
-        styles.footer,
-        "px-6 py-10 md:py-20 space-y-10 bg-[#1F0537]"
-      )}
-    >
-      {/* <div style={clipPathStyle} className="pt-24 pb-20 space-y-5 text-center">
-        <h2 className="text-2xl text-white md:text-3xl lg:text-4xl">
-          SCITY - METAVERSE
-        </h2>
-        <p className="text-lg font-semibold text-white md:text-xl lg:text-2xl">
-          BUY LAND - OPEN BUSINESS - EARN PROFIT
-        </p>
-      </div> */}
+    <div className={clsx(styles.footer, "px-3 sm:px-4 py-10 md:py-20 space-y-10 bg-[#1F0537]")}>
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 px-8 gap-y-10 gap-x-2 md:gap-x-4 lg:px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-10 gap-x-2 md:gap-x-4 lg:px-4">
           {/* COL 1 */}
-          <div className="flex items-center justify-center px-2 space-y-4 md:col-span-2 lg:col-span-1 lg:px-4">
+          <div className="flex items-center justify-center col-span-2 px-2 space-y-4 lg:col-span-1 lg:px-4">
             <Logo width={200} height={220} />
           </div>
 
           {/* COL 2 - 3 -4 */}
           {useFullLinks.map((section, index) => (
-            <div
-              key={index.toString()}
-              className="flex items-center px-2 lg:px-4"
-            >
-              <ul className="space-y-2">
-                <h6 className="flex mb-3 text-white font-[600] text-[18px]">
-                  {section.title}
-                </h6>
+            <div key={index.toString()} className="flex items-center px-2 lg:px-4">
+              <ul className="space-y-4">
+                <h6 className="flex mb-6 text-white font-[600] text-[18px]">{section.title}</h6>
                 {section.children.map((link, idx) => (
-                  <li className="flex justify-start  " key={`${index}-${idx}`}>
+                  <li className="flex justify-start " key={`${index}-${idx}`}>
                     <Link passHref href={link.href}>
                       <a>
                         <span

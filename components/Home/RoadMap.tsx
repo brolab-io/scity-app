@@ -11,25 +11,25 @@ const RoadMap = () => {
     {
       title: "Phase 1",
       goals: ["Seed Round", "Private Sale", "Landing"],
-      className: "left-0 top-[-18%]",
+      className: "lg:left-0 lg:top-[-18%]",
       done: true,
     },
     {
       title: "Phase 2",
       goals: ["Close Beta Launch", "Market Place v1", "Pool"],
-      className: "top-[2%] right-0",
+      className: "lg:top-[2%] lg:right-0",
       done: false,
     },
     {
       title: "Phase 3",
       goals: ["Open Beta", "Guild"],
-      className: "left-[24%] top-[26%]",
+      className: "lg:left-[24%] lg:top-[26%]",
       done: false,
     },
     {
       title: "Phase 4",
       goals: ["Side-chain", "New Feature", "Game"],
-      className: "bottom-0 right-0",
+      className: "lg:bottom-0 lg:right-0",
       done: false,
     },
   ];
@@ -50,48 +50,54 @@ const RoadMap = () => {
             >
               <div className="px-4 lg:hidden">
                 <Image
-                  src="/assets/images/landing/bg-roadmap-mb.png"
-                  height={669 * 1.1}
-                  width={328 * 1.1}
+                  src="/assets/images/landing/bg-roadmap-mb2.png"
+                  height={1047}
+                  width={289}
                   alt="bg-lines"
                   className="lg:block"
                 />
               </div>
               <div
                 className={clsx(
-                  "absolute -top-1/3 sm:-top-1/4 inset-0 lg:relative flex w-full lg:w-auto flex-col"
+                  "absolute top-[-260px] lg:top-0 inset-0 lg:relative flex w-full lg:w-auto flex-col"
                 )}
               >
                 <div className="hidden pr-28 lg:block">
                   <Image
                     src="/assets/images/landing/bg-roadmap.png"
-                    height={975 * 1.1}
-                    width={876 * 1.1}
+                    height={975}
+                    width={876}
                     alt="bg-lines"
                     className="lg:block"
                   />
                 </div>
+                {/*  ##### PHASE #####  */}
                 {phases.map((phase, index) => (
                   <div
                     className={clsx(
                       styles["phase-container"],
-                      "flex flex-col mt-10 py-12 px-8 rounded-xl w-[225px] h-[225px]",
+                      "flex flex-col mt-36 py-12 px-8 rounded-xl w-[225px] h-[225px]",
                       "sm:w-[250px] sm:h-[249px]",
-                      "lg:w-[270px] lg:h-[282px] lg:absolute lg:mt-16",
+                      "lg:w-[270px] lg:h-[282px] relative lg:absolute lg:mt-16",
                       phase.className,
                       index % 2 === 1 && "self-end"
                     )}
                     key={index}
                   >
+                    {/* ##### CHECK CIRCLE #####  */}
                     <div
                       className={clsx(
                         styles.circle,
                         "w-[64px] h-[64px] top-[-32px]",
-                        "lg:w-[80px] lg:h-[80px] top-[-40px]",
+                        "lg:w-[80px] lg:h-[80px] lg:top-[-40px]",
                         "absolute left-1/2 -translate-x-1/2 flex items-center justify-center"
                       )}
                     >
-                      {phase.done ? <SvgCheckDone /> : <SvgCheck />}
+                      {phase.done ? (
+                        <SvgCheckDone className="h-[49px] w-[49px] lg:h-[39px] lg:w-[39px]" />
+                      ) : (
+                        <SvgCheck className="h-[49px] w-[49px] lg:h-[39px] lg:w-[39px]" />
+                      )}
                     </div>
                     <div className="flex items-center space-x-4">
                       <div className="flex items-center">
