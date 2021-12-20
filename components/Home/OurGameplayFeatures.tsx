@@ -108,10 +108,10 @@ const OurGameplayFeatures: React.FC = () => {
           <div className="order-3">
             <Image
               layout="responsive"
-              src={"/assets/images/landing/bg-getprofit-feature.svg"}
+              src={"/assets/images/landing/bg-openbusiness-feature.svg"}
               width={200}
               height={200}
-              alt="Get Profit"
+              alt="Buy Land"
             />
           </div>
           <div className="flex flex-col space-y-8 justify-center order-4">
@@ -121,7 +121,7 @@ const OurGameplayFeatures: React.FC = () => {
                 "text-center md:text-left"
               )}
             >
-              Get Profit
+              Open Business
             </h2>
             <p
               className={clsx(
@@ -156,7 +156,7 @@ const OurGameplayFeatures: React.FC = () => {
                 "text-center md:text-left"
               )}
             >
-              Open Business
+              Get Profit
             </h2>
             <p
               className={clsx(
@@ -180,10 +180,10 @@ const OurGameplayFeatures: React.FC = () => {
           <div className="order-5 md:order-6">
             <Image
               layout="responsive"
-              src={"/assets/images/landing/bg-openbusiness-feature.svg"}
+              src={"/assets/images/landing/bg-getprofit-feature.svg"}
               width={200}
               height={200}
-              alt="Buy Land"
+              alt="Get Profit"
             />
           </div>
         </div>
