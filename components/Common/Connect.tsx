@@ -35,7 +35,7 @@ const Connect: React.FC<Props> = ({ outline }) => {
         styles.connect,
         "text-sm text-white px-6 py-2.5 rounded-full flex items-center space-x-3",
         "hover:opacity-80 duration-200",
-        "disabled:opacity-60 duration-200"
+        "disabled:opacity-60 duration-200 "
       )}
     >
       {activating ? (
@@ -48,7 +48,7 @@ const Connect: React.FC<Props> = ({ outline }) => {
           alt="wallet"
         />
       )}
-      <span>Wallet Connect </span>
+      <span className="whitespace-nowrap">Wallet Connect</span>
     </button>
   );
 };

@@ -52,7 +52,10 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
       <div className="flex flex-col">
         <div className={clsx("flex flex-col justify-center items-center")}>
           <h2
-            className={clsx(styles.title, "text-white uppercase text-center")}
+            className={clsx(
+              styles.title,
+              "text-white uppercase text-center mb-3"
+            )}
           >
             Buy NFT Land in your favorite city
           </h2>
@@ -62,9 +65,11 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
               "text-center text-sm text-gray-600  md:w-1/2"
             )}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry standard dummy text ever
-            since the 1500s, when an unknown
+            From the kingdom of fashion “Paris” to ancient “Rome”, or a typical
+            asia culture “Beijing”, through cloudy streets in London or a
+            sunshine avenue in Rio. What is your favorite city? Buy the lands,
+            build up your businesses and create your own empire in The
+            Socialverse City
           </h6>
         </div>
         <div className="relative flex py-8 lg:py-10 xl:py-16 2xl:py-20">

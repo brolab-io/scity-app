@@ -64,16 +64,20 @@ const Feature = () => {
           <p
             className={clsx(
               styles.subtitle,
-              "my-1 text-gray-600  select-none "
+              "my-1 text-gray-600  select-none text-left"
             )}
           >
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard dummy
-            text ever since the 1500s, when an unknown
+            Residents of Scity would be able to interact to each other with
+            various activities like real time meeting, ride city tour buses,
+            playing football, visiting museum, theater,go shopping just by
+            staying at home. Scity has 4 layers which provide different
+            experiences for residents, each layer has it own unique features.
           </p>
 
           <div className="flex flex-wrap items-center md:space-y-2 lg:flex-nowrap lg:space-y-0">
-            <Button className={clsx(styles.button, "px-10 mr-2 rounded-3xl")}>
+            <Button
+              className={clsx(styles.button, "md:px-10 mr-2 rounded-3xl")}
+            >
               <span className="text-white z-10 select-none">Join Telegram</span>
             </Button>
             <div className="flex items-center space-x-1">

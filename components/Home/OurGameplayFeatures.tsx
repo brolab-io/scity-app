@@ -74,10 +74,9 @@ const OurGameplayFeatures: React.FC = () => {
                 "max-w-md text-[#ebebeb]"
               )}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-              numquam tenetur esse sed exercitationem. Praesentium incidunt
-              fugit eum assumenda quasi aspernatur facilis odio dolore
-              consequatur quae, labore nulla quibusdam distinctio.
+              Each city has limited land slots with 4 levels of rarity. Cities
+              are opened sequencely, and they will be zoned by the Government,
+              but the chosen city will be voted by residents.
             </p>
             <div className="flex justify-center md:justify-start">
               <Button
@@ -129,10 +128,10 @@ const OurGameplayFeatures: React.FC = () => {
                 "max-w-md text-[#ebebeb]"
               )}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-              numquam tenetur esse sed exercitationem. Praesentium incidunt
-              fugit eum assumenda quasi aspernatur facilis odio dolore
-              consequatur quae, labore nulla quibusdam distinctio.
+              Each land matching to each business shows different profit. Scity
+              provide numerous businesses such as hotel, restaurant, store. To
+              maximize profit, residents need to be flexible in choosing both
+              rational cities and businesses.
             </p>
             <div className="flex justify-center md:justify-start">
               <Button
@@ -164,10 +163,8 @@ const OurGameplayFeatures: React.FC = () => {
                 "max-w-md text-[#ebebeb]"
               )}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-              numquam tenetur esse sed exercitationem. Praesentium incidunt
-              fugit eum assumenda quasi aspernatur facilis odio dolore
-              consequatur quae, labore nulla quibusdam distinctio.
+              There are ways to get benefit in Scity: Token NFT Staking,
+              Business Profit, Daily Quest, NFT Item Trading, Create 2 Earn
             </p>
             <div className="flex justify-center md:justify-start">
               <Button
@@ -217,10 +214,10 @@ const OurGameplayFeatures: React.FC = () => {
                 "max-w-md text-[#ebebeb]"
               )}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
-              numquam tenetur esse sed exercitationem. Praesentium incidunt
-              fugit eum assumenda quasi aspernatur facilis odio dolore
-              consequatur quae, labore nulla quibusdam distinctio.
+              This is the place where residents exchange goods, vouchers, lands,
+              and businesses. In addition, there will be some special lands or
+              businesses that will be auctioned on the marketplace at special
+              event periods.
             </p>
             <div className="flex justify-center md:justify-start">
               <Button
