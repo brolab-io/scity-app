@@ -26,10 +26,10 @@ const BackgroundImage: React.FC<{}> = () => {
             src="https://s3.ap-southeast-1.amazonaws.com/scity.games/earth.mp4"
             type="video/mp4"
           />
-          <source
+          {/* <source
             type="video/webm"
             src="https://s3.ap-southeast-1.amazonaws.com/scity.games/Low+Poly+Earth.webm"
-          ></source>
+          ></source> */}
         </video>
         <div className=" mx-auto px-4 absolute top-0 left-0 bottom-0 right-0 z-10 flex justify-center items-center w-full h-screen">
           <div className="flex flex-col items-center space-y-10">
