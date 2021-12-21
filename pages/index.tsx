@@ -13,6 +13,7 @@ import InfinityTown from "../components/Home/InfinityTown";
 import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
 import StayUpToDate from "../components/Home/StayUpToDate";
+import Partner from "../components/Home/Partner";
 
 export const getServerSideProps = async () => {
   try {
@@ -45,6 +46,7 @@ const Home: NextPage<Props> = ({ cities }) => {
       <SCCTokenomics />
       <TokenomicsStatistics />
       <RoadMap />
+      <Partner />
       <StayUpToDate />
     </div>
   );
