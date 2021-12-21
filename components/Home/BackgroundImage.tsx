@@ -18,7 +18,7 @@ const BackgroundImage: React.FC<{}> = () => {
             "aspect-video absolute top-0 left-0 bottom-0 right-0 h-screen object-cover w-full"
           )}
           playsInline
-          autoPlay
+          autoPlay={true}
           muted
           loop
         >
@@ -26,6 +26,10 @@ const BackgroundImage: React.FC<{}> = () => {
             src="https://res.cloudinary.com/leopham/video/upload/v1640023636/video/wznohmplc8uxjoy0tdwi.mp4"
             type="video/mp4"
           />
+          <source
+            type="video/webm"
+            src="https://res.cloudinary.com/leopham/video/upload/v1640057026/video/hk0hdycofkaxajqqfczo.webm"
+          ></source>
         </video>
         <div className=" mx-auto px-4 absolute top-0 left-0 bottom-0 right-0 z-10 flex justify-center items-center w-full h-screen">
           <div className="flex flex-col items-center space-y-10">
