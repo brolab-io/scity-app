@@ -23,13 +23,13 @@ const BackgroundImage: React.FC<{}> = () => {
           loop
         >
           <source
-            src="https://res.cloudinary.com/leopham/video/upload/v1640023636/video/wznohmplc8uxjoy0tdwi.mp4"
+            src="https://res.cloudinary.com/leopham/video/upload/f_auto,q_auto,c_limit/video/wznohmplc8uxjoy0tdwi.mp4"
             type="video/mp4"
           />
-          <source
+          {/* <source
             type="video/webm"
             src="https://res.cloudinary.com/leopham/video/upload/v1640057026/video/hk0hdycofkaxajqqfczo.webm"
-          ></source>
+          ></source> */}
         </video>
         <div className=" mx-auto px-4 absolute top-0 left-0 bottom-0 right-0 z-10 flex justify-center items-center w-full h-screen">
           <div className="flex flex-col items-center space-y-10">
