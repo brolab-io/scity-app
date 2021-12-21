@@ -17,6 +17,7 @@ const BackgroundImage: React.FC<{}> = () => {
           className={clsx(
             "aspect-video absolute top-0 left-0 bottom-0 right-0 h-screen object-cover w-full"
           )}
+          playsInline
           autoPlay
           muted
           loop
