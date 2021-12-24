@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import Image from "next/image";
 const Loading: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -13,7 +13,13 @@ const Loading: React.FC = () => {
   return (
     <div className="fixed inset-0 z-40 flex items-center justify-center duration-500 transform bg-gray-800 bg-opacity-70 disable-scroll">
       <div className="flex-col">
-        <div className="w-24 h-24">
+        <Image
+          src={"/assets/Loading_Scity.gif"}
+          width={150}
+          height={150}
+          alt="loading-logo"
+        />
+        {/* <div className="w-24 h-24">
           <svg viewBox="0 0 860.1 876.5">
             <path
               className="animate-spin from-blue-300"
@@ -54,7 +60,7 @@ const Loading: React.FC = () => {
         </div>
         <div className="mt-3 font-mono text-sm text-gray-200 sm:text-xs">
           Loading...
-        </div>
+        </div> */}
       </div>
     </div>
   );

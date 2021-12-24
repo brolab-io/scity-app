@@ -13,7 +13,7 @@ const Layout: React.FC<any> = ({ children }) => {
   return (
     <div>
       <Navbar />
-      {children}
+      <div className="min-h-screen">{children}</div>
       <Footer />
     </div>
   );
