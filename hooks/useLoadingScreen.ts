@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Router from "next/router";
 
-export default function useLoadingScreen() {
-  const [loading, setLoading] = useState(false);
+export default function useLoadingScreen(initialState: boolean) {
+  const [loading, setLoading] = useState(initialState);
   useEffect(() => {
     const handleStart = (url: string) => {
       console.log("Loading screen: start", url);
@@ -10,7 +10,7 @@ export default function useLoadingScreen() {
     };
     const handleComplete = (url: string) => {
       console.log("Loading screen: complete", url);
-      url === Router.asPath && setLoading(false);
+      url === Router.asPath && setTimeout(() => setLoading(false), 500);
     };
 
     Router.events.on("routeChangeStart", handleStart);

@@ -23,8 +23,6 @@ import EtherContextProvider from "../components/EtherContext";
 
 import * as gtag from "../lib/gtag";
 import { useRouter } from "next/router";
-import useLoadingScreen from "../hooks/useLoadingScreen";
-import LoadingScreen from "../components/UI/LoadingScreen";
 
 const queryClient = new QueryClient();
 
@@ -34,7 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { error, deactivate, connector } = useWeb3React<Web3Provider>();
 
   useInactiveListener(!triedEager || !!activatingConnector);
-  const loading = useLoadingScreen();
 
   useEffect(() => {
     if (error) {
@@ -165,7 +162,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           }}
         />
 
-        {loading && <LoadingScreen />}
         <Component {...pageProps} />
       </Layout>
     </>
