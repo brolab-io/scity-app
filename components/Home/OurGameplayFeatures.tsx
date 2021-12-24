@@ -6,32 +6,6 @@ import Container from "../UI/Container";
 import styles from "./OurGameplayFeatures.module.css";
 
 const OurGameplayFeatures: React.FC = () => {
-  const lists = [
-    {
-      icon: "/images/icons/buy-land.svg",
-      title: "Buy Land",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    },
-    {
-      icon: "/images/icons/open-business.svg",
-      title: "Open Business",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    },
-    {
-      icon: "/images/icons/get-profit.svg",
-      title: "Get Profit",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    },
-    {
-      icon: "/images/icons/trading-icon.svg",
-      title: "Trading",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt",
-    },
-  ];
   return (
     <section className="px-6 py-10 md:py-32 text-white relative">
       <Container>
@@ -48,8 +22,7 @@ const OurGameplayFeatures: React.FC = () => {
                 "m-4 text-lg leading-relaxed text-gray-600"
               )}
             >
-              We believe artists need to be compensated for every sale,not just
-              the first one!
+              There are keys make Scity unique!
             </p>
           </div>
         </div>
@@ -224,7 +197,7 @@ const OurGameplayFeatures: React.FC = () => {
                 className={clsx(styles.button, "px-10 mr-2 rounded-3xl ")}
               >
                 <span className="text-white z-10 select-none">
-                  Buy Land Now
+                  Explore Marketplace
                 </span>
               </Button>
             </div>

@@ -37,8 +37,7 @@ const Partner = () => {
                   "my-1 text-white/80 select-none text-center md:text-left  font-[14px] leading-[21px] md:font-[16px] md:leading-[24px] font-[400]"
                 )}
               >
-                We believe artists need to be compensated for every sale, not
-                just the first one!
+                Together we build the future!
               </p>
             </div>
             <div className="grid grid-cols-3 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-8 z-10">
@@ -65,7 +64,7 @@ const Partner = () => {
                   )}
                 >
                   <Image
-                    src={"/assets/partners/aws.svg"}
+                    src={"/assets/partners/AmazonWebservices_Logo.svg"}
                     alt="aws"
                     width={218}
                     height={63}

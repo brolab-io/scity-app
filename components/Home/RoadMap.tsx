@@ -41,12 +41,17 @@ const RoadMap = () => {
             <div className="space-y-8 text-center text-white">
               <h3 className="font-bold uppercase text-[40px]">Roadmap</h3>
               <p className="mx-auto">
-                We believe artists need to be compensated for every sale,not just the first one!
+                We are trying our best to bring you a better experience
               </p>
             </div>
 
             <div
-              className={clsx("relative mt-52 mb-40", "sm:mt-48 sm:mb-20", "md:mb-28", "lg:mb-0")}
+              className={clsx(
+                "relative mt-52 mb-40",
+                "sm:mt-48 sm:mb-20",
+                "md:mb-28",
+                "lg:mb-0"
+              )}
             >
               <div className="px-4 lg:hidden">
                 <Image
