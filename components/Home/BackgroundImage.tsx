@@ -23,7 +23,7 @@ const BackgroundImage: React.FC<{}> = () => {
           loop
         >
           <source
-            src="https://res.cloudinary.com/leopham/video/upload/f_auto,q_auto,c_limit/video/wznohmplc8uxjoy0tdwi.mp4"
+            src="https://s3.ap-southeast-1.amazonaws.com/scity.games/earth.mp4"
             type="video/mp4"
           />
           {/* <source

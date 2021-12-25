@@ -3,6 +3,7 @@ import React from "react";
 
 // import react slick
 import Container from "../UI/Container";
+import TrailerVideo from "../UI/TrailerVideo";
 
 import styles from "./About.module.css";
 
@@ -28,7 +29,7 @@ const HomeAbout: React.FC<Props> = () => {
                 "flex items-center justify-center w-full aspect-video"
               )}
             >
-              <iframe
+              {/* <iframe
                 width="100%"
                 height="100%"
                 className="rounded-lg lg:rounded-xl"
@@ -37,7 +38,8 @@ const HomeAbout: React.FC<Props> = () => {
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
-              ></iframe>
+              ></iframe> */}
+              <TrailerVideo />
             </div>
           </div>
         </div>

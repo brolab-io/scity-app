@@ -1,0 +1,43 @@
+.thumbnail {
+  z-index: 1;
+}
+
+@keyframes animate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+  }
+  40% {
+    box-shadow: 0 0 0 50px rgba(255, 193, 7, 0);
+  }
+  80% {
+    box-shadow: 0 0 0 50px rgba(255, 193, 7, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 193, 7, 0);
+  }
+}
+
+.button {
+  background: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 108px;
+  animation: animate 2s linear infinite;
+  cursor: pointer;
+  pointer-events: auto;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-play {
+  width: 60px;
+  height: 60px;
+  margin-left: 10px;
+}
