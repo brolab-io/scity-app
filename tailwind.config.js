@@ -12,9 +12,15 @@ module.exports = {
           "0%": { transform: "translate(0px,-20px)" },
           "100%": { transform: "translate(0px,10px)" },
         },
+        sprite: {
+          to: {
+            "background-position": "100%",
+          },
+        },
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out",
+        sprite: "sprite 4s steps(95) infinite",
       },
       fontFamily: {
         poppins: ["Poppins", "Roboto", "sans-serif"],

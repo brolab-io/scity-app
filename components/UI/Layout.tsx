@@ -14,16 +14,13 @@ const Layout: React.FC<any> = ({ children }) => {
     return <>{children}</>;
   }
   return (
-    <div>
-      {loading ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Navbar />
-          <div className="min-h-screen">{children}</div>
-          <Footer />
-        </>
-      )}
+    <div className="relative">
+      {loading && <LoadingScreen />}
+      <main>
+        <Navbar />
+        <div className="min-h-screen">{children}</div>
+        <Footer />
+      </main>
     </div>
   );
 };

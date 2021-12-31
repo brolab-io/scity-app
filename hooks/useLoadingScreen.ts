@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 
 export default function useLoadingScreen(initialState: boolean) {
-  const [loading, setLoading] = useState(initialState);
+  const { pathname } = useRouter();
+  const isLandingPage = pathname === "/";
+  const [loading, setLoading] = useState(isLandingPage || initialState);
+
   useEffect(() => {
     const handleStart = (url: string) => {
       console.log("Loading screen: start", url);
@@ -23,6 +26,12 @@ export default function useLoadingScreen(initialState: boolean) {
       Router.events.off("routeChangeError", handleComplete);
     };
   });
+
+  useEffect(() => {
+    if (isLandingPage && loading) {
+      setTimeout(() => setLoading(false), 1000);
+    }
+  }, [isLandingPage, loading]);
 
   useEffect(() => {
     if (typeof window !== "undefined" && loading) {
