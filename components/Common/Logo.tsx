@@ -6,7 +6,7 @@ type Props = {
   width?: number;
 };
 
-const Logo: React.FC<Props> = ({ height = 72, width = 72 }) => {
+const Logo: React.FC<Props> = ({ height = 47, width = 86 }) => {
   return (
     <Link passHref href="/">
       <a className="flex items-center space-x-1 duration-200 transform">

@@ -94,10 +94,10 @@ const Navbar: React.FC = () => {
               </svg>
             </Clickable>
             <div className="mt-0 lg:hidden">
-              <Logo width={64} height={64} />
+              <Logo width={86} height={47} />
             </div>
-            <div className="hidden lg:block xl:mt-10">
-              <Logo height={133} width={133} />
+            <div className="hidden lg:block">
+              <Logo width={86} height={47} />
             </div>
           </div>
           <div className="lg:hidden">
