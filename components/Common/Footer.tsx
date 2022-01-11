@@ -127,7 +127,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-10 gap-x-2 md:gap-x-4 lg:px-4">
           {/* COL 1 */}
           <div className="flex items-center justify-center col-span-2 px-2 space-y-4 lg:col-span-1 lg:px-4">
-            <Logo width={172} height={94} />
+            <Logo width={160} height={160} />
           </div>
 
           {/* COL 2 - 3 -4 */}

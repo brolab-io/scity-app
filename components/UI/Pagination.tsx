@@ -58,6 +58,7 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
               if (page === currentPage) {
                 return (
                   <button
+                    key={page}
                     className="items-center justify-center w-12 leading-5 transition duration-150 ease-in bg-[#1A202C] rounded cursor-not-allowed flex"
                     disabled
                   >
