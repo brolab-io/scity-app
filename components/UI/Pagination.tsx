@@ -58,7 +58,7 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
               if (page === currentPage) {
                 return (
                   <button
-                    className="items-center justify-center hidden w-12 leading-5 transition duration-150 ease-in bg-[#1A202C] rounded cursor-not-allowed md:flex"
+                    className="items-center justify-center w-12 leading-5 transition duration-150 ease-in bg-[#1A202C] rounded cursor-not-allowed flex"
                     disabled
                   >
                     <span className="font-semibold text-magenta">{page}</span>
@@ -67,7 +67,7 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
               }
               if (page === "...") {
                 return (
-                  <div className="items-center justify-center hidden w-12 leading-5 transition duration-150 ease-in rounded cursor-not-allowed md:flex">
+                  <div className="flex items-center justify-center w-12 leading-5 transition duration-150 ease-in rounded cursor-not-allowed">
                     <span className="font-semibold">...</span>
                   </div>
                 );
@@ -77,7 +77,7 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
                   key={page}
                   data-page={page}
                   onClick={onPressChangePage}
-                  className="items-center justify-center hidden w-12 leading-5 transition duration-150 ease-in rounded cursor-pointer md:flex hover:bg-[#1A202C]"
+                  className="items-center justify-center w-12 leading-5 transition duration-150 ease-in rounded cursor-pointer flex hover:bg-[#1A202C]"
                 >
                   <span className="font-semibold pointer-events-none select-none">{page}</span>
                 </button>

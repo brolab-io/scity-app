@@ -76,13 +76,13 @@ const Navbar: React.FC = () => {
         // isTop ? "bg-opacity-70" : "bg-opacity-100"
       )}
     >
-      <div className="items-center justify-between w-full h-full max-w-screen-xl px-4 mx-auto mt-2 lg:mt-0 lg:flex">
+      <div className="items-center justify-between w-full h-full max-w-screen-xl px-4 md:px-8 lg:px-4 mx-auto -mt-2.5 lg:mt-0 lg:flex">
         {/* LOGO  */}
-        <div className="flex items-center justify-between w-full lg:justify-center lg:w-72">
+        <div className="flex items-center justify-between w-full lg:w-64">
           <div className="flex items-center">
             <Clickable className="mr-2 lg:hidden" onClick={toggle}>
               <svg
-                className="w-10 h-10 text-white fill-current"
+                className="w-8 h-8 text-white fill-current"
                 height="32px"
                 viewBox="0 0 32 32"
                 xmlSpace="preserve"
@@ -92,11 +92,11 @@ const Navbar: React.FC = () => {
                 <path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z" />
               </svg>
             </Clickable>
-            <div className="mt-0 lg:hidden">
-              <Logo width={86} height={47} />
+            <div className="mt-5 lg:hidden">
+              <Logo width={64} height={64} />
             </div>
-            <div className="hidden lg:block">
-              <Logo width={86} height={47} />
+            <div className="hidden mt-12 lg:block">
+              <Logo width={80} height={80} />
             </div>
           </div>
           <div className="lg:hidden">
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
         <NavigationMenus isVisible={isVisible} pathname={pathname} />
 
         {/* CONNECT */}
-        <div className="hidden lg:flex lg:w-72 lg:justify-end">
+        <div className="hidden lg:flex lg:w-64 lg:justify-end">
           <ConnectWalletBlock />
         </div>
       </div>

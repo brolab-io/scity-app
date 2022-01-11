@@ -11,7 +11,7 @@ const MarketPlace: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   return (
     <div className="bg-[#171923] pt-16 min-h-screen">
-      <Container className="px-6 py-20 space-y-4 md:px-8 xxl:px-0">
+      <Container className="px-4 py-20 space-y-4 md:px-8 xl:px-4">
         <div className="flex items-center justify-between">
           <h1 className="text-white title">MarketPlace</h1>
           <button className="rounded button button-magenta button-rounded">
