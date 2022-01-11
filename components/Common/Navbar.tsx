@@ -59,8 +59,7 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const onScroll = () => {
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         setIsTop(scrollTop < window.innerHeight - 64);
       };
       window.addEventListener("scroll", onScroll);
@@ -77,9 +76,9 @@ const Navbar: React.FC = () => {
         // isTop ? "bg-opacity-70" : "bg-opacity-100"
       )}
     >
-      <div className="items-center justify-between w-full h-full max-w-screen-xl px-4 mx-auto lg:flex">
+      <div className="items-center justify-between w-full h-full max-w-screen-xl px-4 mx-auto mt-2 lg:mt-0 lg:flex">
         {/* LOGO  */}
-        <div className="flex items-center justify-between lg:justify-center w-full lg:w-72">
+        <div className="flex items-center justify-between w-full lg:justify-center lg:w-72">
           <div className="flex items-center">
             <Clickable className="mr-2 lg:hidden" onClick={toggle}>
               <svg
@@ -131,13 +130,9 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
       }
     >
       {navigationMenus.map((menu) => {
-        const isActive =
-          pathname === menu.href || pathname.startsWith(menu.href + "/");
+        const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
-          <li
-            key={menu.href}
-            className="border-b border-gray-800 lg:border-b-0"
-          >
+          <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
             <Link passHref href={menu.href}>
               <a
                 target={menu.target}

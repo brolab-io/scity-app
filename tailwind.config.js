@@ -56,10 +56,12 @@ module.exports = {
       primary: "#431216",
       "light-gray": "#718096",
       pink: "#A548E2",
+      magenta: "#E630EF",
     }),
     borderColor: (theme) => ({
       ...theme("colors"),
       primary: "#5a55ee",
+      magenta: "#E630EF",
     }),
     gradientColorStops: (theme) => ({
       ...theme("colors"),

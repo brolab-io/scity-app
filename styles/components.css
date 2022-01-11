@@ -1,0 +1,31 @@
+/* ##### TYPOGRAPHY ##### */
+.title {
+  @apply text-[32px] md:text-[36px] lg:text-[40px] xl:text-[44px] font-semibold leading-[66px];
+}
+
+/* ##### BUTTON ##### */
+.button {
+  @apply px-6 py-3 flex space-x-3 items-center justify-center;
+}
+
+.button.button-rounded {
+  @apply rounded-[24px] border;
+}
+
+.button.button-magenta {
+  @apply text-magenta border-magenta;
+}
+
+/* ##### SELECT ##### */
+.select {
+  @apply rounded-[33px] px-4 py-2.5 text-[16px];
+}
+
+/* ##### INPUT ##### */
+.input {
+  @apply px-6 py-2.5 outline-none focus:ring-1 ring-white ring-opacity-50;
+}
+
+.input.input-rounded {
+  @apply rounded-[33px];
+}
