@@ -1,7 +1,76 @@
 import { memo } from "react";
 import isEqual from "react-fast-compare";
+import Image from "next/image";
+import styles from "./NFTCard.module.css";
+
+const images = [
+  "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/ElSalvador_unj1az.png",
+  "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/Rome_tvhg8q.png",
+  "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/Hongkong_ie1zwg.png",
+  "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/Toronto_uohpdi.png",
+];
+
+const bgStyles = [
+  {
+    background: "radial-gradient(50% 50% at 50% 50%, #FBE9BC 0%, #F1B540 100%)",
+  },
+  {
+    background: "radial-gradient(50% 50% at 50% 50%, #833EF1 0%, #491CB5 100%)",
+  },
+  {
+    background: "radial-gradient(50% 50% at 50% 50%, #46B8C9 0%, #226771 100%)",
+  },
+  {
+    background: "radial-gradient(50% 50% at 50% 50%, #AA75E4 0%, #6320AB 100%)",
+  },
+];
 
 const NFTCard = () => {
-  return null;
+  const index = Math.floor(Math.random() * 4);
+  return (
+    <div className="rounded-lg bg-[#1A202C] overflow-hidden">
+      <div
+        className="relative aspect-[274/258] w-full items-center flex justify-center"
+        style={bgStyles[index]}
+      >
+        <Image
+          quality={100}
+          className="absolute"
+          alt=""
+          src={images[index]}
+          height={242}
+          width={177}
+        />
+      </div>
+
+      <div className="p-4 space-y-2">
+        <h6 className="mb-4 font-semibold text-white">#12 El Salvador</h6>
+        <div className="flex justify-between">
+          <span className="text-[14px] text-[#A0AEC0]">Mining Efficiency</span>
+          <span className="text-[16px] text-white font-semibold">130%</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-[14px] text-[#A0AEC0]">Mining Power</span>
+          <span className="text-[16px] text-white font-semibold">
+            50 <span className="text-magenta">SCC</span>
+          </span>
+        </div>
+      </div>
+      <div className={styles.subtract}></div>
+      <div className="p-4 space-y-2">
+        <div className="flex justify-between">
+          <span className="text-[14px] text-[#A0AEC0]">Sale Price</span>
+          <span className="text-[16px] text-white font-semibold">~ $2.566</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-[18px] text-white">6.250</span>
+          <span className="text-[14px] text-white font-medium space-x-2 flex items-center">
+            <Image quality={100} src="/assets/images/scc.png" alt="SCC" height={24} width={24} />
+            <span>SCC</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default memo(NFTCard, isEqual);

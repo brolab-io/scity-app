@@ -21,12 +21,16 @@ const MarketPlaceFilter = () => {
     []
   );
   return (
-    <div className="flex flex-col items-center justify-between py-4 mt-4 space-y-4 lg:flex-row">
-      <div className="flex space-x-8">
-        <Select className="w-64 max-w-full text-white bg-[#1A202C] select" options={typeOpntions} />
-        <Select className="w-64 max-w-full text-white bg-[#1A202C] select" options={sortOptions} />
+    <div className="flex flex-col items-center justify-between py-2 mt-2 space-y-4 lg:space-y-0 lg:space-x-4 lg:py-3 lg:mt-3 xl:py-4 xl:mt-4 lg:flex-row">
+      <div className="flex w-full space-x-4 lg:w-[46%] md:space-x-6 lg:space-x-8">
+        <div className="w-[50%]">
+          <Select className="w-full text-white bg-[#1A202C] select" options={typeOpntions} />
+        </div>
+        <div className="w-[50%]">
+          <Select className="w-full text-white bg-[#1A202C] select" options={sortOptions} />
+        </div>
       </div>
-      <div className="relative max-w-full w-96">
+      <div className="relative w-full max-w-full lg:w-96">
         <input
           placeholder="Search NFT Card"
           className="bg-[#1A202C] input input-rounded self-end text-white pl-14 w-full"

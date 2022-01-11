@@ -5,7 +5,7 @@
 
 /* ##### BUTTON ##### */
 .button {
-  @apply px-6 py-3 flex space-x-3 items-center justify-center;
+  @apply px-3 lg:px-6 py-2 lg:py-3 flex space-x-1 md:space-x-2 lg:space-x-3 items-center justify-center;
 }
 
 .button.button-rounded {
@@ -18,7 +18,7 @@
 
 /* ##### SELECT ##### */
 .select {
-  @apply rounded-[33px] px-4 py-2.5 text-[16px];
+  @apply rounded-[33px] pl-4 py-2.5 text-[16px] pr-14;
 }
 
 /* ##### INPUT ##### */

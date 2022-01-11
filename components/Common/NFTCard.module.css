@@ -1,0 +1,27 @@
+.subtract {
+  border-bottom: 2px dashed #2d3748;
+  position: relative;
+  margin: 0 20px;
+}
+
+.subtract:before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: -30px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #171923;
+}
+
+.subtract:after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  right: -30px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #171923;
+}
