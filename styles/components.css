@@ -5,7 +5,7 @@
 
 /* ##### BUTTON ##### */
 .button {
-  @apply px-3 lg:px-6 py-2 lg:py-3 flex space-x-1 md:space-x-2 lg:space-x-3 items-center justify-center hover:brightness-75 transition-all;
+  @apply px-3 lg:px-6 py-2.5 lg:py-3 flex space-x-1 md:space-x-2 lg:space-x-3 items-center justify-center hover:brightness-75 transition-all;
 }
 
 .button.button-outline {
@@ -20,6 +20,10 @@
   @apply bg-magenta text-white;
 }
 
+.button.button-info:not(.button-outline) {
+  @apply bg-[#4299E1] text-white;
+}
+
 /* ##### SELECT ##### */
 .select {
   @apply rounded-[33px] pl-4 py-2.5 text-[16px] pr-14;
@@ -32,4 +36,21 @@
 
 .input.input-rounded {
   @apply rounded-[33px];
+}
+
+/* ##### RESPONSIVE ##### */
+.p-responsive {
+  @apply p-4 md:p-6 lg:p-8 xl:p-10;
+}
+
+.gap-responsive {
+  @apply gap-4 md:gap-6 lg:gap-8 xl:gap-10;
+}
+
+.space-y-responsive {
+  @apply space-y-4 md:space-y-6 lg:space-y-8 xl:space-y-10;
+}
+
+.space-x-responsive {
+  @apply space-x-4 md:space-x-6 lg:space-x-8 xl:space-x-10;
 }

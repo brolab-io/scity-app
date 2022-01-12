@@ -30,39 +30,24 @@ const FilterItem: React.FC<ItemProps> = ({ activeFilter, setActiveFilter, active
   );
 };
 
-const MyNFTFilter = () => {
-  const filters = useMemo(
-    (): FilterOption[] => [
-      {
-        label: "Land",
-        value: "land",
-      },
-      {
-        label: "Business",
-        value: "business",
-      },
-      {
-        label: "Box",
-        value: "box",
-      },
-    ],
-    []
-  );
-  const [activeFilter, setActiveFilter] = useState(filters[0]);
+type Props = {
+  options: FilterOption[];
+};
+
+const TabsFilter: React.FC<Props> = ({ options }) => {
+  const [activeFilter, setActiveFilter] = useState(options[0]);
   return (
-    <div>
-      <div className="flex gap-x-1">
-        {filters.map((item) => (
-          <FilterItem
-            active={activeFilter.value === item.value}
-            key={item.value}
-            activeFilter={item}
-            setActiveFilter={setActiveFilter}
-          />
-        ))}
-      </div>
+    <div className="flex gap-x-1">
+      {options.map((item) => (
+        <FilterItem
+          active={activeFilter.value === item.value}
+          key={item.value}
+          activeFilter={item}
+          setActiveFilter={setActiveFilter}
+        />
+      ))}
     </div>
   );
 };
 
-export default memo(MyNFTFilter, isEqual);
+export default memo(TabsFilter, isEqual);
