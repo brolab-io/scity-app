@@ -1,6 +1,7 @@
 import { memo } from "react";
 import isEqual from "react-fast-compare";
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./NFTCard.module.css";
 
 const images = [
@@ -25,52 +26,96 @@ const bgStyles = [
   },
 ];
 
-const NFTCard = () => {
+type Props = {
+  sale?: boolean;
+  href?: string;
+};
+
+const MiningEfficiency = () => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[14px] text-[#A0AEC0]">Mining Efficiency</span>
+      <span className="text-[16px] text-white font-semibold">130%</span>
+    </div>
+  );
+};
+
+const MiningPower = () => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[14px] text-[#A0AEC0]">Mining Power</span>
+      <span className="text-[16px] text-white font-semibold">
+        50 <span className="text-magenta">SCC</span>
+      </span>
+    </div>
+  );
+};
+
+const SalePrice = () => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[14px] text-[#A0AEC0]">Sale Price</span>
+      <span className="text-[16px] text-white font-semibold">~ $2.566</span>
+    </div>
+  );
+};
+
+const PriceInSCC = () => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[18px] text-white">6.250</span>
+      <span className="text-[14px] text-white font-medium space-x-2 flex items-center">
+        <Image quality={100} src="/assets/images/scc.png" alt="SCC" height={24} width={24} />
+        <span>SCC</span>
+      </span>
+    </div>
+  );
+};
+
+const NFTCard: React.FC<Props> = ({ sale, href = "#" }) => {
   const index = Math.floor(Math.random() * 4);
   return (
-    <div className="rounded-lg bg-[#1A202C] overflow-hidden">
-      <div
-        className="relative aspect-[274/258] w-full items-center flex justify-center"
-        style={bgStyles[index]}
-      >
-        <Image
-          quality={100}
-          className="absolute"
-          alt=""
-          src={images[index]}
-          height={242}
-          width={177}
-        />
-      </div>
+    <Link href={href} passHref>
+      <a className="rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer">
+        <div
+          className="relative aspect-[274/258] w-full items-center flex justify-center"
+          style={bgStyles[index]}
+        >
+          <Image
+            quality={100}
+            className="absolute"
+            alt=""
+            src={images[index]}
+            height={242}
+            width={177}
+          />
+        </div>
 
-      <div className="p-4 space-y-2">
-        <h6 className="mb-4 font-semibold text-white">#12 El Salvador</h6>
-        <div className="flex justify-between">
-          <span className="text-[14px] text-[#A0AEC0]">Mining Efficiency</span>
-          <span className="text-[16px] text-white font-semibold">130%</span>
+        <div className="p-4 space-y-2">
+          <h6 className="font-semibold text-white">#12 El Salvador</h6>
+          {sale ? (
+            <>
+              <MiningEfficiency />
+              <MiningPower />
+            </>
+          ) : null}
         </div>
-        <div className="flex justify-between">
-          <span className="text-[14px] text-[#A0AEC0]">Mining Power</span>
-          <span className="text-[16px] text-white font-semibold">
-            50 <span className="text-magenta">SCC</span>
-          </span>
+        <div className={styles.subtract}></div>
+        <div className="p-4 space-y-2">
+          {sale ? (
+            <>
+              <SalePrice />
+              <PriceInSCC />
+            </>
+          ) : (
+            <>
+              <MiningEfficiency />
+              <MiningPower />
+            </>
+          )}
         </div>
-      </div>
-      <div className={styles.subtract}></div>
-      <div className="p-4 space-y-2">
-        <div className="flex justify-between">
-          <span className="text-[14px] text-[#A0AEC0]">Sale Price</span>
-          <span className="text-[16px] text-white font-semibold">~ $2.566</span>
-        </div>
-        <div className="flex justify-between">
-          <span className="text-[18px] text-white">6.250</span>
-          <span className="text-[14px] text-white font-medium space-x-2 flex items-center">
-            <Image quality={100} src="/assets/images/scc.png" alt="SCC" height={24} width={24} />
-            <span>SCC</span>
-          </span>
-        </div>
-      </div>
-    </div>
+      </a>
+    </Link>
   );
 };
 export default memo(NFTCard, isEqual);

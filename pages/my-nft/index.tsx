@@ -2,27 +2,22 @@ import { NextPage } from "next";
 import { memo, useState } from "react";
 import isEqual from "react-fast-compare";
 import NFTCard from "../../components/Common/NFTCard";
-import SvgClockIcon from "../../components/Icons/SvgClockIcon";
-import MarketPlaceFilter from "../../components/MarketPlace/Filter";
 import Container from "../../components/UI/Container";
 import Pagination from "../../components/UI/Pagination";
+import MyNFTFilter from "../../components/MyNFT/Filter";
 
-const MarketPlace: NextPage = () => {
+const MyNFTPage: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   return (
     <div className="bg-[#171923] pt-16 min-h-screen">
       <Container className="px-4 py-10 md:py-12 lg:py-16 space-y-6 md:px-8 xl:px-4">
         <div className="flex items-center justify-between">
-          <h1 className="text-white title">MarketPlace</h1>
-          <button className="rounded button button-magenta button-rounded button-outline">
-            <SvgClockIcon className="w-3 h-3 md:h-4 md:w-4 lg:w-5 lg:h-5" />
-            <span className="text-[12px] md:text-[14px] lg:text-[16px]">Market History</span>
-          </button>
+          <h1 className="text-white title">My NFT</h1>
         </div>
-        <MarketPlaceFilter />
+        <MyNFTFilter />
         <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:gap-8 lg:grid-cols-4">
           {new Array(8).fill(0).map((_, index) => (
-            <NFTCard key={index} href={`marketplace/nft_${index}`} sale></NFTCard>
+            <NFTCard key={index}></NFTCard>
           ))}
         </div>
         <Pagination
@@ -36,4 +31,4 @@ const MarketPlace: NextPage = () => {
   );
 };
 
-export default memo(MarketPlace, isEqual);
+export default memo(MyNFTPage, isEqual);

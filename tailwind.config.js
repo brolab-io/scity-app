@@ -50,6 +50,7 @@ module.exports = {
       dark: "#1A202C",
       "dark-gray": "#2D3748",
       "light-gray": "#718096",
+      magenta: "#E630EF",
     }),
     textColor: (theme) => ({
       ...theme("colors"),

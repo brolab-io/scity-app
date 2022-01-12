@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
                       <a>
                         <span
                           className={clsx(
-                            "text-transparent whitespace-nowrap py-1.5 font-[400] text-[16px] text-[#A0AEC0]"
+                            "text-transparent whitespace-nowrap py-1.5 font-[400] text-[16px] text-[#aaaaaa] hover:text-white"
                           )}
                         >
                           {link.title}

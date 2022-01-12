@@ -9,7 +9,7 @@ type Props = {
   className?: string;
 };
 const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPage, className }) => {
-  const paginationData = rangeWithDots(currentPage, pageCount ?? 0);
+  const paginationData = rangeWithDots(pageCount ?? 0, currentPage, 7);
 
   const onPressPrevious = useCallback(() => {
     if (currentPage > 1) {
@@ -37,7 +37,8 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
           <div className="flex space-x-1 text-gray-700">
             <button
               onClick={onPressPrevious}
-              className="flex items-center justify-center w-12 h-12 mr-1 rounded cursor-pointer hover:bg-[#1A202C]"
+              disabled={currentPage === 1}
+              className="flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 mr-1 rounded disabled:cursor-not-allowed cursor-pointer hover:bg-[#1A202C]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -54,22 +55,26 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
-            {paginationData.map((page) => {
+            {paginationData.map((page, index) => {
               if (page === currentPage) {
                 return (
                   <button
                     key={page}
-                    className="items-center justify-center w-12 leading-5 transition duration-150 ease-in bg-[#1A202C] rounded cursor-not-allowed flex"
+                    className="items-center justify-center w-8 h-8 lg:w-12 lg:h-12 leading-5 transition duration-150 ease-in bg-[#1A202C] rounded cursor-not-allowed flex"
                     disabled
                   >
-                    <span className="font-semibold text-magenta">{page}</span>
+                    <span className="text-sm lg:text-base font-semibold text-magenta">{page}</span>
                   </button>
                 );
               }
-              if (page === "...") {
+              // Page is not in range
+              if (page === 0) {
                 return (
-                  <div className="flex items-center justify-center w-12 leading-5 transition duration-150 ease-in rounded cursor-not-allowed">
-                    <span className="font-semibold">...</span>
+                  <div
+                    key={`${index}-dot`}
+                    className="flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 leading-5 transition duration-150 ease-in rounded cursor-not-allowed"
+                  >
+                    <span className="text-sm lg:text-base font-semibold">...</span>
                   </div>
                 );
               }
@@ -78,15 +83,18 @@ const Pagination: React.FC<Props> = ({ pageCount = 0, currentPage, setCurrentPag
                   key={page}
                   data-page={page}
                   onClick={onPressChangePage}
-                  className="items-center justify-center w-12 leading-5 transition duration-150 ease-in rounded cursor-pointer flex hover:bg-[#1A202C]"
+                  className="items-center justify-center w-8 h-8 lg:w-12 lg:h-12 leading-5 transition duration-150 ease-in rounded cursor-pointer flex hover:bg-[#1A202C]"
                 >
-                  <span className="font-semibold pointer-events-none select-none">{page}</span>
+                  <span className="text-sm lg:text-base font-semibold pointer-events-none select-none">
+                    {page}
+                  </span>
                 </button>
               );
             })}
             <button
               onClick={onPressNext}
-              className="flex items-center justify-center w-12 h-12 ml-1 rounded cursor-pointer hover:bg-[#1A202C]"
+              disabled={currentPage === pageCount}
+              className="flex items-center justify-center w-8 h-8 lg:w-12 lg:h-12 ml-1 rounded cursor-pointer disabled:cursor-not-allowed hover:bg-[#1A202C]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

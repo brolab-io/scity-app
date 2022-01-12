@@ -27,7 +27,9 @@ const Select: React.FC<Props> = ({ className, options }) => {
               <span className="block ml-3 truncate">{selected.label}</span>
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-6 ml-3 pointer-events-none">
-              <SvgChevronDown className={clsx("w-4 h-4", open && "rotate-180")} />
+              <SvgChevronDown
+                className={clsx("w-4 h-4 transition-transform duration-150", open && "rotate-180")}
+              />
             </span>
           </Listbox.Button>
 
