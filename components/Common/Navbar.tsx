@@ -3,9 +3,9 @@ import Clickable from "../UI/Clickable";
 import { useRouter } from "next/router";
 import { useCallback, useEffect, useState } from "react";
 import Logo from "./Logo";
-import ConnectWalletBlock from "./ConnectWalletBlock";
-import ConnectWalletBlockMobile from "./ConnectWalletBlockMobile";
 import clsx from "clsx";
+import EnterApp from "./EnterApp";
+import ConnectWalletBlockMobile from "./ConnectWalletBlockMobile";
 
 const navigationMenus = [
   {
@@ -116,7 +116,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           <div className="lg:hidden">
-            <ConnectWalletBlockMobile />
+            {pathname === "/" ? <EnterApp /> : <ConnectWalletBlockMobile />}
           </div>
         </div>
 
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
 
         {/* CONNECT */}
         <div className="hidden lg:flex lg:w-64 lg:justify-end">
-          <ConnectWalletBlock />
+          {pathname === "/" ? <EnterApp /> : <ConnectWalletBlockMobile />}
         </div>
       </div>
     </nav>
@@ -140,7 +140,7 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
   return (
     <ul
       className={
-        "z-30 transform duration-500 top-15 lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
+        "z-20 transform duration-500 top-[4rem] lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
         " " +
         (isVisible ? "left-0" : "-left-80 lg:left-0")
       }

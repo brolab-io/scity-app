@@ -17,10 +17,16 @@ module.exports = {
             "background-position": "100%",
           },
         },
+        scale: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+          "0%": { transform: "scale(1)" },
+        },
       },
       animation: {
         wiggle: "wiggle 1s ease-in-out",
         sprite: "sprite 4s steps(95) infinite",
+        scale: "scale 1.5s ease-in-out infinite",
       },
       fontFamily: {
         poppins: ["Poppins", "Roboto", "sans-serif"],

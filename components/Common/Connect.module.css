@@ -1,3 +1,27 @@
 .connect {
   background: radial-gradient(169.03% 670.04% at 125.55% 172.92%, #e250e5 24.48%, #4b50e6 100%);
 }
+
+.enter-app {
+  background: radial-gradient(169.03% 670.04% at 125.55% 172.92%, #e250e5 24.48%, #4b50e6 100%);
+  position: relative;
+}
+
+.enter-app:before {
+  content: "";
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  position: absolute;
+  border-radius: 30px;
+  border: 2px solid #6b41c2;
+  animation: ping 1s cubic-bezier(0.55, 0, 0.15, 0.55) infinite;
+}
+@keyframes ping {
+  75%,
+  100% {
+    transform: scale(1.07);
+    opacity: 0;
+  }
+}
