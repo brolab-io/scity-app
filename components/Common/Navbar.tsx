@@ -10,32 +10,48 @@ import clsx from "clsx";
 const navigationMenus = [
   {
     title: "Home",
-    href: "/",
+    href: "/#",
   },
   {
-    title: "Buy Land",
-    href: "/buy-land",
+    title: "Video",
+    href: "/#video",
   },
   {
-    title: "Buy Box",
-    href: "/buy-box",
+    title: "Gameplay",
+    href: "/#gameplay",
   },
   {
-    title: "Explore",
-    href: "/explore",
+    title: "Tokenomic",
+    href: "/#tokenomic",
   },
   {
-    title: "Comunity",
-    href: "/comunity",
+    title: "Team",
+    href: "/#team",
   },
   {
-    title: "Pages",
-    href: "/pages",
+    title: "Roadmap",
+    href: "/#roadmap",
   },
   {
-    title: "Whitepaper",
+    title: "Partner",
+    href: "/#partner",
+  },
+  {
+    title: "Docs",
     href: "https://whitepaper.scity.games",
-    target: "_blank",
+    target: undefined,
+    children: [
+      {
+        title: "Whitepaper",
+        href: "https://whitepaper.scity.games",
+        target: "_blank",
+      },
+      {
+        title: "Pitch Deck",
+        href: "https://whitepaper.scity.games/#pitch-deck",
+        target: "_blank",
+      },
+    ],
   },
 ];
 
@@ -133,14 +149,11 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
         const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
         return (
           <li key={menu.href} className="border-b border-gray-800 lg:border-b-0">
-            <Link passHref href={menu.href}>
-              <a
-                target={menu.target}
-                className="block w-full px-8 py-4 duration-200 transform lg:px-0"
-              >
+            {menu.children ? (
+              <ul className="group relative">
                 <span
                   className={clsx(
-                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px]",
+                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px] cursor-pointer",
                     isActive
                       ? "from-pink to-purple"
                       : "from-white to-white hover:from-pink hover:to-purple"
@@ -148,8 +161,49 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
                 >
                   {menu.title}
                 </span>
-              </a>
-            </Link>
+                <div className="hidden group-hover:flex flex-col absolute bg-[#0F001F] px-6 -left-1/2 bg-opacity-50 rounded-2xl divide-y divide-white divide-opacity-50">
+                  {menu.children.map((child) => (
+                    <li key={child.href}>
+                      <Link passHref href={child.href}>
+                        <a
+                          target={child.target}
+                          className="block w-full px-8 py-3.5 duration-200 transform lg:px-0"
+                        >
+                          <span
+                            className={clsx(
+                              "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px]",
+                              isActive
+                                ? "from-pink to-purple"
+                                : "from-white to-white hover:from-pink hover:to-purple"
+                            )}
+                          >
+                            {child.title}
+                          </span>
+                        </a>
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              </ul>
+            ) : (
+              <Link passHref href={menu.href}>
+                <a
+                  target={menu.target}
+                  className="block w-full px-8 py-4 duration-200 transform lg:px-0"
+                >
+                  <span
+                    className={clsx(
+                      "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px]",
+                      isActive
+                        ? "from-pink to-purple"
+                        : "from-white to-white hover:from-pink hover:to-purple"
+                    )}
+                  >
+                    {menu.title}
+                  </span>
+                </a>
+              </Link>
+            )}
           </li>
         );
       })}

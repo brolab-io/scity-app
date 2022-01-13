@@ -12,8 +12,8 @@ const myPartners = [
 const Partner = () => {
   return (
     <div className={clsx("relative")}>
-      <div className="px-4 py-10 mt-10 md:px-6 lg:px-8 xl:px-10">
-        <Container>
+      <div>
+        <Container className="px-4 py-10 mt-10 md:px-6 lg:px-8 xl:px-10" id="partner">
           <div
             className={clsx(
               styles.bg,
@@ -57,12 +57,7 @@ const Partner = () => {
                 </div>
               </div>
               <div className="flex justify-center items-center">
-                <div
-                  className={clsx(
-                    styles["bg-partner"],
-                    "flex justify-center items-center"
-                  )}
-                >
+                <div className={clsx(styles["bg-partner"], "flex justify-center items-center")}>
                   <Image
                     src={"/assets/partners/AmazonWebservices_Logo.svg"}
                     alt="aws"

@@ -51,24 +51,13 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
     <Container className="px-4 mt-20 lg:px-6 xl:px-8">
       <div className="flex flex-col">
         <div className={clsx("flex flex-col justify-center items-center")}>
-          <h2
-            className={clsx(
-              styles.title,
-              "text-white uppercase text-center mb-3"
-            )}
-          >
+          <h2 className={clsx(styles.title, "text-white uppercase text-center mb-3")}>
             Buy NFT Land in your favorite city
           </h2>
-          <h6
-            className={clsx(
-              styles.subtitle,
-              "text-center text-sm text-gray-600  md:w-1/2"
-            )}
-          >
-            From the kingdom of fashion “Paris” to ancient “Rome”, or a typical
-            asia culture “Beijing”, through cloudy streets in London or a
-            sunshine avenue in Rio. What is your favorite city? Buy the lands,
-            build up your businesses and create your own empire in The
+          <h6 className={clsx(styles.subtitle, "text-center text-sm text-gray-600  md:w-1/2")}>
+            From the kingdom of fashion “Paris” to ancient “Rome”, or a typical asia culture
+            “Beijing”, through cloudy streets in London or a sunshine avenue in Rio. What is your
+            favorite city? Buy the lands, build up your businesses and create your own empire in The
             Socialverse City
           </h6>
         </div>
@@ -83,12 +72,7 @@ const Testimoni: React.FC<Props> = ({ cities }) => {
                 key={index}
               >
                 <div className="shrink-0">
-                  <Image
-                    src={city.image}
-                    width={177}
-                    height={242}
-                    alt="City card"
-                  />
+                  <Image src={city.image} width={177} height={242} alt="City card" />
                   <div className="bg-black/30 text-white text-center shadow-lg rounded-md py-1 mx-3">
                     {city.name}
                   </div>

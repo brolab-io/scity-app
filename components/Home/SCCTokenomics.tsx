@@ -4,7 +4,7 @@ import styles from "./SCCTokenomics.module.css";
 
 const SCCTokenomics = () => {
   return (
-    <Container className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10">
+    <Container className="px-4 py-20 mt-20 md:px-6 lg:px-8 xl:px-10" id="tokenomic">
       <div className="space-y-8 text-center">
         <h3 className="space-x-4 text-xl font-bold text-[32px] lg:text-[40px] uppercase">
           <span className="text-[#BF03DE]">SCC</span>

@@ -14,6 +14,7 @@ import styles from "../styles/Home.module.css";
 import { useEffect } from "react";
 import StayUpToDate from "../components/Home/StayUpToDate";
 import Partner from "../components/Home/Partner";
+import clsx from "clsx";
 
 export const getServerSideProps = async () => {
   try {

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { memo, useEffect, useMemo } from "react";
+import { memo, useMemo } from "react";
 import isEqual from "react-fast-compare";
 import useScript from "../../hooks/useScript";
 import useWindowSize from "../../hooks/useWindowSize";
@@ -32,7 +32,7 @@ const InfinityTown = () => {
 
   const handleScrollDown = () => {
     if (typeof window !== "undefined") {
-      const scrollTo = document.getElementById("section-about");
+      const scrollTo = document.getElementById("video");
       if (scrollTo) {
         scrollTo?.scrollIntoView({
           behavior: "smooth",
