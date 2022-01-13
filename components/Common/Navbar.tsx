@@ -67,8 +67,10 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     const onRouterChange = () => setVisible(false);
     events.on("routeChangeStart", onRouterChange);
+    events.on("hashChangeStart", onRouterChange);
     return () => {
       events.off("routeChangeStart", onRouterChange);
+      events.off("hashChangeStart", onRouterChange);
     };
   }, [events]);
 
@@ -139,11 +141,11 @@ type MenuProps = {
 const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
   return (
     <ul
-      className={
-        "z-20 transform duration-500 top-[4rem] lg:top-0 absolute bg-black lg:bg-transparent h-screen w-80 lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center" +
-        " " +
-        (isVisible ? "left-0" : "-left-80 lg:left-0")
-      }
+      className={clsx(
+        "z-20 transform duration-500 top-[4rem] absolute bg-black h-screen w-80",
+        "lg:top-0 lg:bg-transparent lg:w-auto lg:h-auto lg:flex lg:relative lg:py-0 lg:space-x-8 lg:items-center",
+        isVisible ? "left-0" : "-left-80 lg:left-0"
+      )}
     >
       {navigationMenus.map((menu) => {
         const isActive = pathname === menu.href || pathname.startsWith(menu.href + "/");
@@ -153,7 +155,7 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
               <ul className="group relative">
                 <span
                   className={clsx(
-                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px] cursor-pointer",
+                    "font-semibold text-transparent bg-clip-text bg-gradient-to-br whitespace-nowrap text-[16px] cursor-pointer hidden lg:block",
                     isActive
                       ? "from-pink to-purple"
                       : "from-white to-white hover:from-pink hover:to-purple"
@@ -161,7 +163,12 @@ const NavigationMenus: React.FC<MenuProps> = ({ pathname, isVisible }) => {
                 >
                   {menu.title}
                 </span>
-                <div className="hidden group-hover:flex flex-col absolute bg-[#0F001F] px-6 -left-1/2 bg-opacity-50 rounded-2xl divide-y divide-white divide-opacity-50">
+                <div
+                  className={clsx(
+                    "block group-hover:flex flex-col relative lg:absolute px-0 left-0 lg:-left-1/2 bg-opacity-50 rounded-2xl divide-y-[1px] divide-gray-800",
+                    "lg:px-6 lg:hidden lg:bg-[#0F001F] lg:divide-opacity-50"
+                  )}
+                >
                   {menu.children.map((child) => (
                     <li key={child.href}>
                       <Link passHref href={child.href}>
