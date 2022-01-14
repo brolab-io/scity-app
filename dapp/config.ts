@@ -14,7 +14,7 @@ import busdAbiProduction from "../dapp/abi/production/busd-abi.json";
 
 type ENV = "test" | "development" | "staging" | "production";
 
-const env = (process.env.ENV || "development") as ENV;
+const env = (process.env["NEXT_PUBLIC_ENV"] || "development") as ENV;
 
 export const getMetaMaskNetworks = () => {
   switch (env) {
