@@ -1,5 +1,5 @@
+import { ContractTypes } from "../../dapp/config";
 import useBalanceOf from "../../hooks/useBalanceOf";
-import { ContractTypes } from "../EtherContext";
 
 export default function Balance() {
   const { balance } = useBalanceOf(ContractTypes.LAND);

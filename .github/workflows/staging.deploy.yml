@@ -1,4 +1,4 @@
-name: Deploy to server test
+name: Deploy to server staging
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: yarn install
-      - run: yarn build
+      - run: yarn build:staging
 
       - name: Copy file via ssh key
         uses: appleboy/scp-action@master
@@ -29,7 +29,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "package.json,public,mocks,yarn.lock,.next,ecosystem.config.js,next.config.js"
-          target: ${{ secrets.APP_DIR }}/${{ github.event.repository.name }}
+          target: ${{ secrets.STAGING_DIR }}/${{ github.event.repository.name }}
           debug: true
 
       - name: Run command via ssh
@@ -40,8 +40,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd ${{ secrets.APP_DIR }}/${{ github.event.repository.name }}
-            yarn install
-            pm2 delete -s ${{ github.event.repository.name }} || :
-            pm2 start
-            pm2 save
+            cd ${{ secrets.STAGING_DIR }}/${{ github.event.repository.name }}
+            yarn install --production
+            pm2 delete -s scity-app-staging || :
+            pm2 start -s
+            pm2 save -s

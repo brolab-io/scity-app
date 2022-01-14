@@ -6,9 +6,9 @@ import SvgIconLogout from "../Icons/SvgIconLogout";
 import SvgIconExternalLink from "../Icons/SvgIconExternalLink";
 import { useCallback } from "react";
 import { Web3Provider } from "@ethersproject/providers";
-import getConfig from "next/config";
+import { getMetaMaskNetworks } from "../../dapp/config";
 
-const { publicRuntimeConfig } = getConfig();
+const metaMaskNetworks = getMetaMaskNetworks();
 
 const AccountModal: React.FC = () => {
   const { account, deactivate } = useWeb3React<Web3Provider>();
@@ -36,10 +36,7 @@ const AccountModal: React.FC = () => {
           </Clickable>
         </div>
         <div className="flex justify-center">
-          <Link
-            passHref
-            href={`${publicRuntimeConfig.supportedMetaMaskNetworks[0].blockExplorerUrls[0]}/address/${account}`}
-          >
+          <Link passHref href={`${metaMaskNetworks[0].blockExplorerUrls[0]}/address/${account}`}>
             <a target="_blank" className="flex items-center text-sm text-blue-600">
               <span>View on BSCScan</span>
               <SvgIconExternalLink className="w-4 h-4 ml-1 -mt-1 fill-current" />

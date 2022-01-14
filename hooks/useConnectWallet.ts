@@ -1,12 +1,12 @@
-import getConfig from "next/config";
-import { waitPromise } from "../utils";
+import { getMetaMaskNetworks } from "./../dapp/config";
+import { waitPromise } from "../lib/utils";
 import { useCallback, useMemo } from "react";
 import { useAppContext } from "./../components/AppContext";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { injected } from "../dapp/connectors";
 
-const { publicRuntimeConfig } = getConfig();
+const metaMaskNetworks = getMetaMaskNetworks();
 
 const isMetaMask = (window: Window & typeof globalThis) => {
   return window.ethereum?.isMetaMask;
@@ -14,7 +14,7 @@ const isMetaMask = (window: Window & typeof globalThis) => {
 
 const switchWallet = async (window: Window & typeof globalThis) => {
   if (isMetaMask(window) && !!window.ethereum?.chainId) {
-    const chainId = publicRuntimeConfig.supportedMetaMaskNetworks[0].chainId;
+    const chainId = metaMaskNetworks[0].chainId;
     if (chainId && window.ethereum.chainId !== chainId) {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -26,11 +26,11 @@ const switchWallet = async (window: Window & typeof globalThis) => {
 };
 
 const addBSCChain = async (window: Window & typeof globalThis) => {
-  const chainId = publicRuntimeConfig.supportedMetaMaskNetworks[0].chainId;
+  const chainId = metaMaskNetworks[0].chainId;
   if (!!window.ethereum?.chainId && window.ethereum.chainId !== chainId) {
     await window.ethereum.request({
       method: "wallet_addEthereumChain",
-      params: publicRuntimeConfig.supportedMetaMaskNetworks,
+      params: metaMaskNetworks,
     });
     return waitPromise(700);
   }

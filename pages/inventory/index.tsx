@@ -1,13 +1,13 @@
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BoxList from "../../components/BuyBox/BoxList";
 import CardList from "../../components/BuyLand/CardList";
 import CompanyList from "../../components/Common/CompanyList";
-import { ContractTypes } from "../../components/EtherContext";
 import InventoryPageBanner from "../../components/Inventory/Banner";
 import InventoryFilter from "../../components/Inventory/Filter";
 import Container from "../../components/UI/Container";
 import Loading from "../../components/UI/Loading";
+import { ContractTypes } from "../../dapp/config";
 import useBalanceOf from "../../hooks/useBalanceOf";
 import useBoxContract from "../../hooks/useBoxContract";
 import useCompanyContract from "../../hooks/useCompanyContract";

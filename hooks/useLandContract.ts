@@ -1,12 +1,13 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
-import { getErrorMessage } from "../utils";
+import { getErrorMessage } from "../lib/utils";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
-import { ContractTypes, useEtherContext } from "../components/EtherContext";
+import { useEtherContext } from "../components/EtherContext";
 import { IAreaInfo } from "../lib/types";
 import useConnectWallet from "./useConnectWallet";
+import { ContractTypes } from "../dapp/config";
 
 type LandData = {
   info: Partial<IAreaInfo>;
@@ -90,14 +91,7 @@ const useLandContract = (area?: string) => {
       console.log(`Error buying land:`, error);
       toast.error(getErrorMessage(error));
     }
-  }, [
-    account,
-    area,
-    connectWallet,
-    data.info.price,
-    data.isBuying,
-    getContract,
-  ]);
+  }, [account, area, connectWallet, data.info.price, getContract]);
 
   useEffect(() => {
     getOpenAreaInfo();

@@ -1,4 +1,4 @@
-import logger from "./lib/logger";
+import logger from "./logger";
 import { UnsupportedChainIdError } from "@web3-react/core";
 import {
   NoEthereumProviderError,

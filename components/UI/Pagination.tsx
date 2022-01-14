@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { ButtonHTMLAttributes, useCallback } from "react";
-import { rangeWithDots } from "../../utils";
+import { rangeWithDots } from "../../lib/utils";
 
 type Props = {
   pageCount: number | null;

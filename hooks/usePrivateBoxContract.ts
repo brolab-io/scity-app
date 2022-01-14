@@ -1,13 +1,10 @@
 // import { toast } from "react-toastify";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  callPublicRpc,
-  ContractTypes,
-  useEtherContext,
-} from "../components/EtherContext";
+import { callPublicRpc, useEtherContext } from "../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { TxError } from "../lib/error";
+import { ContractTypes } from "../dapp/config";
 
 type UsePrivateBoxData = {
   info: {
@@ -57,9 +54,9 @@ const usePrivateBoxContract = () => {
     setData((prevData) => ({ ...prevData, isFetchingInfo: true }));
     try {
       const [price, saleLimit, endTime] = await Promise.all([
-        callPublicRpc(ContractTypes.PRIVATE_BOX, "price"),
-        callPublicRpc(ContractTypes.PRIVATE_BOX, "saleLimit"),
-        callPublicRpc(ContractTypes.PRIVATE_BOX, "endTime"),
+        callPublicRpc(ContractTypes.PRIVATE_PACK, "price"),
+        callPublicRpc(ContractTypes.PRIVATE_PACK, "saleLimit"),
+        callPublicRpc(ContractTypes.PRIVATE_PACK, "endTime"),
       ]);
       setData((prevData) => ({
         ...prevData,
@@ -84,7 +81,7 @@ const usePrivateBoxContract = () => {
     }));
     try {
       const contractReceipt: [string, ethers.BigNumber, string][] =
-        await callPublicRpc(ContractTypes.PRIVATE_BOX, "getBuyer");
+        await callPublicRpc(ContractTypes.PRIVATE_PACK, "getBuyer");
 
       setData((prevData) => ({
         ...prevData,
@@ -115,7 +112,7 @@ const usePrivateBoxContract = () => {
       const contract = getContract(ContractTypes.BUSD, true);
       const approved: ethers.BigNumber = await contract.allowance(
         account,
-        process.env["NEXT_PUBLIC_CONTRACT_PRIVATE_BOX"]
+        process.env["NEXT_PUBLIC_CONTRACT_PRIVATE_PACK"]
       );
       setData((prevData) => ({
         ...prevData,
@@ -139,7 +136,7 @@ const usePrivateBoxContract = () => {
     try {
       const contract = getContract(ContractTypes.BUSD, true);
       const contractTx: ethers.ContractTransaction = await contract.approve(
-        process.env["NEXT_PUBLIC_CONTRACT_PRIVATE_BOX"],
+        process.env["NEXT_PUBLIC_CONTRACT_PRIVATE_PACK"],
         data.info.price
       );
       await contractTx.wait();
@@ -170,7 +167,7 @@ const usePrivateBoxContract = () => {
         if (!data.isApprovedBUSD) {
           await approveBUSD();
         }
-        const contract = getContract(ContractTypes.PRIVATE_BOX, true);
+        const contract = getContract(ContractTypes.PRIVATE_PACK, true);
         const contractTx: ethers.ContractTransaction =
           await contract.buyPrivate(email, telegramID, ref);
 
@@ -197,7 +194,7 @@ const usePrivateBoxContract = () => {
 
   useEffect(() => {
     try {
-      const contract = getContract(ContractTypes.PRIVATE_BOX);
+      const contract = getContract(ContractTypes.PRIVATE_PACK);
       const onBuyPrivateSale: ethers.providers.Listener = (
         buyer,
         email,

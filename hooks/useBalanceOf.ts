@@ -1,10 +1,7 @@
-import { ContractTypes, useEtherContext } from "./../components/EtherContext";
+import { ContractTypes } from "./../dapp/config";
+import { useEtherContext } from "./../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast } from "react-toastify";
-import { useAppContext } from "../components/AppContext";
-import abi from "../dapp/abi/land-abi.json";
 
 const useBalanceOf = (type: ContractTypes) => {
   const { account } = useWeb3React();

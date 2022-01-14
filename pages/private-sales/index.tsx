@@ -17,7 +17,7 @@ import Countdown from "../../components/UI/Countdown";
 import Button from "../../components/UI/Button";
 import PrivateBoxTransactionHistory from "../../components/PrivateBox/TransactionHistory";
 import PrivateBoxNavbar from "../../components/PrivateBox/Narbar";
-import { isEmail } from "../../utils";
+import { isEmail } from "../../lib/utils";
 import { useRouter } from "next/router";
 import usePrivateBoxContract from "../../hooks/usePrivateBoxContract";
 import { ethers } from "ethers";

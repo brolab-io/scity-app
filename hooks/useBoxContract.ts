@@ -1,9 +1,10 @@
-import { ContractTypes, useEtherContext } from "./../components/EtherContext";
+import { useEtherContext } from "./../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import useConnectWallet from "./useConnectWallet";
+import { ContractTypes } from "../dapp/config";
 
 type BoxData = {
   totalSupply: number;

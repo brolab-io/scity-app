@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatCountDown } from "../../utils";
+import { formatCountDown } from "../../lib/utils";
 
 type Props = {
   endDate?: string | Date;

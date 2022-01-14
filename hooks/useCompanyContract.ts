@@ -1,8 +1,9 @@
-import { ContractTypes, useEtherContext } from "./../components/EtherContext";
+import { useEtherContext } from "./../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
+import { ContractTypes } from "../dapp/config";
 
 type CompanyData = {
   companyTokenURIs: string[];
