@@ -43,5 +43,5 @@ jobs:
             cd ${{ secrets.STAGING_DIR }}/${{ github.event.repository.name }}
             yarn install --production
             pm2 delete -s scity-app-staging || :
-            pm2 start -s
+            pm2 start --only scity-app-staging -s
             pm2 save -s
