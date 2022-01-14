@@ -16,7 +16,12 @@ const PoolInfo = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-responsive lg:grid-cols-3">
-        <div className="bg-[#2D3748] rounded-[16px] p-5 space-y-4">
+        <div className="bg-[#2D3748] rounded-[16px] p-5 space-y-4 relative">
+          <div className="absolute top-5 right-5">
+            <button className="rounded-xl button button-magenta py-2 px-5">
+              <span className="text-[12px] md:text-[13px] lg:text-[14px]">Harvest</span>
+            </button>
+          </div>
           <span className="text-[#A0AEC0] text-[16px]">SCC</span>
           <div className="flex items-center space-x-3">
             <Image quality={100} src="/assets/images/scc.png" alt="SCC" height={32} width={32} />

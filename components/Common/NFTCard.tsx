@@ -3,6 +3,7 @@ import isEqual from "react-fast-compare";
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./NFTCard.module.css";
+import clsx from "clsx";
 
 const images = [
   "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/ElSalvador_unj1az.png",
@@ -81,6 +82,30 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#" }) => {
           className="relative aspect-[274/258] w-full items-center flex justify-center"
           style={bgStyles[index]}
         >
+          <div className="absolute left-2.5 top-2.5">
+            <Image
+              quality={100}
+              alt=""
+              src="/assets/images/icons/rareN.png"
+              height={45}
+              width={45}
+            />
+          </div>
+          <div
+            className={clsx(
+              sale
+                ? "hidden"
+                : "absolute inset-0 z-20 group hover:bg-black hover:bg-opacity-50 p-9 space-y-2 flex flex-col justify-center",
+              "transition-all duration-300 ease-in-out"
+            )}
+          >
+            <button className="hidden group-hover:flex w-full rounded button button-magenta button-rounded transition-all duration-300 ease-in-out">
+              <span className="text-[12px] md:text-[14px] lg:text-[16px]">Stake</span>
+            </button>
+            <button className="hidden group-hover:flex  w-full rounded button button-rounded bg-white transition-all duration-300 ease-in-out">
+              <span className="text-[12px] md:text-[14px] lg:text-[16px] text-magenta">Sell</span>
+            </button>
+          </div>
           <Image
             quality={100}
             className="absolute"

@@ -10,16 +10,16 @@ const PoolPage: NextPage = () => {
   const options = useMemo(
     () => [
       {
-        label: "Land",
-        value: "land",
+        label: "Hospital",
+        value: "hospital",
       },
       {
-        label: "Business",
-        value: "business",
+        label: "Farmer",
+        value: "farmer",
       },
       {
-        label: "Box",
-        value: "box",
+        label: "Logistic",
+        value: "logistic",
       },
     ],
     []
