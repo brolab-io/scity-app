@@ -3,8 +3,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:production": "env-cmd -f .env.production ENV=production next build",
-    "build:staging": "env-cmd -f .env.staging ENV=staging next build",
+    "build:production": "env-cmd -f .env.production next build",
+    "build:staging": "env-cmd -f .env.staging next build",
     "start": "next start",
     "lint": "next lint"
   },

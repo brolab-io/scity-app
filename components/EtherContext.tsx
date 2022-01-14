@@ -10,8 +10,6 @@ import { ContractTypes, getContractConfig, getMetaMaskNetworks } from "../dapp/c
 const contractsAbi = getContractConfig();
 const metaMaskNetworks = getMetaMaskNetworks();
 
-console.log(metaMaskNetworks);
-
 export const callPublicRpc = (contractType: ContractTypes, method: string, ...args: any) => {
   if (!contractsAbi[contractType].contractAddress || !contractsAbi[contractType].abi) {
     throw new Error(`No contract address or abi found for ${contractType}`);
