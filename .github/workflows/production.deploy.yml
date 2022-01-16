@@ -42,6 +42,6 @@ jobs:
           script: |
             cd ${{ secrets.APP_DIR }}/${{ github.event.repository.name }}
             yarn install --production
-            pm2 delete -s scity-app-production || :
-            pm2 start --only scity-app-production -s
+            pm2 delete -s scity-app || :
+            pm2 start --only scity-app -s
             pm2 save -s
