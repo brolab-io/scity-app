@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import isEqual from "react-fast-compare";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,11 +26,6 @@ const bgStyles = [
     background: "radial-gradient(50% 50% at 50% 50%, #AA75E4 0%, #6320AB 100%)",
   },
 ];
-
-type Props = {
-  sale?: boolean;
-  href?: string;
-};
 
 const MiningEfficiency = () => {
   return (
@@ -73,8 +68,23 @@ const PriceInSCC = () => {
   );
 };
 
-const NFTCard: React.FC<Props> = ({ sale, href = "#" }) => {
+type Props = {
+  sale?: boolean;
+  href?: string;
+  onClickSell?: (nft: NFT) => void;
+};
+
+const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell }) => {
   const index = Math.floor(Math.random() * 4);
+
+  const handleClickSell = useCallback(() => {
+    if (onClickSell) {
+      onClickSell({
+        image: images[index],
+      });
+    }
+  }, [onClickSell, index]);
+
   return (
     <Link href={href} passHref>
       <a className="rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer">
@@ -99,10 +109,13 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#" }) => {
               "transition-all duration-300 ease-in-out"
             )}
           >
-            <button className="hidden group-hover:flex w-full rounded button button-magenta button-rounded transition-all duration-300 ease-in-out">
+            <button className="hidden w-full transition-all duration-300 ease-in-out rounded group-hover:flex button button-magenta button-rounded">
               <span className="text-[12px] md:text-[14px] lg:text-[16px]">Stake</span>
             </button>
-            <button className="hidden group-hover:flex  w-full rounded button button-rounded bg-white transition-all duration-300 ease-in-out">
+            <button
+              onClick={handleClickSell}
+              className="hidden w-full transition-all duration-300 ease-in-out bg-white rounded group-hover:flex button button-rounded"
+            >
               <span className="text-[12px] md:text-[14px] lg:text-[16px] text-magenta">Sell</span>
             </button>
           </div>

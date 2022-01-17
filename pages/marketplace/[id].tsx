@@ -5,6 +5,7 @@ import Container from "../../components/UI/Container";
 import Image from "next/image";
 import Link from "next/link";
 import SvgChevronRight from "../../components/Icons/SvgChevronRight";
+import MarketPlaceRules from "../../components/MarketPlace/Rules";
 
 const images = [
   "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/ElSalvador_unj1az.png",
@@ -32,18 +33,18 @@ const NFTDetail: NextPage = () => {
   const index = Math.floor(Math.random() * 4);
   return (
     <div className="bg-[#171923] pt-16 min-h-screen">
-      <Container className="px-4 pb-10 md:pb-12 lg:pb-16 pt-6 md:pt-10 lg:pt-14 space-y-6 lg:space-y-8 md:px-8 xl:px-4">
+      <Container className="px-4 pt-6 pb-10 space-y-6 md:pb-12 lg:pb-16 md:pt-10 lg:pt-14 lg:space-y-8 md:px-8 xl:px-4">
         <div className="flex font-[16px] font-medium">
           <Link href="/marketplace" passHref>
             <a className="text-[#718096] hover:text-white">Marketplace</a>
           </Link>
-          <SvgChevronRight className="h-6 w-6" />
+          <SvgChevronRight className="w-6 h-6" />
           <span className="text-white">#12 Torontoce</span>
         </div>
-        <div className="grid lg:grid-cols-3 gap-8 mt-10 md:mt-12 lg:mt-14">
+        <div className="grid gap-8 mt-10 lg:grid-cols-3 md:mt-12 lg:mt-14">
           {/* #################### Image & NFT Info ####################*/}
           <div className="col-span-2 bg-[#1A202C] rounded-[24px]">
-            <div className="grid sm:grid-cols-2 p-4 md:p-6 lg:p-8 gap-8">
+            <div className="grid gap-8 p-4 sm:grid-cols-2 md:p-6 lg:p-8">
               <div
                 className="relative aspect-[352/409] w-full items-center flex justify-center rounded-[16px]"
                 style={bgStyles[index]}
@@ -93,7 +94,7 @@ const NFTDetail: NextPage = () => {
                     </span>
                   </div>
                 </div>
-                <button className="rounded button button-magenta button-rounded w-full">
+                <button className="w-full rounded button button-magenta button-rounded">
                   <span className="text-[12px] md:text-[14px] lg:text-[16px]">Connect Wallet</span>
                 </button>
               </div>
@@ -130,17 +131,7 @@ const NFTDetail: NextPage = () => {
         {/* #################### Market Rules ####################*/}
         <div className="w-full p-6 border border-[#2D3748] rounded-[24px]">
           <h4 className="text-[24px] text-white font-semibold mb-4">Market Rules</h4>
-          <div className="text-[#A0AEC0] text-[16px] space-y-2">
-            <p>1. NFT can be purchased in the NFT market with SCC.</p>
-            <p>
-              2. After NFT is listed in the trading market, operations such as transfer and stake
-              mining are not allowed.
-            </p>
-            <p>
-              3. The market will charge 3% of the seller&#8217;s revenue as a service fee, of which
-              50% is burned, 40% enter the SCC NFT Pool, and 10% is the developer&#8217;s revenue.
-            </p>
-          </div>
+          <MarketPlaceRules />
         </div>
       </Container>
     </div>

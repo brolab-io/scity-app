@@ -3,7 +3,7 @@ import SvgSearchIcon from "../Icons/SvgSearchIcon";
 import Select from "../UI/Select";
 
 const MarketPlaceFilter = () => {
-  const typeOpntions = useMemo(
+  const typeOptions = useMemo(
     () => [
       { value: "all", label: "All NFT" },
       { value: "land", label: "Land NFT" },
@@ -24,7 +24,7 @@ const MarketPlaceFilter = () => {
     <div className="flex flex-col items-center justify-between py-2 mt-2 space-y-4 lg:space-y-0 lg:space-x-4 lg:py-3 lg:mt-3 xl:py-4 xl:mt-4 lg:flex-row">
       <div className="flex w-full space-x-4 lg:w-[46%] md:space-x-6 lg:space-x-8">
         <div className="w-[50%]">
-          <Select className="w-full text-white bg-[#1A202C] select" options={typeOpntions} />
+          <Select className="w-full text-white bg-[#1A202C] select" options={typeOptions} />
         </div>
         <div className="w-[50%]">
           <Select className="w-full text-white bg-[#1A202C] select" options={sortOptions} />
