@@ -5,7 +5,7 @@ import isEqual from "react-fast-compare";
 type Props = {};
 
 const BuyBoxSeo: React.FC<Props> = () => {
-  return <NextSeo title={`Treasure Box`} />;
+  return <NextSeo title={`NFT Bussiness`} />;
 };
 
 export default memo(BuyBoxSeo, isEqual);

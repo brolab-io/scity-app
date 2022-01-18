@@ -11,6 +11,7 @@ import { ethers } from "ethers";
 import useBoxContract from "../../hooks/useBoxContract";
 import useCompanyContract from "../../hooks/useCompanyContract";
 import NewLayout from "../../components/UI/NewLayout";
+import { NextSeo } from "next-seo";
 
 const BuyBoxPage: NextPage = () => {
   const {
@@ -27,23 +28,26 @@ const BuyBoxPage: NextPage = () => {
   const { openBox } = useCompanyContract(false);
 
   return (
-    <NewLayout title="NFT Business">
-      <BuyBoxSeo />
-      <BuyBoxBuySection
-        currentQuantity={Number(totalSupply.toString())}
-        priceInBSC={ethers.utils.formatEther(price)}
-        priceInUSD={"6.6"}
-        onClickBuyNow={buyBox}
-        isProcessing={isBuying}
-      />
-      <BoxReceived
-        isLoading={isApprovingBoxes}
-        approve={approveBoxes}
-        isApproved={isApproved}
-        isBoughtBox={isBoughtBox}
-        openBox={openBox}
-      />
-    </NewLayout>
+    <>
+      <NextSeo title="NFT Business" />
+      <NewLayout title="NFT Business">
+        <BuyBoxSeo />
+        <BuyBoxBuySection
+          currentQuantity={Number(totalSupply.toString())}
+          priceInBSC={ethers.utils.formatEther(price)}
+          priceInUSD={"6.6"}
+          onClickBuyNow={buyBox}
+          isProcessing={isBuying}
+        />
+        <BoxReceived
+          isLoading={isApprovingBoxes}
+          approve={approveBoxes}
+          isApproved={isApproved}
+          isBoughtBox={isBoughtBox}
+          openBox={openBox}
+        />
+      </NewLayout>
+    </>
   );
 };
 

@@ -6,8 +6,9 @@ import Pagination from "../../components/UI/Pagination";
 import TabsFilter from "../../components/Common/TabsFilter";
 import NewLayout from "../../components/UI/NewLayout";
 import SellNFTModal, { SellNFTModalRef } from "../../components/MyNFT/SellNFTModal";
+import { NextSeo } from "next-seo";
 
-const MyNFTPage: NextPage = () => {
+const MyAssetsPage: NextPage = () => {
   const options = useMemo(
     () => [
       {
@@ -34,6 +35,7 @@ const MyNFTPage: NextPage = () => {
 
   return (
     <>
+      <NextSeo title="My Assets" />
       <NewLayout title="My Assets">
         <TabsFilter options={options} />
         <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:gap-8 lg:grid-cols-4">
@@ -53,4 +55,4 @@ const MyNFTPage: NextPage = () => {
   );
 };
 
-export default memo(MyNFTPage, isEqual);
+export default memo(MyAssetsPage, isEqual);
