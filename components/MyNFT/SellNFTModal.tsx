@@ -43,8 +43,6 @@ const SellNFTModal = (_: Props, ref: ForwardedRef<SellNFTModalRef>) => {
     [openModal]
   );
 
-  console.log(nft);
-
   return (
     <Modal className="w-[480px] max-w-full" isOpen={nft !== null} onClose={onClose}>
       <Dialog.Title as="h3" className="text-lg font-semibold leading-6 text-white font-[24px]">
@@ -53,7 +51,7 @@ const SellNFTModal = (_: Props, ref: ForwardedRef<SellNFTModalRef>) => {
       <div className="py-1 mt-4 space-y-4">
         <div
           style={bgStyle}
-          className="relative aspect-[347/369] rounded-[16px] w-[369px] mx-auto items-center flex justify-center"
+          className="relative aspect-[347/369] rounded-[16px] w-[369px] max-w-full mx-auto items-center flex justify-center"
         >
           {nft && (
             <Image

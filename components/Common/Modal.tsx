@@ -13,8 +13,12 @@ type Props = {
 const Modal: React.FC<Props> = ({ isOpen, onClose, children, className }) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 z-50 overflow-y-auto" onClose={onClose}>
-        <div className="min-h-screen px-4 text-center">
+      <Dialog
+        as="div"
+        className="fixed inset-0 z-30 overflow-y-auto custom-scrollbar"
+        onClose={onClose}
+      >
+        <div className="min-h-screen px-4 text-center ">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

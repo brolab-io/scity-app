@@ -12,7 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useEffect } from "react";
 import { getErrorMessage } from "../lib/utils";
 import type { Web3Provider } from "@ethersproject/providers";
-import Layout from "../components/UI/Layout";
+import LandingLayout from "../components/UI/LandingLayout";
 import SEO from "../next-seo.config.json";
 import { DefaultSeo } from "next-seo";
 import Head from "next/head";
@@ -23,6 +23,7 @@ import EtherContextProvider from "../components/EtherContext";
 
 import * as gtag from "../lib/gtag";
 import { useRouter } from "next/router";
+import AppLayout from "../components/UI/AppLayout";
 
 const queryClient = new QueryClient();
 
@@ -83,32 +84,31 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <Layout>
-        <DefaultSeo {...SEO} />
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${gtag.GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        <Script
-          id="gtag"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
+      <DefaultSeo {...SEO} />
+      <noscript>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${gtag.GTM_ID}`}
+          height="0"
+          width="0"
+          style={{ display: "none", visibility: "hidden" }}
+        />
+      </noscript>
+      <Script
+        id="gtag"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer', '${gtag.GTM_ID}');
           `,
-          }}
-        />
-
+        }}
+      />
+      <AppLayout>
         <Component {...pageProps} />
-      </Layout>
+      </AppLayout>
     </>
   );
 }

@@ -15,6 +15,7 @@ import { useEffect } from "react";
 import StayUpToDate from "../components/Home/StayUpToDate";
 import Partner from "../components/Home/Partner";
 import clsx from "clsx";
+import LandingLayout from "../components/UI/LandingLayout";
 
 export const getServerSideProps = async () => {
   try {
@@ -33,23 +34,25 @@ type Props = {
 
 const Home: NextPage<Props> = ({ cities }) => {
   return (
-    <div className={styles.background}>
-      {/* <Sample /> */}
-      {/* <HeroSection /> */}
-      <InfinityTown />
-      {/* <BuyNFTLandSlider /> */}
-      <HomeAbout />
-      <Testimoni cities={cities} />
+    <LandingLayout>
+      <div className={styles.background}>
+        {/* <Sample /> */}
+        {/* <HeroSection /> */}
+        <InfinityTown />
+        {/* <BuyNFTLandSlider /> */}
+        <HomeAbout />
+        <Testimoni cities={cities} />
 
-      <Feature />
-      <OurGameplayFeatures />
-      <BackgroundImage />
-      <SCCTokenomics />
-      <TokenomicsStatistics />
-      <RoadMap />
-      <Partner />
-      <StayUpToDate />
-    </div>
+        <Feature />
+        <OurGameplayFeatures />
+        <BackgroundImage />
+        <SCCTokenomics />
+        <TokenomicsStatistics />
+        <RoadMap />
+        <Partner />
+        <StayUpToDate />
+      </div>
+    </LandingLayout>
   );
 };
 

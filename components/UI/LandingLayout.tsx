@@ -6,7 +6,7 @@ import Footer from "../Common/Footer";
 import Navbar from "../Common/Navbar";
 import LoadingScreen from "./LoadingScreen";
 
-const Layout: React.FC<any> = ({ children }) => {
+const LandingLayout: React.FC<any> = ({ children }) => {
   const router = useRouter();
   const loading = useLoadingScreen(false);
   const isPrivateBox = router.pathname.startsWith("/private");
@@ -25,4 +25,4 @@ const Layout: React.FC<any> = ({ children }) => {
   );
 };
 
-export default memo(Layout, isEqual);
+export default memo(LandingLayout, isEqual);
