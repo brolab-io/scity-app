@@ -28,7 +28,7 @@ const ConnectWalletBlockMobile = () => {
       </div>
     </div>
   ) : (
-    <Connect outline />
+    <Connect />
   );
 };
 
