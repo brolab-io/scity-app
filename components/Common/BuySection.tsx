@@ -39,20 +39,13 @@ const BuySection: React.FC<Props> = ({
   onClickBuy,
   showEndTime,
 }) => {
-  const bg1Style = useMemo(
-    () => ({
-      backgroundImage: `url(/images/backgrounds/bg-2.svg)`,
-    }),
-    []
-  );
-
   const { active } = useWeb3React<Web3Provider>();
   const { connectWallet } = useConnectWallet();
 
   return (
-    <div style={bg1Style} className="space-y-8 md:p-4 lg:p-10 md:py-6 lg:y-10">
+    <div className="space-y-8">
       <Container>
-        <div className="p-6 md:rounded-md lg:rounded-lg xl:rounded-xl bg-dark-gray bg-opacity-80 lg:p-8">
+        <div className="p-6 md:rounded-md lg:rounded-lg xl:rounded-xl bg-[#1A202C] bg-opacity-80 lg:p-8">
           <div className="grid gap-x-4 gap-y-8 lg:grid-cols-2 md:gap-x-6 lg:gap-x-8 xl:gap-x-10">
             <ImageSection />
             {/* 2ND COL */}
@@ -77,13 +70,13 @@ const BuySection: React.FC<Props> = ({
               {showEndTime === false ? null : (
                 <div className="flex items-center space-x-4">
                   <span className="text-light-gray">Ended:</span>
-                  <div className="flex items-center px-3 py-1 space-x-2 bg-dark-gray rounded-xl">
+                  <div className="flex items-center px-3 py-1 space-x-2 bg-[#2D3748] rounded-xl">
                     <Image src="/images/icons/fire.svg" width={16} height={16} alt="fire" />
                     <Countdown className="text-sm font-medium text-white" endDate={endTime} />
                   </div>
                 </div>
               )}
-              <div className="p-4 bg-dark-gray rounded-xl">
+              <div className="p-4 bg-[#2D3748] rounded-xl">
                 <span className="text-light-gray">Price</span>
                 <div className="flex items-center space-x-2">
                   <Image src="/images/icons/bnb.svg" width={26} height={26} alt="fire" />
@@ -99,7 +92,7 @@ const BuySection: React.FC<Props> = ({
               >
                 <span className="text-lg">{active ? buttonTitle : "Connect Wallet"}</span>
               </Button>
-              <div className="p-4 space-y-2 bg-dark-gray rounded-xl">
+              <div className="p-4 space-y-2 bg-[#2D3748] rounded-xl">
                 <span className="text-white">Shop Rule:</span>
                 <div className="space-y-1">
                   {shopRules.split("\n").map((rule, index) => (

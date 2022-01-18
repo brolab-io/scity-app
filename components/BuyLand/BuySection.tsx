@@ -38,7 +38,7 @@ const BuyLandBuySection: React.FC<Props> = ({
   const onClickSelectCity = useCallback(
     (city) => {
       setSelectedCity(city);
-      router.push(`/land/${city.slug}`, undefined, { shallow: true });
+      router.push(`/nft-land/${city.slug}`, undefined, { shallow: true });
     },
     [router, setSelectedCity]
   );

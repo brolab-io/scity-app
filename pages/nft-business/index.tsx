@@ -10,6 +10,7 @@ import BuyBoxSeo from "../../components/BuyBox/SEO";
 import { ethers } from "ethers";
 import useBoxContract from "../../hooks/useBoxContract";
 import useCompanyContract from "../../hooks/useCompanyContract";
+import NewLayout from "../../components/UI/NewLayout";
 
 const BuyBoxPage: NextPage = () => {
   const {
@@ -26,17 +27,15 @@ const BuyBoxPage: NextPage = () => {
   const { openBox } = useCompanyContract(false);
 
   return (
-    <>
+    <NewLayout title="NFT Business">
       <BuyBoxSeo />
-      <div className="pt-20 bg-black">
-        <BuyBoxBuySection
-          currentQuantity={Number(totalSupply.toString())}
-          priceInBSC={ethers.utils.formatEther(price)}
-          priceInUSD={"6.6"}
-          onClickBuyNow={buyBox}
-          isProcessing={isBuying}
-        />
-      </div>
+      <BuyBoxBuySection
+        currentQuantity={Number(totalSupply.toString())}
+        priceInBSC={ethers.utils.formatEther(price)}
+        priceInUSD={"6.6"}
+        onClickBuyNow={buyBox}
+        isProcessing={isBuying}
+      />
       <BoxReceived
         isLoading={isApprovingBoxes}
         approve={approveBoxes}
@@ -44,7 +43,7 @@ const BuyBoxPage: NextPage = () => {
         isBoughtBox={isBoughtBox}
         openBox={openBox}
       />
-    </>
+    </NewLayout>
   );
 };
 

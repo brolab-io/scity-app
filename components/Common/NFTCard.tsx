@@ -56,6 +56,19 @@ const SalePrice = () => {
   );
 };
 
+type BasicInfoProps = {
+  title: string;
+  value: string;
+};
+const BasicInfo: React.FC<BasicInfoProps> = ({ title, value }) => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[14px] text-[#A0AEC0]">{title}</span>
+      <span className="text-[16px] text-white font-semibold">{value}</span>
+    </div>
+  );
+};
+
 const PriceInSCC = () => {
   return (
     <div className="flex justify-between">
@@ -70,11 +83,12 @@ const PriceInSCC = () => {
 
 type Props = {
   sale?: boolean;
+  supply?: boolean;
   href?: string;
   onClickSell?: (nft: NFT) => void;
 };
 
-const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell }) => {
+const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell, supply }) => {
   const index = Math.floor(Math.random() * 4);
 
   const handleClickSell = useCallback(() => {
@@ -87,7 +101,12 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell }) => {
 
   return (
     <Link href={href} passHref>
-      <a className="rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer">
+      <a
+        className={clsx(
+          "rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer",
+          (sale || supply) && "hover:-translate-y-1 duration-200"
+        )}
+      >
         <div
           className="relative aspect-[274/258] w-full items-center flex justify-center"
           style={bgStyles[index]}
@@ -103,7 +122,7 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell }) => {
           </div>
           <div
             className={clsx(
-              sale
+              sale || supply
                 ? "hidden"
                 : "absolute inset-0 z-20 group hover:bg-black hover:bg-opacity-50 p-9 space-y-2 flex flex-col justify-center",
               "transition-all duration-300 ease-in-out"
@@ -140,20 +159,41 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell }) => {
         </div>
         <div className={styles.subtract}></div>
         <div className="p-4 space-y-2">
-          {sale ? (
-            <>
-              <SalePrice />
-              <PriceInSCC />
-            </>
-          ) : (
-            <>
-              <MiningEfficiency />
-              <MiningPower />
-            </>
-          )}
+          <CardInfo sale={sale} supply={supply} />
         </div>
       </a>
     </Link>
   );
 };
+
+type CardInfoProps = {
+  sale?: boolean;
+  supply?: boolean;
+};
+const CardInfo: React.FC<CardInfoProps> = ({ sale, supply }) => {
+  if (sale) {
+    return (
+      <>
+        <SalePrice />
+        <PriceInSCC />
+      </>
+    );
+  }
+  if (supply) {
+    return (
+      <>
+        <BasicInfo title="Probability" value="6.5%" />
+        <BasicInfo title="Supply" value="478" />
+        <BasicInfo title="Hashrate" value="x1000" />
+      </>
+    );
+  }
+  return (
+    <>
+      <MiningEfficiency />
+      <MiningPower />
+    </>
+  );
+};
+
 export default memo(NFTCard, isEqual);

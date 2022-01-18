@@ -34,7 +34,7 @@ const MyNFTPage: NextPage = () => {
 
   return (
     <>
-      <NewLayout title="My NFT">
+      <NewLayout title="My Assets">
         <TabsFilter options={options} />
         <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:gap-8 lg:grid-cols-4">
           {new Array(8).fill(0).map((_, index) => (

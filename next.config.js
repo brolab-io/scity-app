@@ -9,8 +9,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: "/land/:slug*",
-        destination: "/land",
+        source: "/nft-land/:slug*",
+        destination: "/nft-land",
       },
     ];
   },

@@ -11,6 +11,7 @@ import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
 import useLandContract from "../../hooks/useLandContract";
+import NewLayout from "../../components/UI/NewLayout";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -63,32 +64,30 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
   const limit = info.limit ?? selectedCity?.numberOfSlots ?? 0;
 
   return (
-    <>
+    <NewLayout title="NFT Land">
       <BuyLandSeo selectedCity={selectedCity} />
-      <div className="pt-20 bg-black">
-        <BuyLandBuySection
-          cities={cities}
-          price={price}
-          selectedCity={selectedCity}
-          setSelectedCity={setSelectedCity}
-          onClickBuyNow={buyLand}
-          currentQuantity={currentQuantity}
-          endTime={endTime}
-          isProcessing={isBuying}
-          limit={limit}
-        />
+      <BuyLandBuySection
+        cities={cities}
+        price={price}
+        selectedCity={selectedCity}
+        setSelectedCity={setSelectedCity}
+        onClickBuyNow={buyLand}
+        currentQuantity={currentQuantity}
+        endTime={endTime}
+        isProcessing={isBuying}
+        limit={limit}
+      />
 
-        {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
-        <Container className="pt-20 pb-10">
-          <CardList cards={new Array(Number(20)).fill(0)} />
-        </Container>
-
-        {isFetchingInfo || isBuying ? <Loading /> : null}
-
-        {/*  MODAL SHOW ON CARD RECEIVED!  */}
-        <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />
+      {/*  LIST OF AVAILABLE CARDS CAN BE RECEIVED!  */}
+      <div className="pt-10">
+        <CardList cards={new Array(Number(20)).fill(0)} />
       </div>
-    </>
+
+      {isFetchingInfo || isBuying ? <Loading /> : null}
+
+      {/*  MODAL SHOW ON CARD RECEIVED!  */}
+      <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />
+    </NewLayout>
   );
 };
 

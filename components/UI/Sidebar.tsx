@@ -17,7 +17,7 @@ const SidebarItems = () => {
       {
         title: "Buy $SCC",
         href: "/buy-scc",
-        target: "_blank",
+        // target: "_blank",
         icon: "/assets/images/icons/buy-SCC.svg",
       },
       {
@@ -61,7 +61,7 @@ const SidebarItems = () => {
             <li key={index}>
               <Link href={item.href} passHref>
                 <a
-                  target={item.target}
+                  // target={item.target}
                   className={clsx(
                     "text-white text-[16px] font-medium flex p-4 rounded-[16px] items-center space-x-3",
                     isActive && "bg-magenta"
