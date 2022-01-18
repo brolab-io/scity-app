@@ -16,6 +16,18 @@ type ENV = "test" | "development" | "staging" | "production";
 
 const env = (process.env["NEXT_PUBLIC_ENV"] || "development") as ENV;
 
+export const getAPIURL = (): string => {
+  switch (env) {
+    case "development":
+    case "staging":
+      return "https://staging-api.scity.games";
+    case "production":
+      return "https://api.scity.games";
+    default:
+      throw new Error("Invalid environment");
+  }
+};
+
 export const getMetaMaskNetworks = () => {
   switch (env) {
     case "development":

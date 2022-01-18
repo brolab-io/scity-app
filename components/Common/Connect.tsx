@@ -9,11 +9,7 @@ import styles from "./Connect.module.css";
 import clsx from "clsx";
 import LoadingIcon from "../UI/LoadingIcon";
 
-type Props = {
-  outline?: boolean;
-};
-
-const Connect: React.FC<Props> = ({ outline }) => {
+const Connect: React.FC = () => {
   const { activatingConnector, triedEager } = useAppContext();
   const { connector, error } = useWeb3React<Web3Provider>();
   const { connectWallet } = useConnectWallet();
@@ -41,14 +37,9 @@ const Connect: React.FC<Props> = ({ outline }) => {
       {activating ? (
         <LoadingIcon className="w-4 h-4" />
       ) : (
-        <Image
-          src="/images/icons/wallet.svg"
-          width={16}
-          height={16}
-          alt="wallet"
-        />
+        <Image src="/images/icons/wallet.svg" width={16} height={16} alt="wallet" />
       )}
-      <span className="whitespace-nowrap">Wallet Connect</span>
+      <span className="whitespace-nowrap">Connect Wallet</span>
     </button>
   );
 };

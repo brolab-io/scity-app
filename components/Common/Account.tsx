@@ -4,14 +4,12 @@ export default function Account() {
   const { account } = useWeb3React();
 
   return (
-    <div className="flex items-center px-5 py-2 rounded-xl bg-primary">
+    <div className="flex items-center px-5 py-2.5 rounded-full bg-magenta">
       <span className="text-sm font-semibold text-white">
         {account === null
           ? "-"
           : account
-          ? `${account.substring(0, 6)}...${account.substring(
-              account.length - 4
-            )}`
+          ? `${account.substring(0, 6)}...${account.substring(account.length - 4)}`
           : ""}
       </span>
     </div>

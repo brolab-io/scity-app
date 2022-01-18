@@ -21,13 +21,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     const cities: ICityData[] = await getOpenedCities();
     return {
       props: {
-        cities,
+        cities: cities ?? [],
         slug,
         city: (cities.find((city) => city.slug === slug) || cities[0]) ?? null,
       },
     };
   } catch (error) {
-    return { props: { error, cities: [] } };
+    console.log(error);
+    return { props: { cities: [] } };
   }
 };
 

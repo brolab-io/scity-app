@@ -1,9 +1,10 @@
 import axios from "axios";
 import { QueryFunctionContext } from "react-query";
+import { getAPIURL } from "../dapp/config";
 import { ICardData } from "./types";
 
 const request = axios.create({
-  baseURL: "https://api.scity.games",
+  baseURL: getAPIURL(),
 });
 
 export const getNFTLandMetaData = (

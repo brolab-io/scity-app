@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Connect from "../Common/Connect";
 import Sidebar from "./Sidebar";
 
 const AppLayout: React.FC = ({ children }) => {

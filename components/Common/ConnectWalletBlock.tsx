@@ -10,11 +10,11 @@ import Clickable from "../UI/Clickable";
 const ConnectWalletBlock = () => {
   const { active } = useWeb3React<Web3Provider>();
   return active ? (
-    <div className="relative flex flex-none px-2 mx-2 group lg:flex">
+    <div className="relative flex flex-none group lg:flex">
       <Clickable href="/inventory">
         <a
           className={clsx(
-            "flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-xl hover:shadow-lg z-20"
+            "flex items-stretch duration-100 ease-out transform bg-white shadow-md rounded-full hover:shadow-lg z-20 overflow-hidden"
           )}
         >
           <Balance />
@@ -35,7 +35,7 @@ const ConnectWalletBlock = () => {
       </div>
     </div>
   ) : (
-    <Connect outline />
+    <Connect />
   );
 };
 

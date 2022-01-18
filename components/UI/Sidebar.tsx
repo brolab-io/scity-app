@@ -37,7 +37,7 @@ const SidebarItems = () => {
       },
       {
         title: "Farming",
-        href: "farming",
+        href: "/farming",
         icon: "/assets/images/icons/farming.svg",
       },
       {
@@ -51,7 +51,7 @@ const SidebarItems = () => {
   const { pathname } = useRouter();
   return (
     <div className="sticky mx-3 min-h-[calc(100vh-1.5rem)] top-3 bg-[#1F2530] rounded-[24px] divide-y divide-[#2D3748] p-3">
-      <div className="py-6 flex justify-center">
+      <div className="flex justify-center py-6">
         <Logo width={103} height={103} />
       </div>
       <ul className="py-5">
