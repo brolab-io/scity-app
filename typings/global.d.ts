@@ -8,7 +8,18 @@ declare global {
     image: string;
   }
 
-  interface LandNFT {}
+  interface LandNFT {
+    name: string;
+    hash: string;
+    description: string | null;
+    image: string;
+    ownerAddress: string;
+    attributes: {
+      display_type?: string;
+      trait_type: string;
+      value: string | number;
+    }[];
+  }
   interface BoxNFT {}
   interface CompanyNFT {}
 }

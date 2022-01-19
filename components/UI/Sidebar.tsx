@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Logo from "../Common/Logo";
 import { Transition } from "@headlessui/react";
 
@@ -81,11 +81,30 @@ const SidebarItems = () => {
 };
 
 const Sidebar = () => {
+  const LG_WIDTH = 1024;
+  const [width, setWidth] = useState(LG_WIDTH);
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const onWindowResize = () => {
+        setWidth(window.innerWidth);
+      };
+      setWidth(window.innerWidth);
+      window.addEventListener("resize", onWindowResize);
+    }
+    return () => {};
+  }, []);
+
+  const shouldShowSidebar = useMemo(() => {
+    return width >= LG_WIDTH || show;
+  }, [width, show]);
+
   return (
     <Transition
       as="div"
       className="block"
-      show={true}
+      show={shouldShowSidebar}
       enter="transition-opacity duration-300"
       enterFrom="opacity-0 left-[-200px]"
       enterTo="opacity-100 left-0"

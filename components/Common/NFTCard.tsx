@@ -1,4 +1,4 @@
-import { memo, useCallback } from "react";
+import { memo, ReactElement, useCallback, useMemo } from "react";
 import isEqual from "react-fast-compare";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,40 +27,11 @@ const bgStyles = [
   },
 ];
 
-const MiningEfficiency = () => {
-  return (
-    <div className="flex justify-between">
-      <span className="text-[14px] text-[#A0AEC0]">Mining Efficiency</span>
-      <span className="text-[16px] text-white font-semibold">130%</span>
-    </div>
-  );
-};
-
-const MiningPower = () => {
-  return (
-    <div className="flex justify-between">
-      <span className="text-[14px] text-[#A0AEC0]">Mining Power</span>
-      <span className="text-[16px] text-white font-semibold">
-        50 <span className="text-magenta">SCC</span>
-      </span>
-    </div>
-  );
-};
-
-const SalePrice = () => {
-  return (
-    <div className="flex justify-between">
-      <span className="text-[14px] text-[#A0AEC0]">Sale Price</span>
-      <span className="text-[16px] text-white font-semibold">~ $2.566</span>
-    </div>
-  );
-};
-
-type BasicInfoProps = {
+type InfoProps = {
   title: string;
   value: string;
 };
-const BasicInfo: React.FC<BasicInfoProps> = ({ title, value }) => {
+export const CardBasicInfo: React.FC<InfoProps> = ({ title, value }) => {
   return (
     <div className="flex justify-between">
       <span className="text-[14px] text-[#A0AEC0]">{title}</span>
@@ -69,10 +40,10 @@ const BasicInfo: React.FC<BasicInfoProps> = ({ title, value }) => {
   );
 };
 
-const PriceInSCC = () => {
+export const CardPriceInSCC: React.FC<Omit<InfoProps, "title">> = ({ value }) => {
   return (
     <div className="flex justify-between">
-      <span className="text-[18px] text-white">6.250</span>
+      <span className="text-[18px] text-white">{value}</span>
       <span className="text-[14px] text-white font-medium space-x-2 flex items-center">
         <Image quality={100} src="/assets/images/scc.png" alt="SCC" height={24} width={24} />
         <span>SCC</span>
@@ -81,14 +52,38 @@ const PriceInSCC = () => {
   );
 };
 
-type Props = {
-  sale?: boolean;
-  supply?: boolean;
-  href?: string;
-  onClickSell?: (nft: NFT) => void;
+export const CardPriceInfo: React.FC<InfoProps> = ({ title, value }) => {
+  return (
+    <div className="flex justify-between">
+      <span className="text-[14px] text-[#A0AEC0]">{title}</span>
+      <span className="text-[16px] text-white font-semibold">
+        {value} <span className="text-magenta">SCC</span>
+      </span>
+    </div>
+  );
 };
 
-const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell, supply }) => {
+type Props = {
+  href?: string;
+  onClickSell?: (nft: NFT) => void;
+  className?: string;
+  metadata: LandNFT;
+  CardHeader: JSX.Element;
+  CardFooter: JSX.Element;
+  allowSell?: boolean;
+  allowStake?: boolean;
+};
+
+const NFTCard: React.FC<Props> = ({
+  href,
+  onClickSell,
+  className,
+  metadata,
+  allowSell,
+  allowStake,
+  CardHeader,
+  CardFooter,
+}) => {
   const index = Math.floor(Math.random() * 4);
 
   const handleClickSell = useCallback(() => {
@@ -99,14 +94,9 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell, supply }) => 
     }
   }, [onClickSell, index]);
 
-  return (
-    <Link href={href} passHref>
-      <a
-        className={clsx(
-          "rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer",
-          (sale || supply) && "hover:-translate-y-1 duration-200"
-        )}
-      >
+  const Card = useCallback(() => {
+    return (
+      <>
         <div
           className="relative aspect-[274/258] w-full items-center flex justify-center"
           style={bgStyles[index]}
@@ -122,9 +112,9 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell, supply }) => 
           </div>
           <div
             className={clsx(
-              sale || supply
-                ? "hidden"
-                : "absolute inset-0 z-20 group hover:bg-black hover:bg-opacity-50 p-9 space-y-2 flex flex-col justify-center",
+              allowSell || allowStake
+                ? "absolute inset-0 z-20 group hover:bg-black hover:bg-opacity-50 p-9 space-y-2 flex flex-col justify-center"
+                : "hidden",
               "transition-all duration-300 ease-in-out"
             )}
           >
@@ -149,50 +139,35 @@ const NFTCard: React.FC<Props> = ({ sale, href = "#", onClickSell, supply }) => 
         </div>
 
         <div className="p-4 space-y-2">
-          <h6 className="font-semibold text-white">#12 El Salvador</h6>
-          {sale ? (
-            <>
-              <MiningEfficiency />
-              <MiningPower />
-            </>
-          ) : null}
+          <h6 className="font-semibold text-white">{metadata?.name || "#0 Card Name"}</h6>
+          {CardHeader}
         </div>
         <div className={styles.subtract}></div>
-        <div className="p-4 space-y-2">
-          <CardInfo sale={sale} supply={supply} />
-        </div>
+        <div className="p-4 space-y-2">{CardFooter}</div>
+      </>
+    );
+  }, [metadata, allowSell, allowStake, handleClickSell, index, CardHeader, CardFooter]);
+
+  if (!href) {
+    return (
+      <div className="rounded-lg bg-[#1A202C] overflow-hidden">
+        <Card />
+      </div>
+    );
+  }
+
+  return (
+    <Link href={href} passHref>
+      <a
+        className={clsx(
+          "rounded-lg bg-[#1A202C] overflow-hidden cursor-pointer",
+          "hover:-translate-y-1 duration-200",
+          className
+        )}
+      >
+        <Card />
       </a>
     </Link>
-  );
-};
-
-type CardInfoProps = {
-  sale?: boolean;
-  supply?: boolean;
-};
-const CardInfo: React.FC<CardInfoProps> = ({ sale, supply }) => {
-  if (sale) {
-    return (
-      <>
-        <SalePrice />
-        <PriceInSCC />
-      </>
-    );
-  }
-  if (supply) {
-    return (
-      <>
-        <BasicInfo title="Probability" value="6.5%" />
-        <BasicInfo title="Supply" value="478" />
-        <BasicInfo title="Hashrate" value="x1000" />
-      </>
-    );
-  }
-  return (
-    <>
-      <MiningEfficiency />
-      <MiningPower />
-    </>
   );
 };
 

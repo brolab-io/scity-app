@@ -1,11 +1,10 @@
 import { GetServerSideProps, NextPage } from "next";
-import { memo, useEffect, useState } from "react";
-import Container from "../../components/UI/Container";
+import { memo, useEffect, useRef, useState } from "react";
 import { ICityData } from "../../lib/types";
 import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
 import { getNFTLandMetaData, getOpenedCities } from "../../lib/api";
-import CardReceived from "../../components/BuyLand/CardRecieved";
+import CardReceived, { CardReceivedRef } from "../../components/BuyLand/CardRecieved";
 import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
@@ -39,6 +38,7 @@ type Props = {
 
 const CityPage: NextPage<Props> = ({ cities, city }) => {
   const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
+  const cardReceivedRef = useRef<CardReceivedRef>(null);
 
   const { info, isFetchingInfo, buyLand, boughtTokenURI, isBuying } = useLandContract(
     selectedCity?.slug
@@ -51,7 +51,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
     {
       enabled: !!boughtTokenURI,
       refetchOnWindowFocus: false,
-      retryDelay: 2000,
+      retryDelay: 5000,
     }
   );
 
@@ -63,6 +63,12 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
     new Date();
 
   const limit = info.limit ?? selectedCity?.numberOfSlots ?? 0;
+
+  useEffect(() => {
+    if (cardMetaData) {
+      cardReceivedRef.current?.showCard(cardMetaData);
+    }
+  }, [cardReceivedRef, cardMetaData]);
 
   return (
     <NewLayout title="NFT Land">
@@ -84,10 +90,10 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
         <CardList cards={new Array(Number(20)).fill(0)} />
       </div>
 
-      {isFetchingInfo || isBuying ? <Loading /> : null}
+      {isFetchingInfo || isFetchingMetaData || isBuying ? <Loading /> : null}
 
       {/*  MODAL SHOW ON CARD RECEIVED!  */}
-      <CardReceived isLoading={isFetchingMetaData} cardData={cardMetaData} />
+      <CardReceived ref={cardReceivedRef} />
     </NewLayout>
   );
 };

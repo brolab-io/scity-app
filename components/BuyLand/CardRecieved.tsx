@@ -1,26 +1,26 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { ICardData } from "../../lib/types";
-import Image from "next/image";
-import ReactCardFlip from "react-card-flip";
-import LoadingIcon from "../UI/LoadingIcon";
+import React, {
+  ForwardedRef,
+  forwardRef,
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useState,
+} from "react";
+import Modal from "../Common/Modal";
+import NFTCard, { CardBasicInfo, CardPriceInfo } from "../Common/NFTCard";
 
-type Props = {
-  cardData?: ICardData;
-  isLoading?: boolean;
+type Props = {};
+
+export type CardReceivedRef = {
+  showCard: (metadata: LandNFT) => void;
 };
 
-const CardReceived: React.FC<Props> = ({ cardData, isLoading }) => {
-  const [cardMetaData, setCardMetaData] = useState<ICardData | undefined>(cardData);
+const CardReceived = (props: Props, ref: ForwardedRef<CardReceivedRef>) => {
+  const [cardMetaData, setCardMetaData] = useState<LandNFT | null>(null);
 
-  useEffect(() => {
-    setCardMetaData(cardData);
-  }, [cardData]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onClickClose = useCallback(() => {
-    setCardMetaData(undefined);
-  }, []);
-
-  const data = useMemo(() => {
+  const attributes = useMemo(() => {
     const obj: Record<string, string | number> = {};
     for (const attribute of cardMetaData?.attributes ?? []) {
       obj[attribute.trait_type] = attribute.value;
@@ -28,52 +28,47 @@ const CardReceived: React.FC<Props> = ({ cardData, isLoading }) => {
     return obj;
   }, [cardMetaData]);
 
-  if (!cardMetaData && !isLoading) {
-    return null;
-  }
+  const onClickClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const showCard = useCallback((metadata: LandNFT) => {
+    setCardMetaData(metadata);
+    setIsModalOpen(true);
+  }, []);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      showCard,
+    }),
+    [showCard]
+  );
 
   return (
-    <div
-      role="presentation"
-      onClick={onClickClose}
-      className="fixed inset-0 z-40 flex items-center justify-center duration-500 transform bg-gray-800 cursor-default bg-opacity-70"
-    >
-      <div className="bg-white select-none rounded-xl">
-        <div className="w-80 p-6 space-y-1.5">
-          <div className="relative">
-            {isLoading ? (
-              <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-opacity-70">
-                <LoadingIcon className="w-8 h-8 text-white" />
-              </div>
-            ) : null}
-            <ReactCardFlip
-              flipSpeedBackToFront={0.2}
-              flipSpeedFrontToBack={0.2}
-              isFlipped={isLoading}
-            >
-              <Image width={247 * 2} height={311 * 2} alt="card" src={"/images/card.png"} />
-              <Image width={247 * 2} height={311 * 2} alt="card" src={"/images/card-back.png"} />
-            </ReactCardFlip>
-          </div>
-          <div className="flex justify-center py-1 mt-4 md:mt-2 lg:mt-1">
-            <span className="font-semibold text-black lg:text-lg">{data?.name ?? "---"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-light-gray">Rare</span>
-            <span className="font-bold">{data?.rare ?? "-"}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-light-gray">Mining Efficiency</span>
-            <span className="font-bold">{data?.miningEfficiency ?? "--"} %</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-light-gray">Mining Power</span>
-            <span className="font-bold ">{data?.miningPower ?? "--"} SCC</span>
-          </div>
+    <Modal isOpen={isModalOpen} onClose={onClickClose} className="bg-[#171923]">
+      <div className="p-4 w-[300px] select-none">
+        <div className="mb-6 text-center">
+          <h3 className="text-white text-[21px]">You received a land card</h3>
         </div>
+        {cardMetaData && (
+          <NFTCard
+            CardHeader={<></>}
+            CardFooter={
+              <>
+                <CardBasicInfo
+                  title="Mining Efficiency"
+                  value={`${attributes.miningEfficiency}%`}
+                />
+                <CardPriceInfo title="Mining Power" value={`${attributes.miningPower}`} />
+              </>
+            }
+            metadata={cardMetaData}
+          />
+        )}
       </div>
-    </div>
+    </Modal>
   );
 };
 
-export default CardReceived;
+export default forwardRef<CardReceivedRef>(CardReceived);

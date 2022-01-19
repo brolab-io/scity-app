@@ -1,7 +1,6 @@
 import axios from "axios";
 import { QueryFunctionContext } from "react-query";
 import { getAPIURL } from "../dapp/config";
-import { ICardData } from "./types";
 
 const request = axios.create({
   baseURL: getAPIURL(),
@@ -9,7 +8,7 @@ const request = axios.create({
 
 export const getNFTLandMetaData = (
   queryContext: QueryFunctionContext<[string, string]>
-): Promise<ICardData> => {
+): Promise<LandNFT> => {
   return request
     .get(queryContext.queryKey[1])
     .then((response) => response.data);
