@@ -78,6 +78,8 @@ const MyAssetsPage: NextPage = () => {
               key={index}
               onClickSell={openSellModal}
               metadata={testMetadata}
+              allowSell
+              allowStake
               href={`marketplace/nft_${index}`}
               CardHeader={<></>}
               CardFooter={
