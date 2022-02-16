@@ -16,10 +16,12 @@ type PaginationResponse<T> = {
 };
 
 export const getNFTLandMetaData = (
-  queryContext: QueryFunctionContext<[string, string]>
+  queryContext: QueryFunctionContext<[string, string, string]>
 ): Promise<LandNFT> => {
   return request
-    .get(queryContext.queryKey[1])
+    .get(queryContext.queryKey[1], {
+      params: { txHash: queryContext.queryKey[2] },
+    })
     .then((response) => response.data);
 };
 

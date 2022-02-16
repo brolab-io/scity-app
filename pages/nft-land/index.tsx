@@ -9,12 +9,12 @@ import isEqual from "react-fast-compare";
 import BuyLandSeo from "../../components/BuyLand/SEO";
 import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
-import useLandContract from "../../hooks/useLandContract";
 import NewLayout from "../../components/UI/NewLayout";
 import useContractRPC from "../../hooks/useContractRPC";
 import { ContractTypes } from "../../dapp/config";
-import { BigNumber, ContractReceipt, ContractTransaction, Event, utils } from "ethers";
+import { Event, utils } from "ethers";
 import useContractMutation from "../../hooks/useContractMutation";
+import { callPublicRpc } from "../../components/EtherContext";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -44,14 +44,13 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
   const cardReceivedRef = useRef<CardReceivedRef>(null);
 
   // Fetch info of selected city
-  const { data: infoOpenedArea, isLoading: isFetchingInfo } = useContractRPC(
-    ContractTypes.LAND,
-    "getInfoOpenArea",
-    [selectedCity?.slug],
-    {
-      enabled: !!selectedCity,
-    }
-  );
+  const {
+    data: infoOpenedArea,
+    isLoading: isFetchingInfo,
+    refetch: revalidateInfoOpenArea,
+  } = useContractRPC(ContractTypes.LAND, "getInfoOpenArea", [selectedCity?.slug], {
+    enabled: !!selectedCity,
+  });
 
   // Map the data to show
   const { price, limit, endTime, currentQuantity } = useMemo(() => {
@@ -67,11 +66,10 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
     };
   }, [infoOpenedArea, selectedCity]);
 
-  // const { buyLand, boughtTokenURI, isBuying } = useLandContract(selectedCity?.slug);
   const {
     mutate: buyLand,
     isLoading: isBuying,
-    data: boughtTokenURI,
+    data: { tokenURI: boughtTokenURI, txHash },
   } = useContractMutation(
     ContractTypes.LAND,
     "buyLand",
@@ -82,26 +80,30 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
       },
     ],
     {
-      enabled: !!selectedCity,
-      pipes: [
-        (txTransaction: ContractTransaction) => txTransaction.wait(),
-        (txReceipt: ContractReceipt) => {
-          const buyLandEvent = txReceipt?.events?.find((event: Event) => event.event === "BuyLand");
-          const [, tokenId] = buyLandEvent?.args || [];
-          return tokenId as BigNumber | undefined;
-        },
-      ],
+      enabled: !!selectedCity, // Only enable when city is selected
+      // Return the URI of the token bought
+      pipe: async (txTransaction) => {
+        const txReceipt = await txTransaction.wait();
+        const buyLandEvent = txReceipt?.events?.find((event: Event) => event.event === "BuyLand");
+        const [, tokenId] = buyLandEvent?.args || [];
+        const tokenURI: string = await callPublicRpc(ContractTypes.LAND, "tokenURI", tokenId);
+        revalidateInfoOpenArea();
+        return { tokenURI, txHash: txReceipt.transactionHash };
+      },
+      initData: {},
     }
   );
 
-  // Fetch metaData once the land is bought
+  // Fetch metaData once the land is bought and return the URI of the token bought
   const { data: cardMetaData, isFetching: isFetchingMetaData } = useQuery(
-    ["nft-lands", boughtTokenURI ?? ""],
+    ["nft-lands", boughtTokenURI ?? "", txHash],
     getNFTLandMetaData,
     {
       enabled: !!boughtTokenURI,
       refetchOnWindowFocus: false,
-      retryDelay: 5000,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      retryDelay: 10000,
     }
   );
 

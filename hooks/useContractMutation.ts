@@ -4,10 +4,11 @@ import { useDeepCompareMemoize } from "use-deep-compare-effect";
 import { ContractTypes } from "../dapp/config";
 import { ContractTransaction } from "ethers";
 
-type Options = {
+type Options<T> = {
   enabled?: boolean;
   onSuccess?: (data: ContractTransaction) => void;
-  pipes?: any[];
+  pipe?: (txTransaction: ContractTransaction) => Promise<any>;
+  initData?: T;
 };
 
 type StateValues = {
@@ -16,11 +17,11 @@ type StateValues = {
   data: any;
 };
 
-const useContractMutation = (
+const useContractMutation = <T = unknown>(
   contractType: ContractTypes,
   method: string,
   args: any[] = [],
-  options: Options = {}
+  options: Options<T> = {}
 ) => {
   const memoizedOptions = useDeepCompareMemoize(options);
   const memoizedArgs = useDeepCompareMemoize(args);
@@ -30,7 +31,7 @@ const useContractMutation = (
   const [state, setState] = useState<StateValues>({
     isLoading: false,
     error: null,
-    data: null,
+    data: memoizedOptions.initData ?? null,
   });
 
   const patchState = useCallback((newState: Partial<StateValues>) => {
@@ -63,10 +64,8 @@ const useContractMutation = (
 
     try {
       let result: ContractTransaction = await contract[method](...memoizedArgs);
-      if (memoizedOptions.pipes) {
-        memoizedOptions.pipes.forEach(async (pipe) => {
-          result = await Promise.resolve(pipe(result));
-        });
+      if (memoizedOptions.pipe) {
+        result = await memoizedOptions.pipe(result);
       }
       if (memoizedOptions.onSuccess) {
         memoizedOptions.onSuccess(result);
