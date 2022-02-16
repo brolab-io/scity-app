@@ -18,6 +18,8 @@ const Connect: React.FC = () => {
   const connected = injected === connector;
   const disabled = !triedEager || !!activatingConnector || connected || !!error;
 
+  // console.log(!triedEager, !!activatingConnector, connected, !!error);
+
   const handleClick = useCallback(() => {
     connectWallet();
   }, [connectWallet]);

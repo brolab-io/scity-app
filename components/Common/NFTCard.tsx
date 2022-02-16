@@ -12,24 +12,24 @@ const images = [
   "https://res.cloudinary.com/dcrbaasbt/image/upload/v1640017575/Toronto_uohpdi.png",
 ];
 
-const bgStyles = [
-  {
-    background: "radial-gradient(50% 50% at 50% 50%, #FBE9BC 0%, #F1B540 100%)",
-  },
-  {
-    background: "radial-gradient(50% 50% at 50% 50%, #833EF1 0%, #491CB5 100%)",
-  },
-  {
-    background: "radial-gradient(50% 50% at 50% 50%, #46B8C9 0%, #226771 100%)",
-  },
-  {
+const RARE = {
+  b: {
     background: "radial-gradient(50% 50% at 50% 50%, #AA75E4 0%, #6320AB 100%)",
   },
-];
+  a: {
+    background: "radial-gradient(50% 50% at 50% 50%, #833EF1 0%, #491CB5 100%)",
+  },
+  r: {
+    background: "radial-gradient(50% 50% at 50% 50%, #46B8C9 0%, #226771 100%)",
+  },
+  sr: {
+    background: "radial-gradient(50% 50% at 50% 50%, #FBE9BC 0%, #F1B540 100%)",
+  },
+};
 
 type InfoProps = {
   title: string;
-  value: string;
+  value: string | number;
 };
 export const CardBasicInfo: React.FC<InfoProps> = ({ title, value }) => {
   return (
@@ -68,10 +68,11 @@ type Props = {
   onClickSell?: (nft: NFT) => void;
   className?: string;
   metadata: LandNFT;
-  CardHeader: JSX.Element;
+  CardHeader?: JSX.Element;
   CardFooter: JSX.Element;
   allowSell?: boolean;
   allowStake?: boolean;
+  attributes?: Record<string, string | number>;
 };
 
 const NFTCard: React.FC<Props> = ({
@@ -83,29 +84,33 @@ const NFTCard: React.FC<Props> = ({
   allowStake,
   CardHeader,
   CardFooter,
+  attributes,
 }) => {
   const index = Math.floor(Math.random() * 4);
 
   const handleClickSell = useCallback(() => {
     if (onClickSell) {
       onClickSell({
+        ...metadata,
         image: images[index],
       });
     }
-  }, [onClickSell, index]);
+  }, [onClickSell, index, metadata]);
 
   const Card = useCallback(() => {
+    const rare = ((attributes?.rare as string | undefined)?.toLowerCase() ||
+      "b") as keyof typeof RARE;
     return (
       <>
         <div
           className="relative aspect-[274/258] w-full items-center flex justify-center"
-          style={bgStyles[index]}
+          style={RARE[rare]}
         >
           <div className="absolute left-2.5 top-2.5">
             <Image
               quality={100}
               alt=""
-              src="/assets/images/icons/rareN.png"
+              src={`/assets/images/icons/rare-${rare}.png`}
               height={45}
               width={45}
             />
@@ -146,7 +151,7 @@ const NFTCard: React.FC<Props> = ({
         <div className="p-4 space-y-2">{CardFooter}</div>
       </>
     );
-  }, [metadata, allowSell, allowStake, handleClickSell, index, CardHeader, CardFooter]);
+  }, [metadata, allowSell, allowStake, handleClickSell, index, CardHeader, CardFooter, attributes]);
 
   if (!href) {
     return (

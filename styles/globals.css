@@ -28,6 +28,7 @@ body {
   font-family: "Poppins", "Roboto", sans-serif;
   overflow-x: hidden;
   scroll-behavior: smooth;
+  overflow-y: overlay;
 }
 
 #__next {

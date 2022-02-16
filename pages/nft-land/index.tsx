@@ -1,5 +1,5 @@
 import { GetServerSideProps, NextPage } from "next";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ICityData } from "../../lib/types";
 import CardList from "../../components/BuyLand/CardList";
 import { useQuery } from "react-query";
@@ -11,6 +11,10 @@ import BuyLandBuySection from "../../components/BuyLand/BuySection";
 import Loading from "../../components/UI/Loading";
 import useLandContract from "../../hooks/useLandContract";
 import NewLayout from "../../components/UI/NewLayout";
+import useContractRPC from "../../hooks/useContractRPC";
+import { ContractTypes } from "../../dapp/config";
+import { BigNumber, ContractReceipt, ContractTransaction, Event, utils } from "ethers";
+import useContractMutation from "../../hooks/useContractMutation";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const slug =
@@ -26,7 +30,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   } catch (error) {
-    console.log(error);
     return { props: { cities: [] } };
   }
 };
@@ -40,8 +43,55 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
   const [selectedCity, setSelectedCity] = useState<ICityData | undefined | null>(city);
   const cardReceivedRef = useRef<CardReceivedRef>(null);
 
-  const { info, isFetchingInfo, buyLand, boughtTokenURI, isBuying } = useLandContract(
-    selectedCity?.slug
+  // Fetch info of selected city
+  const { data: infoOpenedArea, isLoading: isFetchingInfo } = useContractRPC(
+    ContractTypes.LAND,
+    "getInfoOpenArea",
+    [selectedCity?.slug],
+    {
+      enabled: !!selectedCity,
+    }
+  );
+
+  // Map the data to show
+  const { price, limit, endTime, currentQuantity } = useMemo(() => {
+    const [tokens, price, limit, , endTime] = infoOpenedArea || [];
+    return {
+      price: ((price && utils.formatEther(price)) || selectedCity?.price?.toString()) ?? "0",
+      limit: limit?.toString() ?? selectedCity?.numberOfSlots ?? 0,
+      endTime:
+        (endTime && new Date(endTime * 1000)) ||
+        (selectedCity?.closeTime && new Date(selectedCity.closeTime)) ||
+        new Date(),
+      currentQuantity: tokens?.length ?? 0,
+    };
+  }, [infoOpenedArea, selectedCity]);
+
+  // const { buyLand, boughtTokenURI, isBuying } = useLandContract(selectedCity?.slug);
+  const {
+    mutate: buyLand,
+    isLoading: isBuying,
+    data: boughtTokenURI,
+  } = useContractMutation(
+    ContractTypes.LAND,
+    "buyLand",
+    [
+      selectedCity?.slug,
+      {
+        value: utils.parseEther(price),
+      },
+    ],
+    {
+      enabled: !!selectedCity,
+      pipes: [
+        (txTransaction: ContractTransaction) => txTransaction.wait(),
+        (txReceipt: ContractReceipt) => {
+          const buyLandEvent = txReceipt?.events?.find((event: Event) => event.event === "BuyLand");
+          const [, tokenId] = buyLandEvent?.args || [];
+          return tokenId as BigNumber | undefined;
+        },
+      ],
+    }
   );
 
   // Fetch metaData once the land is bought
@@ -55,15 +105,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
     }
   );
 
-  const price = info.price ?? selectedCity?.price?.toString() ?? "0";
-  const currentQuantity = info.currentQuantity ?? 0;
-  const endTime =
-    (info.endTime && new Date(info.endTime * 1000)) ||
-    (selectedCity && new Date(selectedCity.closeTime)) ||
-    new Date();
-
-  const limit = info.limit ?? selectedCity?.numberOfSlots ?? 0;
-
+  // When fetched metaData, show the card
   useEffect(() => {
     if (cardMetaData) {
       cardReceivedRef.current?.showCard(cardMetaData);

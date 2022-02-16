@@ -11,10 +11,8 @@ import RoadMap from "../components/Home/RoadMap";
 import HomeAbout from "../components/Home/About";
 import InfinityTown from "../components/Home/InfinityTown";
 import styles from "../styles/Home.module.css";
-import { useEffect } from "react";
 import StayUpToDate from "../components/Home/StayUpToDate";
 import Partner from "../components/Home/Partner";
-import clsx from "clsx";
 import LandingLayout from "../components/UI/LandingLayout";
 
 export const getServerSideProps = async () => {
@@ -23,8 +21,8 @@ export const getServerSideProps = async () => {
     return {
       props: { cities },
     };
-  } catch (error) {
-    return { props: { error, cities: [] } };
+  } catch ({ message }) {
+    return { props: { error: { message }, cities: [] } };
   }
 };
 

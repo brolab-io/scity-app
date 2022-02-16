@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import isEqual from "react-fast-compare";
 
 type FilterOption = {
@@ -32,10 +32,16 @@ const FilterItem: React.FC<ItemProps> = ({ activeFilter, setActiveFilter, active
 
 type Props = {
   options: FilterOption[];
+  onChange?: (filter: FilterOption) => void;
 };
 
-const TabsFilter: React.FC<Props> = ({ options }) => {
+const TabsFilter: React.FC<Props> = ({ options, onChange }) => {
   const [activeFilter, setActiveFilter] = useState(options[0]);
+
+  useEffect(() => {
+    onChange?.(activeFilter);
+  }, [activeFilter, onChange]);
+
   return (
     <div className="flex gap-x-1">
       {options.map((item) => (

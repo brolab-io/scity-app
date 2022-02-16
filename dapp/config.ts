@@ -4,6 +4,7 @@ import boxAbiTest from "../dapp/abi/test/box-abi.json";
 import companyAbiTest from "../dapp/abi/test/company-abi.json";
 import privatePackAbiTest from "../dapp/abi/test/private-pack-abi.json";
 import busdAbiTest from "../dapp/abi/test/busd-abi.json";
+import marketAbiTest from "../dapp/abi/test/market-abi.json";
 
 // ABI PRODUCTION
 import landAbiProduction from "../dapp/abi/production/land-abi.json";
@@ -11,6 +12,7 @@ import boxAbiProduction from "../dapp/abi/production/box-abi.json";
 import companyAbiProduction from "../dapp/abi/production/company-abi.json";
 import privateBoxProduction from "../dapp/abi/production/private-pack-abi.json";
 import busdAbiProduction from "../dapp/abi/production/busd-abi.json";
+import marketAbiProduction from "../dapp/abi/production/market-abi.json";
 
 type ENV = "test" | "development" | "staging" | "production";
 
@@ -41,7 +43,7 @@ export const getMetaMaskNetworks = () => {
             symbol: "BNB",
             decimals: 18,
           },
-          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+          rpcUrls: ["https://data-seed-prebsc-1-s2.binance.org:8545/"],
           blockExplorerUrls: ["https://testnet.bscscan.com"],
         },
       ];
@@ -71,6 +73,7 @@ export enum ContractTypes {
   COMPANY = "COMPANY",
   PRIVATE_PACK = "PRIVATE_PACK",
   BUSD = "BUSD",
+  MARKET = "MARKET",
 }
 
 export const getContractConfig = () => {
@@ -99,6 +102,10 @@ export const getContractConfig = () => {
           contractAddress: process.env["NEXT_PUBLIC_CONTRACT_BUSD"] ?? "",
           abi: busdAbiTest,
         },
+        [ContractTypes.MARKET]: {
+          contractAddress: process.env["NEXT_PUBLIC_CONTRACT_MARKET"] ?? "",
+          abi: marketAbiTest,
+        },
       };
     case "production":
       return {
@@ -122,6 +129,10 @@ export const getContractConfig = () => {
         [ContractTypes.BUSD]: {
           contractAddress: process.env["NEXT_PUBLIC_CONTRACT_BUSD"] ?? "",
           abi: busdAbiProduction,
+        },
+        [ContractTypes.MARKET]: {
+          contractAddress: process.env["NEXT_PUBLIC_CONTRACT_MARKET"] ?? "",
+          abi: marketAbiProduction,
         },
       };
     default:

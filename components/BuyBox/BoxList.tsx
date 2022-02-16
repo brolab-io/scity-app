@@ -9,7 +9,7 @@ type Props = {
 
 const BoxList: React.FC<Props> = ({ boxes, openBox, approve, isApproved }) => {
   return (
-    <div className="grid grid-cols-2 gap-4 px-4 lg:px-6 lg:gap-6 xl:px-8 xl:gap-10 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 lg:gap-6 xl:gap-10 md:grid-cols-3 xl:grid-cols-4">
       {boxes.map((item, index) => (
         <BoxItem
           item={item}

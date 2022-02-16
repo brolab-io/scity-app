@@ -49,7 +49,7 @@ const BuyLandBuySection: React.FC<Props> = ({
         {cities.map((city) => (
           <Clickable
             onClick={() => onClickSelectCity(city)}
-            className={`bg-radial-gradient-purple p-3 md:p-4 lg:p-5 xl:p-6 rounded-xl ${
+            className={`bg-radial-gradient-purple p-3 md:p-4 lg:p-5 xl:p-6 rounded-xl aspect-square ${
               selectedCity?.id === city.id ? "bg-opacity-100 ring" : "bg-opacity-50"
             }`}
             key={city.id}

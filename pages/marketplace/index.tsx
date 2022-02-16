@@ -57,7 +57,7 @@ const Marketplace: NextPage = () => {
             <NFTCard
               key={index}
               metadata={testMetadata}
-              href={`marketplace/nft_${index}`}
+              href={`/marketplace/nft_${index}`}
               CardHeader={
                 <>
                   <CardBasicInfo title="Mining Efficiency" value={`130%`} />

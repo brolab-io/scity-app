@@ -76,6 +76,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           sizes="192x192"
           href="/favicon/android-icon-192x192.png"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="144x144"
+          href="/favicon/android-icon-144x144.png"
+        />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />

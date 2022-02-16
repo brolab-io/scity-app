@@ -6,6 +6,15 @@ const request = axios.create({
   baseURL: getAPIURL(),
 });
 
+type PaginationResponse<T> = {
+  items: T[];
+  page: number;
+  pageCount: number;
+  total: number;
+  totalPages: number;
+  hasNextPage: boolean;
+};
+
 export const getNFTLandMetaData = (
   queryContext: QueryFunctionContext<[string, string]>
 ): Promise<LandNFT> => {
@@ -15,7 +24,19 @@ export const getNFTLandMetaData = (
 };
 
 export const getOpenedCities = () => {
+  return request.get("/cities/openedCities").then((response) => response.data);
+};
+
+export const getLandNFTsByOwner = (
+  queryContext: QueryFunctionContext<[string, string, number, number]>
+): Promise<PaginationResponse<LandNFT>> => {
   return request
-    .get("/nft-cities/openedCities")
+    .get(`/nft/${queryContext.queryKey[0]}`, {
+      params: {
+        address: queryContext.queryKey[1],
+        page: queryContext.queryKey[2],
+        pageSize: queryContext.queryKey[3],
+      },
+    })
     .then((response) => response.data);
 };

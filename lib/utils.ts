@@ -78,9 +78,9 @@ export const rangeWithDots = (
     return Array.from(Array(end - start + 1), (_, i) => i + start);
   }
 
-  var sideWidth = maxLength < 9 ? 1 : 2;
-  var leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
-  var rightWidth = (maxLength - sideWidth * 2 - 2) >> 1;
+  const sideWidth = maxLength < 9 ? 1 : 2;
+  const leftWidth = (maxLength - sideWidth * 2 - 3) >> 1;
+  const rightWidth = (maxLength - sideWidth * 2 - 2) >> 1;
   if (totalPages <= maxLength) {
     // no breaks in list
     return range(1, totalPages);
