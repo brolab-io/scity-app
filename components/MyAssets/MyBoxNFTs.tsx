@@ -1,63 +1,15 @@
-import { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import { ethers } from "ethers";
 import Image from "next/image";
-import { useEffect } from "react";
-import { ContractTypes } from "../../dapp/config";
-import useContractMutation from "../../hooks/useContractMutation";
-import useContractQuery from "../../hooks/useContractQuery";
+import useOpenBox from "../../hooks/useOpenBox";
 import EmptyList from "../Common/EmptyList";
-import { callPublicRpc } from "../EtherContext";
 import LoadingWithLogo from "../UI/LoadingWithLogo";
 
 const MyBoxNFTs = () => {
-  const { account } = useWeb3React<Web3Provider>();
-
-  const { data: totalBoxes, isLoading } = useContractQuery(
-    ContractTypes.COMPANY,
-    "balanceOf",
-    [account!],
-    {
-      enabled: !!account,
-    }
-  );
-
-  const { data: totalApprovedBox } = useContractQuery(
-    ContractTypes.BOX,
-    "allowance",
-    [account!, process.env["NEXT_PUBLIC_CONTRACT_COMPANY"]],
-    {
-      enabled: !!account,
-    }
-  );
-
-  const isApproved = totalApprovedBox && totalApprovedBox.gt(0);
-
-  const {
-    isLoading: isOpeningBox,
-    mutate: openBox,
-    data: contractTx,
-  } = useContractMutation(ContractTypes.COMPANY, "openBox");
-
-  useEffect(() => {
-    if (contractTx) {
-      const getTokenURI = async () => {
-        const contractReceipt: ethers.ContractReceipt = await contractTx.wait();
-        const openBoxEvent = contractReceipt?.events?.find(
-          (event: ethers.Event) => event.event === "OpenBox"
-        );
-        const [, tokenId] = openBoxEvent?.args || [];
-        const businessTokenURI = await callPublicRpc(ContractTypes.COMPANY, "tokenURI", tokenId);
-        return businessTokenURI;
-      };
-      getTokenURI().then(console.log);
-    }
-  }, [contractTx]);
+  const { totalBoxes, openBox, isApproved, isFetchingTotalBoxes } = useOpenBox();
 
   return (
     <div>
-      {isLoading ? <LoadingWithLogo className="flex justify-center py-40" /> : null}
-      {!isLoading && !totalBoxes ? (
+      {isFetchingTotalBoxes ? <LoadingWithLogo className="flex justify-center py-40" /> : null}
+      {!isFetchingTotalBoxes && !totalBoxes ? (
         <EmptyList className="flex justify-center py-40" message={`No box`} />
       ) : null}
       <div className="grid grid-cols-2 gap-4 lg:gap-6 xl:gap-10 md:grid-cols-3 xl:grid-cols-4">

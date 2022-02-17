@@ -9,13 +9,13 @@ import React, {
 import Modal from "../Common/Modal";
 import NFTCard, { CardBasicInfo, CardPriceInfo } from "../Common/NFTCard";
 
-type Props = {};
+type Props = { title?: string; children?: React.ReactNode };
 
 export type CardReceivedRef = {
   showCard: (metadata: LandNFT) => void;
 };
 
-const CardReceived = (props: Props, ref: ForwardedRef<CardReceivedRef>) => {
+const CardReceived = ({ title }: Props, ref: ForwardedRef<CardReceivedRef>) => {
   const [cardMetaData, setCardMetaData] = useState<LandNFT | null>(null);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -49,7 +49,7 @@ const CardReceived = (props: Props, ref: ForwardedRef<CardReceivedRef>) => {
     <Modal isOpen={isModalOpen} onClose={onClickClose} className="bg-[#171923]">
       <div className="p-4 w-[300px] select-none">
         <div className="mb-6 text-center">
-          <h3 className="text-white text-[21px]">You received a land card</h3>
+          <h3 className="text-white text-[21px]">{title}</h3>
         </div>
         {cardMetaData && (
           <NFTCard
@@ -71,4 +71,4 @@ const CardReceived = (props: Props, ref: ForwardedRef<CardReceivedRef>) => {
   );
 };
 
-export default forwardRef<CardReceivedRef>(CardReceived);
+export default forwardRef<CardReceivedRef, Props>(CardReceived);

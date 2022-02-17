@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { memo } from "react";
+import { memo, useRef } from "react";
 import isEqual from "react-fast-compare";
 
 // Components
@@ -12,6 +12,7 @@ import useBoxContract from "../../hooks/useBoxContract";
 import useCompanyContract from "../../hooks/useCompanyContract";
 import NewLayout from "../../components/UI/NewLayout";
 import { NextSeo } from "next-seo";
+import CardRecieved, { CardReceivedRef } from "../../components/BuyLand/CardRecieved";
 
 const BuyBoxPage: NextPage = () => {
   const {
@@ -26,6 +27,7 @@ const BuyBoxPage: NextPage = () => {
   } = useBoxContract();
 
   const { openBox } = useCompanyContract(false);
+  const cardReceivedRef = useRef<CardReceivedRef>(null);
 
   return (
     <>
@@ -47,6 +49,8 @@ const BuyBoxPage: NextPage = () => {
           openBox={openBox}
         />
       </NewLayout>
+      {/*  MODAL SHOW ON CARD RECEIVED!  */}
+      <CardRecieved title="You received a business card" ref={cardReceivedRef} />
     </>
   );
 };

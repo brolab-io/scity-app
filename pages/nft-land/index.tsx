@@ -137,7 +137,7 @@ const CityPage: NextPage<Props> = ({ cities, city }) => {
       {isFetchingInfo || isFetchingMetaData || isBuying ? <Loading /> : null}
 
       {/*  MODAL SHOW ON CARD RECEIVED!  */}
-      <CardReceived ref={cardReceivedRef} />
+      <CardReceived title="You received a land card" ref={cardReceivedRef} />
     </NewLayout>
   );
 };
