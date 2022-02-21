@@ -1,7 +1,7 @@
 import { useEtherContext } from "../components/EtherContext";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDeepCompareMemoize } from "use-deep-compare-effect";
-import { ContractTypes } from "../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 import { ContractTransaction } from "ethers";
 
 type Options<T> = {

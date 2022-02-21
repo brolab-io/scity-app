@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useDeepCompareEffect, {
   useDeepCompareMemoize,
 } from "use-deep-compare-effect";
-import { ContractTypes } from "../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 
 type Options = {
   enabled?: boolean;

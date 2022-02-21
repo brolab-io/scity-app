@@ -7,14 +7,16 @@ import Clickable from "../UI/Clickable";
 import styles from "./InfinityTown.module.css";
 
 const PreloadAutoResize: React.FC = ({ children }) => {
-  const [, height] = useWindowSize();
+  const [width, height] = useWindowSize();
 
   const style = useMemo(
     () => ({
       height: `${height}px`,
+      maxWidth: `${width / 2}px`,
     }),
-    [height]
+    [height, width]
   );
+
   return (
     <div style={style} className={clsx("w-screen bg-center", styles.bg)}>
       {children}
@@ -28,7 +30,7 @@ const InfinityTown = () => {
     true
   );
   const threeJsStatus = useScript("js/lib/three.min.js?v=1529488004622", jqueryStatus === "ready");
-  const mainStatus = useScript("js/main.min.js?v=1529488004622", threeJsStatus === "ready");
+  useScript("js/main.min.js?v=1529488004622", threeJsStatus === "ready");
 
   const handleScrollDown = () => {
     if (typeof window !== "undefined") {

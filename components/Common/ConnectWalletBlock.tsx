@@ -1,15 +1,14 @@
-import { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
 import NavbarAccountPopover from "./NavbarAccountPopover";
 import clsx from "clsx";
-import Balance from "./Balance";
-import Account from "./Account";
 import Connect from "./Connect";
 import Clickable from "../UI/Clickable";
+import { useNearContext } from "../NearContext";
+import Account from "./Account";
+import Balance from "./Balance";
 
 const ConnectWalletBlock = () => {
-  const { active } = useWeb3React<Web3Provider>();
-  return active ? (
+  const { isSignedIn } = useNearContext();
+  return isSignedIn ? (
     <div className="relative flex flex-none group lg:flex">
       <Clickable href="/inventory">
         <a

@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "react-toastify";
 import useConnectWallet from "./useConnectWallet";
-import { ContractTypes } from "../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 
 type BoxData = {
   totalSupply: number;

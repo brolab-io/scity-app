@@ -5,7 +5,7 @@ import { useWeb3React } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
 import logger from "../lib/logger";
-import { ContractTypes, getContractConfig, getMetaMaskNetworks } from "../dapp/config";
+import { ContractTypes, getContractConfig, getMetaMaskNetworks } from "../dapp/bsc.config";
 
 const contractsAbi = getContractConfig();
 const metaMaskNetworks = getMetaMaskNetworks();

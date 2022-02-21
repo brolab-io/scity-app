@@ -1,4 +1,4 @@
-import { getMetaMaskNetworks } from "./../dapp/config";
+import { getMetaMaskNetworks } from "../dapp/bsc.config";
 import { waitPromise } from "../lib/utils";
 import { useCallback, useMemo } from "react";
 import { useAppContext } from "./../components/AppContext";

@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback } from "react";
 import { ICityData } from "../../lib/types";
 import Clickable from "../UI/Clickable";
 import Image from "next/image";
@@ -50,15 +50,15 @@ const BuyLandBuySection: React.FC<Props> = ({
           <Clickable
             onClick={() => onClickSelectCity(city)}
             className={`bg-radial-gradient-purple p-3 md:p-4 lg:p-5 xl:p-6 rounded-xl aspect-square ${
-              selectedCity?.id === city.id ? "bg-opacity-100 ring" : "bg-opacity-50"
+              selectedCity?.slug === city.slug ? "bg-opacity-100 ring" : "bg-opacity-50"
             }`}
-            key={city.id}
+            key={city.slug}
           >
             <div className="p-4 cursor-pointer">
               <Image
                 draggable={false}
                 className={`transform ease-in-out duration-300 ${
-                  selectedCity?.id === city.id ? "scale-110" : "hover:scale-110"
+                  selectedCity?.slug === city.slug ? "scale-110" : "hover:scale-110"
                 }`}
                 src={city.image}
                 height={600}
@@ -77,7 +77,7 @@ const BuyLandBuySection: React.FC<Props> = ({
         ))}
       </div>
     ),
-    [cities, onClickSelectCity, selectedCity?.id]
+    [cities, onClickSelectCity, selectedCity?.slug]
   );
 
   const buttonTitle = isOutOfStock ? "Out of stock" : isOutOfTime ? "Out of time" : "Buy now";

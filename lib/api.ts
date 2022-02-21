@@ -1,6 +1,6 @@
 import axios from "axios";
 import { QueryFunctionContext } from "react-query";
-import { getAPIURL } from "../dapp/config";
+import { getAPIURL } from "../dapp/bsc.config";
 
 const request = axios.create({
   baseURL: getAPIURL(),

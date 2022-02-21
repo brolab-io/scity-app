@@ -24,6 +24,7 @@ import EtherContextProvider from "../components/EtherContext";
 import * as gtag from "../lib/gtag";
 import { useRouter } from "next/router";
 import AppLayout from "../components/UI/AppLayout";
+import NearContextProvider from "../components/NearContext";
 
 const queryClient = new QueryClient();
 
@@ -122,7 +123,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default function App(props: AppProps) {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <EtherContextProvider>
+      <NearContextProvider>
         <AppContextProvider>
           <QueryClientProvider client={queryClient}>
             <MyApp {...props} />
@@ -130,7 +131,7 @@ export default function App(props: AppProps) {
             <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </AppContextProvider>
-      </EtherContextProvider>
+      </NearContextProvider>
     </Web3ReactProvider>
   );
 }

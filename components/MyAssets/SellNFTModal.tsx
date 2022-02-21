@@ -13,7 +13,7 @@ import Modal from "../Common/Modal";
 import SvgChevronDown from "../Icons/SvgChevronDown";
 import MarketPlaceRules from "../MarketPlace/Rules";
 import { Disclosure, Transition } from "@headlessui/react";
-import { ContractTypes, getContractConfig } from "../../dapp/config";
+import { ContractTypes, getContractConfig } from "../../dapp/bsc.config";
 import { useEtherContext } from "../EtherContext";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";

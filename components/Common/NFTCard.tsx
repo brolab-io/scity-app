@@ -67,12 +67,11 @@ type Props = {
   href?: string;
   onClickSell?: (nft: NFT) => void;
   className?: string;
-  metadata: LandNFT;
+  metadata: any;
   CardHeader?: JSX.Element;
   CardFooter: JSX.Element;
   allowSell?: boolean;
   allowStake?: boolean;
-  attributes?: Record<string, string | number>;
 };
 
 const NFTCard: React.FC<Props> = ({
@@ -84,7 +83,6 @@ const NFTCard: React.FC<Props> = ({
   allowStake,
   CardHeader,
   CardFooter,
-  attributes,
 }) => {
   const index = Math.floor(Math.random() * 4);
 
@@ -98,7 +96,7 @@ const NFTCard: React.FC<Props> = ({
   }, [onClickSell, index, metadata]);
 
   const Card = useCallback(() => {
-    const rare = ((attributes?.rare as string | undefined)?.toLowerCase() ||
+    const rare = ((metadata?.rare as string | undefined)?.toLowerCase() ||
       "b") as keyof typeof RARE;
     return (
       <>
@@ -144,14 +142,14 @@ const NFTCard: React.FC<Props> = ({
         </div>
 
         <div className="p-4 space-y-2">
-          <h6 className="font-semibold text-white">{metadata?.name || "#0 Card Name"}</h6>
+          <h6 className="font-semibold text-white">{metadata?.title || "#0 Card Name"}</h6>
           {CardHeader}
         </div>
         <div className={styles.subtract}></div>
         <div className="p-4 space-y-2">{CardFooter}</div>
       </>
     );
-  }, [metadata, allowSell, allowStake, handleClickSell, index, CardHeader, CardFooter, attributes]);
+  }, [metadata, allowSell, allowStake, handleClickSell, index, CardHeader, CardFooter]);
 
   if (!href) {
     return (

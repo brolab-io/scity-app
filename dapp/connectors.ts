@@ -1,4 +1,4 @@
-import { getMetaMaskNetworks } from "./config";
+import { getMetaMaskNetworks } from "./bsc.config";
 import { InjectedConnector } from "@web3-react/injected-connector";
 const metaMaskNetworks = getMetaMaskNetworks();
 

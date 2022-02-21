@@ -1,18 +1,18 @@
 // ABI STAGING
-import landAbiTest from "../dapp/abi/test/land-abi.json";
-import boxAbiTest from "../dapp/abi/test/box-abi.json";
-import companyAbiTest from "../dapp/abi/test/company-abi.json";
-import privatePackAbiTest from "../dapp/abi/test/private-pack-abi.json";
-import busdAbiTest from "../dapp/abi/test/busd-abi.json";
-import marketAbiTest from "../dapp/abi/test/market-abi.json";
+import landAbiTest from "./abi/test/land-abi.json";
+import boxAbiTest from "./abi/test/box-abi.json";
+import companyAbiTest from "./abi/test/company-abi.json";
+import privatePackAbiTest from "./abi/test/private-pack-abi.json";
+import busdAbiTest from "./abi/test/busd-abi.json";
+import marketAbiTest from "./abi/test/market-abi.json";
 
 // ABI PRODUCTION
-import landAbiProduction from "../dapp/abi/production/land-abi.json";
-import boxAbiProduction from "../dapp/abi/production/box-abi.json";
-import companyAbiProduction from "../dapp/abi/production/company-abi.json";
-import privateBoxProduction from "../dapp/abi/production/private-pack-abi.json";
-import busdAbiProduction from "../dapp/abi/production/busd-abi.json";
-import marketAbiProduction from "../dapp/abi/production/market-abi.json";
+import landAbiProduction from "./abi/production/land-abi.json";
+import boxAbiProduction from "./abi/production/box-abi.json";
+import companyAbiProduction from "./abi/production/company-abi.json";
+import privateBoxProduction from "./abi/production/private-pack-abi.json";
+import busdAbiProduction from "./abi/production/busd-abi.json";
+import marketAbiProduction from "./abi/production/market-abi.json";
 
 type ENV = "test" | "development" | "staging" | "production";
 

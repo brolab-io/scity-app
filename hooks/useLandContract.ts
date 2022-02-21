@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useEtherContext } from "../components/EtherContext";
 import { IAreaInfo } from "../lib/types";
 import useConnectWallet from "./useConnectWallet";
-import { ContractTypes } from "../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 
 type LandData = {
   info: Partial<IAreaInfo>;

@@ -2,9 +2,12 @@ import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useState } from "react";
 import { useQuery } from "react-query";
+import { ContractTypes } from "../../dapp/near.config";
+import useNearContractQuery from "../../hooks/useNearContractQuery";
 import { getLandNFTsByOwner } from "../../lib/api";
 import EmptyList from "../Common/EmptyList";
 import NFTCard, { CardBasicInfo, CardPriceInfo } from "../Common/NFTCard";
+import { useNearContext } from "../NearContext";
 import LoadingWithLogo from "../UI/LoadingWithLogo";
 import Pagination from "../UI/Pagination";
 
@@ -13,19 +16,36 @@ type Props = {
 };
 
 const MyLandNFTs: React.FC<Props> = ({ openSellModal }) => {
-  const { account } = useWeb3React<Web3Provider>();
+  const { account } = useNearContext();
 
   const [currentPage, setCurrentPage] = useState(1);
   const PAGE_COUNT = 8;
 
-  const { data, isLoading } = useQuery(
-    ["lands", account!, currentPage, PAGE_COUNT],
-    getLandNFTsByOwner,
+  const { data: lands, isLoading } = useNearContractQuery<any[]>(
+    ContractTypes.LAND,
+    "nft_tokens_for_owner",
+    {
+      account_id: account?.accountId,
+      from_index: ((currentPage - 1) * PAGE_COUNT).toString(),
+      limit: PAGE_COUNT.toString(),
+    },
     {
       enabled: !!account,
-      keepPreviousData: true,
     }
   );
+
+  const { data: totalLands } = useNearContractQuery<number>(
+    ContractTypes.LAND,
+    "nft_supply_for_owner",
+    {
+      account_id: account?.accountId,
+    },
+    {
+      enabled: !!account,
+    }
+  );
+
+  const totalPages = Math.ceil((totalLands || 0) / PAGE_COUNT);
 
   return (
     <div>
@@ -33,40 +53,35 @@ const MyLandNFTs: React.FC<Props> = ({ openSellModal }) => {
       {isLoading ? <LoadingWithLogo className="flex justify-center py-40" /> : null}
 
       {/*  */}
-      {!isLoading && !data?.items.length ? (
+      {!isLoading && !lands?.length ? (
         <EmptyList className="flex justify-center py-40" message={`No land`} />
       ) : null}
 
       <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:gap-8 lg:grid-cols-4">
-        {data?.items.map((metadata, index) => {
-          const attributes = metadata.attributes.reduce((acc, curr) => {
-            acc[curr.trait_type] = curr.value;
-            return acc;
-          }, {} as Record<string, string | number>);
+        {lands?.map(({ metadata, token_id }, index) => {
           return (
             <NFTCard
               key={index}
               onClickSell={openSellModal}
               metadata={metadata}
-              attributes={attributes}
               allowSell
               allowStake
               CardFooter={
                 <>
                   <CardBasicInfo
                     title="Mining Efficiency"
-                    value={attributes.miningEfficiency ?? 0}
+                    value={metadata.mining_efficiency ?? 0}
                   />
-                  <CardPriceInfo title="Mining Power" value={attributes.miningPower ?? 0} />
+                  <CardPriceInfo title="Mining Power" value={metadata.mining_power ?? 0} />
                 </>
               }
             ></NFTCard>
           );
         })}
       </div>
-      {data?.totalPages ? (
+      {totalPages ? (
         <Pagination
-          pageCount={data.totalPages}
+          pageCount={totalPages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           className="py-4"

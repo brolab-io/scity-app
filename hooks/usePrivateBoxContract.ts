@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { callPublicRpc, useEtherContext } from "../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { TxError } from "../lib/error";
-import { ContractTypes } from "../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 
 type UsePrivateBoxData = {
   info: {

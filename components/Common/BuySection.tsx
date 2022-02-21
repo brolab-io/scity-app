@@ -1,12 +1,10 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import Button from "../UI/Button";
 import Container from "../UI/Container";
 import Image from "next/image";
 import Countdown from "../UI/Countdown";
-import { useWeb3React } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
-import { useRouter } from "next/router";
 import useConnectWallet from "../../hooks/useConnectWallet";
+import { useNearContext } from "../NearContext";
 
 type Props = {
   priceInBSC: string;
@@ -39,7 +37,7 @@ const BuySection: React.FC<Props> = ({
   onClickBuy,
   showEndTime,
 }) => {
-  const { active } = useWeb3React<Web3Provider>();
+  const { isSignedIn } = useNearContext();
   const { connectWallet } = useConnectWallet();
 
   return (
@@ -86,11 +84,11 @@ const BuySection: React.FC<Props> = ({
               </div>
               <Button
                 className="py-2.5 rounded-lg"
-                disabled={!buyEnabled || (buyEnabled && !active)}
+                disabled={!buyEnabled || (buyEnabled && !isSignedIn)}
                 isLoading={isBuying}
-                onClick={active ? onClickBuy : connectWallet}
+                onClick={isSignedIn ? onClickBuy : connectWallet}
               >
-                <span className="text-lg">{active ? buttonTitle : "Connect Wallet"}</span>
+                <span className="text-lg">{isSignedIn ? buttonTitle : "Connect Wallet"}</span>
               </Button>
               <div className="p-4 space-y-2 bg-[#2D3748] rounded-xl">
                 <span className="text-white">Shop Rule:</span>

@@ -1,33 +1,51 @@
 import { NextPage } from "next";
-import { memo, useRef } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import isEqual from "react-fast-compare";
 
 // Components
-import BoxReceived from "../../components/BuyBox/BoxReceived";
 import BuyBoxBuySection from "../../components/BuyBox/BuySection";
 import BuyBoxSeo from "../../components/BuyBox/SEO";
 
-import { ethers } from "ethers";
-import useBoxContract from "../../hooks/useBoxContract";
-import useCompanyContract from "../../hooks/useCompanyContract";
 import NewLayout from "../../components/UI/NewLayout";
 import { NextSeo } from "next-seo";
 import CardRecieved, { CardReceivedRef } from "../../components/BuyLand/CardRecieved";
+import useNearContractQuery from "../../hooks/useNearContractQuery";
+import { ContractTypes, MIN_FEE } from "../../dapp/near.config";
+import useNearContractMutation from "../../hooks/useNearContractMutation";
+import { useNearContext } from "../../components/NearContext";
+import useNearCallbackQuery from "../../hooks/useNearCallbackQuery";
 
 const BuyBoxPage: NextPage = () => {
-  const {
-    price,
-    totalSupply,
-    isBuying,
-    buyBox,
-    isBoughtBox,
-    isApproved,
-    approveBoxes,
-    isApprovingBoxes,
-  } = useBoxContract();
-
-  const { openBox } = useCompanyContract(false);
+  const { data: totalSupply } = useNearContractQuery<number>(
+    ContractTypes.BOX,
+    "get_total_supply",
+    {},
+    {
+      initValue: 1000000000,
+    }
+  );
+  const { account } = useNearContext();
+  const [isBuying, setIsBuying] = useState(false);
+  const { mutate } = useNearContractMutation(ContractTypes.BOX, "buy_box");
   const cardReceivedRef = useRef<CardReceivedRef>(null);
+
+  useNearCallbackQuery(console.log);
+
+  const buyBox = useCallback(() => {
+    setIsBuying(true);
+  }, []);
+
+  useEffect(() => {
+    if (isBuying && account) {
+      mutate({
+        args: {
+          receiver_id: account?.accountId,
+          amount: "1",
+        },
+        amount: (1e23 + MIN_FEE).toLocaleString("fullwide", { useGrouping: false }),
+      });
+    }
+  }, [isBuying, mutate, account]);
 
   return (
     <>
@@ -35,19 +53,19 @@ const BuyBoxPage: NextPage = () => {
       <NewLayout title="NFT Business">
         <BuyBoxSeo />
         <BuyBoxBuySection
-          currentQuantity={Number(totalSupply.toString())}
-          priceInBSC={ethers.utils.formatEther(price)}
+          currentQuantity={Number((totalSupply! - 1000000000).toString())}
+          priceInBSC="0"
           priceInUSD={"6.6"}
           onClickBuyNow={buyBox}
           isProcessing={isBuying}
         />
-        <BoxReceived
+        {/* <BoxReceived
           isLoading={isApprovingBoxes}
           approve={approveBoxes}
           isApproved={isApproved}
           isBoughtBox={isBoughtBox}
           openBox={openBox}
-        />
+        /> */}
       </NewLayout>
       {/*  MODAL SHOW ON CARD RECEIVED!  */}
       <CardRecieved title="You received a business card" ref={cardReceivedRef} />

@@ -1,10 +1,23 @@
 import Image from "next/image";
-import useOpenBox from "../../hooks/useOpenBox";
+import { useCallback } from "react";
+import { ContractTypes, MIN_FEE } from "../../dapp/near.config";
+import useNearContractMutation from "../../hooks/useNearContractMutation";
 import EmptyList from "../Common/EmptyList";
+import { useNearContext } from "../NearContext";
 import LoadingWithLogo from "../UI/LoadingWithLogo";
 
 const MyBoxNFTs = () => {
-  const { totalBoxes, openBox, isApproved, isFetchingTotalBoxes } = useOpenBox();
+  const { account } = useNearContext();
+  const totalBoxes = 3;
+  const { mutate } = useNearContractMutation(ContractTypes.BUSINESS, "open_box");
+  const isFetchingTotalBoxes = false;
+
+  const openBox = useCallback(() => {
+    mutate({
+      args: {},
+      amount: MIN_FEE.toLocaleString("fullwide", { useGrouping: false }),
+    });
+  }, [mutate]);
 
   return (
     <div>
@@ -19,15 +32,9 @@ const MyBoxNFTs = () => {
             <div className="py-1 mt-4 text-center md:mt-2 lg:mt-1">
               <span className="font-semibold text-white lg:text-lg xl:text-xl">BUSINESS BOX</span>
             </div>
-            {isApproved ? (
-              <button onClick={openBox} className="w-full rounded-xl button button-magenta">
-                <span className="text-[12px] md:text-[14px] lg:text-[16px]">Open</span>
-              </button>
-            ) : (
-              <button className="w-full rounded-xl button button-magenta">
-                <span className="text-[12px] md:text-[14px] lg:text-[16px]">Approve Boxes</span>
-              </button>
-            )}
+            <button onClick={openBox} className="w-full rounded-xl button button-magenta">
+              <span className="text-[12px] md:text-[14px] lg:text-[16px]">Open</span>
+            </button>
           </div>
         ))}
       </div>

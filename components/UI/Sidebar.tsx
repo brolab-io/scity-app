@@ -10,6 +10,11 @@ const SidebarItems = () => {
   const memuItems = useMemo(
     () => [
       {
+        title: "3D City",
+        href: "/3d-city",
+        icon: "/assets/images/icons/NFT-land.svg",
+      },
+      {
         title: "Marketplace",
         href: "/marketplace",
         icon: "/assets/images/icons/marketplace.svg",

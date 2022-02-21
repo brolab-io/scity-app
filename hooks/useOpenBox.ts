@@ -3,7 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import { ContractReceipt, Event } from "ethers";
 import { useMemo } from "react";
 import { callPublicRpc } from "../components/EtherContext";
-import { ContractTypes, getContractConfig } from "../dapp/config";
+import { ContractTypes, getContractConfig } from "../dapp/bsc.config";
 import useContractMutation from "./useContractMutation";
 import useContractQuery from "./useContractQuery";
 
@@ -20,14 +20,15 @@ const useOpenBox = () => {
   });
 
   // Check if user has approved boxes to the company contract
-  const { data: totalApprovedBox, refetch: recheckApprovedBoxes } = useContractQuery(
-    ContractTypes.BOX,
-    "allowance",
-    [account!, getContractConfig().COMPANY.contractAddress],
-    {
-      enabled: !!account,
-    }
-  );
+  const { data: totalApprovedBox, refetch: recheckApprovedBoxes } =
+    useContractQuery(
+      ContractTypes.BOX,
+      "allowance",
+      [account!, getContractConfig().COMPANY.contractAddress],
+      {
+        enabled: !!account,
+      }
+    );
 
   const isApproved = totalApprovedBox && totalApprovedBox.gt(0);
 
@@ -47,7 +48,11 @@ const useOpenBox = () => {
         (event: Event) => event.event === "OpenBox"
       );
       const [, tokenId] = openBoxEvent?.args || [];
-      const tokenURI = await callPublicRpc(ContractTypes.COMPANY, "tokenURI", tokenId);
+      const tokenURI = await callPublicRpc(
+        ContractTypes.COMPANY,
+        "tokenURI",
+        tokenId
+      );
       return { tokenURI, txHash: contractTx.hash };
     },
   });
@@ -62,7 +67,15 @@ const useOpenBox = () => {
       txHash,
       isFetchingTotalBoxes,
     };
-  }, [isFetchingTotalBoxes, isOpeningBox, isApproved, totalBoxes, openBox, tokenURI, txHash]);
+  }, [
+    isFetchingTotalBoxes,
+    isOpeningBox,
+    isApproved,
+    totalBoxes,
+    openBox,
+    tokenURI,
+    txHash,
+  ]);
 };
 
 export default useOpenBox;

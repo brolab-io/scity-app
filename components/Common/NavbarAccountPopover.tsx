@@ -6,7 +6,7 @@ import SvgIconLogout from "../Icons/SvgIconLogout";
 import SvgIconExternalLink from "../Icons/SvgIconExternalLink";
 import { useCallback } from "react";
 import { Web3Provider } from "@ethersproject/providers";
-import { getMetaMaskNetworks } from "../../dapp/config";
+import { getMetaMaskNetworks } from "../../dapp/bsc.config";
 
 const metaMaskNetworks = getMetaMaskNetworks();
 

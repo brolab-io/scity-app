@@ -1,4 +1,4 @@
-import { ContractTypes } from "./../dapp/config";
+import { ContractTypes } from "../dapp/bsc.config";
 import { useEtherContext } from "./../components/EtherContext";
 import { useWeb3React } from "@web3-react/core";
 import { useCallback, useEffect, useMemo, useState } from "react";

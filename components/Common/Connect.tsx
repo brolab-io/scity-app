@@ -1,33 +1,25 @@
-import type { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import { useCallback } from "react";
-import { injected } from "../../dapp/connectors";
-import { useAppContext } from "../AppContext";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import useConnectWallet from "../../hooks/useConnectWallet";
 import styles from "./Connect.module.css";
 import clsx from "clsx";
 import LoadingIcon from "../UI/LoadingIcon";
+import { useNearContext } from "../NearContext";
 
 const Connect: React.FC = () => {
-  const { activatingConnector, triedEager } = useAppContext();
-  const { connector, error } = useWeb3React<Web3Provider>();
-  const { connectWallet } = useConnectWallet();
-
-  const activating = injected === activatingConnector;
-  const connected = injected === connector;
-  const disabled = !triedEager || !!activatingConnector || connected || !!error;
-
-  // console.log(!triedEager, !!activatingConnector, connected, !!error);
+  const { signIn } = useNearContext();
+  const [isLoading, setLoading] = useState(false);
 
   const handleClick = useCallback(() => {
-    connectWallet();
-  }, [connectWallet]);
+    setLoading(true);
+  }, []);
+
+  useEffect(() => {
+    isLoading && signIn();
+  }, [isLoading, signIn]);
 
   return (
     <button
       // isLoading={activating}
-      disabled={disabled || activating}
       onClick={handleClick}
       className={clsx(
         styles.connect,
@@ -36,7 +28,7 @@ const Connect: React.FC = () => {
         "disabled:opacity-60 duration-200 "
       )}
     >
-      {activating ? (
+      {isLoading ? (
         <LoadingIcon className="w-4 h-4" />
       ) : (
         <Image src="/images/icons/wallet.svg" width={16} height={16} alt="wallet" />
